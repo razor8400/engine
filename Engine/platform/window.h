@@ -2,15 +2,16 @@
 
 #include "common.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 
 namespace engine
 {
     class window
     {
     public:
-        window(const char* display_name, int width, int height);
-        void begin_render();
+        window();
+		bool create(const char* display_name, int width, int height);
+		void process();
     private:
         GLFWwindow* m_window = nullptr;
     };
