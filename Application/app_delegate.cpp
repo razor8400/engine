@@ -10,7 +10,7 @@ void my_app_delegate::application_launched(engine::application* application)
 	application->set_display_name("Test Application");
 
 	director.set_frame_rate(60);
-	director.start(new engine::scene());
+	director.start(std::make_shared<engine::scene>());
 
 	application->run();
 }

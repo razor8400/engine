@@ -1,10 +1,9 @@
 ﻿  window.cpp
-d:\engine\engine\platform\desktop\window.cpp(14): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-d:\engine\engine\platform\desktop\window.cpp(34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  director.cpp
+d:\engine\engine\platform\glew\window.cpp(75): warning C4244: 'argument': conversion from 'double' to 'GLsizei', possible loss of data
+  Generating Code...
+  Compiling...
+  application.cpp
   Generating Code...
   Skipping... (no relevant changes detected)
-  vector2d.cpp
-  game_object.cpp
-  application.cpp
+  director.cpp
   Engine.vcxproj -> D:\engine\Win32\Test GL\Debug\Engine.lib

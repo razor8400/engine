@@ -34,7 +34,7 @@
     <ClCompile Include="..\..\..\Engine\core\game_object.cpp" />
     <ClCompile Include="..\..\..\Engine\core\scene.cpp" />
     <ClCompile Include="..\..\..\Engine\math\vector2d.cpp" />
-    <ClCompile Include="..\..\..\Engine\platform\desktop\window.cpp" />
+    <ClCompile Include="..\..\..\Engine\platform\glew\window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

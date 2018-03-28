@@ -28,7 +28,7 @@ namespace engine
         m_time_interval = 1.0f / frame_rate;
     }
     
-    void director::start(scene* scene)
+    void director::start(const scene_ptr& scene)
     {
         m_running = true;
 		m_scene = scene;

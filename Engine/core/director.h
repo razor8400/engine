@@ -4,15 +4,13 @@
 
 namespace engine
 {   
-	class scene;
-
     class director
     {
     public:
         static director& instance();
         
 		void set_frame_rate(int frame_rate);
-        void start(scene* scene);
+        void start(const scene_ptr& scene);
         void stop();
 
 		void main_loop();
@@ -26,6 +24,6 @@ namespace engine
     private:
         float m_time_interval = 0;
         bool m_running = false;
-		scene* m_scene = nullptr;
+		scene_ptr m_scene;
     };
 }

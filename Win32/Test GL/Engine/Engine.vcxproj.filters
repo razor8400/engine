@@ -13,7 +13,7 @@
     <Filter Include="Engine\platform">
       <UniqueIdentifier>{e7a16a9c-1191-4c23-99de-274e688b0e84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\platform\desktop">
+    <Filter Include="Engine\platform\glew">
       <UniqueIdentifier>{a0c24271-3232-4bdc-8f7f-4d2c251b0139}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -50,9 +50,6 @@
     <ClCompile Include="..\..\..\Engine\math\vector2d.cpp">
       <Filter>Engine\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Engine\platform\desktop\window.cpp">
-      <Filter>Engine\platform\desktop</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Engine\core\application.cpp">
       <Filter>Engine\core</Filter>
     </ClCompile>
@@ -61,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Engine\core\scene.cpp">
       <Filter>Engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Engine\platform\glew\window.cpp">
+      <Filter>Engine\platform\glew</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
