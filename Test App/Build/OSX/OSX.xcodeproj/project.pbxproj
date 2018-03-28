@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC80206B981C005A6240 /* my_app_delegate.cpp */; };
+		BF3D14D6206BE78500293C36 /* layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14D4206BE78500293C36 /* layer.cpp */; };
+		BF3D14D8206BF8E700293C36 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */; };
 		BF51ECA8206BAB15005A6240 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF51ECA7206BAB15005A6240 /* main.mm */; };
 		BF51ECA9206BABCF005A6240 /* director.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC66206B96FA005A6240 /* director.cpp */; };
 		BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC68206B96FA005A6240 /* scene.cpp */; };
@@ -31,6 +34,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF3D14CF206BD2B600293C36 /* app_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_delegate.h; sourceTree = "<group>"; };
+		BF3D14D0206BD33200293C36 /* input_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = input_delegate.h; sourceTree = "<group>"; };
+		BF3D14D3206BE74000293C36 /* layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = layer.h; sourceTree = "<group>"; };
+		BF3D14D4206BE78500293C36 /* layer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = layer.cpp; sourceTree = "<group>"; };
+		BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../ThirdParty/GLEW/lib/osx/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		BF51EC66206B96FA005A6240 /* director.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = director.cpp; sourceTree = "<group>"; };
 		BF51EC67206B96FA005A6240 /* director.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = director.h; sourceTree = "<group>"; };
 		BF51EC68206B96FA005A6240 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -45,8 +53,8 @@
 		BF51EC74206B96FA005A6240 /* vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
 		BF51EC7D206B9806005A6240 /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
 		BF51EC7E206B9806005A6240 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		BF51EC80206B981C005A6240 /* app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = app_delegate.cpp; sourceTree = "<group>"; };
-		BF51EC81206B981C005A6240 /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = app_delegate.h; sourceTree = "<group>"; };
+		BF51EC80206B981C005A6240 /* my_app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = my_app_delegate.cpp; sourceTree = "<group>"; };
+		BF51EC81206B981C005A6240 /* my_app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = my_app_delegate.h; sourceTree = "<group>"; };
 		BF51EC84206B993A005A6240 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../ThirdParty/GLFW3/osx/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		BF51EC9F206BAAF0005A6240 /* OSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSX; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF3D14D8206BF8E700293C36 /* libGLEW.2.1.0.dylib in Frameworks */,
 				BF51ECB0206BAC3D005A6240 /* libglfw.3.2.dylib in Frameworks */,
 				BF51ECAF206BAC28005A6240 /* OpenGL.framework in Frameworks */,
 			);
@@ -66,6 +75,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF3D14CD206BD28200293C36 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				BF3D14CF206BD2B600293C36 /* app_delegate.h */,
+				BF3D14D0206BD33200293C36 /* input_delegate.h */,
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
+		BF3D14D1206BE67200293C36 /* 2d */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2d;
+			sourceTree = "<group>";
+		};
 		BF51EC30206B8B76005A6240 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +113,8 @@
 		BF51EC64206B96FA005A6240 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				BF3D14D1206BE67200293C36 /* 2d */,
+				BF3D14CD206BD28200293C36 /* interface */,
 				BF51EC7E206B9806005A6240 /* common.h */,
 				BF51EC7D206B9806005A6240 /* engine.h */,
 				BF51EC65206B96FA005A6240 /* core */,
@@ -109,6 +136,8 @@
 				BF51EC6B206B96FA005A6240 /* game_object.cpp */,
 				BF51EC6C206B96FA005A6240 /* application.cpp */,
 				BF51EC6D206B96FA005A6240 /* scene.h */,
+				BF3D14D3206BE74000293C36 /* layer.h */,
+				BF3D14D4206BE78500293C36 /* layer.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -117,17 +146,17 @@
 			isa = PBXGroup;
 			children = (
 				BF51EC6F206B96FA005A6240 /* window.h */,
-				BF51EC70206B96FA005A6240 /* glew */,
+				BF51EC70206B96FA005A6240 /* glfw3 */,
 			);
 			path = platform;
 			sourceTree = "<group>";
 		};
-		BF51EC70206B96FA005A6240 /* glew */ = {
+		BF51EC70206B96FA005A6240 /* glfw3 */ = {
 			isa = PBXGroup;
 			children = (
 				BF51EC71206B96FA005A6240 /* window.cpp */,
 			);
-			path = glew;
+			path = glfw3;
 			sourceTree = "<group>";
 		};
 		BF51EC72206B96FA005A6240 /* math */ = {
@@ -142,8 +171,8 @@
 		BF51EC7F206B981C005A6240 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BF51EC80206B981C005A6240 /* app_delegate.cpp */,
-				BF51EC81206B981C005A6240 /* app_delegate.h */,
+				BF51EC80206B981C005A6240 /* my_app_delegate.cpp */,
+				BF51EC81206B981C005A6240 /* my_app_delegate.h */,
 			);
 			name = Sources;
 			path = ../../Sources;
@@ -152,6 +181,7 @@
 		BF51EC83206B993A005A6240 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */,
 				BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */,
 				BF51EC84206B993A005A6240 /* OpenGL.framework */,
 			);
@@ -225,8 +255,10 @@
 			files = (
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
 				BF51ECAB206BABD4005A6240 /* game_object.cpp in Sources */,
+				BF3D14D6206BE78500293C36 /* layer.cpp in Sources */,
 				BF51ECA8206BAB15005A6240 /* main.mm in Sources */,
 				BF51ECAD206BABDB005A6240 /* window.cpp in Sources */,
+				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
 				BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */,
 				BF51ECA9206BABCF005A6240 /* director.cpp in Sources */,
 				BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */,
@@ -357,6 +389,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 58JPMN53WZ;
+				LIBRARY_SEARCH_PATHS = (
+					../../../ThirdParty/GLFW3/osx/,
+					../../../ThirdParty/GLEW/lib/osx/,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -367,6 +403,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 58JPMN53WZ;
+				LIBRARY_SEARCH_PATHS = (
+					../../../ThirdParty/GLFW3/osx/,
+					../../../ThirdParty/GLEW/lib/osx/,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

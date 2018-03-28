@@ -5,14 +5,7 @@
 
 namespace engine
 {
-	class application;
-	class window;
-	
-	class app_delegate
-	{
-	public:
-		virtual void application_launched(application* application) = 0;
-	};
+	class app_delegate;
 
 	class application
 	{
@@ -25,11 +18,12 @@ namespace engine
 
 		void on_launched();
 		bool run();
+        const vector2d& get_win_size() const { return m_win_size; }
 	private:
         application() {};
         
 		std::string m_display_name;
-		int m_width = 0, m_height = 0;
+        vector2d m_win_size;
 
 		app_delegate* m_delegate = nullptr;
 		std::unique_ptr<window> m_window;

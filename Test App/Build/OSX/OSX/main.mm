@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
-#include "app_delegate.h"
+#include "engine.h"
+#include "my_app_delegate.h"
 
 int main(int argc, const char * argv[])
 {

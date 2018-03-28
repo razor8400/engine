@@ -1,4 +1,5 @@
 #include "application.h"
+#include "interface/app_delegate.h"
 
 namespace engine
 {
@@ -10,8 +11,8 @@ namespace engine
     
 	void application::set_win_size(int width, int height)
 	{
-		m_width = width;
-		m_height = height;
+		m_win_size.m_x = width;
+		m_win_size.m_y = height;
 	}
 
 	void application::set_display_name(const std::string& display_name)
@@ -34,7 +35,7 @@ namespace engine
 	{
 		m_window = std::make_unique<window>();
 
-		if (!m_window->create(m_display_name.c_str(), m_width, m_height))
+		if (!m_window->create(m_display_name.c_str(), m_win_size.m_x, m_win_size.m_y))
 			return false;
 
 		m_window->process();

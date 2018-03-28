@@ -7,14 +7,9 @@ namespace engine
 		double m_x;
 		double m_y;
 
-		vector2d() : m_x(0), m_y(0)
-		{
+        vector2d();
+        vector2d(double x, double y);
 
-		}
-
-		vector2d(double x, double y) : m_x(x), m_y(y)
-		{
-
-		}
+        static vector2d zero;
     };
 }

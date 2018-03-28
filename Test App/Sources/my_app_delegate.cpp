@@ -1,6 +1,4 @@
-#include "app_delegate.h"
-#include "core/scene.h"
-#include "core/director.h"
+#include "my_app_delegate.h"
 
 void my_app_delegate::application_launched(engine::application* application)
 {
@@ -10,7 +8,11 @@ void my_app_delegate::application_launched(engine::application* application)
 	application->set_display_name("Test Application");
 
 	director.set_frame_rate(60);
-	director.start(std::make_shared<engine::scene>());
+    
+    auto scene = std::make_shared<engine::scene>();
+    
+	director.start();
+    director.run_scene(scene);
 
 	application->run();
 }
