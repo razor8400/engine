@@ -1,4 +1,5 @@
 #include "app_delegate.h"
+#include "core/scene.h"
 #include "core/director.h"
 
 void my_app_delegate::application_launched(engine::application* application)
@@ -9,7 +10,7 @@ void my_app_delegate::application_launched(engine::application* application)
 	application->set_display_name("Test Application");
 
 	director.set_frame_rate(60);
-	director.start();
+	director.start(new engine::scene());
 
 	application->run();
 }

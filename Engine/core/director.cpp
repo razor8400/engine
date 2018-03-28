@@ -1,6 +1,8 @@
 #include <chrono>
 
 #include "core/director.h"
+#include "core/scene.h"
+
 #include "platform/window.h"
 
 namespace engine
@@ -26,9 +28,10 @@ namespace engine
         m_time_interval = 1.0f / frame_rate;
     }
     
-    void director::start()
+    void director::start(scene* scene)
     {
         m_running = true;
+		m_scene = scene;
     }
     
     void director::stop()
@@ -50,12 +53,34 @@ namespace engine
             {
                 last_update = now;
                 update(count);
+
+				if (m_scene)
+					m_scene->draw();
             }
         }
     }
     
-    void director::update(float dt)
+	void director::handle_mouse_down(const vector2d& location)
+	{
+		if (m_scene)
+			m_scene->on_mouse_down(location);
+	}
+
+	void director::handle_mouse_move(const vector2d& location)
+	{
+		if (m_scene)
+			m_scene->on_mouse_move(location);
+	}
+
+	void director::handle_mouse_up(const vector2d& location)
+	{
+		if (m_scene)
+			m_scene->on_mouse_up(location);
+	}
+
+	void director::update(float dt)
     {
-		printf("%f \n", dt);
+		if (m_scene)
+			m_scene->update(dt);
     }
 }

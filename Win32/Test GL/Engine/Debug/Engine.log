@@ -1,5 +1,10 @@
-﻿  director.cpp
+﻿  window.cpp
+d:\engine\engine\platform\desktop\window.cpp(14): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\engine\engine\platform\desktop\window.cpp(34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  director.cpp
   Generating Code...
   Skipping... (no relevant changes detected)
-  window.cpp
+  vector2d.cpp
+  game_object.cpp
+  application.cpp
   Engine.vcxproj -> D:\engine\Win32\Test GL\Debug\Engine.lib

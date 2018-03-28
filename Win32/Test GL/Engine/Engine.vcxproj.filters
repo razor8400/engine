@@ -36,6 +36,12 @@
     <ClInclude Include="..\..\..\Engine\core\application.h">
       <Filter>Engine\core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Engine\core\game_object.h">
+      <Filter>Engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Engine\core\scene.h">
+      <Filter>Engine\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Engine\core\director.cpp">
@@ -48,6 +54,12 @@
       <Filter>Engine\platform\desktop</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Engine\core\application.cpp">
+      <Filter>Engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Engine\core\game_object.cpp">
+      <Filter>Engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Engine\core\scene.cpp">
       <Filter>Engine\core</Filter>
     </ClCompile>
   </ItemGroup>

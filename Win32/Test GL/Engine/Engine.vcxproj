@@ -22,6 +22,8 @@
     <ClInclude Include="..\..\..\Engine\common.h" />
     <ClInclude Include="..\..\..\Engine\core\application.h" />
     <ClInclude Include="..\..\..\Engine\core\director.h" />
+    <ClInclude Include="..\..\..\Engine\core\game_object.h" />
+    <ClInclude Include="..\..\..\Engine\core\scene.h" />
     <ClInclude Include="..\..\..\Engine\engine.h" />
     <ClInclude Include="..\..\..\Engine\math\vector2d.h" />
     <ClInclude Include="..\..\..\Engine\platform\window.h" />
@@ -29,6 +31,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Engine\core\application.cpp" />
     <ClCompile Include="..\..\..\Engine\core\director.cpp" />
+    <ClCompile Include="..\..\..\Engine\core\game_object.cpp" />
+    <ClCompile Include="..\..\..\Engine\core\scene.cpp" />
     <ClCompile Include="..\..\..\Engine\math\vector2d.cpp" />
     <ClCompile Include="..\..\..\Engine\platform\desktop\window.cpp" />
   </ItemGroup>
