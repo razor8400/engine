@@ -1,9 +1,0 @@
-﻿  window.cpp
-d:\engine\engine\platform\glew\window.cpp(75): warning C4244: 'argument': conversion from 'double' to 'GLsizei', possible loss of data
-  Generating Code...
-  Compiling...
-  application.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  director.cpp
-  Engine.vcxproj -> D:\engine\Win32\Test GL\Debug\Engine.lib

@@ -17,6 +17,8 @@ namespace engine
 	class application
 	{
 	public:
+        static application& instance();
+        
 		void set_win_size(int width, int height);
 		void set_display_name(const std::string& display_name);
 		void set_delegate(app_delegate* delegate);
@@ -24,6 +26,8 @@ namespace engine
 		void on_launched();
 		bool run();
 	private:
+        application() {};
+        
 		std::string m_display_name;
 		int m_width = 0, m_height = 0;
 

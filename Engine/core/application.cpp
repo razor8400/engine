@@ -2,6 +2,12 @@
 
 namespace engine
 {
+    application& application::instance()
+    {
+        static application instance;
+        return instance;
+    }
+    
 	void application::set_win_size(int width, int height)
 	{
 		m_width = width;
