@@ -35,7 +35,7 @@ namespace engine
 	{
 		m_window = std::make_unique<window>();
 
-		if (!m_window->create(m_display_name.c_str(), m_win_size.x, m_win_size.y))
+		if (!m_window->create(m_display_name.c_str(), (int)m_win_size.x, (int)m_win_size.y))
 			return false;
 
 		m_window->process();

@@ -6,14 +6,14 @@
 
 namespace engine
 {
-    static const char* frag_shader =   "#version 330 core\
+    static const char* frag_shader =   "#version 330 core\n\
                                         out vec3 color;\
                                         void main()\
                                         {\
                                             color = vec3(1, 1, 1);\
                                         }";
     
-    static const char* vert_shader =   "#version 330 core\
+    static const char* vert_shader =   "#version 330 core\n\
                                         layout(location = 0) in vec3 vertexPosition_modelspace;\
                                         void main()\
                                         {\
@@ -104,7 +104,7 @@ namespace engine
             {
                 -1.0f, -1.0f, 0.0f,
                 1.0f, -1.0f, 0.0f,
-              //  0.0f,  1.0f, 0.0f,
+				0.0f,  1.0f, 0.0f,
             };
             
             // Это будет идентификатором нашего буфера вершин
@@ -123,7 +123,7 @@ namespace engine
             glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
             glVertexAttribPointer(
                                   0,                  // Атрибут 0. Подробнее об этом будет рассказано в части, посвященной шейдерам.
-                                  2,                  // Размер
+                                  3,                  // Размер
                                   GL_FLOAT,           // Тип
                                   GL_FALSE,           // Указывает, что значения не нормализованы
                                   0,                  // Шаг
@@ -131,7 +131,7 @@ namespace engine
                                   );
             
             // Вывести треугольник!
-            glDrawArrays(GL_TRIANGLES, 0, 2); // Начиная с вершины 0, всего 3 вершины -> один треугольник
+            glDrawArrays(GL_TRIANGLES, 0, 3); // Начиная с вершины 0, всего 3 вершины -> один треугольник
             
             glDisableVertexAttribArray(0);
             
