@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vector3d.h"
+
 namespace engine
 {
     namespace math
@@ -18,6 +20,14 @@ namespace engine
             const float& operator[](int a) const { return m[a]; }
                         
             mat4 operator*(const mat4& m4) const;
+			mat4 operator*(float f) const;
+
+			static mat4 translate(float x, float y, float z);
+			static mat4 rotate(float x, float y, float z);
+			static mat4 scale(float x, float y, float z);
+
+			static mat4 look_at(const vector3d& eye, const vector3d& target, const vector3d& up = vector3d::up);
+			static mat4 perspective(float fow, float aspect_ratio, float near_plane, float far_plane);
         
 			static const mat4 identity;
 		};
