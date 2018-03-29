@@ -10,6 +10,10 @@
 		BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC80206B981C005A6240 /* my_app_delegate.cpp */; };
 		BF3D14D6206BE78500293C36 /* layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14D4206BE78500293C36 /* layer.cpp */; };
 		BF3D14D8206BF8E700293C36 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */; };
+		BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14DA206CF33500293C36 /* mat4.cpp */; };
+		BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14DD206D030100293C36 /* vector4d.cpp */; };
+		BF3D14E3206D21D300293C36 /* gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E2206D21D300293C36 /* gl.cpp */; };
+		BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E4206D51C700293C36 /* vector3d.cpp */; };
 		BF51ECA8206BAB15005A6240 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF51ECA7206BAB15005A6240 /* main.mm */; };
 		BF51ECA9206BABCF005A6240 /* director.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC66206B96FA005A6240 /* director.cpp */; };
 		BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC68206B96FA005A6240 /* scene.cpp */; };
@@ -39,6 +43,14 @@
 		BF3D14D3206BE74000293C36 /* layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = layer.h; sourceTree = "<group>"; };
 		BF3D14D4206BE78500293C36 /* layer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = layer.cpp; sourceTree = "<group>"; };
 		BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../ThirdParty/GLEW/lib/osx/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
+		BF3D14D9206CF32100293C36 /* mat4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mat4.h; sourceTree = "<group>"; };
+		BF3D14DA206CF33500293C36 /* mat4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mat4.cpp; sourceTree = "<group>"; };
+		BF3D14DC206D02E300293C36 /* vector4d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector4d.h; sourceTree = "<group>"; };
+		BF3D14DD206D030100293C36 /* vector4d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vector4d.cpp; sourceTree = "<group>"; };
+		BF3D14E1206D1E3B00293C36 /* gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl.h; sourceTree = "<group>"; };
+		BF3D14E2206D21D300293C36 /* gl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gl.cpp; sourceTree = "<group>"; };
+		BF3D14E4206D51C700293C36 /* vector3d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vector3d.cpp; sourceTree = "<group>"; };
+		BF3D14E5206D51C700293C36 /* vector3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector3d.h; sourceTree = "<group>"; };
 		BF51EC66206B96FA005A6240 /* director.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = director.cpp; sourceTree = "<group>"; };
 		BF51EC67206B96FA005A6240 /* director.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = director.h; sourceTree = "<group>"; };
 		BF51EC68206B96FA005A6240 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -91,6 +103,28 @@
 			path = 2d;
 			sourceTree = "<group>";
 		};
+		BF3D14DF206D0D3800293C36 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				BF51EC68206B96FA005A6240 /* scene.cpp */,
+				BF51EC6D206B96FA005A6240 /* scene.h */,
+				BF51EC6A206B96FA005A6240 /* game_object.h */,
+				BF51EC6B206B96FA005A6240 /* game_object.cpp */,
+				BF3D14D3206BE74000293C36 /* layer.h */,
+				BF3D14D4206BE78500293C36 /* layer.cpp */,
+			);
+			path = objects;
+			sourceTree = "<group>";
+		};
+		BF3D14E0206D1E2300293C36 /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				BF3D14E1206D1E3B00293C36 /* gl.h */,
+				BF3D14E2206D21D300293C36 /* gl.cpp */,
+			);
+			path = gl;
+			sourceTree = "<group>";
+		};
 		BF51EC30206B8B76005A6240 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +147,8 @@
 		BF51EC64206B96FA005A6240 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				BF3D14E0206D1E2300293C36 /* gl */,
+				BF3D14DF206D0D3800293C36 /* objects */,
 				BF3D14D1206BE67200293C36 /* 2d */,
 				BF3D14CD206BD28200293C36 /* interface */,
 				BF51EC7E206B9806005A6240 /* common.h */,
@@ -130,14 +166,8 @@
 			children = (
 				BF51EC66206B96FA005A6240 /* director.cpp */,
 				BF51EC67206B96FA005A6240 /* director.h */,
-				BF51EC68206B96FA005A6240 /* scene.cpp */,
-				BF51EC69206B96FA005A6240 /* application.h */,
-				BF51EC6A206B96FA005A6240 /* game_object.h */,
-				BF51EC6B206B96FA005A6240 /* game_object.cpp */,
 				BF51EC6C206B96FA005A6240 /* application.cpp */,
-				BF51EC6D206B96FA005A6240 /* scene.h */,
-				BF3D14D3206BE74000293C36 /* layer.h */,
-				BF3D14D4206BE78500293C36 /* layer.cpp */,
+				BF51EC69206B96FA005A6240 /* application.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -164,6 +194,12 @@
 			children = (
 				BF51EC73206B96FA005A6240 /* vector2d.cpp */,
 				BF51EC74206B96FA005A6240 /* vector2d.h */,
+				BF3D14D9206CF32100293C36 /* mat4.h */,
+				BF3D14DA206CF33500293C36 /* mat4.cpp */,
+				BF3D14DC206D02E300293C36 /* vector4d.h */,
+				BF3D14DD206D030100293C36 /* vector4d.cpp */,
+				BF3D14E5206D51C700293C36 /* vector3d.h */,
+				BF3D14E4206D51C700293C36 /* vector3d.cpp */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -253,9 +289,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */,
+				BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */,
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
+				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
 				BF51ECAB206BABD4005A6240 /* game_object.cpp in Sources */,
 				BF3D14D6206BE78500293C36 /* layer.cpp in Sources */,
+				BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */,
 				BF51ECA8206BAB15005A6240 /* main.mm in Sources */,
 				BF51ECAD206BABDB005A6240 /* window.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,

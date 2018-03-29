@@ -1,5 +1,7 @@
 #include "my_app_delegate.h"
 
+#include "math/mat4.h"
+
 void my_app_delegate::application_launched(engine::application* application)
 {
 	engine::director& director = engine::director::instance();
@@ -13,6 +15,6 @@ void my_app_delegate::application_launched(engine::application* application)
     
 	director.start();
     director.run_scene(scene);
-
+    
 	application->run();
 }

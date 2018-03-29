@@ -19,9 +19,9 @@ namespace engine
         
 		void main_loop();
 		
-        void handle_mouse_down(const vector2d& location);
-		void handle_mouse_move(const vector2d& location);
-		void handle_mouse_up(const vector2d& location);
+        void handle_mouse_down(const math::vector2d& location);
+		void handle_mouse_move(const math::vector2d& location);
+		void handle_mouse_up(const math::vector2d& location);
         
         void add_input_delegate(input_delegate* delegate);
         void remove_input_delegate(input_delegate* delegate);

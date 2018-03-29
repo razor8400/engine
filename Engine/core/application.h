@@ -18,12 +18,12 @@ namespace engine
 
 		void on_launched();
 		bool run();
-        const vector2d& get_win_size() const { return m_win_size; }
+        const math::vector2d& get_win_size() const { return m_win_size; }
 	private:
         application() {};
         
 		std::string m_display_name;
-        vector2d m_win_size;
+        math::vector2d m_win_size;
 
 		app_delegate* m_delegate = nullptr;
 		std::unique_ptr<window> m_window;

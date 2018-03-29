@@ -1,7 +1,7 @@
 #include <chrono>
 
 #include "core/director.h"
-#include "core/scene.h"
+#include "objects/scene.h"
 
 #include "interface/input_delegate.h"
 #include "platform/window.h"
@@ -69,7 +69,7 @@ namespace engine
         }
     }
     
-	void director::handle_mouse_down(const vector2d& location)
+	void director::handle_mouse_down(const math::vector2d& location)
 	{
         for (auto it : m_input_handlers)
         {
@@ -81,13 +81,13 @@ namespace engine
         }
 	}
 
-	void director::handle_mouse_move(const vector2d& location)
+	void director::handle_mouse_move(const math::vector2d& location)
 	{
         if (m_current_input)
             m_current_input->on_mouse_move(location);
 	}
 
-	void director::handle_mouse_up(const vector2d& location)
+	void director::handle_mouse_up(const math::vector2d& location)
 	{
         if (m_current_input)
             m_current_input->on_mouse_up(location);

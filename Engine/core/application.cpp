@@ -11,8 +11,8 @@ namespace engine
     
 	void application::set_win_size(int width, int height)
 	{
-		m_win_size.m_x = width;
-		m_win_size.m_y = height;
+		m_win_size.x = width;
+		m_win_size.y = height;
 	}
 
 	void application::set_display_name(const std::string& display_name)
@@ -35,7 +35,7 @@ namespace engine
 	{
 		m_window = std::make_unique<window>();
 
-		if (!m_window->create(m_display_name.c_str(), m_win_size.m_x, m_win_size.m_y))
+		if (!m_window->create(m_display_name.c_str(), m_win_size.x, m_win_size.y))
 			return false;
 
 		m_window->process();

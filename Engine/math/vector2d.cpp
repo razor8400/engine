@@ -2,16 +2,19 @@
 
 namespace engine
 {
-    vector2d vector2d::zero;
-    
-    vector2d::vector2d() : m_x(0), m_y(0)
+    namespace math
     {
+        const vector2d vector2d::zero;
         
-    }
-    
-    vector2d::vector2d(double x, double y) : m_x(x), m_y(y)
-    {
+        vector2d::vector2d() : x(0), y(0)
+        {
+            
+        }
         
+        vector2d::vector2d(double x1, double y1) : x(x1), y(y1)
+        {
+            
+        }
     }
 }
 

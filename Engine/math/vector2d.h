@@ -2,14 +2,17 @@
 
 namespace engine
 {
-    struct vector2d
+    namespace math
     {
-		double m_x;
-		double m_y;
-
-        vector2d();
-        vector2d(double x, double y);
-
-        static vector2d zero;
-    };
+        struct vector2d
+        {
+            double x;
+            double y;
+            
+            vector2d();
+            vector2d(double x, double y);
+            
+            static const vector2d zero;
+        };
+    }
 }

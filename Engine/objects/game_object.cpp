@@ -1,4 +1,4 @@
-#include "core/game_object.h"
+#include "game_object.h"
 
 namespace engine
 {

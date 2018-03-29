@@ -9,13 +9,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/platform/glfw3/window.cpp"
-            timestampString = "543947301.240744"
+            filePath = "../../Sources/my_app_delegate.cpp"
+            timestampString = "544034763.658042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "window::create(const char* display_name, int width, int height)"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "my_app_delegate::application_launched(engine::application* application)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Sources/my_app_delegate.cpp"
+            timestampString = "544034789.826676"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "my_app_delegate::application_launched(engine::application* application)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
