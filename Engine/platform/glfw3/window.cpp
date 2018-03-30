@@ -97,9 +97,9 @@ namespace engine
         
         GLuint program = gl::create_gl_program(vert_shader, frag_shader);
         
-		math::mat4 projection = math::mat4::perspective(45.0f, 4.0f / 3.0f, 1.0f, 100.0f);
+		math::mat4 projection = math::mat4::perspective(45.0f, m_size.x / m_size.y, 0.1f, 100.0f);
 		math::mat4 view = math::mat4::look_at(
-			math::vector3d(4, -3, 3), // Camera is at (4,3,3), in World Space
+			math::vector3d(-4, 3, 3), // Camera is at (4,3,3), in World Space
 			math::vector3d(0, 0, 0), // and looks at the origin
 			math::vector3d(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
 		);

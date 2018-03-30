@@ -126,16 +126,14 @@ namespace engine
 		{
 			mat4 mat;
 
-            float rad = deg_to_rad(fow) * 0.5f;
-            float h = cos(rad) / sin(rad);
-            float w = h * height / width;
+			float tangent = tan(deg_to_rad(fow) * 0.5f);
 
-			mat[0] = (1.0f / aspect_ratio) * factor;
-			mat[5] = factor;
+			mat[0] = 1.0f / (aspect_ratio * tangent);
+			mat[5] = 1.0f / tangent;
 
-			mat[10] = (-(far_plane + near_plane)) * f_n;
-			mat[11] = -1.0f;
-			mat[14] = -2.0f * far_plane * near_plane * f_n;
+            mat[10] = (far_plane + near_plane) / (far_plane - near_plane);
+			mat[11] = 1.0f;
+			mat[14] = -(2.0f * far_plane * near_plane) / (far_plane - near_plane);
 
 			return mat;
 		}
