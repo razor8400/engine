@@ -51,6 +51,7 @@
 		BF3D14E2206D21D300293C36 /* gl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gl.cpp; sourceTree = "<group>"; };
 		BF3D14E4206D51C700293C36 /* vector3d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vector3d.cpp; sourceTree = "<group>"; };
 		BF3D14E5206D51C700293C36 /* vector3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector3d.h; sourceTree = "<group>"; };
+		BF3D14E7206E341800293C36 /* functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
 		BF51EC66206B96FA005A6240 /* director.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = director.cpp; sourceTree = "<group>"; };
 		BF51EC67206B96FA005A6240 /* director.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = director.h; sourceTree = "<group>"; };
 		BF51EC68206B96FA005A6240 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -200,6 +201,7 @@
 				BF3D14DD206D030100293C36 /* vector4d.cpp */,
 				BF3D14E5206D51C700293C36 /* vector3d.h */,
 				BF3D14E4206D51C700293C36 /* vector3d.cpp */,
+				BF3D14E7206E341800293C36 /* functions.h */,
 			);
 			path = math;
 			sourceTree = "<group>";

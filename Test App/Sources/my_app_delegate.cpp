@@ -1,6 +1,8 @@
 #include "my_app_delegate.h"
 
-#include "math/mat4.h"
+#include "math/vector3d.h"
+
+using namespace engine;
 
 void my_app_delegate::application_launched(engine::application* application)
 {

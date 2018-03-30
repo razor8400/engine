@@ -32,6 +32,16 @@ namespace engine
 			return vector3d(x - v3.x, y - v3.y, z - v3.z);
 		}
 
+        vector3d vector3d::operator*(const vector3d& v3) const
+        {
+            return vector3d(x * v3.x, y * v3.y, z * v3.z);
+        }
+        
+        vector3d vector3d::operator*(float number) const
+        {
+            return vector3d(x * number, y * number, z * number);
+        }
+        
 		float vector3d::lenght() const
 		{
 			return sqrt(x * x + y * y + z * z);
@@ -60,8 +70,9 @@ namespace engine
 			vector3d r;
 
 			r.x = v1.y * v2.z - v1.z * v2.y;
-			r.y = v1.x * v2.z - v1.z * v2.x;
+			r.y = v1.z * v2.x - v1.x * v2.z;
 			r.z = v1.x * v2.y - v1.y * v2.x;
+            
 			return r;
 		}
 	}

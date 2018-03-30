@@ -13,7 +13,10 @@ namespace engine
 
 			vector3d operator+(const vector3d& v3) const;
 			vector3d operator-(const vector3d& v3) const;
+            vector3d operator*(const vector3d& v3) const;
 
+            vector3d operator*(float number) const;
+            
 			float lenght() const;
 
 			static float dot(const vector3d& v1, const vector3d& v2);

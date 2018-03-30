@@ -2,6 +2,7 @@
 #include <cmath>
 
 #include "mat4.h"
+#include "functions.h"
 
 namespace engine
 {
@@ -98,7 +99,7 @@ namespace engine
 
 			auto normalized_eye = vector3d::normalize(eye);
 
-			auto zaxis = vector3d::normalize(normalized_eye - target);
+			auto zaxis = vector3d::normalize(target - eye);
 			auto xaxis = vector3d::normalize(vector3d::cross(up, zaxis));
 			auto yaxis = vector3d::normalize(vector3d::cross(zaxis, xaxis));
 			
@@ -114,8 +115,6 @@ namespace engine
 			mat[9] = yaxis.z;
 			mat[10] = yaxis.z;
 
-			auto dot = vector3d::dot(xaxis, normalized_eye);
-
 			mat[12] = -vector3d::dot(xaxis, normalized_eye);
 			mat[13] = -vector3d::dot(yaxis, normalized_eye);
 			mat[14] = -vector3d::dot(zaxis, normalized_eye);
@@ -127,9 +126,9 @@ namespace engine
 		{
 			mat4 mat;
 
-			float f_n = 1.0f / (far_plane - near_plane);
-			float divisor = std::tan(fow * 0.5f);
-			float factor = 1.0f / divisor;
+            float rad = deg_to_rad(fow) * 0.5f;
+            float h = cos(rad) / sin(rad);
+            float w = h * height / width;
 
 			mat[0] = (1.0f / aspect_ratio) * factor;
 			mat[5] = factor;
@@ -140,5 +139,28 @@ namespace engine
 
 			return mat;
 		}
+        
+        mat4 mat4::ortographic(float width, float height, float near_plane, float far_plane)
+        {
+            mat4 mat;
+            
+            float half_width = width / 2.0f;
+            float half_height = height / 2.0f;
+            
+            float left = -half_width;
+            float right = half_width;
+            float bottom = -half_height;
+            float top = half_height;
+            
+            mat[0] = 2 / (right - left);
+            mat[5] = 2 / (top - bottom);
+            mat[10] = 2 / (near_plane - far_plane);
+            
+            mat[12] = (left + right) / (left - right);
+            mat[13] = (top + bottom) / (bottom - top);
+            mat[14] = (near_plane + far_plane) / (near_plane - far_plane);
+            
+            return mat;
+        }
 	}
 }

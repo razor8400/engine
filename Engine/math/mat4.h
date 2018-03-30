@@ -28,6 +28,7 @@ namespace engine
 
 			static mat4 look_at(const vector3d& eye, const vector3d& target, const vector3d& up = vector3d::up);
 			static mat4 perspective(float fow, float aspect_ratio, float near_plane, float far_plane);
+            static mat4 ortographic(float width, float height, float near_plane, float far_plane);
         
 			static const mat4 identity;
 		};
