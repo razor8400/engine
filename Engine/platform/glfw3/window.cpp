@@ -4,6 +4,8 @@
 #include "gl/gl.h"
 #include "GLFW3/glfw3.h"
 
+#include "math/mat4.h"
+
 namespace engine
 {
     static const char* frag_shader =   "#version 330 core\n\
@@ -15,10 +17,10 @@ namespace engine
     
     static const char* vert_shader =   "#version 330 core\n\
                                         layout(location = 0) in vec3 vertexPosition_modelspace;\
+										uniform mat4 MVP;\
                                         void main()\
                                         {\
-                                            gl_Position.xyz = vertexPosition_modelspace;\
-                                            gl_Position.w = 1.0;\
+											gl_Position =  MVP * vec4(vertexPosition_modelspace,1);\
                                         }";
     
     GLFWwindow* g_window = nullptr;
@@ -95,11 +97,23 @@ namespace engine
         
         GLuint program = gl::create_gl_program(vert_shader, frag_shader);
         
+		math::mat4 projection = math::mat4::perspective(45.0f * 3.1459f / 180.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+		math::mat4 view = math::mat4::look_at(
+			math::vector3d(4, 3, 3), // Camera is at (4,3,3), in World Space
+			math::vector3d(0, 0, 0), // and looks at the origin
+			math::vector3d(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+		);
+
+		math::mat4 MVP = projection * view * math::mat4::identity; // Remember, matrix multiplication is the other way around
+
+		GLuint MatrixID = glGetUniformLocation(program, "MVP");
+
 		while (!glfwWindowShouldClose(g_window))
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glUseProgram(program);
-            
+			//glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0]);
+
             static const GLfloat g_vertex_buffer_data[] =
             {
                 -1.0f, -1.0f, 0.0f,
