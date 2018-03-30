@@ -112,7 +112,7 @@ namespace engine
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glUseProgram(program);
-			//glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0]);
+			glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0]);
 
             static const GLfloat g_vertex_buffer_data[] =
             {

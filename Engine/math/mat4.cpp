@@ -96,7 +96,9 @@ namespace engine
 		{
 			mat4 mat;
 
-			auto zaxis = vector3d::normalize(eye - target);
+			auto normalized_eye = vector3d::normalize(eye);
+
+			auto zaxis = vector3d::normalize(normalized_eye - target);
 			auto xaxis = vector3d::normalize(vector3d::cross(up, zaxis));
 			auto yaxis = vector3d::normalize(vector3d::cross(zaxis, xaxis));
 			
@@ -112,9 +114,11 @@ namespace engine
 			mat[9] = yaxis.z;
 			mat[10] = yaxis.z;
 
-			mat[12] = -vector3d::dot(xaxis, eye);
-			mat[13] = -vector3d::dot(yaxis, eye);
-			mat[14] = -vector3d::dot(zaxis, eye);
+			auto dot = vector3d::dot(xaxis, normalized_eye);
+
+			mat[12] = -vector3d::dot(xaxis, normalized_eye);
+			mat[13] = -vector3d::dot(yaxis, normalized_eye);
+			mat[14] = -vector3d::dot(zaxis, normalized_eye);
 
 			return mat;
 		}
