@@ -1,4 +1,5 @@
 #include "gl.h"
+#include "shaders_manager.h"
 
 namespace engine
 {
@@ -14,7 +15,18 @@ namespace engine
             return true;
         }
         
-        GLint compile_shader(const char* source, unsigned int shader)
+		void compile_shaders()
+		{
+			auto& manager = shaders_manager::instance();
+			manager.compile_default_shaders();
+		}
+
+		void clear()
+		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		}
+
+		GLint compile_shader(const char* source, unsigned int shader)
         {
             GLint result = GL_FALSE;
             int info_log_length = -1;
@@ -38,7 +50,7 @@ namespace engine
             return shader_id;
         }
         
-        GLuint create_gl_program(const char* vert, const char* frag)
+		GLint create_gl_program(const char* vert, const char* frag)
         {
             GLint result = GL_FALSE;
             int info_log_length = -1;
@@ -50,8 +62,7 @@ namespace engine
             glAttachShader(program, vertex_shader);
             glAttachShader(program, fragment_shader);
             glLinkProgram(program);
-            
-            // Проверяем шейдерную программу
+
             glGetProgramiv(program, GL_LINK_STATUS, &result);
             glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_log_length);
            
@@ -66,7 +77,47 @@ namespace engine
             glDeleteShader(vertex_shader);
             glDeleteShader(fragment_shader);
             
-            return program;
+			return program;
         }
-    }
+
+		void draw_poly(const std::vector<math::vector2d>& vertices, const std::vector<GLushort>& indices)
+		{
+			GLuint element_buffer;
+
+			std::vector<math::vector2d> g_vert =
+			{
+				{ -1, -1, },
+				{ 1, -1, },
+				{ 0, 1, },
+			};
+
+			std::vector<GLushort> g_ind = 
+			{
+				0, 1, 2
+			};
+
+			glGenBuffers(1, &element_buffer);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, g_ind.size() * sizeof(GLushort), &g_ind[0], GL_STATIC_DRAW);
+
+			GLuint vertex_buffer;
+
+			glGenBuffers(1, &vertex_buffer);
+			glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+			glBufferData(GL_ARRAY_BUFFER, g_vert.size() * sizeof(math::vector2d), &g_vert[0], GL_STATIC_DRAW);
+
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+
+			glDrawElements(GL_TRIANGLES, g_ind.size(), GL_UNSIGNED_SHORT, NULL);
+
+			glDisableVertexAttribArray(0);
+		}
+
+		void draw_rect(const std::vector<math::vector2d>& vertices)
+		{
+			static const std::vector<GLushort> indices = { 0, 1, 2, 2, 3, 0 };
+			draw_poly(vertices, indices);
+		}
+	}
 }

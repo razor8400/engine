@@ -6,7 +6,7 @@ namespace engine
     bool layer::init()
     {
         m_size = application::instance().get_win_size();
-        m_anchor = math::vector2d::zero;
+        m_anchor = math::vector3d::zero;
         
         return game_object::init();
     }

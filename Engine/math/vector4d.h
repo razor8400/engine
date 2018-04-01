@@ -8,10 +8,10 @@ namespace engine
     {
         struct vector4d
         {
-            double x, y, z, w;
+			float x, y, z, w;
         
 			vector4d();
-			vector4d(double x1, double y1, double z1, double w1);
+			vector4d(float x1, float y1, float z1, float w1);
             vector4d operator*(const mat4& m4) const;
         };
     }

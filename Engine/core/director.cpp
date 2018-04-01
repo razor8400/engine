@@ -1,6 +1,9 @@
 #include <chrono>
 
-#include "core/director.h"
+#include "director.h"
+#include "application.h"
+#include "renderer.h"
+
 #include "objects/scene.h"
 
 #include "interface/input_delegate.h"
@@ -16,7 +19,7 @@ namespace engine
     
     director::director()
     {
-        
+		m_renderer = std::make_unique<renderer>();
     }
     
     director::~director()
@@ -24,12 +27,37 @@ namespace engine
 
     }
         
-    void director::set_frame_rate(int frame_rate)
+	void director::set_frame_rate(int frame_rate)
     {
         m_time_interval = 1.0f / frame_rate;
     }
     
-    void director::start()
+	void director::set_projection_mode(projection_mode mode)
+	{
+		m_renderer->set_projection_mode(mode);
+	}
+
+	void director::set_near_plane(float near_plane)
+	{
+		m_renderer->set_near_plane(near_plane);
+	}
+
+	void director::set_far_plane(float far_plane)
+	{
+		m_renderer->set_far_plane(far_plane);
+	}
+
+	void director::set_field_of_view(float field_of_view)
+	{
+		m_renderer->set_field_of_view(field_of_view);
+	}
+
+	void director::set_camera_position(const math::vector3d& position)
+	{
+		m_renderer->set_camera_position(position);
+	}
+
+	void director::start()
     {
         m_running = true;
     }
@@ -61,10 +89,12 @@ namespace engine
             if (count >= m_time_interval)
             {
                 last_update = now;
-                update(count);
 
 				if (m_scene)
-					m_scene->draw();
+				{
+					m_scene->update(count);
+					m_renderer->draw_scene(m_scene);
+				}
             }
         }
     }
@@ -104,11 +134,5 @@ namespace engine
         
         if (it != m_input_handlers.end())
             m_input_handlers.erase(it);
-    }
-
-	void director::update(float dt)
-    {
-		if (m_scene)
-			m_scene->update(dt);
     }
 }

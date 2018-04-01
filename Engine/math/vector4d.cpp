@@ -9,7 +9,7 @@ namespace engine
 
 		}
 
-		vector4d::vector4d(double x1, double y1, double z1, double w1) : x(x1), y(y1), z(z1), w(w1)
+		vector4d::vector4d(float x1, float y1, float z1, float w1) : x(x1), y(y1), z(z1), w(w1)
 		{
 
 		}

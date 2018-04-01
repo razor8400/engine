@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -123,22 +123,29 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Engine\core\application.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\director.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\core\renderer.cpp" />
     <ClCompile Include="..\..\..\..\Engine\gl\gl.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\gl\shaders.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\mat4.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\vector2d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\vector3d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\vector4d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\objects\game_object.cpp" />
-    <ClCompile Include="..\..\..\..\Engine\objects\layer.cpp" />
     <ClCompile Include="..\..\..\..\Engine\objects\scene.cpp" />
     <ClCompile Include="..\..\..\..\Engine\platform\glfw3\window.cpp" />
     <ClCompile Include="..\..\..\Sources\my_app_delegate.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Engine\common.h" />
     <ClInclude Include="..\..\..\..\Engine\core\application.h" />
     <ClInclude Include="..\..\..\..\Engine\core\director.h" />
+    <ClInclude Include="..\..\..\..\Engine\core\renderer.h" />
+    <ClInclude Include="..\..\..\..\Engine\engine.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\gl.h" />
+    <ClInclude Include="..\..\..\..\Engine\gl\shaders.h" />
+    <ClInclude Include="..\..\..\..\Engine\gl\shaders_manager.h" />
     <ClInclude Include="..\..\..\..\Engine\interface\app_delegate.h" />
     <ClInclude Include="..\..\..\..\Engine\interface\input_delegate.h" />
     <ClInclude Include="..\..\..\..\Engine\math\mat4.h" />
@@ -146,7 +153,6 @@
     <ClInclude Include="..\..\..\..\Engine\math\vector3d.h" />
     <ClInclude Include="..\..\..\..\Engine\math\vector4d.h" />
     <ClInclude Include="..\..\..\..\Engine\objects\game_object.h" />
-    <ClInclude Include="..\..\..\..\Engine\objects\layer.h" />
     <ClInclude Include="..\..\..\..\Engine\objects\scene.h" />
     <ClInclude Include="..\..\..\..\Engine\platform\window.h" />
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h" />

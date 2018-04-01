@@ -41,25 +41,8 @@ namespace engine
 		{
 			mat4 mat;
 
-			mat[0] = m[0] * f;
-			mat[1] = m[1] * f;
-			mat[2] = m[2] * f;
-			mat[3] = m[3] * f;
-
-			mat[4] = m[4] * f;
-			mat[5] = m[5] * f;
-			mat[6] = m[6] * f;
-			mat[7] = m[7] * f;
-
-			mat[8] = m[8] * f;
-			mat[9] = m[9] * f;
-			mat[10] = m[10] * f;
-			mat[11] = m[11] * f;
-
-			mat[12] = m[12] * f;
-			mat[13] = m[13] * f;
-			mat[14] = m[14] * f;
-			mat[15] = m[15] * f;
+			for (int i = 0; i < 4 * 4; ++i)
+				mat[i] = m[i] * f;
 
 			return mat;
 		}
@@ -104,20 +87,19 @@ namespace engine
 			auto yaxis = vector3d::normalize(vector3d::cross(zaxis, xaxis));
 			
 			mat[0] = xaxis.x;
-			mat[1] = yaxis.x;
-			mat[2] = zaxis.x;
-
-			mat[4] = xaxis.y;
+			mat[1] = xaxis.y;
+			mat[2] = xaxis.z;
+			mat[3] = -vector3d::dot(xaxis, normalized_eye);
+			
+			mat[4] = yaxis.x;
 			mat[5] = yaxis.y;
-			mat[6] = zaxis.y;
+			mat[6] = yaxis.z;
+			mat[7] = -vector3d::dot(yaxis, normalized_eye);
 
-			mat[8] = xaxis.z;
-			mat[9] = yaxis.z;
-			mat[10] = yaxis.z;
-
-			mat[12] = -vector3d::dot(xaxis, normalized_eye);
-			mat[13] = -vector3d::dot(yaxis, normalized_eye);
-			mat[14] = -vector3d::dot(zaxis, normalized_eye);
+			mat[8] = zaxis.x;			
+			mat[9] = zaxis.y;
+			mat[10] = zaxis.z;
+			mat[11] = -vector3d::dot(zaxis, normalized_eye);
 
 			return mat;
 		}
@@ -132,8 +114,9 @@ namespace engine
 			mat[5] = 1.0f / tangent;
 
             mat[10] = (far_plane + near_plane) / (far_plane - near_plane);
-			mat[11] = 1.0f;
-			mat[14] = -(2.0f * far_plane * near_plane) / (far_plane - near_plane);
+			mat[11] = -(2.0f * far_plane * near_plane) / (far_plane - near_plane);
+
+			mat[14] = 1.0f;
 
 			return mat;
 		}
@@ -154,9 +137,9 @@ namespace engine
             mat[5] = 2 / (top - bottom);
             mat[10] = 2 / (near_plane - far_plane);
             
-            mat[12] = (left + right) / (left - right);
-            mat[13] = (top + bottom) / (bottom - top);
-            mat[14] = (near_plane + far_plane) / (near_plane - far_plane);
+            mat[3] = (left + right) / (left - right);
+            mat[7] = (top + bottom) / (bottom - top);
+            mat[11] = (near_plane + far_plane) / (near_plane - far_plane);
             
             return mat;
         }

@@ -6,10 +6,10 @@ namespace engine
     {
         struct vector3d
         {
-            double x, y, z;
+            float x, y, z;
             
             vector3d();
-            vector3d(double x1, double y1, double z1);
+            vector3d(float x1, float y1, float z1);
 
 			vector3d operator+(const vector3d& v3) const;
 			vector3d operator-(const vector3d& v3) const;

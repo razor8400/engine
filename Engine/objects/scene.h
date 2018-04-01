@@ -1,10 +1,10 @@
 #pragma once
 
-#include "layer.h"
+#include "game_object.h"
 
 namespace engine
 {
-	class scene : public layer
+	class scene : public game_object
 	{
 	public:
 

@@ -11,8 +11,8 @@ namespace engine
     
 	void application::set_win_size(int width, int height)
 	{
-		m_win_size.x = width;
-		m_win_size.y = height;
+		m_win_size.x = (float)width;
+		m_win_size.y = (float)height;
 	}
 
 	void application::set_display_name(const std::string& display_name)

@@ -5,6 +5,7 @@
 namespace engine
 {
     class input_delegate;
+	class renderer;
     
     class director
     {
@@ -12,9 +13,17 @@ namespace engine
         static director& instance();
         
 		void set_frame_rate(int frame_rate);
-        void start();
-        void stop();
+		void set_projection_mode(projection_mode mode);
+		
+		void set_near_plane(float near_plane);
+		void set_far_plane(float far_plane);
+		void set_field_of_view(float field_of_view);
 
+		void set_camera_position(const math::vector3d& position);
+
+		void start();
+        void stop();
+				
         void run_scene(const scene_ptr& scene);
         
 		void main_loop();
@@ -30,13 +39,15 @@ namespace engine
 	private:
         director();
         ~director();
-        void update(float dt);
     private:
-        float m_time_interval = 0;
-        bool m_running = false;
+		float m_time_interval = 0;
+
 		scene_ptr m_scene;
-        
+
+		bool m_running = false;
+
         std::vector<input_delegate*> m_input_handlers;
+		std::unique_ptr<renderer> m_renderer;
         input_delegate* m_current_input = nullptr;
     };
 }

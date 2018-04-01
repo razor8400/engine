@@ -75,11 +75,17 @@
     <ClCompile Include="..\..\..\..\Engine\objects\game_object.cpp">
       <Filter>engine\objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\objects\layer.cpp">
-      <Filter>engine\objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\objects\scene.cpp">
       <Filter>engine\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\core\renderer.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\gl\shaders.cpp">
+      <Filter>engine\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp">
+      <Filter>engine\gl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,11 +125,23 @@
     <ClInclude Include="..\..\..\..\Engine\objects\game_object.h">
       <Filter>engine\objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\objects\layer.h">
-      <Filter>engine\objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\objects\scene.h">
       <Filter>engine\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\core\renderer.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\gl\shaders.h">
+      <Filter>engine\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\gl\shaders_manager.h">
+      <Filter>engine\gl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

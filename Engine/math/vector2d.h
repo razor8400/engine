@@ -6,11 +6,14 @@ namespace engine
     {
         struct vector2d
         {
-            double x;
-            double y;
+			float x;
+			float y;
             
             vector2d();
-            vector2d(double x, double y);
+            vector2d(float x, float y);
+
+			bool operator==(const vector2d& other) const;
+			bool operator!=(const vector2d& other) const;
             
             static const vector2d zero;
         };

@@ -17,7 +17,7 @@ namespace engine
             
         }
         
-        vector3d::vector3d(double x1, double y1, double z1) : x(x1), y(y1), z(z1)
+        vector3d::vector3d(float x1, float y1, float z1) : x(x1), y(y1), z(z1)
         {
             
         }
@@ -44,7 +44,7 @@ namespace engine
         
 		float vector3d::lenght() const
 		{
-			return sqrt(x * x + y * y + z * z);
+			return (float)sqrt(x * x + y * y + z * z);
 		}
 
 		float vector3d::dot(const vector3d& v1, const vector3d& v2)
