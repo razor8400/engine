@@ -1,7 +1,7 @@
 #include "renderer.h"
 #include "application.h"
 
-#include "objects/scene.h"
+#include "core/scene.h"
 
 #include "gl/gl.h"
 #include "gl/shaders.h"

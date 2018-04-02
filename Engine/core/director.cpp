@@ -4,7 +4,7 @@
 #include "application.h"
 #include "renderer.h"
 
-#include "objects/scene.h"
+#include "scene.h"
 
 #include "interface/input_delegate.h"
 #include "platform/window.h"

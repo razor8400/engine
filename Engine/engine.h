@@ -2,7 +2,8 @@
 
 #include "core/director.h"
 #include "core/application.h"
-#include "objects/scene.h"
+#include "core/scene.h"
+#include "core/game_object.h"
 
 #include "interface/app_delegate.h"
 #include "interface/input_delegate.h"
