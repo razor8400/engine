@@ -14,7 +14,6 @@ namespace engine
                 0, 0, 1, 0, // 8,  9,  10, 11
                 0, 0, 0, 1  // 12, 13, 14, 15
             };
-            
 		public:
             float& operator[](int a) { return m[a]; }
             const float& operator[](int a) const { return m[a]; }

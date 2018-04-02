@@ -31,7 +31,7 @@ namespace engine
 		};
 
 		auto program = gl::shaders_manager::instance().get_program(gl::shaders::k_shader_position_color);
-		program->apply_transform(world);
+		program->apply_transform(world * transform());
 		program->use();
 
 		gl::draw_rect(vertices);
@@ -78,7 +78,7 @@ namespace engine
 
 	math::mat4 game_object::transform() const
 	{
-		auto position = math::mat4::translate(10.0f, 10.0f, 1.0f);
+		auto position = math::mat4::translate(m_position.x, m_position.y, m_position.z);
 		auto rotation = math::mat4::rotate(m_rotation.x, m_rotation.y, m_rotation.z);
 		auto scale = math::mat4::scale(m_scale.x, m_scale.y, m_scale.z);
 		auto pivot = math::mat4::translate(m_anchor.x, m_anchor.y, m_anchor.z);

@@ -84,32 +84,20 @@ namespace engine
 		{
 			GLuint element_buffer;
 
-			std::vector<math::vector2d> g_vert =
-			{
-				{ -1, -1, },
-				{ 1, -1, },
-				{ 0, 1, },
-			};
-
-			std::vector<GLushort> g_ind = 
-			{
-				0, 1, 2
-			};
-
 			glGenBuffers(1, &element_buffer);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, g_ind.size() * sizeof(GLushort), &g_ind[0], GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), &indices[0], GL_STATIC_DRAW);
 
 			GLuint vertex_buffer;
 
 			glGenBuffers(1, &vertex_buffer);
 			glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-			glBufferData(GL_ARRAY_BUFFER, g_vert.size() * sizeof(math::vector2d), &g_vert[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(math::vector2d), &vertices[0], GL_STATIC_DRAW);
 
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-			glDrawElements(GL_TRIANGLES, g_ind.size(), GL_UNSIGNED_SHORT, NULL);
+			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, NULL);
 
 			glDisableVertexAttribArray(0);
 		}
