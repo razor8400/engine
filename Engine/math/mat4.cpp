@@ -9,6 +9,11 @@ namespace engine
     namespace math
     {
         const mat4 mat4::identity;
+		
+		void mat4::operator*=(const mat4& m4)
+		{
+			*this = *this * m4;
+		}
         
         mat4 mat4::operator*(const mat4& m4) const
         {
@@ -51,16 +56,9 @@ namespace engine
 		{
 			mat4 mat;
 
-			mat[3] = x;
-			mat[7] = y;
-			mat[11] = z;
-
-			return mat;
-		}
-
-		mat4 mat4::rotate(float x, float y, float z)
-		{
-			mat4 mat;
+			mat[12] = x;
+			mat[13] = y;
+			mat[14] = z;
 
 			return mat;
 		}
@@ -76,6 +74,46 @@ namespace engine
 			return mat;
 		}
 
+		mat4 mat4::rotate(const vector3d & axis, float angle)
+		{
+			mat4 mat;
+
+			auto normalized_axis = vector3d::normalize(axis);
+			auto rad = deg_to_rad(angle);
+
+			float c = cos(rad);
+			float s = sin(rad);
+
+			float t = 1.0f - c;
+
+			float tx = t * normalized_axis.x;
+			float ty = t * normalized_axis.y;
+			float tz = t * normalized_axis.z;
+
+			float txy = tx * normalized_axis.y;
+			float txz = tx * normalized_axis.z;
+			float tyz = ty * normalized_axis.z;
+
+			float sx = s * normalized_axis.x;
+			float sy = s * normalized_axis.y;
+			float sz = s * normalized_axis.z;
+						
+			mat[0] = c + tx * normalized_axis.x;
+			mat[1] = txy + sz;
+			mat[2] = txz - sy;
+			mat[3] = 0.0f;
+
+			mat[4] = txy - sz;
+			mat[5] = c + ty * normalized_axis.y;
+			mat[6] = tyz + sx;
+
+			mat[8] = txz + sy;
+			mat[9] = tyz - sx;
+			mat[10] = c + tz * normalized_axis.z;
+
+			return mat;
+		}
+
 		mat4 mat4::look_at(const vector3d& eye, const vector3d& target, const vector3d& up)
 		{
 			mat4 mat;
@@ -87,19 +125,20 @@ namespace engine
 			auto yaxis = vector3d::normalize(vector3d::cross(zaxis, xaxis));
 			
 			mat[0] = xaxis.x;
-			mat[1] = xaxis.y;
-			mat[2] = xaxis.z;
-			mat[3] = -vector3d::dot(xaxis, normalized_eye);
-			
-			mat[4] = yaxis.x;
-			mat[5] = yaxis.y;
-			mat[6] = yaxis.z;
-			mat[7] = -vector3d::dot(yaxis, normalized_eye);
+			mat[1] = yaxis.x;
+			mat[2] = zaxis.x;
 
-			mat[8] = zaxis.x;			
-			mat[9] = zaxis.y;
+			mat[4] = xaxis.y;
+			mat[5] = yaxis.y;
+			mat[6] = zaxis.y;
+
+			mat[8] = xaxis.z;
+			mat[9] = yaxis.z;
 			mat[10] = zaxis.z;
-			mat[11] = -vector3d::dot(zaxis, normalized_eye);
+
+			mat[12] = -vector3d::dot(xaxis, normalized_eye);
+			mat[13] = -vector3d::dot(yaxis, normalized_eye);
+			mat[14] = -vector3d::dot(zaxis, normalized_eye);
 
 			return mat;
 		}
@@ -112,11 +151,10 @@ namespace engine
 
 			mat[0] = 1.0f / (aspect_ratio * tangent);
 			mat[5] = 1.0f / tangent;
-
             mat[10] = (far_plane + near_plane) / (far_plane - near_plane);
-			mat[11] = -(2.0f * far_plane * near_plane) / (far_plane - near_plane);
-
-			mat[14] = 1.0f;
+			
+			mat[11] = 1.0f;
+			mat[14] = -(2.0f * far_plane * near_plane) / (far_plane - near_plane);
 
 			return mat;
 		}

@@ -1,6 +1,6 @@
 #include "renderer.h"
-#include "application.h"
 
+#include "core/application.h"
 #include "core/scene.h"
 
 #include "gl/gl.h"

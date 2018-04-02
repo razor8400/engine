@@ -14,25 +14,26 @@ void my_app_delegate::application_launched(engine::application* application)
 	director.set_frame_rate(60);
 
 	director.set_projection_mode(engine::perspective);
-	director.set_field_of_view(90);
+	director.set_field_of_view(45);
 	
 	director.set_near_plane(0.1f);
 	director.set_far_plane(100.0f);
-	director.set_camera_position(math::vector3d(0, 0, 1));
+	director.set_camera_position(math::vector3d(0, 0, -1));
 
-    auto scene = std::make_shared<engine::scene>();
-	auto obj = std::make_shared<engine::game_object>();
+	auto scene = game_object::create<engine::scene>();
+	auto obj = game_object::create<engine::game_object>();
+	auto obj2 = game_object::create<engine::game_object>();
 
-	obj->set_size(math::vector3d(0.5f, 0.5f, 0));
-	obj->set_position(math::vector3d(1, 1, 1));
-	obj->set_tag(1);
+	obj->set_size(math::vector3d(1.1f, 1.1f, 0));
+	obj->set_position(math::vector3d(0, 0, 1));	
 
-	auto m1 = math::mat4::translate(10, 10, 1.0f);
-	auto m2 = math::mat4::translate(20, 30, 1.0f);
-
-	auto m3 = m1 * m2;
-
-	scene->add_child(obj.get());
+	obj2->set_position(math::vector3d(1.0f, 1.0f, 1.0f));
+	obj2->set_anchor(math::vector3d(1, 1, 0));
+	obj2->set_rotation(math::vector3d(0, 0, -45));
+	obj2->set_size(math::vector3d(0.5f, 0.5f, 0));
+	
+	obj->add_child(obj2);
+	scene->add_child(obj);
     
 	director.start();
     director.run_scene(scene);
