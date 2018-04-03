@@ -11,6 +11,10 @@ namespace engine
             
             if (glewInit() != GLEW_OK)
                 return false;
+
+			GLuint vertex_array;
+			glGenVertexArrays(1, &vertex_array);
+			glBindVertexArray(vertex_array);
             
             return true;
         }

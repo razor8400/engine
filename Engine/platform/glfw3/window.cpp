@@ -80,11 +80,7 @@ namespace engine
 	}
 
 	void window::process()
-    {
-		GLuint VertexArrayID;
-		glGenVertexArrays(1, &VertexArrayID);
-        glBindVertexArray(VertexArrayID);
-        	
+    {       	
 		while (!glfwWindowShouldClose(g_window))
         {           
 			director::instance().main_loop();
