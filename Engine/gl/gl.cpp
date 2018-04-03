@@ -97,6 +97,8 @@ namespace engine
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
+			glPolygonMode(GL_BACK, GL_LINE);
+
 			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, NULL);
 
 			glDisableVertexAttribArray(0);

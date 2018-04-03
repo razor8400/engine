@@ -6,24 +6,6 @@ namespace engine
 {
 	namespace gl
 	{
-		namespace default_shaders
-		{
-			static const char* shader_color = "#version 330 core\n\
-												out vec3 color;\
-												void main()\
-												{\
-													color = vec3(1, 1, 1);\
-												}";
-
-			static const char* shader_position = "#version 330 core\n\
-												layout(location = 0) in vec3 vertexPosition_modelspace;\
-												uniform mat4 mvp;\
-												void main()\
-												{\
-													gl_Position = mvp * vec4(vertexPosition_modelspace,1);\
-												}";
-		}
-		
 		shaders_manager& shaders_manager::instance()
 		{
 			static shaders_manager instance;
@@ -46,7 +28,7 @@ namespace engine
 
 		void shaders_manager::compile_default_shaders()
 		{
-			auto position_color = create_gl_program<shader_position_color>(default_shaders::shader_position, default_shaders::shader_color);
+			auto position_color = create_gl_program<shader_position_color>(shaders::shader_position, shaders::shader_color);
 
 			add_to_cache(position_color, shaders::k_shader_position_color);
 		}
