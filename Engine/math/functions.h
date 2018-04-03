@@ -1,14 +1,13 @@
 #pragma once
 
-#define M_PI       3.14159265358979323846f 
+#ifndef M_PI
+#define M_PI       3.14159265358979323846f
+#endif
 
-namespace engine
+namespace math
 {
-    namespace math
+    static float deg_to_rad(float rotation)
     {
-        static float deg_to_rad(float rotation)
-        {
-            return rotation * M_PI / 180;
-        }
+        return rotation * M_PI / 180;
     }
 }

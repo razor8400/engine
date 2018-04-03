@@ -13,9 +13,9 @@
 		BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14DD206D030100293C36 /* vector4d.cpp */; };
 		BF3D14E3206D21D300293C36 /* gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E2206D21D300293C36 /* gl.cpp */; };
 		BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E4206D51C700293C36 /* vector3d.cpp */; };
-		BF3D14EC2072254D00293C36 /* shaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E82072254D00293C36 /* shaders.cpp */; };
 		BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E92072254D00293C36 /* shaders_manager.cpp */; };
 		BF3D14F1207225C600293C36 /* renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14EF207225C600293C36 /* renderer.cpp */; };
+		BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14F320736F9200293C36 /* shader_program.cpp */; };
 		BF51ECA8206BAB15005A6240 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF51ECA7206BAB15005A6240 /* main.mm */; };
 		BF51ECA9206BABCF005A6240 /* director.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC66206B96FA005A6240 /* director.cpp */; };
 		BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC68206B96FA005A6240 /* scene.cpp */; };
@@ -52,12 +52,15 @@
 		BF3D14E4206D51C700293C36 /* vector3d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vector3d.cpp; sourceTree = "<group>"; };
 		BF3D14E5206D51C700293C36 /* vector3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector3d.h; sourceTree = "<group>"; };
 		BF3D14E7206E341800293C36 /* functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
-		BF3D14E82072254D00293C36 /* shaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaders.cpp; sourceTree = "<group>"; };
 		BF3D14E92072254D00293C36 /* shaders_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaders_manager.cpp; sourceTree = "<group>"; };
 		BF3D14EA2072254D00293C36 /* shaders_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaders_manager.h; sourceTree = "<group>"; };
 		BF3D14EB2072254D00293C36 /* shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaders.h; sourceTree = "<group>"; };
 		BF3D14EF207225C600293C36 /* renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderer.cpp; sourceTree = "<group>"; };
 		BF3D14F0207225C600293C36 /* renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
+		BF3D14F220736F3200293C36 /* shader_program.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_program.h; sourceTree = "<group>"; };
+		BF3D14F320736F9200293C36 /* shader_program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader_program.cpp; sourceTree = "<group>"; };
+		BF3D14F5207376D400293C36 /* libgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgl.h; sourceTree = "<group>"; };
+		BF3D14F62073785C00293C36 /* libmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmath.h; sourceTree = "<group>"; };
 		BF51EC66206B96FA005A6240 /* director.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = director.cpp; sourceTree = "<group>"; };
 		BF51EC67206B96FA005A6240 /* director.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = director.h; sourceTree = "<group>"; };
 		BF51EC68206B96FA005A6240 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -115,10 +118,12 @@
 			children = (
 				BF3D14E92072254D00293C36 /* shaders_manager.cpp */,
 				BF3D14EA2072254D00293C36 /* shaders_manager.h */,
-				BF3D14E82072254D00293C36 /* shaders.cpp */,
 				BF3D14EB2072254D00293C36 /* shaders.h */,
 				BF3D14E1206D1E3B00293C36 /* gl.h */,
 				BF3D14E2206D21D300293C36 /* gl.cpp */,
+				BF3D14F220736F3200293C36 /* shader_program.h */,
+				BF3D14F320736F9200293C36 /* shader_program.cpp */,
+				BF3D14F5207376D400293C36 /* libgl.h */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				BF3D14E5206D51C700293C36 /* vector3d.h */,
 				BF3D14E4206D51C700293C36 /* vector3d.cpp */,
 				BF3D14E7206E341800293C36 /* functions.h */,
+				BF3D14F62073785C00293C36 /* libmath.h */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -302,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */,
+				BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */,
 				BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */,
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
@@ -311,7 +318,6 @@
 				BF3D14F1207225C600293C36 /* renderer.cpp in Sources */,
 				BF51ECAD206BABDB005A6240 /* window.cpp in Sources */,
 				BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */,
-				BF3D14EC2072254D00293C36 /* shaders.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
 				BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */,
 				BF51ECA9206BABCF005A6240 /* director.cpp in Sources */,
@@ -337,7 +343,7 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -398,7 +404,7 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;

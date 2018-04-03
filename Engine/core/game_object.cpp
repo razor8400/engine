@@ -1,9 +1,5 @@
 #include "game_object.h"
 
-#include "gl/gl.h"
-#include "gl/shaders.h"
-#include "gl/shaders_manager.h"
-
 namespace engine
 {
 	bool game_object::init()
@@ -44,7 +40,7 @@ namespace engine
 			{ -m_size.x / 2, m_size.y / 2 }
 		};
 
-		auto program = gl::shaders_manager::instance().get_program(gl::shaders::k_shader_position_color);
+		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
 		program->apply_transform(world * world_transform());
 		program->use();
 

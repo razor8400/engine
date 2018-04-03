@@ -6,9 +6,8 @@
 #include <algorithm>
 #include <map>
 
-#include "math/vector2d.h"
-#include "math/vector3d.h"
-#include "math/mat4.h"
+#include "gl/libgl.h"
+#include "math/libmath.h"
 
 namespace engine
 {
