@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>..\..\..\Sources;..\..\..\..\Engine;..\..\..\..\ThirdParty;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\..\..\ThirdParty\GLEW\lib\Win32\;..\..\..\..\ThirdParty\GLFW3\Win32\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\..\..\ThirdParty\GLEW\lib\Win32\;..\..\..\..\ThirdParty\GLFW3\Win32\;..\..\..\..\ThirdParty\libpng\Win32\;..\..\..\..\ThirdParty\zlib\Win32\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,7 +81,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;zlib.lib;libpng16.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,13 +121,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Engine\2d\texture2d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\application.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\director.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\game_object.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\scene.cpp" />
     <ClCompile Include="..\..\..\..\Engine\gl\gl.cpp" />
-    <ClCompile Include="..\..\..\..\Engine\gl\shaders.cpp" />
     <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\gl\shader_program.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\mat4.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\vector2d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\math\vector3d.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Engine\2d\texture2d.h" />
     <ClInclude Include="..\..\..\..\Engine\common.h" />
     <ClInclude Include="..\..\..\..\Engine\core\application.h" />
     <ClInclude Include="..\..\..\..\Engine\core\director.h" />
@@ -145,8 +147,10 @@
     <ClInclude Include="..\..\..\..\Engine\core\scene.h" />
     <ClInclude Include="..\..\..\..\Engine\engine.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\gl.h" />
+    <ClInclude Include="..\..\..\..\Engine\gl\libgl.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\shaders.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\shaders_manager.h" />
+    <ClInclude Include="..\..\..\..\Engine\gl\shader_program.h" />
     <ClInclude Include="..\..\..\..\Engine\interface\app_delegate.h" />
     <ClInclude Include="..\..\..\..\Engine\interface\input_delegate.h" />
     <ClInclude Include="..\..\..\..\Engine\math\mat4.h" />

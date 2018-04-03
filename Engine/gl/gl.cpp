@@ -9,15 +9,25 @@ namespace gl
         
         if (glewInit() != GLEW_OK)
             return false;
-
-        GLuint vertex_array;
-        glGenVertexArrays(1, &vertex_array);
-        glBindVertexArray(vertex_array);
         
         return true;
     }
+
+	GLuint generate_vbo()
+	{
+		GLuint vertex_array;
+		glGenVertexArrays(1, &vertex_array);
+		glBindVertexArray(vertex_array);
+
+		return vertex_array;
+	}
     
-    void compile_shaders()
+	void clear_vbo(GLuint vbo)
+	{
+		glDeleteVertexArrays(1, &vbo);
+	}
+
+	void compile_shaders()
     {
         auto& manager = shaders_manager::instance();
         manager.compile_default_shaders();
@@ -82,6 +92,20 @@ namespace gl
         return program;
     }
 
+	GLuint load_texture(unsigned char * data, int width, int height, GLuint format)
+	{
+		GLuint texture;
+		glGenTextures(1, &texture);
+
+		glBindTexture(GL_TEXTURE_2D, texture);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		return texture;
+	}
+
     void draw_poly(const std::vector<math::vector2d>& vertices, const std::vector<GLushort>& indices)
     {
         GLuint element_buffer;
@@ -99,9 +123,10 @@ namespace gl
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-        glPolygonMode(GL_BACK, GL_LINE);
-
         glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
+
+		glDeleteBuffers(1, &element_buffer);
+		glDeleteBuffers(1, &vertex_buffer);
 
         glDisableVertexAttribArray(0);
     }

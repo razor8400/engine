@@ -40,6 +40,9 @@
     <Filter Include="engine\renderer">
       <UniqueIdentifier>{f9c87a35-b022-4208-91ee-2f05d60b41f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\2d">
+      <UniqueIdentifier>{caa5a98e-598c-4428-8964-193a7d76229c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,9 +75,6 @@
     <ClCompile Include="..\..\..\..\Engine\platform\glfw3\window.cpp">
       <Filter>engine\platform\glfw</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\gl\shaders.cpp">
-      <Filter>engine\gl</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp">
       <Filter>engine\gl</Filter>
     </ClCompile>
@@ -86,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp">
       <Filter>engine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\gl\shader_program.cpp">
+      <Filter>engine\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\2d\texture2d.cpp">
+      <Filter>engine\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h">
       <Filter>engine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\gl\libgl.h">
+      <Filter>engine\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\gl\shader_program.h">
+      <Filter>engine\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\2d\texture2d.h">
+      <Filter>engine\2d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

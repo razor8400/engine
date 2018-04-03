@@ -80,7 +80,9 @@ namespace engine
 	}
 
 	void window::process()
-    {       	
+    {
+		auto vbo = gl::generate_vbo();
+
 		while (!glfwWindowShouldClose(g_window))
         {           
 			director::instance().main_loop();
@@ -89,6 +91,8 @@ namespace engine
             glfwPollEvents();
         }
         
+		gl::clear_vbo(vbo);
+
         glfwTerminate();
     }
 }

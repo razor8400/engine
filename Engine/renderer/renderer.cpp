@@ -3,10 +3,6 @@
 #include "core/application.h"
 #include "core/scene.h"
 
-#include "gl/gl.h"
-#include "gl/shaders.h"
-#include "gl/shaders_manager.h"
-
 namespace engine
 {
 	void renderer::set_projection_mode(projection_mode mode)
