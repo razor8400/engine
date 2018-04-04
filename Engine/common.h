@@ -23,5 +23,7 @@ namespace engine
 	{
 		ortographic, perspective
 	};
+    
+    static const std::string empty_string;
 }
 

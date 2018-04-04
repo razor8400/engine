@@ -25,17 +25,22 @@
 		BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC73206B96FA005A6240 /* vector2d.cpp */; };
 		BF51ECAF206BAC28005A6240 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC84206B993A005A6240 /* OpenGL.framework */; };
 		BF51ECB0206BAC3D005A6240 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */; };
+		BFCB320D20753218001B5995 /* libpng16.16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCB320C20753218001B5995 /* libpng16.16.dylib */; };
+		BFCB321820753EAE001B5995 /* file_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB321720753EAE001B5995 /* file_system.cpp */; };
+		BFCB321D20754006001B5995 /* file_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB321C20754006001B5995 /* file_utils.cpp */; };
+		BFCB321E20754100001B5995 /* Assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFCB321220753755001B5995 /* Assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BF51EC9D206BAAF0005A6240 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				BFCB321E20754100001B5995 /* Assets in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -81,6 +86,12 @@
 		BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../ThirdParty/GLFW3/osx/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		BF51EC9F206BAAF0005A6240 /* OSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSX; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF51ECA7206BAB15005A6240 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		BFCB320C20753218001B5995 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = ../../../ThirdParty/libpng/OSX/libpng16.16.dylib; sourceTree = "<group>"; };
+		BFCB321220753755001B5995 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = ../../Assets; sourceTree = "<group>"; };
+		BFCB321520753E4F001B5995 /* file_system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = file_system.h; sourceTree = "<group>"; };
+		BFCB321720753EAE001B5995 /* file_system.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_system.cpp; sourceTree = "<group>"; };
+		BFCB321B20754006001B5995 /* file_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_utils.h; sourceTree = "<group>"; };
+		BFCB321C20754006001B5995 /* file_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_utils.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +102,7 @@
 				BF3D14D8206BF8E700293C36 /* libGLEW.2.1.0.dylib in Frameworks */,
 				BF51ECB0206BAC3D005A6240 /* libglfw.3.2.dylib in Frameworks */,
 				BF51ECAF206BAC28005A6240 /* OpenGL.framework in Frameworks */,
+				BFCB320D20753218001B5995 /* libpng16.16.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +157,7 @@
 				BF51EC3A206B8B76005A6240 /* Products */,
 				BF51ECA6206BAB15005A6240 /* OSX */,
 				BF51EC83206B993A005A6240 /* Frameworks */,
+				BFCB321220753755001B5995 /* Assets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +172,7 @@
 		BF51EC64206B96FA005A6240 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				BFCB321A20754006001B5995 /* utils */,
 				BF3D14EE2072255F00293C36 /* renderer */,
 				BF3D14E0206D1E2300293C36 /* gl */,
 				BF3D14D1206BE67200293C36 /* 2d */,
@@ -192,6 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				BF51EC6F206B96FA005A6240 /* window.h */,
+				BFCB321520753E4F001B5995 /* file_system.h */,
+				BFCB321620753E89001B5995 /* posix */,
 				BF51EC70206B96FA005A6240 /* glfw3 */,
 			);
 			path = platform;
@@ -237,6 +253,7 @@
 			children = (
 				BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */,
 				BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */,
+				BFCB320C20753218001B5995 /* libpng16.16.dylib */,
 				BF51EC84206B993A005A6240 /* OpenGL.framework */,
 			);
 			name = Frameworks;
@@ -248,6 +265,23 @@
 				BF51ECA7206BAB15005A6240 /* main.mm */,
 			);
 			path = OSX;
+			sourceTree = "<group>";
+		};
+		BFCB321620753E89001B5995 /* posix */ = {
+			isa = PBXGroup;
+			children = (
+				BFCB321720753EAE001B5995 /* file_system.cpp */,
+			);
+			path = posix;
+			sourceTree = "<group>";
+		};
+		BFCB321A20754006001B5995 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				BFCB321B20754006001B5995 /* file_utils.h */,
+				BFCB321C20754006001B5995 /* file_utils.cpp */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,9 +347,11 @@
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
 				BF51ECAB206BABD4005A6240 /* game_object.cpp in Sources */,
+				BFCB321820753EAE001B5995 /* file_system.cpp in Sources */,
 				BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */,
 				BF51ECA8206BAB15005A6240 /* main.mm in Sources */,
 				BF3D14F1207225C600293C36 /* renderer.cpp in Sources */,
+				BFCB321D20754006001B5995 /* file_utils.cpp in Sources */,
 				BF51ECAD206BABDB005A6240 /* window.cpp in Sources */,
 				BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
@@ -452,6 +488,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					../../../ThirdParty/GLFW3/osx/,
 					../../../ThirdParty/GLEW/lib/osx/,
+					../../../ThirdParty/libpng/OSX/,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -466,6 +503,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					../../../ThirdParty/GLFW3/osx/,
 					../../../ThirdParty/GLEW/lib/osx/,
+					../../../ThirdParty/libpng/OSX/,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

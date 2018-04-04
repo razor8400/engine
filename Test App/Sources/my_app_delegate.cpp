@@ -1,6 +1,7 @@
 #include "my_app_delegate.h"
 
-#include "math/vector3d.h"
+#include "utils/file_utils.h"
+#include "platform/file_system.h"
 
 using namespace engine;
 
@@ -21,19 +22,7 @@ void my_app_delegate::application_launched(engine::application* application)
 	director.set_camera_position(math::vector3d(0, 0, -1));
 
 	auto scene = game_object::create<engine::scene>();
-	auto obj = game_object::create<engine::game_object>();
-	auto obj2 = game_object::create<engine::game_object>();
-
-	obj->set_size(math::vector3d(1.1f, 1.1f, 0));
-	obj->set_position(math::vector3d(0, 0, 1));	
-
-	obj2->set_position(math::vector3d(1.0f, 1.0f, 1.0f));
-	obj2->set_anchor(math::vector3d(1, 1, 0));
-	obj2->set_rotation(math::vector3d(0, 0, -45));
-	obj2->set_size(math::vector3d(0.5f, 0.5f, 0));
-	
-	obj->add_child(obj2);
-	scene->add_child(obj);
+    auto path = file_utils::instance().get_path_to_resource("hui.png");
     
 	director.start();
     director.run_scene(scene);
