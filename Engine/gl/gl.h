@@ -19,7 +19,9 @@ namespace gl
     void clear();
     
     GLint create_gl_program(const char* vert, const char* frag);
-	GLuint load_texture(unsigned char* data, int width, int height, GLuint format);
+	GLuint load_texture(const unsigned char* data, int width, int height, GLuint format);
+    
+    void delete_texture(GLuint texture);
 
     void draw_poly(const std::vector<math::vector2d>& vertices, const std::vector<GLushort>& indices);
     void draw_rect(const std::vector<math::vector2d>& vertices);

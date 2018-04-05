@@ -1,34 +1,45 @@
 #include "file_utils.h"
-#include "platform/file_system.h"
+#include "platform/file_system/file_system.h"
+
+#include <stdio.h>
 
 namespace engine
 {
-    static const char* assets_folder = "Assets/";
-    
-	file_utils& file_utils::instance()
-	{
-		static file_utils utils;
-
-		return utils;
-	}
-
-	bool file_utils::read_file(const std::string& file_name, unsigned char* data) const
-	{
-		return nullptr;
-	}
-    
-    std::string file_utils::get_resources_folder() const
+    namespace file_utils
     {
-        return file_system::get_current_directory() + '/' + assets_folder;
+        static const char* assets_folder = "Assets/";
+        
+        bool read_file(const std::string& file_name, unsigned char** data)
+        {
+            auto file = fopen(file_name.c_str(), "r+");
+            
+            if (file != NULL)
+            {
+                fseek(file, 0, SEEK_END);
+                
+                auto size = ftell(file);
+                *data = new unsigned char[size];
+                
+                fseek(file, 0, 0);
+                
+                auto bytes_read = fread(*data, sizeof(unsigned char), size, file);
+                
+                fclose(file);
+                
+                return bytes_read == size;
+            }
+            
+            return false;
+        }
+        
+        std::string get_resources_folder()
+        {
+            return file_system::get_current_directory() + '/' + assets_folder;
+        }
+        
+        std::string get_path_to_resource(const std::string& path)
+        {
+            return get_resources_folder() + path;
+        }
     }
-    
-    std::string file_utils::get_path_to_resource(const std::string& path)
-    {
-        return get_resources_folder() + path;
-    }
-
-	file_utils::file_utils()
-	{
-
-	}
 }

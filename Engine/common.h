@@ -16,6 +16,9 @@ namespace engine
 
 	class game_object;
 	typedef std::shared_ptr<game_object> game_object_ptr;
+    
+    class resource;
+    typedef std::shared_ptr<resource> resource_ptr;
 
 	class renderer;
 

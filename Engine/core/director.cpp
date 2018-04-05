@@ -7,7 +7,6 @@
 #include "scene.h"
 
 #include "interface/input_delegate.h"
-#include "platform/window.h"
 
 namespace engine
 {

@@ -1,13 +1,7 @@
 #include "core/director.h"
-#include "platform/window.h"
-
-#include "gl/gl.h"
-#include "gl/shaders.h"
-#include "gl/shaders_manager.h"
+#include "platform/window/window.h"
 
 #include "GLFW3/glfw3.h"
-
-#include "math/mat4.h"
 
 namespace engine
 {   

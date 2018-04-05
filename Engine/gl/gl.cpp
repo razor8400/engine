@@ -92,7 +92,7 @@ namespace gl
         return program;
     }
 
-	GLuint load_texture(unsigned char * data, int width, int height, GLuint format)
+	GLuint load_texture(const unsigned char* data, int width, int height, GLuint format)
 	{
 		GLuint texture;
 		glGenTextures(1, &texture);
@@ -105,6 +105,11 @@ namespace gl
 
 		return texture;
 	}
+    
+    void delete_texture(GLuint texture)
+    {
+        glDeleteTextures(1, &texture);
+    }
 
     void draw_poly(const std::vector<math::vector2d>& vertices, const std::vector<GLushort>& indices)
     {
