@@ -1,7 +1,7 @@
+#include "common.h"
+
 #include "file_utils.h"
 #include "platform/file_system/file_system.h"
-
-#include <stdio.h>
 
 namespace engine
 {
@@ -11,7 +11,7 @@ namespace engine
         
         bool read_file(const std::string& file_name, unsigned char** data)
         {
-            auto file = fopen(file_name.c_str(), "r+");
+            auto file = file_system::open_file(file_name.c_str(), "rb");
             
             if (file != NULL)
             {

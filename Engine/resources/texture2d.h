@@ -9,16 +9,10 @@ namespace engine
     public:
         virtual ~texture2d();
         
-        struct data
-        {
-            int width;
-            int height;
-            int format;
-        };
-        
         bool load(const unsigned char* data) override;
     private:
-        data m_data;
+		int m_width = 0;
+		int m_height = 0;
         int m_texture_id = -1;
 	};
 }

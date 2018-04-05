@@ -31,17 +31,29 @@
     <Filter Include="engine\platform">
       <UniqueIdentifier>{ce41c174-72ea-42e4-88eb-e9e8e46eb982}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sources">
-      <UniqueIdentifier>{f99d2877-dea8-4635-bbcf-6c95f31c28c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="engine\platform\glfw">
-      <UniqueIdentifier>{7e531321-c761-40e6-97df-d1bd342bfb8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="engine\renderer">
       <UniqueIdentifier>{f9c87a35-b022-4208-91ee-2f05d60b41f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\2d">
-      <UniqueIdentifier>{caa5a98e-598c-4428-8964-193a7d76229c}</UniqueIdentifier>
+    <Filter Include="engine\utils">
+      <UniqueIdentifier>{003400e7-d629-44d5-ae6b-bfc1e5ea0098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\resources">
+      <UniqueIdentifier>{c81b24aa-181c-424e-9971-7c85aecbfa8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\platform\file_system">
+      <UniqueIdentifier>{4c3dde71-d7d5-4d5a-ad3f-3d92b3b7f0bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\platform\window">
+      <UniqueIdentifier>{79d74cca-41a7-4d8d-b16e-bbe3060c31b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\platform\window\glfw">
+      <UniqueIdentifier>{6b99edd9-aa7a-4c2d-92f1-344d5d32083c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\platform\file_system\windows">
+      <UniqueIdentifier>{daf941c8-db52-47c0-8e8a-6029106bc310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{f99d2877-dea8-4635-bbcf-6c95f31c28c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,7 +61,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sources\my_app_delegate.cpp">
-      <Filter>sources</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\gl\gl.cpp">
       <Filter>engine\gl</Filter>
@@ -72,9 +84,6 @@
     <ClCompile Include="..\..\..\..\Engine\math\vector4d.cpp">
       <Filter>engine\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\platform\glfw3\window.cpp">
-      <Filter>engine\platform\glfw</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp">
       <Filter>engine\gl</Filter>
     </ClCompile>
@@ -90,13 +99,28 @@
     <ClCompile Include="..\..\..\..\Engine\gl\shader_program.cpp">
       <Filter>engine\gl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\2d\texture2d.cpp">
-      <Filter>engine\2d</Filter>
+    <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\utils\image_utils.cpp">
+      <Filter>engine\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\window.cpp">
+      <Filter>engine\platform\window\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\platform\file_system\windows\file_system.cpp">
+      <Filter>engine\platform\file_system\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\utils\file_utils.cpp">
+      <Filter>engine\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h">
-      <Filter>sources</Filter>
+      <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\gl\gl.h">
       <Filter>engine\gl</Filter>
@@ -125,9 +149,6 @@
     <ClInclude Include="..\..\..\..\Engine\math\vector4d.h">
       <Filter>engine\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\platform\window.h">
-      <Filter>engine\platform</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -155,8 +176,29 @@
     <ClInclude Include="..\..\..\..\Engine\gl\shader_program.h">
       <Filter>engine\gl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\2d\texture2d.h">
-      <Filter>engine\2d</Filter>
+    <ClInclude Include="..\..\..\..\Engine\resources\resource.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.hpp">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\texture2d.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\utils\file_utils.h">
+      <Filter>engine\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\utils\image_utils.h">
+      <Filter>engine\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\platform\window\window.h">
+      <Filter>engine\platform\window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\platform\file_system\file_system.h">
+      <Filter>engine\platform\file_system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

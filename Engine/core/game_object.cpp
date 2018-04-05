@@ -1,3 +1,4 @@
+#include "common.h"
 #include "game_object.h"
 
 namespace engine

@@ -1,3 +1,4 @@
+#include "common.h"
 #include "resources_manager.h"
 
 namespace engine

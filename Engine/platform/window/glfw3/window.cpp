@@ -1,3 +1,4 @@
+#include "common.h"
 #include "core/director.h"
 #include "platform/window/window.h"
 

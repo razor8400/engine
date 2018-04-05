@@ -1,8 +1,5 @@
 #pragma once
 
-#include "common.h"
-#include "texture2d.h"
-
 namespace engine
 {
     namespace format
@@ -15,7 +12,14 @@ namespace engine
     
     namespace image_utils
     {
-        bool load_texture_data(texture2d::data* data, const unsigned char* buffer);
+		struct image_data
+		{
+			int width;
+			int height;
+			int format;
+		};
+		
+		bool load_texture_data(image_data* data, const unsigned char* buffer);
         const char* get_image_format(const unsigned char* buffer);
     }
 }

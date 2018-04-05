@@ -1,6 +1,5 @@
 #pragma once
 
-#include "common.h"
 #include "platform/window/window.h"
 
 namespace engine

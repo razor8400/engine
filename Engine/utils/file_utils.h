@@ -1,7 +1,5 @@
 #pragma once
 
-#include "common.h"
-
 namespace engine
 {
 	namespace file_utils

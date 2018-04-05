@@ -1,3 +1,4 @@
+#include "common.h"
 #include "texture2d.h"
 #include "utils/image_utils.h"
 
@@ -13,9 +14,12 @@ namespace engine
     
     bool texture2d::load(const unsigned char* data)
     {
-        if (image_utils::load_texture_data(&m_data, data))
+		auto image = image_utils::image_data();
+		if (image_utils::load_texture_data(&image, data))
         {
-            m_texture_id = gl::load_texture(data, m_data.width, m_data.height, m_data.format);
+			m_width = image.width;
+			m_height = image.height;
+            m_texture_id = gl::load_texture(data, m_width, m_height, image.format);
             return true;
         }
         

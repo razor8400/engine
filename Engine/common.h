@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <functional>
 
 #include "gl/libgl.h"
 #include "math/libmath.h"

@@ -1,3 +1,4 @@
+#include "common.h"
 #include "application.h"
 #include "interface/app_delegate.h"
 
