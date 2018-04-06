@@ -19,16 +19,12 @@ void my_app_delegate::application_launched(engine::application* application)
 	director.set_camera_position(math::vector3d(0, 0, -1));
 
 	auto scene = game_object::create<engine::scene>();
+    auto sprite = sprite::create("hui.png");
     
-    auto texture = resources_manager::instance().load_resource<texture2d>("hui.png");
-    
-    if (texture)
-    {
-        int a = 1234;
-    }
+    scene->add_child(sprite);
     
 	director.start();
     director.run_scene(scene);
     
-	application->run();
+    application->run();
 }

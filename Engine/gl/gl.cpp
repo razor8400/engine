@@ -10,6 +10,9 @@ namespace gl
         if (glewInit() != GLEW_OK)
             return false;
         
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
+        
         return true;
     }
 
@@ -105,6 +108,41 @@ namespace gl
 
 		return texture;
 	}
+    
+    void draw_texture2d(GLuint texture, const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv, const std::vector<GLushort>& indices)
+    {
+        GLuint element_buffer;
+        
+        glGenBuffers(1, &element_buffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), &indices[0], GL_STATIC_DRAW);
+        
+        GLuint vertex_buffer;
+        
+        glGenBuffers(1, &vertex_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(math::vector2d), &vertices[0], GL_STATIC_DRAW);
+        
+        GLuint uv_buffer;
+        glGenBuffers(1, &uv_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
+        glBufferData(GL_ARRAY_BUFFER, uv.size() * sizeof(math::vector2d), &uv[0], GL_STATIC_DRAW);
+        
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
+        
+        glDeleteBuffers(1, &element_buffer);
+        glDeleteBuffers(1, &vertex_buffer);
+        glDeleteBuffers(1, &uv_buffer);
+        
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(0);
+    }
     
     void delete_texture(GLuint texture)
     {

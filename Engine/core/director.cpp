@@ -5,6 +5,7 @@
 #include "director.h"
 #include "application.h"
 #include "renderer/renderer.h"
+#include "resources/resources_manager.h"
 
 #include "scene.h"
 
@@ -91,6 +92,8 @@ namespace engine
             {
                 last_update = now;
 
+                resources_manager::instance().update();
+                
 				if (m_scene)
 				{
 					m_scene->update(count);

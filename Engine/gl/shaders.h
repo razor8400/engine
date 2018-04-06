@@ -12,11 +12,11 @@ namespace gl
                                             })";
 
         static const char* shader_position = R"(#version 330 core
-                                            layout(location = 0) in vec3 vertexPosition_modelspace;
+                                            layout(location = 0) in vec3 vertex_position_modelspace;
                                             uniform mat4 mvp;
                                             void main()
                                             {
-                                                gl_Position = mvp * vec4(vertexPosition_modelspace,1);
+                                                gl_Position = mvp * vec4(vertex_position_modelspace, 1);
                                             })";
 
 		static const char* shader_texture_color = R"(#version 330 core
@@ -25,7 +25,7 @@ namespace gl
 												uniform sampler2D sampler2d;
 												void main()
 												{
-													color = texture(sampler2d, uv).rgb;
+                                                    color = texture(sampler2d, uv).rgb;
 												})";
 
 		static const char* shader_texture_position = R"(#version 330 core
@@ -38,4 +38,8 @@ namespace gl
 													   gl_Position = mvp * vec4(vertex_position_modelspace, 1);
 													   uv = vertex_uv;
 													})";
+        
+        static const char* mvp = "mvp";
+        static const char* texture_sampler2d = "sampler2d";
+    }
 }

@@ -25,4 +25,30 @@ namespace engine
         
         return false;
     }
+    
+    void texture2d::draw()
+    {
+        std::vector<math::vector2d> vertices =
+        {
+            { 0, 0 },
+            { 100.0f / (float)m_width, 0 },
+            { 100.0f / (float)m_width, 100.0f / (float)m_height, },
+            { 0, 100.0f / (float)m_height }
+        };
+        
+        std::vector<math::vector2d> uv =
+        {
+            { 0, 0 },
+            { 1, 0,},
+            { 1, 1 },
+            { 0, 1 },
+        };
+        
+        std::vector<GLushort> indices =
+        {
+            0, 1, 2, 2, 3, 0
+        };
+        
+        gl::draw_texture2d(m_texture_id, vertices, uv, indices);
+    }
 }

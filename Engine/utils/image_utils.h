@@ -17,6 +17,7 @@ namespace engine
 			int width;
 			int height;
 			int format;
+            int bit_depth;
 		};
 		
 		bool load_texture_data(image_data* data, const unsigned char* buffer);

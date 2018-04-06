@@ -9,7 +9,7 @@ namespace engine
 	{
 		static size_t bytes_read = 0;
 
-		void read_png_func(png_structp png_ptr, png_bytep out_data, png_size_t length)
+		void read_png_callback(png_structp png_ptr, png_bytep out_data, png_size_t length)
 		{
 			unsigned char* data = (unsigned char*)png_get_io_ptr(png_ptr);
 			
@@ -32,15 +32,13 @@ namespace engine
 
 			bytes_read = 0;
 
-			png_set_read_fn(png_ptr, (png_voidp*)buffer, read_png_func);
+			png_set_read_fn(png_ptr, (png_voidp*)buffer, read_png_callback);
 			png_read_info(png_ptr, info_ptr);
 
 			data->width = png_get_image_width(png_ptr, info_ptr);
 			data->height = png_get_image_height(png_ptr, info_ptr);
 			data->format = png_get_color_type(png_ptr, info_ptr);
-
-			delete png_ptr;
-			delete info_ptr;
+            data->bit_depth = png_get_bit_depth(png_ptr, info_ptr);
 
 			return true;
 		}
@@ -52,7 +50,8 @@ namespace engine
         {
             typedef std::function<bool(image_data*, const unsigned char*)> format_helper;
             
-            static const std::map<std::string, format_helper> helpers = {
+            static const std::map<std::string, format_helper> helpers =
+            {
                 { format::png, png::read_png_data }
             };
             

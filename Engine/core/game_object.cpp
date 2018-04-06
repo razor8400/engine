@@ -42,8 +42,7 @@ namespace engine
 		};
 
 		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
-		program->apply_transform(world * world_transform());
-		program->use();
+		program->use(world * world_transform());
 
 		gl::draw_rect(vertices);
     }
@@ -67,6 +66,9 @@ namespace engine
     
 	void game_object::add_child(const game_object_ptr& obj)
 	{
+        if (m_active)
+            obj->on_enter();
+        
 		obj->m_parent = this;
 		m_children.push_back(obj);
 	}
@@ -80,6 +82,9 @@ namespace engine
 
 		if (it != m_children.end())
 		{
+            if (m_active)
+                obj->on_exit();
+            
 			m_children.erase(it);
 			obj->m_parent = nullptr;
 		}

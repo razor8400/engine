@@ -27,8 +27,10 @@ namespace gl
     void shaders_manager::compile_default_shaders()
     {
         auto position_color = create_gl_program<shader_position_color>(shaders::shader_position, shaders::shader_color);
+        auto shader_position_texture_color = create_gl_program<shader_texture_position_color>(shaders::shader_texture_position, shaders::shader_texture_color);
 
         add_to_cache(position_color, shader_program::shader_position_color);
+        add_to_cache(shader_position_texture_color, shader_program::shader_texture_position_color);
     }
 
     void shaders_manager::add_to_cache(const shader_program_ptr& program, const std::string& key)

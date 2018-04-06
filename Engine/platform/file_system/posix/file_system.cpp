@@ -16,5 +16,10 @@ namespace engine
             
             return empty_string;
         }
+        
+        FILE* open_file(const char* path, const char* mode)
+        {
+            return fopen(path, mode);
+        }
     }
 }

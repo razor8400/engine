@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <map>
 #include <functional>
+#include <queue>
 
 #include "gl/libgl.h"
 #include "math/libmath.h"
@@ -20,6 +21,9 @@ namespace engine
     
     class resource;
     typedef std::shared_ptr<resource> resource_ptr;
+    
+    class texture2d;
+    typedef std::shared_ptr<texture2d> texture2d_ptr;
 
 	class renderer;
 
@@ -29,5 +33,10 @@ namespace engine
 	};
     
     static const std::string empty_string;
+    
+    static void log(const char* msg)
+    {
+        
+    }
 }
 
