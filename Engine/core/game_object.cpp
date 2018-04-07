@@ -40,9 +40,12 @@ namespace engine
 			{ m_size.x /2, m_size.y / 2, },
 			{ -m_size.x / 2, m_size.y / 2 }
 		};
-
-		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
-		program->use(world * world_transform());
+        
+        if (!m_shader_program)
+            m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
+        
+        if (m_shader_program)
+            m_shader_program->use(world * world_transform());
 
 		gl::draw_rect(vertices);
     }
@@ -53,6 +56,7 @@ namespace engine
             obj->on_enter();
         
         m_active = true;
+
 		mark_dirty();
     }
     
@@ -108,7 +112,7 @@ namespace engine
 		auto scale = math::mat4::scale(m_scale.x, m_scale.y, m_scale.z);
 		auto pivot = math::mat4::translate(center.x, center.y, center.z);
 
-		return position * pivot * scale * rotation * math::mat4::translate(-center.x, -center.y, -center.z);
+        return position * rotation * scale;// * rotation * math::mat4::translate(-center.x, -center.y, -center.z);
 	}
 
 	math::mat4 game_object::world_transform() const

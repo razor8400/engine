@@ -28,7 +28,7 @@ namespace engine
             {
                 resource_loaded = m_resource->load(buffer);
                 
-                delete buffer;
+                delete[] buffer;
             }
         }
         

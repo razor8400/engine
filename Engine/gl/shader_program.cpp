@@ -40,8 +40,12 @@ namespace gl
         GLuint texture_id  = glGetUniformLocation(m_program_id, shaders::texture_sampler2d);
         
         glUseProgram(m_program_id);
-        
         glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &transform[0]);
+        
+        // Bind our texture in Texture Unit 0
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, 1);
+        
         glUniform1i(texture_id, 0);
     }
 }

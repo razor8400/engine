@@ -11,16 +11,20 @@ namespace engine
         auto it = m_resources.find(path);
         
         if (it != m_resources.end() && complete_callback)
+        {
             complete_callback(it->second);
-        
-        auto task = new file_loader_task();
-        
-        task->m_path = path;
-        task->m_resource = std::make_shared<T>();
-        task->m_complete_callback = complete_callback;
-        task->m_error_callback = error_callback;
-        task->m_delegate = this;
-        
-        m_loading_queue.push(task);
+        }
+        else
+        {
+            auto task = new file_loader_task();
+            
+            task->m_path = path;
+            task->m_resource = std::make_shared<T>();
+            task->m_complete_callback = complete_callback;
+            task->m_error_callback = error_callback;
+            task->m_delegate = this;
+            
+            m_loading_queue.push(task);
+        }
     }
 }

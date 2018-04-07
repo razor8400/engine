@@ -2,7 +2,7 @@
 #include "engine.h"
 #include "my_app_delegate.h"
 
-int main(int argc, const char * argv[])
+int main(int argc, const char* argv[])
 {
     @autoreleasepool
     {

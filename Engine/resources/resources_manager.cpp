@@ -4,6 +4,8 @@
 
 namespace engine
 {
+    const int resources_manager::default_loading_tasks = 10;
+    
     resources_manager& resources_manager::instance()
     {
         static resources_manager manager;

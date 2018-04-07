@@ -49,6 +49,9 @@ namespace engine
 		int get_tag() const { return m_tag; }
                 
         int get_children_count() const { return (int)m_children.size(); }
+        
+        void set_shader_program(const gl::shader_program_ptr& shader_program) { m_shader_program = shader_program; }
+        const gl::shader_program_ptr& get_shader_program() const { return m_shader_program; }
 	protected:
 		std::vector<game_object_ptr> m_children;
 
@@ -66,6 +69,7 @@ namespace engine
 		bool m_update_transform = false;
 
 		game_object* m_parent = nullptr;
+        gl::shader_program_ptr m_shader_program;
 	};
 
 	template<class T>

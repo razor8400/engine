@@ -62,10 +62,10 @@ namespace engine
     {
         if (m_texture)
         {
-            auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color);
-            program->use(world * world_transform());
+            if (!m_shader_program)
+                m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color);
             
-            m_texture->draw();
+            m_texture->draw(world, m_shader_program);
         }
     }
     

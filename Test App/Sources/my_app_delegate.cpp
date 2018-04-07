@@ -20,6 +20,7 @@ void my_app_delegate::application_launched(engine::application* application)
 
 	auto scene = game_object::create<engine::scene>();
     auto sprite = sprite::create("hui.png");
+    sprite->set_scale(math::vector3d(0.5f, 0.5f, 0.5f));
     
     scene->add_child(sprite);
     

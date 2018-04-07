@@ -40,6 +40,8 @@ namespace engine
 			data->format = png_get_color_type(png_ptr, info_ptr);
             data->bit_depth = png_get_bit_depth(png_ptr, info_ptr);
 
+            png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+            
 			return true;
 		}
 	}

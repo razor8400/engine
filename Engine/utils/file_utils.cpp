@@ -19,7 +19,7 @@ namespace engine
                 
                 auto size = ftell(file);
                 *data = new unsigned char[size];
-                
+
                 fseek(file, 0, 0);
                 
                 auto bytes_read = fread(*data, sizeof(unsigned char), size, file);

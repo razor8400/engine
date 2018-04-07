@@ -21,12 +21,13 @@ namespace engine
         void on_loading_done(resource_loader_task* task) override;
         void on_loading_failed(resource_loader_task* task, const char* error) override;
     private:
+        static const int default_loading_tasks;
         resources_manager();
         
         std::map<std::string, resource_ptr> m_resources;
         std::queue<resource_loader_task*> m_loading_queue;
         
-        int m_max_loading_tasks = 10;
+        int m_max_loading_tasks = default_loading_tasks;
     };
 }
 

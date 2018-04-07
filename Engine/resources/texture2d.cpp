@@ -26,7 +26,7 @@ namespace engine
         return false;
     }
     
-    void texture2d::draw()
+    void texture2d::draw(const math::mat4& transform, const gl::shader_program_ptr& shader_program)
     {
         std::vector<math::vector2d> vertices =
         {
@@ -49,6 +49,11 @@ namespace engine
             0, 1, 2, 2, 3, 0
         };
         
-        gl::draw_texture2d(m_texture_id, vertices, uv, indices);
+        //gl::bind_texture(m_texture_id);
+        
+        if (shader_program)
+            shader_program->use(transform);
+        
+        gl::draw_texture2d(vertices, uv, indices);
     }
 }
