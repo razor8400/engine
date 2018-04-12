@@ -1,5 +1,7 @@
 #include "common.h"
 
+#include "platform/file_system/file_system.h"
+
 #include "image_utils.h"
 #include "libpng/png.h"
 
@@ -7,18 +9,7 @@ namespace engine
 {
 	namespace png
 	{
-		static size_t bytes_read = 0;
-
-		void read_png_callback(png_structp png_ptr, png_bytep out_data, png_size_t length)
-		{
-			unsigned char* data = (unsigned char*)png_get_io_ptr(png_ptr);
-			
-			memcpy(out_data, data + bytes_read, length);
-
-			bytes_read += length;
-		}
-
-		bool read_png_data(image_utils::image_data* data, const unsigned char* buffer)
+		bool read_png_data(image_utils::image_data* data, FILE* file)
 		{
 			auto png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 
@@ -29,17 +20,31 @@ namespace engine
 
 			if (!info_ptr)
 				return false;
+            
+            if (setjmp(png_jmpbuf(png_ptr)))
+                return false;
 
-			bytes_read = 0;
-
-			png_set_read_fn(png_ptr, (png_voidp*)buffer, read_png_callback);
+            png_init_io(png_ptr, file);
+            
 			png_read_info(png_ptr, info_ptr);
 
 			data->width = png_get_image_width(png_ptr, info_ptr);
 			data->height = png_get_image_height(png_ptr, info_ptr);
 			data->format = png_get_color_type(png_ptr, info_ptr);
             data->bit_depth = png_get_bit_depth(png_ptr, info_ptr);
-
+            
+            auto buffer = new png_bytep[sizeof(png_bytep) * data->height];
+            
+            for (int y = 0; y < data->height; y++)
+                buffer[y] = new png_byte[png_get_rowbytes(png_ptr, info_ptr)];
+            
+            png_read_image(png_ptr, buffer);
+            
+            for (int y = 0; y < data->height; ++y)
+            {
+                auto i = buffer[y];
+                auto x = 0;
+            }
             png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
             
 			return true;
@@ -47,29 +52,47 @@ namespace engine
 	}
 
     namespace image_utils
-    {       
-        bool load_texture_data(image_data* data, const unsigned char* buffer)
+    {
+        typedef std::function<bool(image_utils::image_data*, FILE*)> helper;
+        
+        bool load_image_from_file(const std::string& file_name, image_data* data)
         {
-            typedef std::function<bool(image_data*, const unsigned char*)> format_helper;
+            auto format = get_image_format(file_name);
             
-            static const std::map<std::string, format_helper> helpers =
+            std::map<std::string, helper> helpers =
             {
                 { format::png, png::read_png_data }
             };
             
-            auto format = get_image_format(buffer);
             auto it = helpers.find(format);
             
-            if (it != helpers.end())
-                return it->second(data, buffer);
+            if (it == helpers.end())
+            {
+                data->error = "unknown format";
+                return false;
+            }
+            
+            auto file = file_system::open_file(file_name.c_str(), "rb");
+            
+            if (file)
+            {
+                bool result =  it->second(data, file);
                 
+                fclose(file);
+                
+                return result;
+            }
+            
+            data->error = "can't open file:" + file_name;
             return false;
         }
         
-        const char* get_image_format(const unsigned char* buffer)
+        std::string get_image_format(const std::string& file_name)
         {
-            if (png_check_sig(buffer, 8))
-                return format::png;
+            auto i = file_name.find_last_of('.');
+            
+            if (i != std::string::npos)
+                return file_name.substr(i + 1);
             
             return format::unknown;
         }

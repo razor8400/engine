@@ -10,16 +10,16 @@ namespace engine
     {
     public:
         static resources_manager& instance();
-
-        template<class T>
-        void load_resource_from_file(const std::string& file_name, const resource_loader_callback& complete_callback, const resource_error_callback& error_callback);
+        
+        void load_texture(const std::string& file_name, const resource_loader_callback& complete_callback, const resource_error_callback& error_callback);
         
         void update();
         void clear_cache();
         void set_max_loading_tasks(int max_loading_tasks) { m_max_loading_tasks = max_loading_tasks; }
     private:
-        void on_loading_done(resource_loader_task* task) override;
+        void on_loading_done(resource_loader_task* task, const resource_ptr& resource) override;
         void on_loading_failed(resource_loader_task* task, const char* error) override;
+        bool find_resource(const std::string& path, const resource_loader_callback& complete_callback) const;
     private:
         static const int default_loading_tasks;
         resources_manager();
@@ -31,4 +31,3 @@ namespace engine
     };
 }
 
-#include "resources_manager.inl"

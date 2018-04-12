@@ -7,9 +7,10 @@ namespace engine
     class texture2d : public resource
 	{
     public:
+        texture2d(int width, int height, int format);
         virtual ~texture2d();
         
-        bool load(const unsigned char* data) override;
+        void load(const unsigned char* data) override;
         void draw(const math::mat4& transform, const gl::shader_program_ptr& shader_program);
         
         int get_width() const { return m_width; }
@@ -17,6 +18,7 @@ namespace engine
     private:
 		int m_width = 0;
 		int m_height = 0;
+        int m_format = 0;
         int m_texture_id = -1;
 	};
 }

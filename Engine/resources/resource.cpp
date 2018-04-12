@@ -1,13 +1,17 @@
 #include "common.h"
 #include "resource.h"
+
+#include "utils/image_utils.h"
 #include "utils/file_utils.h"
+
+#include "texture2d.h"
 
 namespace engine
 {
-    void resource_loader_task::on_loading_done()
+    void resource_loader_task::on_loading_done(const resource_ptr& resource)
     {
         if (m_delegate)
-            m_delegate->on_loading_done(this);
+            m_delegate->on_loading_done(this, resource);
     }
     
     void resource_loader_task::on_loading_failed(const char* error)
@@ -16,29 +20,18 @@ namespace engine
             m_delegate->on_loading_failed(this, error);
     }
     
-    void file_loader_task::load_resource()
+    void texture_loader_task::load_resource()
     {
-        bool resource_loaded = m_resource != nullptr;
+        auto data = image_utils::image_data();
         
-        if (m_resource)
+        if (image_utils::load_image_from_file(m_path, &data))
         {
-            unsigned char* buffer;
+            auto texture = std::make_shared<texture2d>(data.width, data.height, data.format);
+            texture->load(data.buffer);
             
-            if (file_utils::read_file(m_path, &buffer))
-            {
-                resource_loaded = m_resource->load(buffer);
-                
-                delete[] buffer;
-            }
+            on_loading_done(texture);
         }
         
-        if (resource_loaded)
-        {
-            on_loading_done();
-        }
-        else
-        {
-            on_loading_failed(loading_error::file_not_found_error);
-        }
+        on_loading_failed(data.error.c_str());
     }
 }

@@ -18,9 +18,13 @@ namespace engine
 			int height;
 			int format;
             int bit_depth;
+            
+            unsigned char* buffer;
+            
+            std::string error;
 		};
 		
-		bool load_texture_data(image_data* data, const unsigned char* buffer);
-        const char* get_image_format(const unsigned char* buffer);
+        bool load_image_from_file(const std::string& file_name, image_data* data);
+        std::string get_image_format(const std::string& file_name);
     }
 }

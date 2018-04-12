@@ -1,10 +1,14 @@
 #include "common.h"
 #include "texture2d.h"
-#include "utils/image_utils.h"
 
 namespace engine
 {
     static const int texture_default_id = -1;
+    
+    texture2d::texture2d(int width, int height, int format) : m_width(width), m_height(height), m_format(format)
+    {
+        
+    }
     
     texture2d::~texture2d()
     {
@@ -12,18 +16,9 @@ namespace engine
             gl::delete_texture(m_texture_id);
     }
     
-    bool texture2d::load(const unsigned char* data)
+    void texture2d::load(const unsigned char* data)
     {
-		auto image = image_utils::image_data();
-		if (image_utils::load_texture_data(&image, data))
-        {
-			m_width = image.width;
-			m_height = image.height;
-            m_texture_id = gl::load_texture(data, m_width, m_height, image.format);
-            return true;
-        }
-        
-        return false;
+        m_texture_id = gl::load_texture(data, m_width, m_height, m_format);
     }
     
     void texture2d::draw(const math::mat4& transform, const gl::shader_program_ptr& shader_program)

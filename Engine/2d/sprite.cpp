@@ -43,7 +43,7 @@ namespace engine
             log(error);
         };
         
-        resources_manager::instance().load_resource_from_file<texture2d>(texture_file_name, complete_callback, error_callback);
+        resources_manager::instance().load_texture(texture_file_name, complete_callback, error_callback);
         
         return true;
     }
