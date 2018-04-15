@@ -24,7 +24,7 @@ namespace engine
 		void start();
         void stop();
 				
-        void run_scene(const scene_ptr& scene);
+        void run_scene(scene* scene);
         
 		void main_loop();
 		
@@ -35,7 +35,7 @@ namespace engine
         void add_input_delegate(input_delegate* delegate);
         void remove_input_delegate(input_delegate* delegate);
         
-        const scene_ptr& running_scene() const { return m_scene; }
+        scene* running_scene() const { return m_scene; }
 	private:
         void update(float delta_time);
         
@@ -44,7 +44,7 @@ namespace engine
     private:
 		float m_time_interval = 0;
 
-		scene_ptr m_scene;
+		scene* m_scene;
 
 		bool m_running = false;
 

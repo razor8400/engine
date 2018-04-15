@@ -35,7 +35,7 @@ namespace engine
 		m_camera_position = math::mat4::look_at(position, math::vector3d::zero, math::vector3d::up);
 	}
 
-	void renderer::draw_scene(const scene_ptr& scene)
+	void renderer::draw_scene(scene* scene)
 	{
 		if (scene)
 		{

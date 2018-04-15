@@ -4,11 +4,12 @@
 
 #include "director.h"
 #include "application.h"
+
 #include "renderer/renderer.h"
 #include "resources/resources_manager.h"
 
 #include "scene.h"
-
+#include "pool_manager.h"
 #include "interface/input_delegate.h"
 
 namespace engine
@@ -69,12 +70,16 @@ namespace engine
         m_running = false;
     }
     
-    void director::run_scene(const scene_ptr& scene)
+    void director::run_scene(scene* scene)
     {
         if (m_scene)
+        {
             m_scene->on_exit();
+            m_scene->release();
+        }
         
         m_scene = scene;
+        m_scene->retain();
         m_scene->on_enter();
         
         update(0);
@@ -105,6 +110,8 @@ namespace engine
             m_scene->update(delta_time);
             m_renderer->draw_scene(m_scene);
         }
+        
+        pool_manager::instance().update();
     }
     
 	void director::handle_mouse_down(const math::vector2d& location)

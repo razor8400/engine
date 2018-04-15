@@ -11,31 +11,24 @@
 #include "gl/libgl.h"
 #include "math/libmath.h"
 
-#include "utils/safe_vector.h"
+#include "utils/vector.h"
 #include "config.h"
-
-#include "scripting/scripting.h"
 
 namespace engine
 {
+    class ref;
     class renderer;
     
 	class scene;
-	typedef std::shared_ptr<scene> scene_ptr;
-
 	class game_object;
-	typedef std::shared_ptr<game_object> game_object_ptr;
-    
-    class resource;
-    typedef std::shared_ptr<resource> resource_ptr;
-    
-    class texture2d;
-    typedef std::shared_ptr<texture2d> texture2d_ptr;
-    
-    class action;
-    typedef std::shared_ptr<action> action_ptr;
+    class component;
 
+    class resource;
+    class texture2d;
     class script;
+    
+    typedef std::shared_ptr<resource> resource_ptr;
+    typedef std::shared_ptr<texture2d> texture2d_ptr;
     typedef std::shared_ptr<script> script_ptr;
 
 	enum projection_mode

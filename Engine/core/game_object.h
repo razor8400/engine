@@ -1,14 +1,13 @@
 #pragma once
 
+#include "ref.h"
+
 namespace engine
 {
-	class game_object
+    class game_object : public ref
 	{
 	public:
         OBJECT_TYPE(game_object);
-        
-		template<class T>
-		static std::shared_ptr<T> create();
 
 		virtual bool init();
 
@@ -19,14 +18,12 @@ namespace engine
         virtual void on_enter();
         virtual void on_exit();
     public:
-        void add_child(const game_object_ptr& obj);
+        void add_child(game_object* obj);
         void remove_child(game_object* obj);
 		void remove_from_parent();
         
-        void run_action(const action_ptr& action);
-        void on_action_done(action* action);
-        
-        void run_script(const script_ptr& script);
+        void add_component(component* component);
+        void remove_component(component* component);
 		
 		void mark_dirty() { m_update_transform = true; }
 
@@ -64,9 +61,8 @@ namespace engine
         void set_shader_program(const gl::shader_program_ptr& shader_program) { m_shader_program = shader_program; }
         const gl::shader_program_ptr& get_shader_program() const { return m_shader_program; }
 	protected:
-        safe_vector<game_object_ptr> m_children;
-        safe_vector<action_ptr> m_actions;
-        safe_vector<script_ptr> m_scritps;
+        engine::vector<game_object*> m_children;
+        engine::vector<component*> m_components;
         
 		math::vector3d m_position;
 		math::vector3d m_rotation;
@@ -86,15 +82,4 @@ namespace engine
 		game_object* m_parent = nullptr;
         gl::shader_program_ptr m_shader_program;
 	};
-
-	template<class T>
-	inline std::shared_ptr<T> game_object::create()
-	{
-		auto obj = std::make_shared<T>();
-
-		if (obj->init())
-			return obj;
-
-		return nullptr;
-	}
 }

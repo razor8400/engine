@@ -1,8 +1,7 @@
 #include "common.h"
-#include "game_object.h"
 
-#include "actions/action.h"
-#include "resources/script.h"
+#include "components/component.h"
+#include "game_object.h"
 
 namespace engine
 {
@@ -25,16 +24,10 @@ namespace engine
 			m_transform = parent_transform();
 		}
         
-        m_actions.lock([this, dt]()
+        m_components.lock([this, dt]()
         {
-           for (auto action : m_actions)
-               action->update(dt);
-        });
-        
-        m_scritps.lock([this]()
-        {
-            for (auto script : m_scritps)
-                script->call_function(scripting::update);
+            for (auto component : m_components)
+                component->update(dt);
         });
         
         m_children.lock([this, dt]()
@@ -66,11 +59,11 @@ namespace engine
     
     void game_object::on_enter()
     {
+        for (auto component : m_components)
+            component->start();
+        
         for (auto obj : m_children)
             obj->on_enter();
-        
-        for (auto script : m_scritps)
-            script->run(this);
         
         m_active = true;
 
@@ -79,20 +72,17 @@ namespace engine
     
     void game_object::on_exit()
     {
+        for (auto component : m_components)
+            component->stop();
+        
         for (auto obj : m_children)
             obj->on_exit();
-        
-        for (auto script : m_scritps)
-            script->call_function(scripting::stop);
         
         m_active = false;
     }
     
-	void game_object::add_child(const game_object_ptr& obj)
+	void game_object::add_child(game_object* obj)
 	{
-        if (!obj)
-            return;
-        
         if (m_active)
             obj->on_enter();
         
@@ -102,22 +92,12 @@ namespace engine
 
 	void game_object::remove_child(game_object* obj)
 	{
-        if (!obj)
-            return;
-        
-		auto it = std::find_if(m_children.begin(), m_children.end(), [obj](const game_object_ptr& ob)
-		{
-			return obj == ob.get();
-		});
+        m_children.erase(obj);
 
-		if (it != m_children.end())
-		{
-            if (m_active)
-                obj->on_exit();
-            
-            m_children.erase(it);
-			obj->m_parent = nullptr;
-		}
+        if (m_active)
+            obj->on_exit();
+        
+        obj->m_parent = nullptr;
 	}
 
 	void game_object::remove_from_parent()
@@ -126,38 +106,22 @@ namespace engine
 			m_parent->remove_child(this);
 	}
     
-    void game_object::run_action(const action_ptr& action)
+    void game_object::add_component(component* component)
     {
-        if (!action)
-            return;
-        
-        action->start(this);
-        m_actions.push_back(action);
-    }
-    
-    void game_object::on_action_done(action* action)
-    {
-        auto it = std::find_if(m_actions.begin(), m_actions.end(), [action](const action_ptr& ptr)
-        {
-           return ptr.get() == action;
-        });
-        
-        if (it != m_actions.end())
-        {
-            action->finish();
-            m_actions.erase(it);
-        }
-    }
-    
-    void game_object::run_script(const script_ptr& script)
-    {
-        if (!script)
-            return;
+        component->m_parent = this;
         
         if (m_active)
-            script->run(this);
+            component->start();
         
-        m_scritps.push_back(script);
+        m_components.push_back(component);
+    }
+    
+    void game_object::remove_component(component* component)
+    {
+        if (m_active)
+            component->stop();
+        
+        m_components.erase(component);
     }
     
     math::mat4 game_object::transfrom(const math::mat4& parent) const

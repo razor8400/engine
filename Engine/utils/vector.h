@@ -5,14 +5,14 @@
 namespace engine
 {
     template<class T>
-    class safe_vector : public std::vector<T>
+    class vector : public std::vector<T>
     {
     public:
         typedef std::vector<T> base_class;
         void lock(const std::function<void()>& handler);
         
         void push_back(T obj);
-        void erase(typename base_class::const_iterator it);
+        void erase(T obj);
     private:
         void unlock();
         void update();
@@ -24,4 +24,4 @@ namespace engine
     };
 }
 
-#include "safe_vector.inl"
+#include "vector.inl"

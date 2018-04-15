@@ -28,8 +28,6 @@ namespace engine
 
 	void application::on_launched()
 	{
-        scripting::create_state();
-        
 		if (m_delegate)
 			m_delegate->application_launched(this);
 	}

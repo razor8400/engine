@@ -1,6 +1,7 @@
 #include "common.h"
+
 #include "utils/file_utils.h"
-#include "scripting/scripting_server.h"
+
 #include "script.h"
 
 namespace engine
@@ -30,27 +31,45 @@ namespace engine
     
     script::~script()
     {
-
+        stop();
+    }
+    
+    void script::run()
+    {
+        m_state = scripting::create_state();
+        
+        if (m_state)
+        {
+            scripting::create_class(m_state, m_name.c_str());
+            scripting::register_objects(m_state);
+            
+            scripting::load_script(m_state, m_buffer.data(), m_buffer.size(), m_name);
+        }
+    }
+    
+    void script::stop()
+    {
+        if (m_state)
+        {
+            scripting::close_state(m_state);
+            m_state = nullptr;
+        }
     }
     
     bool script::load(const unsigned char* data, size_t size)
     {
-        std::string buffer = std::string(data, data + size);
-        auto& server = scripting_server::instance();
+        if (m_state)
+            return false;
         
-        server.create_table(m_name.c_str());
+        m_buffer.clear();
+        m_buffer.reserve(size);
+        m_buffer.insert(m_buffer.end(), data, data + size);
         
-        return server.load_script(buffer.c_str(), buffer.length(), m_name.c_str());
-    }
-    
-    void script::run(game_object* obj)
-    {
-        scripting_server::instance().push_to_table<game_object>(m_name, "obj", obj);
-        call_function(scripting::start);
+        return m_buffer.size() > 0;
     }
     
     void script::call_function(const std::string& function)
     {
-        scripting_server::instance().call_method(m_name, function);
+        scripting::call_method(m_state, m_name, function);
     }
 }

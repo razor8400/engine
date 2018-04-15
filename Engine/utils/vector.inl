@@ -1,11 +1,11 @@
 #pragma once
 
-#include "safe_vector.h"
+#include "vector.h"
 
 namespace engine
 {
     template<class T>
-    void safe_vector<T>::lock(const std::function<void()>& handler)
+    void vector<T>::lock(const std::function<void()>& handler)
     {
         m_locked = true;
         
@@ -16,28 +16,30 @@ namespace engine
     }
     
     template<class T>
-    void safe_vector<T>::push_back(T obj)
+    void vector<T>::push_back(T obj)
     {
+        obj->retain();
+        
         m_push.push_back(obj);
         update();
     }
-    
+
     template<class T>
-    void safe_vector<T>::erase(typename base_class::const_iterator it)
+    void vector<T>::erase(T obj)
     {
-        m_erase.push_back(*it);
+        m_erase.push_back(obj);
         update();
     }
     
     template<class T>
-    void safe_vector<T>::unlock()
+    void vector<T>::unlock()
     {
         m_locked = false;
         update();
     }
 
     template<class T>
-    void safe_vector<T>::update()
+    void vector<T>::update()
     {
         if (m_locked)
             return;
@@ -48,6 +50,8 @@ namespace engine
         for (auto obj : m_erase)
         {
             auto it = std::find(this->begin(), this->end(), obj);
+            
+            obj->release();
             
             if (it != this->end())
                 base_class::erase(it);

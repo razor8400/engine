@@ -12,7 +12,7 @@ namespace engine
 		void set_field_of_view(float field_of_view);
 
 		void set_camera_position(const math::vector3d& position);
-		void draw_scene(const scene_ptr& scene);
+		void draw_scene(scene* scene);
 	private:
 		void update_world();
 	private:

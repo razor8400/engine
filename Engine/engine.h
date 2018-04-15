@@ -5,6 +5,8 @@
 #include "core/scene.h"
 #include "core/game_object.h"
 
+#include "components/scriptable_component.h"
+
 #include "2d/sprite.h"
 
 #include "resources/resources_manager.h"
