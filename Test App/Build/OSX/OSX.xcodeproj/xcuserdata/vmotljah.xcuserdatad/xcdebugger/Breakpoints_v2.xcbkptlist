@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/gl/gl.cpp"
-            timestampString = "545150299.055567"
+            timestampString = "545439575.005475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "draw_texture2d(const std::vector&lt;math::vector2d&gt;&amp; vertices, const std::vector&lt;math::vector2d&gt;&amp; uv, const std::vector&lt;GLushort&gt;&amp; indices)"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "draw_texture2d(float x, float y, float width, float height)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/gl/gl.cpp"
-            timestampString = "545150299.056046"
+            timestampString = "545439575.005608"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "draw_texture2d(const std::vector&lt;math::vector2d&gt;&amp; vertices, const std::vector&lt;math::vector2d&gt;&amp; uv, const std::vector&lt;GLushort&gt;&amp; indices)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/gl/gl.cpp"
-            timestampString = "545150299.056178"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "load_texture(const unsigned char* data, int width, int height, GLuint format)"
             landmarkType = "9">
          </BreakpointContent>
@@ -57,28 +41,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.6107709"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "../../../Engine/core/game_object.cpp"
-            timestampString = "545150299.056626"
+            timestampString = "545439575.005735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "game_object::parent_transform()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/resources/texture2d.cpp"
-            timestampString = "545222204.6118211"
+            timestampString = "545439575.005838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53">
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "texture2d::draw(const math::mat4&amp; transform, const gl::shader_program_ptr&amp; shader_program)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -104,11 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/resources/texture2d.cpp"
-            timestampString = "545222204.611976"
+            timestampString = "545439575.005903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52">
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "texture2d::draw(const math::mat4&amp; transform, const gl::shader_program_ptr&amp; shader_program)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -134,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/gl/gl.cpp"
-            timestampString = "545150299.058444"
+            timestampString = "545439575.006017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "draw_texture2d(const std::vector&lt;math::vector2d&gt;&amp; vertices, const std::vector&lt;math::vector2d&gt;&amp; uv, const std::vector&lt;GLushort&gt;&amp; indices)"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "draw_texture2d(float x, float y, float width, float height)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -181,13 +153,93 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/resources/resources_manager.cpp"
-            timestampString = "545222204.612349"
+            filePath = "../../../Engine/utils/image_utils.cpp"
+            timestampString = "545439575.006188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "resources_manager::load_texture(const std::string&amp; file_name, const resource_loader_callback&amp; complete_callback, const resource_error_callback&amp; error_callback)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/utils/image_utils.cpp"
+            timestampString = "545439575.00625"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/utils/image_utils.cpp"
+            timestampString = "545439575.0063061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/utils/image_utils.cpp"
+            timestampString = "545439575.0063601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/utils/image_utils.cpp"
+            timestampString = "545439575.0064141"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/resources/texture2d.cpp"
+            timestampString = "545439575.006467"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "texture2d::load(const unsigned char* data)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -197,205 +249,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.612458"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.6130739"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.613629"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.614194"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.614705"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.6151659"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.61561"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.616033"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.616495"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.61695"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.617519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "load_image_from_file(const std::string&amp; file_name, image_data* data)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.618009"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.618466"
+            filePath = "../../../Engine/gl/gl.cpp"
+            timestampString = "545439575.006524"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
             endingLineNumber = "25"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
+            landmarkName = "init_gl()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -405,13 +265,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.618902"
+            filePath = "../../../Engine/gl/gl.cpp"
+            timestampString = "545439575.006626"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "generate_buffers()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/gl/gl.cpp"
+            timestampString = "545439575.00673"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "clear_buffers()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OSX/main.mm"
+            timestampString = "545399794.480715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
             endingLineNumber = "14"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
+            landmarkName = "main(int argc, const char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -421,13 +313,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.619351"
+            filePath = "../../../Engine/gl/gl.cpp"
+            timestampString = "545439575.0068671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "generate_buffers()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -437,14 +329,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.6197799"
+            filePath = "../../Sources/my_app_delegate.cpp"
+            timestampString = "545470170.061782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
-            landmarkType = "9">
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "my_app_delegate::application_terminated(engine::application* application)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -453,14 +345,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.6202641"
+            filePath = "../../../Engine/2d/sprite.cpp"
+            timestampString = "545439575.007055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
-            landmarkType = "9">
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "sprite::render(const math::mat4&amp; world)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -469,13 +361,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.62079"
+            filePath = "../../../Engine/common.h"
+            timestampString = "545470170.061968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "log(const char* msg, ...)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -485,14 +377,62 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/image_utils.cpp"
-            timestampString = "545222204.6212161"
+            filePath = "../../../Engine/core/director.cpp"
+            timestampString = "545437513.519794"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "director::main_loop()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "545439575.007237"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "game_object::parent_transform()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/gl/shader_program.cpp"
+            timestampString = "545439575.007323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
             endingLineNumber = "46"
-            landmarkName = "read_png_data(image_utils::image_data* data, FILE* file)"
-            landmarkType = "9">
+            landmarkName = "shader_texture_position_color::use(const math::mat4&amp; transform, const math::vector4d&amp; color)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/2d/sprite.cpp"
+            timestampString = "545439575.007375"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "sprite::render(const math::mat4&amp; world)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

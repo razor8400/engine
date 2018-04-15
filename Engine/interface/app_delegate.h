@@ -8,6 +8,7 @@ namespace engine
     {
     public:
         virtual void application_launched(application* application) = 0;
+        virtual void application_terminated(application* application) = 0;
     };
 }
 

@@ -4,6 +4,7 @@
 namespace math
 {
     const vector3d vector3d::zero;
+    const vector3d vector3d::one = vector3d(1, 1, 1);
     const vector3d vector3d::up = vector3d(0, 1, 0);
 
     const vector3d vector3d::left = vector3d(-1, 0, 0);
@@ -16,6 +17,11 @@ namespace math
     }
     
     vector3d::vector3d(float x1, float y1, float z1) : x(x1), y(y1), z(z1)
+    {
+        
+    }
+    
+    vector3d::vector3d(const vector2d& v2) : x(v2.x), y(v2.y), z(0)
     {
         
     }

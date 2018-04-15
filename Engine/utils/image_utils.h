@@ -23,7 +23,7 @@ namespace engine
             
             std::string error;
 		};
-		
+    
         bool load_image_from_file(const std::string& file_name, image_data* data);
         std::string get_image_format(const std::string& file_name);
     }

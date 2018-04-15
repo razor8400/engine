@@ -2,6 +2,8 @@
 
 namespace math
 {
+    const vector4d vector4d::one = vector4d(1, 1, 1, 1);
+    
     vector4d::vector4d() : x(0), y(0), z(0), w(0)
     {
 

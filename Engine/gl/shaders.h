@@ -21,11 +21,12 @@ namespace gl
 
 		static const char* shader_texture_color = R"(#version 330 core
 												in vec2 uv;
-												out vec3 color;
+												out vec4 color;
+                                                uniform vec4 tint;
 												uniform sampler2D sampler2d;
 												void main()
 												{
-                                                    color = texture(sampler2d, uv).rgb;
+                                                    color = texture(sampler2d, uv).rgba * tint;
 												})";
 
 		static const char* shader_texture_position = R"(#version 330 core
@@ -41,5 +42,6 @@ namespace gl
         
         static const char* mvp = "mvp";
         static const char* texture_sampler2d = "sampler2d";
+        static const char* tint = "tint";
     }
 }

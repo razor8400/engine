@@ -10,6 +10,9 @@
 
 #include "gl/libgl.h"
 #include "math/libmath.h"
+#include "lua/lua.h"
+#include "utils/safe_vector.h"
+#include "config.h"
 
 namespace engine
 {
@@ -24,6 +27,9 @@ namespace engine
     
     class texture2d;
     typedef std::shared_ptr<texture2d> texture2d_ptr;
+    
+    class action;
+    typedef std::shared_ptr<action> action_ptr;
 
 	class renderer;
 
@@ -34,9 +40,18 @@ namespace engine
     
     static const std::string empty_string;
     
-    static void log(const char* msg)
+    static void log(const char* msg, ...)
     {
+        static const int MAX = 100;
+        static char buffer[MAX];
         
+        va_list args;
+        
+        va_start(args, msg);
+        vsnprintf(buffer, MAX, msg, args);
+        va_end(args);
+        
+        printf("%s\n", buffer);
     }
 }
 

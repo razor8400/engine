@@ -8,8 +8,9 @@ namespace engine
     std::shared_ptr<sprite> sprite::create(const std::string& file_name)
     {
         auto obj = std::make_shared<sprite>();
+        auto texture = resources_manager::instance().load_resource_from_file<texture2d>(file_name);
         
-        if (obj->init(file_name))
+        if (obj->init(texture))
             return obj;
         
         return nullptr;
@@ -25,34 +26,12 @@ namespace engine
         return nullptr;
     }
     
-    bool sprite::init(const std::string& texture_file_name)
-    {
-        if (!game_object::init())
-            return false;
-        
-        resource_loader_callback complete_callback = [this](const resource_ptr& resource)
-        {
-            auto texture = std::dynamic_pointer_cast<texture2d>(resource);
-            
-            if (texture)
-                set_texture(texture);
-        };
-        
-        resource_error_callback error_callback = [](const char* error)
-        {
-            log(error);
-        };
-        
-        resources_manager::instance().load_texture(texture_file_name, complete_callback, error_callback);
-        
-        return true;
-    }
-    
     bool sprite::init(const texture2d_ptr& texture)
     {
         if (!texture || !game_object::init())
             return false;
         
+        m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color);
         set_texture(texture);
             
         return true;
@@ -62,11 +41,11 @@ namespace engine
     {
         if (m_texture)
         {
-            if (!m_shader_program)
-                m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color);
-            
-            m_texture->draw(world, m_shader_program);
+            m_texture->set_color(math::vector4d(m_color.x, m_color.y, m_color.z, m_opacity / 255.0f));
+            m_texture->draw(transfrom(world), m_shader_program);
         }
+        
+        game_object::render(world);
     }
     
     void sprite::set_texture(const texture2d_ptr& texture)

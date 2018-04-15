@@ -3,6 +3,23 @@
 
 namespace gl
 {
+    static GLuint vertex_array;
+    static GLuint current_texture = -1;
+    
+    namespace vertex_attribute
+    {
+        static const int position = 0;
+        static const int texture_position = 1;
+        static const int color = 2;
+    };
+    
+    namespace buffers
+    {
+        static GLuint position;
+        static GLuint color;
+        static GLuint texture_position;
+    };
+    
     bool init_gl()
     {
         glewExperimental = true;
@@ -10,24 +27,28 @@ namespace gl
         if (glewInit() != GLEW_OK)
             return false;
         
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LESS);
+        glEnable(GL_BLEND);
         
         return true;
     }
 
-	GLuint generate_vbo()
+	void generate_buffers()
 	{
-		GLuint vertex_array;
 		glGenVertexArrays(1, &vertex_array);
 		glBindVertexArray(vertex_array);
-
-		return vertex_array;
-	}
+        
+        glGenBuffers(1, &buffers::position);
+        glGenBuffers(1, &buffers::texture_position);
+        glGenBuffers(1, &buffers::color);
+    }
     
-	void clear_vbo(GLuint vbo)
+	void clear_buffers()
 	{
-		glDeleteVertexArrays(1, &vbo);
+		glDeleteVertexArrays(1, &vertex_array);
+        
+        glDeleteBuffers(1, &buffers::position);
+        glDeleteBuffers(1, &buffers::texture_position);
+        glDeleteBuffers(1, &buffers::color);
 	}
 
 	void compile_shaders()
@@ -101,8 +122,8 @@ namespace gl
 		glGenTextures(1, &texture);
 
 		glBindTexture(GL_TEXTURE_2D, texture);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+        
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
@@ -111,160 +132,84 @@ namespace gl
     
     void bind_texture(GLuint texture)
     {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
+        if (current_texture != texture)
+        {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, texture);
+        }
     }
     
-    void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv, const std::vector<GLushort>& indices)
+    void set_blend_func(GLenum source, GLenum destination)
     {
-        static const GLfloat g_vertex_buffer_data[] = {
-            -1.0f,-1.0f,-1.0f,
-            -1.0f,-1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f,-1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f, 1.0f,
-            -1.0f,-1.0f,-1.0f,
-            1.0f,-1.0f,-1.0f,
-            1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f,-1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f, 1.0f,
-            -1.0f,-1.0f, 1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f,-1.0f, 1.0f,
-            1.0f,-1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f,-1.0f,-1.0f,
-            1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f,-1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f,-1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f,-1.0f,
-            -1.0f, 1.0f,-1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f,-1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f,-1.0f, 1.0f
-        };
+        glBlendFunc(source, destination);
+    }
+    
+    void draw_texture2d(float x, float y, float width, float height)
+    {
+        static const GLsizei size = 8;
+        static GLfloat vertices[size];
         
-        static const GLfloat g_uv_buffer_data[] = {
-            0.000059f, 1.0f-0.000004f,
-            0.000103f, 1.0f-0.336048f,
-            0.335973f, 1.0f-0.335903f,
-            1.000023f, 1.0f-0.000013f,
-            0.667979f, 1.0f-0.335851f,
-            0.999958f, 1.0f-0.336064f,
-            0.667979f, 1.0f-0.335851f,
-            0.336024f, 1.0f-0.671877f,
-            0.667969f, 1.0f-0.671889f,
-            1.000023f, 1.0f-0.000013f,
-            0.668104f, 1.0f-0.000013f,
-            0.667979f, 1.0f-0.335851f,
-            0.000059f, 1.0f-0.000004f,
-            0.335973f, 1.0f-0.335903f,
-            0.336098f, 1.0f-0.000071f,
-            0.667979f, 1.0f-0.335851f,
-            0.335973f, 1.0f-0.335903f,
-            0.336024f, 1.0f-0.671877f,
-            1.000004f, 1.0f-0.671847f,
-            0.999958f, 1.0f-0.336064f,
-            0.667979f, 1.0f-0.335851f,
-            0.668104f, 1.0f-0.000013f,
-            0.335973f, 1.0f-0.335903f,
-            0.667979f, 1.0f-0.335851f,
-            0.335973f, 1.0f-0.335903f,
-            0.668104f, 1.0f-0.000013f,
-            0.336098f, 1.0f-0.000071f,
-            0.000103f, 1.0f-0.336048f,
-            0.000004f, 1.0f-0.671870f,
-            0.336024f, 1.0f-0.671877f,
-            0.000103f, 1.0f-0.336048f,
-            0.336024f, 1.0f-0.671877f,
-            0.335973f, 1.0f-0.335903f,
-            0.667969f, 1.0f-0.671889f,
-            1.000004f, 1.0f-0.671847f,
-            0.667979f, 1.0f-0.335851f
-        };
+        static const GLushort indices[size] = { 0, 1, 2, 2, 3, 0 };
+        static const GLfloat texture_coords[] = { 0, 0, 1, 0, 1, -1, 0, -1, };
         
-        //GLuint element_buffer;
+        vertices[0] = x;
+        vertices[1] = y;
+        vertices[2] = x + width;
+        vertices[3] = y;
+        vertices[4] = x + width;
+        vertices[5] = y + height;
+        vertices[6] = x;
+        vertices[7] = y + height;
         
-        //glGenBuffers(1, &element_buffer);
-        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-       // glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), &indices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::texture_position);
         
-        GLuint vertexbuffer;
-        glGenBuffers(1, &vertexbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+        GLuint index_buffer;
+        glGenBuffers(1, &index_buffer);
         
-        GLuint uvbuffer;
-        glGenBuffers(1, &uvbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * sizeof(GLushort), indices, GL_STATIC_DRAW);
         
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-        
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-        
-        glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
-        
-      //  glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
-        
-        //glDeleteBuffers(1, &element_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
+        glVertexAttribPointer(vertex_attribute::position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::texture_position);
+        glVertexAttribPointer(vertex_attribute::texture_position, 2, GL_FLOAT, GL_FALSE, 0, texture_coords);
 
-        glDeleteBuffers(1, &vertexbuffer);
-        glDeleteBuffers(1, &uvbuffer);
+        glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_SHORT, NULL);
+
+        glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::texture_position);
     }
     
     void delete_texture(GLuint texture)
     {
         glDeleteTextures(1, &texture);
     }
-
-    void draw_poly(const std::vector<math::vector2d>& vertices, const std::vector<GLushort>& indices)
+    
+    void draw_line(float x1, float y1, float x2, float y2)
     {
-        GLuint element_buffer;
+        const GLfloat vertices[] =
+        {
+            x1, y1,
+            x2, y2
+        };
+        
+        glEnableVertexAttribArray(vertex_attribute::position);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 
-        glGenBuffers(1, &element_buffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), &indices[0], GL_STATIC_DRAW);
-
-        GLuint vertex_buffer;
-
-        glGenBuffers(1, &vertex_buffer);
-        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(math::vector2d), &vertices[0], GL_STATIC_DRAW);
-
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-
-        glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
-
-		glDeleteBuffers(1, &element_buffer);
-		glDeleteBuffers(1, &vertex_buffer);
-
-        glDisableVertexAttribArray(0);
+        glDrawArrays(GL_LINES, 0, 2);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
     }
-
-    void draw_rect(const std::vector<math::vector2d>& vertices)
+    
+    void draw_rect(float x, float y, float width, float height)
     {
-        static const std::vector<GLushort> indices = { 0, 1, 2, 2, 3, 0 };
-        draw_poly(vertices, indices);
+        draw_line(x, y, x + width, y);
+        draw_line(x + width, y, x + width, y + height);
+        draw_line(x + width, y + height, x, y + height);
+        draw_line(x, y + height, x, y);
     }
 }

@@ -76,6 +76,8 @@ namespace engine
         
         m_scene = scene;
         m_scene->on_enter();
+        
+        update(0);
     }
     
     void director::main_loop()
@@ -91,15 +93,17 @@ namespace engine
             if (count >= m_time_interval)
             {
                 last_update = now;
-
-                resources_manager::instance().update();
-                
-				if (m_scene)
-				{
-					m_scene->update(count);
-					m_renderer->draw_scene(m_scene);
-				}
+                update(count);
             }
+        }
+    }
+    
+    void director::update(float delta_time)
+    {
+        if (m_scene)
+        {
+            m_scene->update(delta_time);
+            m_renderer->draw_scene(m_scene);
         }
     }
     

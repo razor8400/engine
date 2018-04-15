@@ -11,5 +11,7 @@ namespace math
         vector4d();
         vector4d(float x1, float y1, float z1, float w1);
         vector4d operator*(const mat4& m4) const;
+        
+        static const vector4d one;
     };
 }

@@ -16,7 +16,11 @@ namespace engine
 		void set_delegate(app_delegate* delegate);
 
 		void on_launched();
-		bool run();
+        void on_terminated();
+        
+        bool create_context_window();
+		void run();
+        void shutdown();
         const math::vector2d& get_win_size() const { return m_win_size; }
 	private:
         application() {};

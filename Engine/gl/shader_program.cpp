@@ -21,7 +21,7 @@ namespace gl
         
     }
     
-    void shader_position_color::use(const math::mat4& transform)
+    void shader_position_color::use(const math::mat4& transform, const math::vector4d& color)
     {
         GLuint matrix_id = glGetUniformLocation(m_program_id, shaders::mvp);
         
@@ -34,17 +34,16 @@ namespace gl
         
     }
     
-    void shader_texture_position_color::use(const math::mat4& transform)
+    void shader_texture_position_color::use(const math::mat4& transform, const math::vector4d& color)
     {
         GLuint matrix_id = glGetUniformLocation(m_program_id, shaders::mvp);
         GLuint texture_id  = glGetUniformLocation(m_program_id, shaders::texture_sampler2d);
+        GLuint tint_id = glGetUniformLocation(m_program_id, shaders::tint);
         
         glUseProgram(m_program_id);
-        glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &transform[0]);
         
-        // Bind our texture in Texture Unit 0
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, 1);
+        glUniform4f(tint_id, color.x, color.y, color.z, color.w);
+        glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &transform[0]);
         
         glUniform1i(texture_id, 0);
     }

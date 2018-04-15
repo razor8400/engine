@@ -2,20 +2,16 @@
 
 #include <vector>
 #include <map>
-#include <string>
-#include <memory>
-
-#include "math/libmath.h"
 
 #include "GLEW/glew.h"
+#include "math/libmath.h"
 
 namespace gl
 {
     bool init_gl();
 
-	GLuint generate_vbo();
-
-	void clear_vbo(GLuint vbo);
+	void generate_buffers();
+    void clear_buffers();
     void compile_shaders();
     void clear();
     
@@ -23,9 +19,16 @@ namespace gl
 	GLuint load_texture(const unsigned char* data, int width, int height, GLuint format);
     
     void bind_texture(GLuint texture);
-    void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv, const std::vector<GLushort>& indices);
+    void set_blend_func(GLenum source, GLenum destination);
+    void draw_texture2d(float x, float y, float width, float height);
     void delete_texture(GLuint texture);
-
-    void draw_poly(const std::vector<math::vector2d>& vertices, const std::vector<GLushort>& indices);
-    void draw_rect(const std::vector<math::vector2d>& vertices);
+    
+    void draw_line(float x1, float y1, float x2, float y2);
+    void draw_rect(float x, float y, float width, float height);
+    
+    struct blend_func
+    {
+        GLenum source;
+        GLenum destination;
+    };
 }

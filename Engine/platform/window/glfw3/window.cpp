@@ -1,5 +1,8 @@
 #include "common.h"
+
 #include "core/director.h"
+#include "core/application.h"
+
 #include "platform/window/window.h"
 
 #include "GLFW3/glfw3.h"
@@ -62,11 +65,6 @@ namespace engine
 		}
         
         glfwMakeContextCurrent(g_window);
-
-        if (!gl::init_gl())
-            return false;
-
-		gl::compile_shaders();
         
 		glfwSetCursorPosCallback(g_window, mouse_move_callback);
 		glfwSetMouseButtonCallback(g_window, mouse_button_callback);
@@ -76,8 +74,6 @@ namespace engine
 
 	void window::process()
     {
-		auto vbo = gl::generate_vbo();
-
 		while (!glfwWindowShouldClose(g_window))
         {           
 			director::instance().main_loop();
@@ -86,8 +82,11 @@ namespace engine
             glfwPollEvents();
         }
         
-		gl::clear_vbo(vbo);
-
+        application::instance().on_terminated();
+    }
+    
+    void window::terminate()
+    {
         glfwTerminate();
     }
 }

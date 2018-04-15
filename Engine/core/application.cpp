@@ -31,17 +31,40 @@ namespace engine
 		if (m_delegate)
 			m_delegate->application_launched(this);
 	}
+    
+    void application::on_terminated()
+    {
+        if (m_delegate)
+            m_delegate->application_terminated(this);
+    }
+    
+    bool application::create_context_window()
+    {
+        m_window = std::make_unique<window>();
+        
+        if (!m_window->create(m_display_name.c_str(), (int)m_win_size.x, (int)m_win_size.y))
+            return false;
+        
+        if (!gl::init_gl())
+            return false;
+        
+        gl::compile_shaders();
+        gl::generate_buffers();
+        
+        return true;
+    }
 
-	bool application::run()
+	void application::run()
 	{
-		m_window = std::make_unique<window>();
-
-		if (!m_window->create(m_display_name.c_str(), (int)m_win_size.x, (int)m_win_size.y))
-			return false;
-
-		m_window->process();
-
-		return true;
+        if (m_window)
+            m_window->process();
 	}
+    
+    void application::shutdown()
+    {
+        gl::clear_buffers();
+        if (m_window)
+            m_window->terminate();
+    }
 }
 

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "game_object.h"
+#include "actions/action.h"
 
 namespace engine
 {
@@ -7,47 +8,54 @@ namespace engine
 	{
 		m_scale = math::vector3d(1.0f, 1.0f, 1.0f);
 		m_anchor = math::vector3d(0.5f, 0.5f, 0.5f);
-
+        
 		return true;
 	}
 
 	void game_object::update(float dt)
 	{
+        if (!m_enabled)
+            return;
+        
 		if (m_update_transform)
 		{
 			m_update_transform = false;
 			m_transform = parent_transform();
 		}
-
+        
+        m_actions.lock();
+        
+        for (auto action : m_actions)
+            action->update(dt);
+        
+        m_actions.unlock();
+        
+        m_children.lock();
+        
 		for (auto obj : m_children)
 			obj->update(dt);
+        
+        m_children.unlock();
 	}
 
 	void game_object::draw(const math::mat4& world)
-	{ 
+	{
+        render(world);
+        
 		for (auto obj : m_children)
 			obj->draw(world);
-
-        render(world);
     }
     
     void game_object::render(const math::mat4& world)
     {
-		std::vector<math::vector2d> vertices = 
-		{
-			{ -m_size.x / 2, -m_size.y / 2, },
-			{ m_size.x /2, -m_size.x /2, },
-			{ m_size.x /2, m_size.y / 2, },
-			{ -m_size.x / 2, m_size.y / 2 }
-		};
+#if DEBUG_DRAW
+        auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
         
-        if (!m_shader_program)
-            m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
-        
-        if (m_shader_program)
-            m_shader_program->use(world * world_transform());
+        if (program)
+            program->use(transfrom(world), math::vector4d::one);
 
-		gl::draw_rect(vertices);
+        gl::draw_rect(0, 0, m_size.x, m_size.y);
+#endif
     }
     
     void game_object::on_enter()
@@ -89,7 +97,7 @@ namespace engine
             if (m_active)
                 obj->on_exit();
             
-			m_children.erase(it);
+            m_children.erase(it);
 			obj->m_parent = nullptr;
 		}
 	}
@@ -99,28 +107,51 @@ namespace engine
 		if (m_parent)
 			m_parent->remove_child(this);
 	}
+    
+    void game_object::run_action(const action_ptr& action)
+    {
+        action->start(this);
+        m_actions.push_back(action);
+    }
+    
+    void game_object::on_action_done(action* action)
+    {
+        auto it = std::find_if(m_actions.begin(), m_actions.end(), [action](const action_ptr& ptr)
+        {
+           return ptr.get() == action;
+        });
+        
+        if (it != m_actions.end())
+        {
+            action->finish();
+            m_actions.erase(it);
+        }
+    }
+    
+    math::mat4 game_object::transfrom(const math::mat4& parent) const
+    {
+        auto anchor = m_size * m_anchor;
+        return parent * world_transform() * math::mat4::translate(-anchor.x, -anchor.y, -anchor.z);
+    }
 
 	math::mat4 game_object::parent_transform() const
 	{
-		auto center = m_size * m_anchor;
-
 		auto position = math::mat4::translate(m_position.x, m_position.y, m_position.z);
 		auto rotation = math::mat4::rotate(math::vector3d::right, m_rotation.x)
 			* math::mat4::rotate(math::vector3d::up, m_rotation.y)
 			* math::mat4::rotate(math::vector3d(0, 0, 1), m_rotation.z);
 
 		auto scale = math::mat4::scale(m_scale.x, m_scale.y, m_scale.z);
-		auto pivot = math::mat4::translate(center.x, center.y, center.z);
-
-        return position * rotation * scale;// * rotation * math::mat4::translate(-center.x, -center.y, -center.z);
-	}
+        
+        return position * rotation * scale;
+    }
 
 	math::mat4 game_object::world_transform() const
 	{
-		auto tr = transfrom();
+		auto tr = m_transform;
 
 		for (auto obj = m_parent; obj != nullptr; obj = obj->m_parent)
-			tr *= obj->transfrom();
+			tr *= obj->m_transform;
 
 		return tr;
 	}

@@ -37,6 +37,8 @@ namespace engine
         
         const scene_ptr& running_scene() const { return m_scene; }
 	private:
+        void update(float delta_time);
+        
         director();
         ~director();
     private:
