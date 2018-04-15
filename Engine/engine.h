@@ -9,6 +9,7 @@
 
 #include "resources/resources_manager.h"
 #include "resources/texture2d.h"
+#include "resources/script.h"
 
 #include "utils/file_utils.h"
 

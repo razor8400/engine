@@ -9,12 +9,12 @@ namespace engine
     {
     public:
         typedef std::vector<T> base_class;
-        void lock();
-        void unlock();
+        void lock(const std::function<void()>& handler);
         
         void push_back(T obj);
         void erase(typename base_class::const_iterator it);
     private:
+        void unlock();
         void update();
     private:
         std::vector<T> m_push;

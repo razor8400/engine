@@ -1,3 +1,4 @@
+#include "common.h"
 #include "action.h"
 #include "core/game_object.h"
 

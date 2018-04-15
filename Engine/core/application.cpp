@@ -28,6 +28,8 @@ namespace engine
 
 	void application::on_launched()
 	{
+        scripting::create_state();
+        
 		if (m_delegate)
 			m_delegate->application_launched(this);
 	}
@@ -55,7 +57,7 @@ namespace engine
     }
 
 	void application::run()
-	{
+	{        
         if (m_window)
             m_window->process();
 	}
@@ -63,6 +65,7 @@ namespace engine
     void application::shutdown()
     {
         gl::clear_buffers();
+        
         if (m_window)
             m_window->terminate();
     }

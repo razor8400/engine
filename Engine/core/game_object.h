@@ -4,7 +4,9 @@ namespace engine
 {
 	class game_object
 	{
-	public: 
+	public:
+        OBJECT_TYPE(game_object);
+        
 		template<class T>
 		static std::shared_ptr<T> create();
 
@@ -23,6 +25,8 @@ namespace engine
         
         void run_action(const action_ptr& action);
         void on_action_done(action* action);
+        
+        void run_script(const script_ptr& script);
 		
 		void mark_dirty() { m_update_transform = true; }
 
@@ -62,6 +66,7 @@ namespace engine
 	protected:
         safe_vector<game_object_ptr> m_children;
         safe_vector<action_ptr> m_actions;
+        safe_vector<script_ptr> m_scritps;
         
 		math::vector3d m_position;
 		math::vector3d m_rotation;

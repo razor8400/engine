@@ -1,6 +1,8 @@
 #include "common.h"
 #include "game_object.h"
+
 #include "actions/action.h"
+#include "resources/script.h"
 
 namespace engine
 {
@@ -23,19 +25,23 @@ namespace engine
 			m_transform = parent_transform();
 		}
         
-        m_actions.lock();
+        m_actions.lock([this, dt]()
+        {
+           for (auto action : m_actions)
+               action->update(dt);
+        });
         
-        for (auto action : m_actions)
-            action->update(dt);
+        m_scritps.lock([this]()
+        {
+            for (auto script : m_scritps)
+                script->call_function(scripting::update);
+        });
         
-        m_actions.unlock();
-        
-        m_children.lock();
-        
-		for (auto obj : m_children)
-			obj->update(dt);
-        
-        m_children.unlock();
+        m_children.lock([this, dt]()
+        {
+            for (auto obj : m_children)
+                obj->update(dt);
+        });
 	}
 
 	void game_object::draw(const math::mat4& world)
@@ -63,6 +69,9 @@ namespace engine
         for (auto obj : m_children)
             obj->on_enter();
         
+        for (auto script : m_scritps)
+            script->run(this);
+        
         m_active = true;
 
 		mark_dirty();
@@ -73,11 +82,17 @@ namespace engine
         for (auto obj : m_children)
             obj->on_exit();
         
+        for (auto script : m_scritps)
+            script->call_function(scripting::stop);
+        
         m_active = false;
     }
     
 	void game_object::add_child(const game_object_ptr& obj)
 	{
+        if (!obj)
+            return;
+        
         if (m_active)
             obj->on_enter();
         
@@ -87,6 +102,9 @@ namespace engine
 
 	void game_object::remove_child(game_object* obj)
 	{
+        if (!obj)
+            return;
+        
 		auto it = std::find_if(m_children.begin(), m_children.end(), [obj](const game_object_ptr& ob)
 		{
 			return obj == ob.get();
@@ -110,6 +128,9 @@ namespace engine
     
     void game_object::run_action(const action_ptr& action)
     {
+        if (!action)
+            return;
+        
         action->start(this);
         m_actions.push_back(action);
     }
@@ -126,6 +147,17 @@ namespace engine
             action->finish();
             m_actions.erase(it);
         }
+    }
+    
+    void game_object::run_script(const script_ptr& script)
+    {
+        if (!script)
+            return;
+        
+        if (m_active)
+            script->run(this);
+        
+        m_scritps.push_back(script);
     }
     
     math::mat4 game_object::transfrom(const math::mat4& parent) const

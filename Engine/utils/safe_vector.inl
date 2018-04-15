@@ -5,16 +5,14 @@
 namespace engine
 {
     template<class T>
-    void safe_vector<T>::lock()
+    void safe_vector<T>::lock(const std::function<void()>& handler)
     {
         m_locked = true;
-    }
-    
-    template<class T>
-    void safe_vector<T>::unlock()
-    {
-        m_locked = false;
-        update();
+        
+        if (handler)
+            handler();
+        
+        unlock();
     }
     
     template<class T>
@@ -28,6 +26,13 @@ namespace engine
     void safe_vector<T>::erase(typename base_class::const_iterator it)
     {
         m_erase.push_back(*it);
+        update();
+    }
+    
+    template<class T>
+    void safe_vector<T>::unlock()
+    {
+        m_locked = false;
         update();
     }
 

@@ -7,6 +7,8 @@ namespace engine
     class sprite : public game_object
     {
     public:
+        OBJECT_TYPE(sprite);
+        
         static std::shared_ptr<sprite> create(const std::string& file_name);
         static std::shared_ptr<sprite> create(const texture2d_ptr& texture);
         

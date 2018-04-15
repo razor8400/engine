@@ -9,7 +9,7 @@ namespace engine
     {
         static const char* assets_folder = "Assets/";
         
-        bool read_file(const std::string& file_name, unsigned char** data)
+        bool read_file(const std::string& file_name, unsigned char** data, size_t* size)
         {
             auto file = file_system::open_file(file_name.c_str(), "rb");
             
@@ -17,16 +17,16 @@ namespace engine
             {
                 fseek(file, 0, SEEK_END);
                 
-                auto size = ftell(file);
-                *data = new unsigned char[size];
+                *size = ftell(file);
+                *data = new unsigned char[*size];
 
                 fseek(file, 0, 0);
                 
-                auto bytes_read = fread(*data, sizeof(unsigned char), size, file);
+                auto bytes_read = fread(*data, sizeof(unsigned char), *size, file);
                 
                 fclose(file);
                 
-                return bytes_read == size;
+                return bytes_read == *size;
             }
             
             return false;
@@ -40,6 +40,23 @@ namespace engine
         std::string get_path_to_resource(const std::string& path)
         {
             return get_resources_folder() + path;
+        }
+        
+        std::string get_file_name(const std::string& path)
+        {
+            auto file = path;
+            auto i = file.find_last_of('/');
+            
+            if (i != std::string::npos)
+            {
+                file = file.substr(i + 1);
+                i = file.find_last_of('.');
+                
+                if (i != std::string::npos)
+                    file = file.substr(0, i);
+            }
+            
+            return file;
         }
     }
 }

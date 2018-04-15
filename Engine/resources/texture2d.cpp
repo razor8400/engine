@@ -6,21 +6,21 @@ namespace engine
 {
     static const int texture_default_id = -1;
     
-    texture2d_ptr texture2d::load_from_file(const std::string& file_name)
+    std::shared_ptr<texture2d> texture2d::load_from_file(const std::string& file_name)
     {
         auto data = image_utils::image_data();
         
         if (image_utils::load_image_from_file(file_name, &data))
         {
             auto texture = std::make_shared<texture2d>(data.width, data.height, data.format);
-            texture->load(data.buffer);
             
-            return texture;
+            if (texture->load(data.buffer, 0))
+                return texture;
         }
         
-        log(data.error.c_str());
+        log("[texture2d] can't load texture, error %s", data.error.c_str());
         
-        return texture2d_ptr();
+        return std::shared_ptr<texture2d>();
     }
     
     texture2d::texture2d(int width, int height, int format) : m_width(width), m_height(height), m_format(format)
@@ -34,9 +34,11 @@ namespace engine
             gl::delete_texture(m_texture_id);
     }
     
-    void texture2d::load(const unsigned char* data)
+    bool texture2d::load(const unsigned char* data, size_t size)
     {
         m_texture_id = gl::load_texture(data, m_width, m_height, m_format);
+        
+        return m_texture_id != texture_default_id;
     }
     
     void texture2d::draw(const math::mat4& transform, const gl::shader_program_ptr& shader_program)

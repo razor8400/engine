@@ -7,12 +7,12 @@ namespace engine
     class texture2d : public resource
 	{
     public:
-        static texture2d_ptr load_from_file(const std::string& file_name);
+        static std::shared_ptr<texture2d> load_from_file(const std::string& file_name);
         
         texture2d(int width, int height, int format);
         virtual ~texture2d();
         
-        void load(const unsigned char* data) override;
+        bool load(const unsigned char* data, size_t size) override;
         void draw(const math::mat4& transform, const gl::shader_program_ptr& shader_program);
         
         int get_width() const { return m_width; }

@@ -2,7 +2,9 @@
 
 #include "resources_manager.h"
 #include "utils/file_utils.h"
+
 #include "texture2d.h"
+#include "script.h"
 
 namespace engine
 {
