@@ -34,11 +34,21 @@ namespace engine
 
 			math::vector3d get(lua_State* L, int n)
 			{
-				if (!lua_istable(L, -1))
-					return math::vector3d::zero;
+				if (lua_istable(L, n + 1))
+				{
+					lua_getfield(L, n + 1, "x");
+					auto x = lua_tonumber(L, n + 2);
 
-				int a = lua_getfield(L, n + 1, "x");
-				auto x = lua_tonumber(L, n - 1);
+					lua_getfield(L, n + 1, "y");
+					auto y = lua_tonumber(L, n + 2);
+					
+					lua_getfield(L, n + 1, "z");
+					auto z = lua_tonumber(L, n + 2);
+					
+					return math::vector3d(x, y, z);
+				}
+				
+				auto x = lua_tonumber(L, n + 1);
 				auto y = lua_tonumber(L, n + 2);
 				auto z = lua_tonumber(L, n + 3);
 
