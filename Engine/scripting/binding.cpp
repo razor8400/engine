@@ -1,11 +1,16 @@
-#pragma once
-
 #include "scripting.h"
+
+#include "components/component.h"
 
 #include "core/game_object.h"
 #include "core/scene.h"
 
 #include "2d/sprite.h"
+
+#define CHECK_TOP(L, TOP)\
+auto n = lua_gettop(L);\
+if (n < TOP)\
+    return 0;
 
 namespace engine
 {
@@ -13,22 +18,19 @@ namespace engine
     {
         namespace game_object
         {
-            static int create(lua_State* L)
+            int create(lua_State* L)
             {
                 return scripting::create_ref<engine::game_object>(L);
             }
             
-            static int destroy(lua_State* L)
+            int destroy(lua_State* L)
             {
                 return scripting::destroy_ref<engine::game_object>(L);
             }
             
-            static int add_child(lua_State* L)
+            int add_child(lua_State* L)
             {
-                auto n = lua_gettop(L);
-                
-                if (n != 2)
-                    return 0;
+                CHECK_TOP(L, 2);
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 auto child = scripting::get<engine::game_object>(L, 2);
@@ -39,42 +41,65 @@ namespace engine
                 return 0;
             }
             
-            static int remove_child(lua_State* L)
+            int remove_child(lua_State* L)
             {
+                CHECK_TOP(L, 2);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                auto child = scripting::get<engine::game_object>(L, 2);
+                
+                if (obj && child)
+                    obj->remove_child(child);
+                
                 return 0;
             }
             
-            static int remove_from_parent(lua_State* L)
+            int remove_from_parent(lua_State* L)
             {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (obj)
+                    obj->remove_from_parent();
+                
                 return 0;
             }
             
-            static int add_component(component* component)
+            int add_component(lua_State* L)
             {
+                CHECK_TOP(L, 2);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                auto component = scripting::get<engine::component>(L, 1);
+                
+                if (obj && component)
+                    obj->add_component(component);
+                
                 return 0;
             }
             
-            static int remove_component(component* component)
+            int remove_component(lua_State* L)
             {
+                CHECK_TOP(L, 2);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                auto component = scripting::get<engine::component>(L, 1);
+                
+                if (obj && component)
+                    obj->remove_component(component);
+                
                 return 0;
             }
-            
-            static const luaL_Reg functions[] =
-            {
-                { "create", create },
-                { "add_child", add_child },
-                { "__gc", destroy },
-                { NULL, NULL }
-            };
         }
         
         namespace sprite
         {
-            static int create(lua_State* L)
+            int create(lua_State* L)
             {
-                auto n =  lua_gettop(L);
+                CHECK_TOP(L, 1);
                 
-                if (n != 1)
+                if (!lua_isstring(L, 1))
                     return 0;
                 
                 auto texture = lua_tostring(L, 1);
@@ -88,44 +113,31 @@ namespace engine
                 return 1;
             }
             
-            static int set_color(lua_State* L)
+            int set_color(lua_State* L)
             {
-                auto n = lua_gettop(L);
-                
-                if (n != 4)
-                    return 0;
+                CHECK_TOP(L, 1);
 
                 auto obj = scripting::get<engine::sprite>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
                 auto r = lua_tonumber(L, 2);
                 auto g = lua_tonumber(L, 3);
                 auto b = lua_tonumber(L, 4);
                 
-                if (obj)
-                    obj->set_color(math::vector3d(r, g, b));
+                obj->set_color(math::vector3d(r, g, b));
                 
                 return 0;
             }
-            
-            static const luaL_Reg functions[] =
-            {
-                { "create", create },
-                { "set_color", set_color },
-                { NULL, NULL }
-            };
         }
         
         namespace scene
         {
-            static int create(lua_State* L)
+            int create(lua_State* L)
             {
                 return scripting::create_ref<engine::scene>(L);
             }
-            
-            static const luaL_Reg functions[] =
-            {
-                { "create", create },
-                { NULL, NULL }
-            };
         }
     }
 }
