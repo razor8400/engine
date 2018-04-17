@@ -6,11 +6,10 @@ namespace engine
 {    
     class sprite : public game_object
     {
+        DECLARE_CLASS;
     public:
-        OBJECT_TYPE(sprite);
-        
-        static std::shared_ptr<sprite> create(const std::string& file_name);
-        static std::shared_ptr<sprite> create(const texture2d_ptr& texture);
+        static sprite* create(const std::string& file_name);
+        static sprite* create(const texture2d_ptr& texture);
         
         bool init(const texture2d_ptr& texture);
         void render(const math::mat4& world) override;

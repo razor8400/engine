@@ -9,12 +9,28 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/scripting.cpp"
-            timestampString = "545527348.389468"
+            filePath = "../../../Engine/scripting/binding.h"
+            timestampString = "545669572.314021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "set_color(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.h"
+            timestampString = "545669572.314363"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "add_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -25,14 +41,378 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/resources/script.cpp"
-            timestampString = "545527348.389791"
+            filePath = "../../../Engine/scripting/binding.h"
+            timestampString = "545669572.314437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "script::run()"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "set_color(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.h"
+            timestampString = "545669572.3144929"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "set_color(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/scripting.inl"
+            timestampString = "545669572.3145519"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "get(lua_State* L, int n)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::get&lt;engine::game_object&gt;(lua_State*, int)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657499.40757"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::sprite* engine::scripting::get&lt;engine::sprite&gt;(lua_State*, int)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657499.410701"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/scripting/scripting.inl"
+                  timestampString = "545657499.415143"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/scripting.inl"
+            timestampString = "545669572.314737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "push(lua_State* L, T* obj)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657523.832036"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "39">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::sprite* engine::scripting::push&lt;engine::sprite&gt;(lua_State*, engine::sprite*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657523.834859"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "39">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/scripting/scripting.inl"
+                  timestampString = "545657523.838189"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "39">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/scripting.inl"
+            timestampString = "545669572.314795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "push(lua_State* L, T* obj)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657618.135981"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::sprite* engine::scripting::push&lt;engine::sprite&gt;(lua_State*, engine::sprite*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657618.143146"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/scripting/scripting.inl"
+                  timestampString = "545657618.1478699"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "50">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/scripting.inl"
+            timestampString = "545669572.314847"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "push(lua_State* L, T* obj)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657710.394972"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::sprite* engine::scripting::push&lt;engine::sprite&gt;(lua_State*, engine::sprite*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.inl"
+                  timestampString = "545657710.399513"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::game_object* engine::scripting::push&lt;engine::game_object&gt;(lua_State*, engine::game_object*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/scripting/scripting.inl"
+                  timestampString = "545657710.404014"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "50">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/type_info.h"
+            timestampString = "545669572.3149019"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "create(const char* type, const char* parent)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/type_info.h"
+            timestampString = "545669572.314959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "get_class()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/type_info.h"
+            timestampString = "545669572.315212"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "get_parent()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/scripting.cpp"
+            timestampString = "545669572.315317"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "register_class(lua_State* state, const luaL_Reg* methods)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void engine::scripting::register_class&lt;engine::game_object&gt;(lua_State*, luaL_Reg const*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.cpp"
+                  timestampString = "545669261.374557"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void engine::scripting::register_class&lt;engine::sprite&gt;(lua_State*, luaL_Reg const*)"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/scripting/scripting.cpp"
+                  timestampString = "545669261.379499"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

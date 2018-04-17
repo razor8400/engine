@@ -11,6 +11,7 @@
 #include "gl/libgl.h"
 #include "math/libmath.h"
 
+#include "core/type_info.h"
 #include "utils/vector.h"
 #include "config.h"
 
@@ -51,9 +52,5 @@ namespace engine
         
         printf("[engine]%s\n", buffer);
     }
-    
-#define OBJECT_TYPE(TYPENAME)\
-public:\
-    static const char* type_name() { return #TYPENAME; }
 }
 

@@ -7,6 +7,6 @@ namespace engine
 	class scene : public game_object
 	{
 	public:
-        OBJECT_TYPE(scene);
+
 	};
 }

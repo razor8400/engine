@@ -7,8 +7,8 @@ namespace engine
     class game_object : public ref
 	{
 	public:
-        OBJECT_TYPE(game_object);
-
+        DECLARE_CLASS;
+        
 		virtual bool init();
 
 		virtual void update(float dt);

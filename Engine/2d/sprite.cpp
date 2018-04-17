@@ -5,9 +5,11 @@
 
 namespace engine
 {
-    std::shared_ptr<sprite> sprite::create(const std::string& file_name)
+    IMPLEMENT_INHERITED_CLASS(sprite, game_object);
+    
+    sprite* sprite::create(const std::string& file_name)
     {
-        auto obj = std::make_shared<sprite>();
+        auto obj = ref::create<sprite>();
         auto texture = resources_manager::instance().load_resource_from_file<texture2d>(file_name);
         
         if (obj->init(texture))
@@ -16,9 +18,9 @@ namespace engine
         return nullptr;
     }
     
-    std::shared_ptr<sprite> sprite::create(const texture2d_ptr& texture)
+    sprite* sprite::create(const texture2d_ptr& texture)
     {
-        auto obj = std::make_shared<sprite>();
+        auto obj = ref::create<sprite>();
         
         if (obj->init(texture))
             return obj;

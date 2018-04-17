@@ -66,7 +66,9 @@
 		BF0D23A62084030600542952 /* scriptable_component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scriptable_component.h; sourceTree = "<group>"; };
 		BF0D23A72084030600542952 /* scriptable_component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scriptable_component.cpp; sourceTree = "<group>"; };
 		BF0D23A920840B8300542952 /* scripting.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = scripting.inl; sourceTree = "<group>"; };
+		BF0D23AB2084924600542952 /* binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = binding.h; sourceTree = "<group>"; };
 		BF2D94F3208208C1004F98C0 /* resources_manager.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources_manager.inl; sourceTree = "<group>"; };
+		BF2DD50E208614E800BB2734 /* type_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = type_info.h; sourceTree = "<group>"; };
 		BF3D14CF206BD2B600293C36 /* app_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_delegate.h; sourceTree = "<group>"; };
 		BF3D14D0206BD33200293C36 /* input_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = input_delegate.h; sourceTree = "<group>"; };
 		BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../ThirdParty/GLEW/lib/osx/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				BF0D239120835D5000542952 /* scripting.h */,
 				BF0D23962083734100542952 /* scripting.cpp */,
 				BF0D23A920840B8300542952 /* scripting.inl */,
+				BF0D23AB2084924600542952 /* binding.h */,
 			);
 			path = scripting;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 		BF51EC65206B96FA005A6240 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				BF2DD50E208614E800BB2734 /* type_info.h */,
 				BF0D239B2083D46100542952 /* ref.h */,
 				BF0D23A02083DB5D00542952 /* ref.cpp */,
 				BF0D239D2083D7DF00542952 /* pool_manager.cpp */,

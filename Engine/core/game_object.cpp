@@ -5,6 +5,8 @@
 
 namespace engine
 {
+    IMPLEMENT_CLASS(game_object)
+    
 	bool game_object::init()
 	{
 		m_scale = math::vector3d(1.0f, 1.0f, 1.0f);
