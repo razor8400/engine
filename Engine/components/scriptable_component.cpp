@@ -1,3 +1,4 @@
+#include "common.h"
 #include "scriptable_component.h"
 
 #include "resources/script.h"

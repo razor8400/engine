@@ -1,3 +1,4 @@
+#include "common.h"
 #include "component.h"
 
 namespace engine

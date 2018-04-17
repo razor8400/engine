@@ -1,3 +1,4 @@
+#include "common.h"
 #include "scripting.h"
 
 #include "components/component.h"

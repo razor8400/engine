@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>..\..\..\Sources;..\..\..\..\Engine;..\..\..\..\ThirdParty;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\..\..\ThirdParty\GLEW\lib\Win32\;..\..\..\..\ThirdParty\GLFW3\Win32\;..\..\..\..\ThirdParty\libpng\Win32\;..\..\..\..\ThirdParty\libzlib\Win32\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\..\..\ThirdParty\GLEW\lib\Win32\;..\..\..\..\ThirdParty\GLFW3\Win32\;..\..\..\..\ThirdParty\lua\Win32\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,7 +83,7 @@
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;libpng16.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,9 +123,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\components\component.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\components\scriptable_component.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\application.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\director.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\game_object.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\core\pool_manager.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\core\ref.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\scene.cpp" />
     <ClCompile Include="..\..\..\..\Engine\gl\gl.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -152,7 +157,10 @@
     <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\window.cpp" />
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\resources\script.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\scripting\binding.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\scripting\scripting.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\file_utils.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\image_utils.cpp" />
     <ClCompile Include="..\..\..\Sources\my_app_delegate.cpp">
@@ -163,11 +171,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Engine\2d\sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\common.h" />
+    <ClInclude Include="..\..\..\..\Engine\components\component.h" />
+    <ClInclude Include="..\..\..\..\Engine\components\scriptable_component.h" />
+    <ClInclude Include="..\..\..\..\Engine\config.h" />
     <ClInclude Include="..\..\..\..\Engine\core\application.h" />
     <ClInclude Include="..\..\..\..\Engine\core\director.h" />
     <ClInclude Include="..\..\..\..\Engine\core\game_object.h" />
+    <ClInclude Include="..\..\..\..\Engine\core\pool_manager.h" />
+    <ClInclude Include="..\..\..\..\Engine\core\ref.h" />
     <ClInclude Include="..\..\..\..\Engine\core\scene.h" />
+    <ClInclude Include="..\..\..\..\Engine\core\type_info.h" />
     <ClInclude Include="..\..\..\..\Engine\engine.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\gl.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\libgl.h" />
@@ -185,11 +200,19 @@
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resource.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h" />
-    <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.hpp" />
+    <ClInclude Include="..\..\..\..\Engine\resources\script.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\texture2d.h" />
+    <ClInclude Include="..\..\..\..\Engine\scripting\binding.h" />
+    <ClInclude Include="..\..\..\..\Engine\scripting\scripting.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\file_utils.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\image_utils.h" />
+    <ClInclude Include="..\..\..\..\Engine\utils\vector.h" />
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Engine\resources\resources_manager.inl" />
+    <None Include="..\..\..\..\Engine\scripting\scripting.inl" />
+    <None Include="..\..\..\..\Engine\utils\vector.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

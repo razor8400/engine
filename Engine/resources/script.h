@@ -3,7 +3,7 @@
 #include "resource.h"
 #include "scripting/scripting.h"
 
-class lua_State;
+struct lua_State;
 
 namespace engine
 {

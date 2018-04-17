@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vector2d.h"
+
 namespace math
 {
     struct vector3d

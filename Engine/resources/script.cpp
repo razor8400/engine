@@ -1,7 +1,6 @@
 #include "common.h"
 
 #include "utils/file_utils.h"
-
 #include "script.h"
 
 namespace engine

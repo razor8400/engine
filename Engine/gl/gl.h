@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include <map>
 
 #include "GLEW/glew.h"

@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -55,6 +51,15 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{f99d2877-dea8-4635-bbcf-6c95f31c28c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\components">
+      <UniqueIdentifier>{d2fb8249-6df8-47c6-81b3-cd8c8f6dc60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\scripting">
+      <UniqueIdentifier>{91338e95-4c4a-4bbb-a358-6a0cf4d4ec67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\2d">
+      <UniqueIdentifier>{c8673621-45e8-48f2-a676-5eda910e875f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,12 +104,6 @@
     <ClCompile Include="..\..\..\..\Engine\gl\shader_program.cpp">
       <Filter>engine\gl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp">
-      <Filter>engine\resources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp">
-      <Filter>engine\resources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\utils\image_utils.cpp">
       <Filter>engine\utils</Filter>
     </ClCompile>
@@ -116,6 +115,36 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\utils\file_utils.cpp">
       <Filter>engine\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\components\component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\components\scriptable_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\scripting\binding.cpp">
+      <Filter>engine\scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\scripting\scripting.cpp">
+      <Filter>engine\scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\core\pool_manager.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\core\ref.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\script.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp">
+      <Filter>engine\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,12 +178,6 @@
     <ClInclude Include="..\..\..\..\Engine\math\vector4d.h">
       <Filter>engine\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\gl\shaders.h">
       <Filter>engine\gl</Filter>
     </ClInclude>
@@ -176,18 +199,6 @@
     <ClInclude Include="..\..\..\..\Engine\gl\shader_program.h">
       <Filter>engine\gl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\resources\resource.h">
-      <Filter>engine\resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h">
-      <Filter>engine\resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.hpp">
-      <Filter>engine\resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\resources\texture2d.h">
-      <Filter>engine\resources</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\utils\file_utils.h">
       <Filter>engine\utils</Filter>
     </ClInclude>
@@ -200,5 +211,64 @@
     <ClInclude Include="..\..\..\..\Engine\platform\file_system\file_system.h">
       <Filter>engine\platform\file_system</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\components\component.h">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\components\scriptable_component.h">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\scripting\binding.h">
+      <Filter>engine\scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\scripting\scripting.h">
+      <Filter>engine\scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\core\pool_manager.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\core\ref.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\core\type_info.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\utils\vector.h">
+      <Filter>engine\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\resource.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\script.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\texture2d.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\common.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\config.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\engine.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\2d\sprite.h">
+      <Filter>engine\2d</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Engine\utils\vector.inl">
+      <Filter>engine\utils</Filter>
+    </None>
+    <None Include="..\..\..\..\Engine\resources\resources_manager.inl">
+      <Filter>engine\resources</Filter>
+    </None>
+    <None Include="..\..\..\..\Engine\scripting\scripting.inl">
+      <Filter>engine\scripting</Filter>
+    </None>
   </ItemGroup>
 </Project>
