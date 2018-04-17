@@ -41,7 +41,7 @@ namespace engine
 
 	void game_object::draw(const math::mat4& world)
 	{
-        render(world);
+		render(world);
         
 		for (auto obj : m_children)
 			obj->draw(world);
@@ -55,7 +55,7 @@ namespace engine
         if (program)
             program->use(transfrom(world), math::vector4d::one);
 
-        gl::draw_rect(0, 0, m_size.x, m_size.y);
+		gl::draw_rect(0, 0, m_size.x, m_size.y);
 #endif
     }
     

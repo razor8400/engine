@@ -108,10 +108,10 @@ namespace engine
         if (m_scene)
         {
             m_scene->update(delta_time);
-            m_renderer->draw_scene(m_scene);
+			m_renderer->draw_scene(m_scene);
         }
         
-        pool_manager::instance().update();
+		pool_manager::instance().update();
     }
     
 	void director::handle_mouse_down(const math::vector2d& location)

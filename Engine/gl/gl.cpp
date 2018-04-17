@@ -171,10 +171,12 @@ namespace gl
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * sizeof(GLushort), indices, GL_STATIC_DRAW);
         
         glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
-        glVertexAttribPointer(vertex_attribute::position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
         glBindBuffer(GL_ARRAY_BUFFER, buffers::texture_position);
-        glVertexAttribPointer(vertex_attribute::texture_position, 2, GL_FLOAT, GL_FALSE, 0, texture_coords);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(texture_coords), texture_coords, GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::texture_position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
         glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_SHORT, NULL);
 
@@ -198,11 +200,12 @@ namespace gl
         glEnableVertexAttribArray(vertex_attribute::position);
         
         glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-        glDrawArrays(GL_LINES, 0, 2);
+		glDrawArrays(GL_LINES, 0, 2);
         
-        glDisableVertexAttribArray(vertex_attribute::position);
+		glDisableVertexAttribArray(vertex_attribute::position);
     }
     
     void draw_rect(float x, float y, float width, float height)

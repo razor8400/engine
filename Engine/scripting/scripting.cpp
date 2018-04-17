@@ -50,7 +50,6 @@ namespace engine
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
             register_class<engine::scene>(state, scripting::scene::functions);
-            register_class<engine::component>(state, NULL);
         }
         
         void close_state(lua_State* state)

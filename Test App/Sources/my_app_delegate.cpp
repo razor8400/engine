@@ -15,13 +15,13 @@ void my_app_delegate::application_launched(engine::application* application)
         director.set_near_plane(0.1f);
         director.set_far_plane(100.0f);
         
-      //  auto script = engine::scriptable_component::create("scripts/scene.lua");
-        auto scene = engine::game_object::create<engine::scene>();
+		auto script = engine::scriptable_component::create("scripts/scene.lua");
+		auto scene = engine::game_object::create<engine::scene>();
         
-      //  scene->add_component(script);
+		scene->add_component(script);
         
         director.start();
-        director.run_scene(scene);
+		director.run_scene(scene);
         
         application->run();
     }
