@@ -6,7 +6,8 @@ namespace engine
 {
     class component : public ref
     {
-    friend class game_object;
+        friend class game_object;
+        DECLARE_CLASS;
     public:
         virtual void start() = 0;
         virtual void update(float dt) = 0;

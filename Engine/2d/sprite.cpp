@@ -5,27 +5,12 @@
 
 namespace engine
 {
-    IMPLEMENT_INHERITED_CLASS(sprite, game_object);
+    IMPLEMENT_INHERITANCE_INFO(sprite, game_object);
     
-    sprite* sprite::create(const std::string& file_name)
+    bool sprite::init(const std::string& file_name)
     {
-        auto obj = ref::create<sprite>();
         auto texture = resources_manager::instance().load_resource_from_file<texture2d>(file_name);
-        
-        if (obj->init(texture))
-            return obj;
-        
-        return nullptr;
-    }
-    
-    sprite* sprite::create(const texture2d_ptr& texture)
-    {
-        auto obj = ref::create<sprite>();
-        
-        if (obj->init(texture))
-            return obj;
-        
-        return nullptr;
+        return init(texture);
     }
     
     bool sprite::init(const texture2d_ptr& texture)

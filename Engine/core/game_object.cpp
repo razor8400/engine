@@ -5,7 +5,7 @@
 
 namespace engine
 {
-    IMPLEMENT_CLASS(game_object)
+    IMPLEMENT_TYPE_INFO(game_object)
     
 	bool game_object::init()
 	{

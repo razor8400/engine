@@ -11,7 +11,9 @@ namespace engine
         static T* get(lua_State* L, int n)
         {
             T** obj = (T**)lua_touserdata(L, n);
-            return dynamic_cast<T*>(*obj);
+            if (obj)
+                return dynamic_cast<T*>(*obj);
+            return NULL;
         }
         
         template<class T>
@@ -24,13 +26,18 @@ namespace engine
         }
         
         template<class T>
-        static int create_ref(lua_State* L)
+        static void push_ref(lua_State* L, T* obj)
         {
-            T* obj = push<T>(L, ref::create<T>());
-            obj->retain();
+            push<T>(L, obj)->retain();
             
             luaL_getmetatable(L, T::type_name());
             lua_setmetatable(L, -2);
+        }
+        
+        template<class T>
+        static int create_ref(lua_State* L)
+        {
+            push_ref<T>(L, ref::create<T>());
             
             return 1;
         }
@@ -47,16 +54,12 @@ namespace engine
         }
         
         template<class T>
-        void push_to_table(lua_State* L, const std::string& table, const std::string& field, T* data)
+        void push_to_table(lua_State* L, const std::string& table, const std::string& field, T* obj)
         {
             lua_getglobal(L, table.c_str());
             
-            T* obj = push<T>(L, data);
-            obj->retain();
-            
-            luaL_getmetatable(L, T::type_name());
-            lua_setmetatable(L, -2);
-            
+            push_ref<T>(L, obj);
+                        
             lua_setfield(L, -2, field.c_str());
         }
     }

@@ -5,6 +5,8 @@
 
 namespace engine
 {
+    IMPLEMENT_INHERITANCE_INFO(scriptable_component, component);
+    
     scriptable_component* scriptable_component::create(const std::string& file_name)
     {
         auto resource = resources_manager::instance().load_resource_from_file<script>(file_name);

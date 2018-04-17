@@ -6,6 +6,7 @@ namespace engine
 {
     class scriptable_component : public component
     {
+        DECLARE_CLASS;
     public:
         static scriptable_component* create(const std::string& file_name);
         

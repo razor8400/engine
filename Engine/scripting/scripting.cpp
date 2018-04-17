@@ -2,6 +2,13 @@
 #include "scripting.h"
 #include "binding.h"
 
+#include "components/component.h"
+
+#include "core/game_object.h"
+#include "core/scene.h"
+
+#include "2d/sprite.h"
+
 namespace engine
 {
     namespace scripting
@@ -12,12 +19,16 @@ namespace engine
             auto type_name = T::type_name();
             
             luaL_newmetatable(state, type_name);
-            luaL_setfuncs(state, methods, NULL);
+            
+            if (methods)
+                luaL_setfuncs(state, methods, NULL);
             
             lua_pushvalue(state, -1);
             lua_setfield(state, -1, "__index");
             
-            for (auto parent = T::type_info()->get_parent(); parent != nullptr; parent = parent->get_parent())
+            auto parent = T::type_info()->get_parent();
+            
+            if (parent)
             {
                 lua_getglobal(state, parent->get_class());
                 lua_setmetatable(state, -2);
@@ -38,6 +49,8 @@ namespace engine
         {
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
+            register_class<engine::scene>(state, scripting::scene::functions);
+            register_class<engine::component>(state, NULL);
         }
         
         void close_state(lua_State* state)
@@ -64,6 +77,10 @@ namespace engine
         void create_class(lua_State* state, const std::string& class_name)
         {
             luaL_newmetatable(state, class_name.c_str());
+            
+            lua_pushvalue(state, -1);
+            lua_setfield(state, -1, "__index");
+            
             lua_setglobal(state, class_name.c_str());
         }
     }

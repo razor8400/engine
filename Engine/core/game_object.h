@@ -9,6 +9,9 @@ namespace engine
 	public:
         DECLARE_CLASS;
         
+        template<class T, class ...Args>
+        static T* create(Args... args);
+        
 		virtual bool init();
 
 		virtual void update(float dt);
@@ -82,4 +85,15 @@ namespace engine
 		game_object* m_parent = nullptr;
         gl::shader_program_ptr m_shader_program;
 	};
+    
+    template<class T, class ...Args>
+    T* game_object::create(Args... args)
+    {
+        auto obj = ref::create<T>();
+        
+        if (obj->init(args...))
+            return obj;
+        
+        return nullptr;
+    }
 }

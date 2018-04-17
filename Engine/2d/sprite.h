@@ -8,9 +8,7 @@ namespace engine
     {
         DECLARE_CLASS;
     public:
-        static sprite* create(const std::string& file_name);
-        static sprite* create(const texture2d_ptr& texture);
-        
+        bool init(const std::string& file_name);
         bool init(const texture2d_ptr& texture);
         void render(const math::mat4& world) override;
         void set_texture(const texture2d_ptr& texture);

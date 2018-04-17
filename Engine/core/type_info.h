@@ -51,10 +51,10 @@ static const shared_info& type_info()\
     return __info;\
 }
     
-#define IMPLEMENT_CLASS(CLASS)\
+#define IMPLEMENT_TYPE_INFO(CLASS)\
 const std::shared_ptr<type_info> CLASS::__info = type_info::create(#CLASS);
 
-#define IMPLEMENT_INHERITED_CLASS(CLASS, PARENT)\
+#define IMPLEMENT_INHERITANCE_INFO(CLASS, PARENT)\
 const std::shared_ptr<type_info> CLASS::__info = type_info::create(#CLASS, #PARENT);
     
 }
