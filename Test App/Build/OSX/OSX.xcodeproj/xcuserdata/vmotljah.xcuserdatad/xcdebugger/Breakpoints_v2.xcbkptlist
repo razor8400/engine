@@ -485,7 +485,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -501,7 +501,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
             endingLineNumber = "105"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -517,7 +517,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
             endingLineNumber = "102"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -533,7 +533,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
             endingLineNumber = "107"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -549,7 +549,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
             endingLineNumber = "108"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -565,7 +565,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
             endingLineNumber = "103"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -581,7 +581,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
             endingLineNumber = "104"
-            landmarkName = "create(lua_State* L)"
+            landmarkName = "remove_child(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -597,7 +597,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
             endingLineNumber = "123"
-            landmarkName = "set_color(lua_State* L)"
+            landmarkName = "remove_from_parent(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -613,7 +613,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
             endingLineNumber = "129"
-            landmarkName = "set_color(lua_State* L)"
+            landmarkName = "add_component(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
