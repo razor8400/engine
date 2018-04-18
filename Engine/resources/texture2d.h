@@ -25,6 +25,7 @@ namespace engine
 		int m_height = 0;
         int m_format = 0;
         int m_texture_id = -1;
+        
         math::vector4d m_color = math::vector4d::one;
         gl::blend_func m_blend_func = { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };
 	};

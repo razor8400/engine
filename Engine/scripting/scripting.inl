@@ -1,6 +1,8 @@
 #pragma once
 
 #include "scripting.h"
+#include "binding.h"
+
 #include "core/game_object.h"
 
 namespace engine
@@ -61,6 +63,8 @@ namespace engine
             push_ref<T>(L, obj);
                         
             lua_setfield(L, -2, field.c_str());
+            
+            CLEAR_TOP(L);
         }
     }
 }

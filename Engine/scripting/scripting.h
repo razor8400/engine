@@ -2,6 +2,9 @@
 
 #include "lua/lua.hpp"
 
+#define CLEAR_TOP(L)\
+lua_pop(L, lua_gettop(L));
+
 namespace engine
 {
     namespace scripting
@@ -9,6 +12,10 @@ namespace engine
         static const char* start = "start";
         static const char* update = "update";
         static const char* stop = "stop";
+        
+        static const char* mouse_down = "mouse_down";
+        static const char* mouse_move = "mouse_move";
+        static const char* mouse_up = "mouse_up";
         
         lua_State* create_state();
         void close_state(lua_State* state);
@@ -20,6 +27,7 @@ namespace engine
         
         template<class T>
         void push_to_table(lua_State* state, const std::string& table, const std::string& field, T* data);
+        void push_to_table(lua_State* state, const std::string& table, const std::string& field, const math::vector3d& v3);
     }
 }
 

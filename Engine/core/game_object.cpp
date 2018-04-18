@@ -85,6 +85,9 @@ namespace engine
     
 	void game_object::add_child(game_object* obj)
 	{
+        if (obj->m_parent)
+            obj->remove_from_parent();
+        
         if (m_active)
             obj->on_enter();
         

@@ -61,6 +61,8 @@ namespace engine
                 
         int get_children_count() const { return (int)m_children.size(); }
         
+        game_object* get_parent() const { return m_parent; };
+        
         void set_shader_program(const gl::shader_program_ptr& shader_program) { m_shader_program = shader_program; }
         const gl::shader_program_ptr& get_shader_program() const { return m_shader_program; }
 	protected:

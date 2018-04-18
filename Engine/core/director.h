@@ -50,6 +50,5 @@ namespace engine
 
         std::vector<input_delegate*> m_input_handlers;
 		std::unique_ptr<renderer> m_renderer;
-        input_delegate* m_current_input = nullptr;
     };
 }

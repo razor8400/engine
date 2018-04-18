@@ -23,6 +23,7 @@ namespace engine
         
         template<class T>
         void push_user_data(const std::string& field, T* data);
+        void push_vector(const std::string& field, const math::vector3d& v3);
     private:
         std::string m_name;
         std::vector<char> m_buffer;

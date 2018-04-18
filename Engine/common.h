@@ -52,7 +52,7 @@ namespace engine
         vsnprintf(buffer, MAX, msg, args);
         va_end(args);
         
-        printf("[engine]%s\n", buffer);
+        printf("[engine] %s\n", buffer);
     }
 }
 

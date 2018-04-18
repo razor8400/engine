@@ -35,6 +35,8 @@ namespace engine
             }
             
             lua_setglobal(state, type_name);
+            
+            CLEAR_TOP(state);
         }
         
         lua_State* create_state()
@@ -71,6 +73,8 @@ namespace engine
             
             if (lua_pcall(state, 1, 0, 0))
                 log("[scripting] call_method error: %s", lua_tostring(state, -1));
+            
+            CLEAR_TOP(state);
         }
         
         void create_class(lua_State* state, const std::string& class_name)
@@ -81,6 +85,19 @@ namespace engine
             lua_setfield(state, -1, "__index");
             
             lua_setglobal(state, class_name.c_str());
+            
+            CLEAR_TOP(state);
+        }
+        
+        void push_to_table(lua_State* state, const std::string& table, const std::string& field, const math::vector3d& v3)
+        {
+            lua_getglobal(state, table.c_str());
+            
+            vector::push(state, v3.x, v3.y, v3.z);
+            
+            lua_setfield(state, -2, field.c_str());
+            
+            CLEAR_TOP(state);
         }
     }
 }

@@ -117,25 +117,19 @@ namespace engine
 	void director::handle_mouse_down(const math::vector2d& location)
 	{
         for (auto it : m_input_handlers)
-        {
-            if (it->on_mouse_down(location))
-            {
-                m_current_input = it;
-                break;
-            }
-        }
+            it->on_mouse_up(location);
 	}
 
 	void director::handle_mouse_move(const math::vector2d& location)
 	{
-        if (m_current_input)
-            m_current_input->on_mouse_move(location);
+        for (auto it : m_input_handlers)
+            it->on_mouse_move(location);
 	}
 
 	void director::handle_mouse_up(const math::vector2d& location)
 	{
-        if (m_current_input)
-            m_current_input->on_mouse_up(location);
+        for (auto it : m_input_handlers)
+            it->on_mouse_up(location);
 	}
     
     void director::add_input_delegate(input_delegate* delegate)

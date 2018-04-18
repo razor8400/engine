@@ -19,15 +19,20 @@ namespace engine
     {
 		namespace vector
 		{
+            void push(lua_State* L, float x, float y, float z)
+            {
+                lua_newtable(L);
+                lua_pushnumber(L, x);
+                lua_setfield(L, -2, "x");
+                lua_pushnumber(L, y);
+                lua_setfield(L, -2, "y");
+                lua_pushnumber(L, z);
+                lua_setfield(L, -2, "z");
+            }
+            
 			int create(lua_State* L, float x, float y, float z)
 			{
-				lua_newtable(L);
-				lua_pushnumber(L, x);
-				lua_setfield(L, -2, "x");
-				lua_pushnumber(L, y);
-				lua_setfield(L, -2, "y");
-				lua_pushnumber(L, z);
-				lua_setfield(L, -2, "z");
+                push(L, x, y, z);
 
 				return 1;
 			}
@@ -70,13 +75,48 @@ namespace engine
 
 				return 1;
 			}
+            
+            math::vector3d get(lua_State* L, int n)
+            {
+                if (lua_istable(L, n + 1))
+                {
+                    lua_getfield(L, n + 1, "r");
+                    auto r = lua_tonumber(L, n + 2);
+                    
+                    lua_getfield(L, n + 1, "g");
+                    auto g = lua_tonumber(L, n + 2);
+                    
+                    lua_getfield(L, n + 1, "b");
+                    auto b = lua_tonumber(L, n + 2);
+                    
+                    return math::vector3d(r, g, b);
+                }
+                
+                auto r = lua_tonumber(L, n + 1);
+                auto g = lua_tonumber(L, n + 2);
+                auto b = lua_tonumber(L, n + 3);
+                
+                return math::vector3d(r, g, b);
+            }
 		}
 
         namespace game_object
         {
+            template<class T, class ...Args>
+            int create(lua_State* L, Args... args)
+            {
+                auto obj = engine::game_object::create<T>(args...);
+                
+                if (!obj)
+                    return 0;
+                
+                push_ref(L, obj);
+                return 1;
+            }
+            
             int create(lua_State* L)
             {
-                return scripting::create_ref<engine::game_object>(L);
+                return create<engine::game_object>(L);
             }
             
             int destroy(lua_State* L)
@@ -94,6 +134,8 @@ namespace engine
                 if (obj && child)
                     obj->add_child(child);
                 
+                CLEAR_TOP(L);
+                
                 return 0;
             }
             
@@ -107,6 +149,8 @@ namespace engine
                 if (obj && child)
                     obj->remove_child(child);
                 
+                CLEAR_TOP(L);
+                
                 return 0;
             }
             
@@ -118,6 +162,8 @@ namespace engine
                 
                 if (obj)
                     obj->remove_from_parent();
+                
+                CLEAR_TOP(L);
                 
                 return 0;
             }
@@ -132,6 +178,8 @@ namespace engine
                 if (obj && component)
                     obj->add_component(component);
                 
+                CLEAR_TOP(L);
+                
                 return 0;
             }
             
@@ -144,6 +192,8 @@ namespace engine
                 
                 if (obj && component)
                     obj->remove_component(component);
+                
+                CLEAR_TOP(L);
                 
                 return 0;
             }
@@ -159,6 +209,8 @@ namespace engine
 
 				if (obj)
 					obj->set_enabled(lua_toboolean(L, 2) > 0);
+                
+                CLEAR_TOP(L);
 
 				return 0;
 			}
@@ -188,6 +240,8 @@ namespace engine
 					return 0;
 
 				obj->set_position(vector::get(L, 1));
+                
+                CLEAR_TOP(L);
 
 				return 0;
 			}
@@ -216,6 +270,8 @@ namespace engine
 					return 0;
 
 				obj->set_rotation(vector::get(L, 1));
+                
+                CLEAR_TOP(L);
 
 				return 0;
 			}
@@ -242,6 +298,8 @@ namespace engine
 					return 0;
 
 				obj->set_scale(vector::get(L, 1));
+                
+                CLEAR_TOP(L);
 
 				return 0;
 			}
@@ -268,6 +326,8 @@ namespace engine
 					return 0;
 
 				obj->set_size(vector::get(L, 1));
+                
+                CLEAR_TOP(L);
 
 				return 0;
 			}
@@ -294,12 +354,16 @@ namespace engine
 					return 0;
 
 				obj->set_anchor(vector::get(L, 1));
+                
+                CLEAR_TOP(L);
 
 				return 0;
 			}
 
 			int get_anchor(lua_State* L)
 			{
+                CHECK_TOP(L, 1);
+                
 				auto obj = scripting::get<engine::game_object>(L, 1);
 
 				if (!obj)
@@ -309,26 +373,111 @@ namespace engine
 
 				return vector::create(L, anchor.x, anchor.y, anchor.z);
 			}
+            
+            int set_tag(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                int tag = (int)lua_tointeger(L, 2);
+                
+                obj->set_tag(tag);
+                
+                CLEAR_TOP(L);
+                
+                return 0;
+            }
+            
+            int get_tag(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                lua_pushnumber(L, obj->get_tag());
+                
+                return 1;
+            }
+            
+            int set_opacity(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                float opacity = lua_tonumber(L, 2);
+                
+                obj->set_opacity(opacity);
+                
+                CLEAR_TOP(L);
+                
+                return 0;
+            }
+            
+            int get_opacity(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                lua_pushnumber(L, obj->get_opacity());
+                
+                return 1;
+            }
+            
+            int get_children_count(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                lua_pushnumber(L, obj->get_children_count());
+                
+                return 1;
+            }
+            
+            int get_parent(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                push_ref<engine::game_object>(L, obj->get_parent());
+                
+                return 1;
+            }
         }
         
         namespace sprite
         {
             int create(lua_State* L)
             {
-                CHECK_TOP(L, 1);
+                if (lua_isstring(L, 1))
+                {
+                    auto texture = lua_tostring(L, 1);
+                    return game_object::create<engine::sprite>(L, texture);
+                } 
                 
-                if (!lua_isstring(L, 1))
-                    return 0;
-                
-                auto texture = lua_tostring(L, 1);
-                auto sprite = engine::sprite::create<engine::sprite>(texture);
-                
-                if (!sprite)
-                    return 0;
-                
-                push_ref(L, sprite);
-                
-                return 1;
+                return game_object::create<engine::sprite>(L);
             }
             
             int set_color(lua_State* L)
@@ -340,13 +489,75 @@ namespace engine
                 if (!obj)
                     return 0;
                 
-                auto r = lua_tonumber(L, 2);
-                auto g = lua_tonumber(L, 3);
-                auto b = lua_tonumber(L, 4);
+                obj->set_color(vector::get(L, 1));
                 
-                obj->set_color(math::vector3d(r, g, b));
+                CLEAR_TOP(L);
                 
                 return 0;
+            }
+
+            int get_color(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+
+                auto obj = scripting::get<engine::sprite>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                auto color = obj->get_color();
+                
+                return color::create(L, color.x, color.y, color.z);
+            }
+
+            int set_texture(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+
+                auto obj = scripting::get<engine::sprite>(L, 1);
+                
+                if (!obj || !lua_isstring(L, 2))
+                    return 0;
+                
+                auto texture = lua_tostring(L, 2);
+                obj->set_texture(texture);
+                
+                CLEAR_TOP(L);
+                
+                return 0;
+            }
+            
+            int set_alpha(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::sprite>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                auto alpha = lua_tonumber(L, 2);
+                obj->set_alpha(alpha);
+                
+                CLEAR_TOP(L);
+                
+                return 0;
+            }
+            
+            int get_alpha(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                auto obj = scripting::get<engine::sprite>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                auto alpha = obj->get_alpha();
+                
+                lua_pushnumber(L, alpha);
+                
+                return 1;
             }
         }
         
@@ -354,7 +565,7 @@ namespace engine
         {
             int create(lua_State* L)
             {
-                return scripting::create_ref<engine::scene>(L);
+                return game_object::create<engine::game_object>(L);
             }
         }
     }
