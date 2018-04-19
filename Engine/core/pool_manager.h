@@ -1,7 +1,5 @@
 #pragma once
 
-#include "utils/vector.h"
-
 namespace engine
 {
 	class ref;

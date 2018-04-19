@@ -70,6 +70,8 @@ namespace engine
 				{ "get_scale", get_scale },
 				{ "set_size", set_size },
 				{ "get_size", get_size },
+				{ "set_anchor", set_anchor },
+				{ "get_anchor", get_anchor },
 				{ "set_tag", set_tag },
 				{ "get_tag", get_tag },
                 { "set_opacity", set_opacity },

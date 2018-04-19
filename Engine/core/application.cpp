@@ -1,5 +1,6 @@
 #include "common.h"
 #include "application.h"
+#include "platform/platform.h"
 #include "interface/app_delegate.h"
 
 namespace engine
@@ -28,6 +29,9 @@ namespace engine
 
 	void application::on_launched()
 	{
+		logger() << "[application] application launched";
+		logger() << "[application] platform:" << platform::instance().get_platform_code();
+
 		if (m_delegate)
 			m_delegate->application_launched(this);
 	}
@@ -42,12 +46,23 @@ namespace engine
     {
         m_window = std::make_unique<window>();
         
-        if (!m_window->create(m_display_name.c_str(), (int)m_win_size.x, (int)m_win_size.y))
-            return false;
+		if (!m_window->create(m_display_name.c_str(), (int)m_win_size.x, (int)m_win_size.y))
+		{
+			logger() << "[application] failed to create application window";
+			return false;
+		}
         
-        if (!gl::init_gl())
-            return false;
-        
+		if (!gl::init_gl())
+		{
+			logger() << "[application] open gl init failed";
+			return false;
+		}
+
+		logger() << "[application] create context window";
+		logger() << "[application] title:" << m_display_name;
+		logger() << "[application] width:" << (int)m_win_size.x;
+		logger() << "[application] height:" << (int)m_win_size.y;
+		        
         gl::compile_shaders();
         gl::generate_buffers();
         
@@ -55,7 +70,9 @@ namespace engine
     }
 
 	void application::run()
-	{        
+	{   
+		logger() << "[application] run";
+
         if (m_window)
             m_window->process();
 	}

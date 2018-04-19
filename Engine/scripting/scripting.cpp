@@ -59,10 +59,14 @@ namespace engine
             lua_close(state);
         }
         
-        void load_script(lua_State* state, const char* buffer, size_t size, const std::string& name)
+        bool load_script(lua_State* state, const char* buffer, size_t size, const std::string& name)
         {
-            if (luaL_loadbuffer(state, buffer, size, name.c_str()) || lua_pcall(state, 0, 0, 0))
-                log("[scripting] load error: %s", lua_tostring(state, -1));
+			if (luaL_loadbuffer(state, buffer, size, name.c_str()) || lua_pcall(state, 0, 0, 0))
+			{
+				logger() << "[scripting] load error:" << lua_tostring(state, -1);
+				return false;
+			}
+			return true;
         }
         
         void call_method(lua_State* state, const std::string& class_name, const std::string& method)
@@ -71,9 +75,9 @@ namespace engine
             lua_getfield(state, -1, method.c_str());
             lua_pushvalue(state, -2);
             
-            if (lua_pcall(state, 1, 0, 0))
-                log("[scripting] call_method error: %s", lua_tostring(state, -1));
-            
+			if (lua_pcall(state, 1, 0, 0))
+				logger() << "[scripting] call_method error:" << lua_tostring(state, -1);
+             
             CLEAR_TOP(state);
         }
         
@@ -99,5 +103,15 @@ namespace engine
             
             CLEAR_TOP(state);
         }
+
+		float get_number(lua_State* state, int n)
+		{
+			return (float)lua_tonumber(state, n);
+		}
+
+		int get_integer(lua_State* state, int n)
+		{
+			return (int)lua_tointeger(state, n);
+		}
     }
 }

@@ -9,6 +9,8 @@ namespace engine
     std::shared_ptr<texture2d> texture2d::load_from_file(const std::string& file_name)
     {
         auto data = image_utils::image_data();
+
+		logger() << "[texture2d] load:" << file_name;
         
         if (image_utils::load_image_from_file(file_name, &data))
         {
@@ -18,7 +20,7 @@ namespace engine
                 return texture;
         }
         
-        log("[texture2d] can't load texture, error %s", data.error.c_str());
+		logger() << "[texture2d] load error:can" << data.error;
         
         return std::shared_ptr<texture2d>();
     }
@@ -49,6 +51,6 @@ namespace engine
         if (shader_program)
             shader_program->use(transform, m_color);
         
-        gl::draw_texture2d(0, 0, m_width, m_height);
+        gl::draw_texture2d(0, 0, (float)m_width, (float)m_height);
     }
 }

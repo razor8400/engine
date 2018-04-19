@@ -11,11 +11,10 @@ void my_app_delegate::application_launched(engine::application* application)
         
         director.set_frame_rate(60);
         director.set_projection_mode(engine::ortographic);
+		director.set_near_plane(-1000.0f);
+        director.set_far_plane(1000.0f);
         
-        director.set_near_plane(0.1f);
-        director.set_far_plane(100.0f);
-        
-		auto script = engine::scriptable_component::create("scripts/scene.lua");
+		auto script = engine::scriptable_component::create("scripts/match3scene.lua");
 		auto scene = engine::game_object::create<engine::scene>();
         
 		scene->add_component(script);

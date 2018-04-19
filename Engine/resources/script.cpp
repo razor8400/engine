@@ -9,17 +9,20 @@ namespace engine
     {
         unsigned char* buffer;
         size_t size;
-        
+		
+		logger() << "[script] load:" << file_name;
+
         if (file_utils::read_file(file_name, &buffer, &size))
         {
             auto name = file_utils::get_file_name(file_name);
             auto lua = std::make_shared<script>(name);
+
             if (lua->load(buffer, size))
                 return lua;
         }
-        
-        log("[script] can't load script file:%s", file_name.c_str());
-        
+
+		logger() << "[script] load error:can't read file";
+                
         return std::shared_ptr<script>();
     }
     
@@ -33,23 +36,29 @@ namespace engine
         stop();
     }
     
-    void script::run()
+    bool script::run()
     {
         m_state = scripting::create_state();
         
         if (m_state)
         {
+			logger() << "[script] run:" << m_name;
+
             scripting::create_class(m_state, m_name.c_str());
             scripting::register_objects(m_state);
             
-            scripting::load_script(m_state, m_buffer.data(), m_buffer.size(), m_name);
+            return scripting::load_script(m_state, m_buffer.data(), m_buffer.size(), m_name);
         }
+
+		return false;
     }
     
     void script::stop()
     {
         if (m_state)
         {
+			logger() << "[script] stop:" << m_name;
+
             scripting::close_state(m_state);
             m_state = nullptr;
         }
@@ -59,7 +68,7 @@ namespace engine
     {
         if (m_state)
             return false;
-        
+		        
         m_buffer.clear();
         m_buffer.reserve(size);
         m_buffer.insert(m_buffer.end(), data, data + size);

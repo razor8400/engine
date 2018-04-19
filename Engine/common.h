@@ -14,6 +14,7 @@
 
 #include "core/type_info.h"
 
+#include "utils/logger.h"
 #include "utils/vector.h"
 #include "config.h"
 
@@ -52,7 +53,30 @@ namespace engine
         vsnprintf(buffer, MAX, msg, args);
         va_end(args);
         
-        printf("[engine] %s\n", buffer);
+        printf("%s\n", buffer);
     }
+
+	static std::string vector3d_to_string(const math::vector3d& v3)
+	{
+		std::stringstream ss;
+
+		ss << "(" << v3.x << ", "  << v3.y << ", " << v3.z << ")";
+
+		return ss.str();
+	}
+
+	static std::string projection_mode_to_string(projection_mode mode)
+	{
+		if (mode == perspective)
+		{
+			return "perspective";
+		}
+		else if (mode == ortographic)
+		{
+			return "ortographic";
+		}
+
+		return empty_string;
+	}
 }
 

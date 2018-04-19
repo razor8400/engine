@@ -60,6 +60,9 @@ namespace math
     {
         auto lenght = v3.lenght();
 
+		if (lenght == 0)
+			return v3;
+
         vector3d r;
         
         r.x = v3.x / lenght;

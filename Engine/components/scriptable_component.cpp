@@ -35,7 +35,12 @@ namespace engine
         
         if (m_script)
         {
-            m_script->run();
+			if (!m_script->run())
+			{
+				m_script.reset();
+				return;
+			}
+
             m_script->push_user_data("obj", m_parent);
             m_script->call_function(scripting::start);
         }

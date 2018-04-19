@@ -85,6 +85,9 @@ namespace engine
     
 	void game_object::add_child(game_object* obj)
 	{
+		if (!obj)
+			return;
+
         if (obj->m_parent)
             obj->remove_from_parent();
         
@@ -97,6 +100,9 @@ namespace engine
 
 	void game_object::remove_child(game_object* obj)
 	{
+		if (!obj)
+			return;
+
         m_children.erase(obj);
 
         if (m_active)
@@ -113,6 +119,9 @@ namespace engine
     
     void game_object::add_component(component* component)
     {
+		if (!component)
+			return;
+
         component->m_parent = this;
         
         if (m_active)
@@ -123,6 +132,9 @@ namespace engine
     
     void game_object::remove_component(component* component)
     {
+		if (!component)
+			return;
+
         if (m_active)
             component->stop();
         

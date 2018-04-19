@@ -13,6 +13,7 @@ namespace engine
 
 		void set_camera_position(const math::vector3d& position);
 		void draw_scene(scene* scene);
+		void dump_camera_settings();
 	private:
 		void update_world();
 	private:
@@ -22,7 +23,7 @@ namespace engine
 
 		projection_mode m_projection_mode;
 
+		math::vector3d m_camera_position = math::vector3d(0, 0, -1);
 		math::mat4 m_world;
-		math::mat4 m_camera_position;
 	};
 }

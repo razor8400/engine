@@ -60,6 +60,9 @@
     <Filter Include="engine\2d">
       <UniqueIdentifier>{c8673621-45e8-48f2-a676-5eda910e875f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\platform\windows">
+      <UniqueIdentifier>{c7cbc21f-6103-4115-b693-9f2ec4af9577}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp">
       <Filter>engine\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\utils\logger.cpp">
+      <Filter>engine\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\platform\platform.cpp">
+      <Filter>engine\platform\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +267,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\2d\sprite.h">
       <Filter>engine\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\utils\logger.h">
+      <Filter>engine\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\platform\platform.h">
+      <Filter>engine\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

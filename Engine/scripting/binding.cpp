@@ -42,20 +42,20 @@ namespace engine
 				if (lua_istable(L, n + 1))
 				{
 					lua_getfield(L, n + 1, "x");
-					auto x = lua_tonumber(L, n + 2);
+					auto x = get_number(L, n + 2);
 
 					lua_getfield(L, n + 1, "y");
-					auto y = lua_tonumber(L, n + 2);
+					auto y = get_number(L, n + 2);
 					
 					lua_getfield(L, n + 1, "z");
-					auto z = lua_tonumber(L, n + 2);
+					auto z = get_number(L, n + 2);
 					
 					return math::vector3d(x, y, z);
 				}
 				
-				auto x = lua_tonumber(L, n + 1);
-				auto y = lua_tonumber(L, n + 2);
-				auto z = lua_tonumber(L, n + 3);
+				auto x = get_number(L, n + 1);
+				auto y = get_number(L, n + 2);
+				auto z = get_number(L, n + 3);
 
 				return math::vector3d(x, y, z);
 			}
@@ -81,20 +81,20 @@ namespace engine
                 if (lua_istable(L, n + 1))
                 {
                     lua_getfield(L, n + 1, "r");
-                    auto r = lua_tonumber(L, n + 2);
+                    auto r = get_number(L, n + 2);
                     
                     lua_getfield(L, n + 1, "g");
-                    auto g = lua_tonumber(L, n + 2);
+                    auto g = get_number(L, n + 2);
                     
                     lua_getfield(L, n + 1, "b");
-                    auto b = lua_tonumber(L, n + 2);
+                    auto b = get_number(L, n + 2);
                     
                     return math::vector3d(r, g, b);
                 }
                 
-                auto r = lua_tonumber(L, n + 1);
-                auto g = lua_tonumber(L, n + 2);
-                auto b = lua_tonumber(L, n + 3);
+                auto r = get_number(L, n + 1);
+                auto g = get_number(L, n + 2);
+                auto b = get_number(L, n + 3);
                 
                 return math::vector3d(r, g, b);
             }
@@ -415,7 +415,7 @@ namespace engine
                 if (!obj)
                     return 0;
                 
-                float opacity = lua_tonumber(L, 2);
+                int opacity = get_integer(L, 2);
                 
                 obj->set_opacity(opacity);
                 
@@ -433,7 +433,7 @@ namespace engine
                 if (!obj)
                     return 0;
                 
-                lua_pushnumber(L, obj->get_opacity());
+                lua_pushinteger(L, obj->get_opacity());
                 
                 return 1;
             }
@@ -536,7 +536,7 @@ namespace engine
                 if (!obj)
                     return 0;
                 
-                auto alpha = lua_tonumber(L, 2);
+                auto alpha = get_number(L, 2);
                 obj->set_alpha(alpha);
                 
                 CLEAR_TOP(L);

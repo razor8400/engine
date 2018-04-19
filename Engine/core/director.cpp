@@ -62,6 +62,8 @@ namespace engine
 
 	void director::start()
     {
+		logger() << "[director] start";
+		m_renderer->dump_camera_settings();
         m_running = true;
     }
     
@@ -72,6 +74,7 @@ namespace engine
     
     void director::run_scene(scene* scene)
     {
+		logger() << "[director] run scene";
         if (m_scene)
         {
             m_scene->on_exit();
@@ -116,6 +119,8 @@ namespace engine
     
 	void director::handle_mouse_down(const math::vector2d& location)
 	{
+		logger() << "[director] mouse pressed:" << vector3d_to_string(location);
+
         for (auto it : m_input_handlers)
             it->on_mouse_up(location);
 	}
@@ -128,7 +133,9 @@ namespace engine
 
 	void director::handle_mouse_up(const math::vector2d& location)
 	{
-        for (auto it : m_input_handlers)
+		logger() << "[director] mouse released:" << vector3d_to_string(location);
+
+		for (auto it : m_input_handlers)
             it->on_mouse_up(location);
 	}
     

@@ -65,7 +65,7 @@ namespace engine
     
     void sprite::set_alpha(float alpha)
     {
-        set_opacity(alpha * 255);
+        set_opacity(int(alpha * 255));
     }
     
     float sprite::get_alpha() const

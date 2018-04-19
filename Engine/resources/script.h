@@ -15,10 +15,10 @@ namespace engine
         script(const std::string& name);
         ~script();
         
-        void run();
-        void stop();
         bool load(const unsigned char* data, size_t size) override;
-        
+		bool run();
+		void stop();
+
         void call_function(const std::string& function);
         
         template<class T>
