@@ -19,7 +19,9 @@ namespace engine
         
         lua_State* create_state();
         void close_state(lua_State* state);
+        
         void register_objects(lua_State* state);
+        void register_functions(lua_State* state);
         
         bool load_script(lua_State* state, const char* buffer, size_t size, const std::string& name);
         void call_method(lua_State* state, const std::string& class_name, const std::string& method);

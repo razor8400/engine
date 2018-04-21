@@ -9,6 +9,10 @@ namespace engine
         std::string get_file_name(const std::string& path);
         
         bool file_exist(const std::string& file_name);
+        
+        bool read_resource_file(const std::string& file_name, unsigned char** data, size_t* size);
+        bool read_resource_file(const std::string& file_name, std::vector<char>* buffer);
 		bool read_file(const std::string& file_name, unsigned char** data, size_t* size);
+        bool read_file(const std::string& file_name, std::vector<char>* buffer);
 	};
 }

@@ -73,6 +73,23 @@ namespace engine
         director::instance().handle_mouse_move(mouse);
 	}
 
+    void window_close_callback(GLFWwindow* window)
+    {
+        application::instance().on_terminated();
+    }
+    
+    void window_iconify_callback(GLFWwindow* window, int iconified)
+    {
+        if (iconified)
+        {
+            application::instance().on_enter_background();
+        }
+        else
+        {
+            application::instance().on_enter_foreground();
+        }
+    }
+    
 	window::window()
 	{
 
@@ -102,6 +119,9 @@ namespace engine
         
 		glfwSetCursorPosCallback(g_window, mouse_move_callback);
 		glfwSetMouseButtonCallback(g_window, mouse_button_callback);
+        
+        glfwSetWindowCloseCallback(g_window, window_close_callback);
+        glfwSetWindowIconifyCallback(g_window, window_iconify_callback);
 
 		return true;
 	}
@@ -116,7 +136,7 @@ namespace engine
             glfwPollEvents();
         }
         
-        application::instance().on_terminated();
+        terminate();
     }
     
     void window::terminate()

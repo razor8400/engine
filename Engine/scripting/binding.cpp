@@ -1,6 +1,7 @@
 #include "common.h"
 #include "scripting.h"
 
+#include "utils/file_utils.h"
 #include "components/component.h"
 
 #include "core/game_object.h"
@@ -17,6 +18,40 @@ namespace engine
 {
     namespace scripting
     {
+        namespace functions
+        {
+            int load_script(lua_State* L)
+            {
+                if (lua_isstring(L, 1))
+                {
+                    auto script = lua_tostring(L, 1);
+                    std::vector<char> data;
+                    
+                    logger() << "[scripting] load script:" << script;
+                    
+                    CLEAR_TOP(L)
+                    
+                    if (file_utils::read_resource_file(script, &data))
+                    {
+                        if (scripting::load_script(L, data.data(), data.size(), script))
+                            return 1;
+                    }
+                }
+                
+                return 0;
+            }
+            
+            int debug_log(lua_State* L)
+            {
+                if (lua_isstring(L, 1))
+                    logger() << "[lua] " << lua_tostring(L, 1);
+                
+                CLEAR_TOP(L)
+                
+                return 0;
+            }
+        }
+        
 		namespace vector
 		{
             void push(lua_State* L, float x, float y, float z)

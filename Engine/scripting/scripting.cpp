@@ -54,6 +54,17 @@ namespace engine
             register_class<engine::scene>(state, scripting::scene::functions);
         }
         
+        void register_functions(lua_State* state)
+        {
+            lua_pushcfunction(state, functions::load_script);
+            lua_setglobal(state, "load_script");
+            
+            lua_pushcfunction(state, functions::debug_log);
+            lua_setglobal(state, "debug_log");
+            
+            CLEAR_TOP(state);
+        }
+        
         void close_state(lua_State* state)
         {
             lua_close(state);
@@ -61,7 +72,7 @@ namespace engine
         
         bool load_script(lua_State* state, const char* buffer, size_t size, const std::string& name)
         {
-			if (luaL_loadbuffer(state, buffer, size, name.c_str()) || lua_pcall(state, 0, 0, 0))
+			if (luaL_loadbuffer(state, buffer, size, name.c_str()) || lua_pcall(state, 0, 1, 0))
 			{
 				logger() << "[scripting] load error:" << lua_tostring(state, -1);
 				return false;

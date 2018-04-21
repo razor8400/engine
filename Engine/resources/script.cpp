@@ -18,10 +18,13 @@ namespace engine
             auto lua = std::make_shared<script>(name);
 
             if (lua->load(buffer, size))
+            {
+                delete [] buffer;
                 return lua;
+            }
         }
 
-		logger() << "[script] load error:can't read file";
+        logger() << "[script] load error:can't read file:" << file_name;
                 
         return std::shared_ptr<script>();
     }
@@ -46,6 +49,7 @@ namespace engine
 
             scripting::create_class(m_state, m_name.c_str());
             scripting::register_objects(m_state);
+            scripting::register_functions(m_state);
             
             return scripting::load_script(m_state, m_buffer.data(), m_buffer.size(), m_name);
         }

@@ -15,10 +15,7 @@ namespace engine
         auto it = m_resources.find(path);
         
 		if (it != m_resources.end())
-		{
-			logger() << "[resources] get resource from cache:" << file_name;
 			return std::dynamic_pointer_cast<T>(it->second);
-		}
 		        
 		logger() << "[resources] load resource from file:" << path;
         auto resource = T::load_from_file(path);

@@ -44,7 +44,8 @@ namespace engine
     private:
 		float m_time_interval = 0;
 
-		scene* m_scene;
+        scene* m_scene = nullptr;
+        scene* m_next_scene = nullptr;
 
 		bool m_running = false;
 

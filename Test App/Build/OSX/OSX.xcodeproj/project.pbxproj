@@ -24,6 +24,8 @@
 		BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E92072254D00293C36 /* shaders_manager.cpp */; };
 		BF3D14F1207225C600293C36 /* renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14EF207225C600293C36 /* renderer.cpp */; };
 		BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14F320736F9200293C36 /* shader_program.cpp */; };
+		BF439CC120888616000B8A15 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF439CC020888616000B8A15 /* platform.cpp */; };
+		BF439CC420888653000B8A15 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF439CC320888653000B8A15 /* logger.cpp */; };
 		BF51ECA8206BAB15005A6240 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF51ECA7206BAB15005A6240 /* main.mm */; };
 		BF51ECA9206BABCF005A6240 /* director.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC66206B96FA005A6240 /* director.cpp */; };
 		BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC68206B96FA005A6240 /* scene.cpp */; };
@@ -94,6 +96,10 @@
 		BF3D14F320736F9200293C36 /* shader_program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader_program.cpp; sourceTree = "<group>"; };
 		BF3D14F5207376D400293C36 /* libgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgl.h; sourceTree = "<group>"; };
 		BF3D14F62073785C00293C36 /* libmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmath.h; sourceTree = "<group>"; };
+		BF439CBE208885ED000B8A15 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		BF439CC020888616000B8A15 /* platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
+		BF439CC220888653000B8A15 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
+		BF439CC320888653000B8A15 /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
 		BF51EC66206B96FA005A6240 /* director.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = director.cpp; sourceTree = "<group>"; };
 		BF51EC67206B96FA005A6240 /* director.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = director.h; sourceTree = "<group>"; };
 		BF51EC68206B96FA005A6240 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -216,6 +222,14 @@
 			path = renderer;
 			sourceTree = "<group>";
 		};
+		BF439CBF208885F8000B8A15 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				BF439CC020888616000B8A15 /* platform.cpp */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
 		BF51EC30206B8B76005A6240 = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +295,8 @@
 		BF51EC6E206B96FA005A6240 /* platform */ = {
 			isa = PBXGroup;
 			children = (
+				BF439CBF208885F8000B8A15 /* osx */,
+				BF439CBE208885ED000B8A15 /* platform.h */,
 				BFCB32252076100A001B5995 /* file_system */,
 				BFCB32212076100A001B5995 /* window */,
 			);
@@ -337,6 +353,8 @@
 		BFCB321A20754006001B5995 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				BF439CC320888653000B8A15 /* logger.cpp */,
+				BF439CC220888653000B8A15 /* logger.h */,
 				BFCB321B20754006001B5995 /* file_utils.h */,
 				BFCB321C20754006001B5995 /* file_utils.cpp */,
 				BFCB323420764BCB001B5995 /* image_utils.h */,
@@ -422,7 +440,7 @@
 		BF51EC31206B8B76005A6240 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Vladimir;
 				TargetAttributes = {
 					BF51EC9E206BAAF0005A6240 = {
@@ -457,6 +475,7 @@
 				BF868748208341FA00523939 /* script.cpp in Sources */,
 				BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */,
 				BFCB323220762B58001B5995 /* resources_manager.cpp in Sources */,
+				BF439CC120888616000B8A15 /* platform.cpp in Sources */,
 				BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */,
 				BFCB32292076100B001B5995 /* window.cpp in Sources */,
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
@@ -473,6 +492,7 @@
 				BF3D14F1207225C600293C36 /* renderer.cpp in Sources */,
 				BFCB321D20754006001B5995 /* file_utils.cpp in Sources */,
 				BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */,
+				BF439CC420888653000B8A15 /* logger.cpp in Sources */,
 				BF1910EC2086685F00BCE74B /* component.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
 				BFCB323620766319001B5995 /* image_utils.cpp in Sources */,
@@ -502,6 +522,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -509,6 +530,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -563,6 +585,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -570,6 +593,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

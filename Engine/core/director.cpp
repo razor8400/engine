@@ -75,21 +75,27 @@ namespace engine
     void director::run_scene(scene* scene)
     {
 		logger() << "[director] run scene";
-        if (m_scene)
-        {
-            m_scene->on_exit();
-            m_scene->release();
-        }
         
-        m_scene = scene;
-        m_scene->retain();
-        m_scene->on_enter();
-        
-        update(0);
+        m_next_scene = scene;
     }
     
     void director::main_loop()
     {
+        if (m_next_scene)
+        {
+            if (m_scene)
+            {
+                m_scene->on_exit();
+                m_scene->release();
+            }
+            
+            m_scene = m_next_scene;
+            m_scene->retain();
+            m_scene->on_enter();
+            
+            m_next_scene = nullptr;
+        }
+        
         if (m_running)
         {
             static auto last_update = std::chrono::high_resolution_clock::now();
@@ -119,8 +125,6 @@ namespace engine
     
 	void director::handle_mouse_down(const math::vector2d& location)
 	{
-		logger() << "[director] mouse pressed:" << vector3d_to_string(location);
-
         for (auto it : m_input_handlers)
             it->on_mouse_up(location);
 	}
@@ -133,8 +137,6 @@ namespace engine
 
 	void director::handle_mouse_up(const math::vector2d& location)
 	{
-		logger() << "[director] mouse released:" << vector3d_to_string(location);
-
 		for (auto it : m_input_handlers)
             it->on_mouse_up(location);
 	}

@@ -38,8 +38,26 @@ namespace engine
     
     void application::on_terminated()
     {
+        logger() << "[application] application terminated";
+        
         if (m_delegate)
             m_delegate->application_terminated(this);
+    }
+    
+    void application::on_enter_background()
+    {
+        logger() << "[application] application enter background";
+        
+        if (m_delegate)
+            m_delegate->application_enter_background(this);
+    }
+    
+    void application::on_enter_foreground()
+    {
+        logger() << "[application] application enter foreground";
+        
+        if (m_delegate)
+            m_delegate->application_enter_foreground(this);
     }
     
     bool application::create_context_window()
@@ -79,10 +97,9 @@ namespace engine
     
     void application::shutdown()
     {
-        gl::clear_buffers();
+        logger() << "[application] shutdown";
         
-        if (m_window)
-            m_window->terminate();
+        gl::clear_buffers();
     }
 }
 

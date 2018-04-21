@@ -42,9 +42,9 @@ namespace engine
 	void game_object::draw(const math::mat4& world)
 	{
 		render(world);
-        
-		for (auto obj : m_children)
-			obj->draw(world);
+    
+        for (auto obj : m_children)
+            obj->draw(world);
     }
     
     void game_object::render(const math::mat4& world)

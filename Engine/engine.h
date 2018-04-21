@@ -13,7 +13,7 @@
 #include "resources/texture2d.h"
 #include "resources/script.h"
 
-#include "utils/file_utils.h"
+#include "utils/logger.h"
 
 #include "interface/app_delegate.h"
 #include "interface/input_delegate.h"

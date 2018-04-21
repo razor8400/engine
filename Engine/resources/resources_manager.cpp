@@ -17,6 +17,7 @@ namespace engine
     
     void resources_manager::clear_cache()
     {
+        logger() << "[resources_manager] clear cache";
         m_resources.clear();
     }
 }

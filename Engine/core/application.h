@@ -17,6 +17,8 @@ namespace engine
 
 		void on_launched();
         void on_terminated();
+        void on_enter_background();
+        void on_enter_foreground();
         
         bool create_context_window();
 		void run();

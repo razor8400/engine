@@ -11,6 +11,7 @@ namespace gl
 {
     bool init_gl();
 
+    void enable_depth();
 	void generate_buffers();
     void clear_buffers();
     void compile_shaders();

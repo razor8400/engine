@@ -27,9 +27,13 @@ namespace gl
         if (glewInit() != GLEW_OK)
             return false;
         
-        glEnable(GL_BLEND);
-        
         return true;
+    }
+    
+    void enable_depth()
+    {
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
     }
 
 	void generate_buffers()
@@ -163,6 +167,7 @@ namespace gl
         
         glEnableVertexAttribArray(vertex_attribute::position);
         glEnableVertexAttribArray(vertex_attribute::texture_position);
+        glEnable(GL_BLEND);
         
         GLuint index_buffer;
         glGenBuffers(1, &index_buffer);
@@ -182,6 +187,9 @@ namespace gl
 
         glDisableVertexAttribArray(vertex_attribute::position);
         glDisableVertexAttribArray(vertex_attribute::texture_position);
+        glDisable(GL_BLEND);
+        
+        glDeleteBuffers(1, &index_buffer);
     }
     
     void delete_texture(GLuint texture)

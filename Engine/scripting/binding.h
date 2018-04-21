@@ -6,6 +6,12 @@ namespace engine
 {
     namespace scripting
     {
+        namespace functions
+        {
+            int load_script(lua_State* L);
+            int debug_log(lua_State* L);
+        }
+        
         namespace vector
         {
             void push(lua_State* L, float x, float y, float z);

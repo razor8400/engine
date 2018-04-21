@@ -20,7 +20,7 @@ namespace engine
                 return texture;
         }
         
-		logger() << "[texture2d] load error:can" << data.error;
+		logger() << "[texture2d] load error:" << data.error;
         
         return std::shared_ptr<texture2d>();
     }
