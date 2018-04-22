@@ -6,6 +6,7 @@ local rows = 10
 local cell = 64
 
 local field = match3field.new(colls, rows, cell)
+local bounds = { -field:size().x / 2, - field:size().y / 2, field:size().x / 2, field:size().y / 2 }
 
 local function get_cell_texture(x, y)
 	if math.fmod(x + y, 2) == 0 then

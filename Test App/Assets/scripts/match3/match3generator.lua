@@ -21,7 +21,7 @@ function elements_generator:generate_element()
 
 	for k, v in pairs(self.config) do
 		if r <= v then
-			return match3element.new(k)
+			return match3element.new(k, element_layer.gameplay)
 		end
 		r = r - v
 	end

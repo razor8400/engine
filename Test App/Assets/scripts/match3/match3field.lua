@@ -29,8 +29,8 @@ end
 function match3field:generate_field()
 	match3match:load_config()
 
-	for x = 1, self.colls do
-		for y = 1, self.rows do
+	for x = self.colls, 1, -1 do
+		for y = self.rows, 1, -1 do
 			local cell = assert(self:get_cell(x, y))
 			local element = nil
 
@@ -40,7 +40,6 @@ function match3field:generate_field()
 				end
 				element = assert(match3generator:generate_element())
 				cell:add_element(element)
-				local match = match3match:check_match(self, x, y)
 			until match3match:check_match(self, x, y) == nil
 		end
 	end

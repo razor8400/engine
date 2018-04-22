@@ -15,6 +15,24 @@ function match3cell:element_index(element)
 	return -1
 end
 
+function match3cell:get_element_at(layer)
+	for k, v in pairs(self.elements) do
+		if v.element_layer == layer then
+			return v
+		end
+	end
+	return nil
+end
+
+function match3cell:find_element(family, layer)
+	for k, v in pairs(self.elements) do
+		if v.element_type == family and v.element_layer == layer then
+			return v
+		end
+	end
+	return nil
+end
+
 function match3cell:add_element(element)
 	element.cell = self
 	table.insert(self.elements, element)

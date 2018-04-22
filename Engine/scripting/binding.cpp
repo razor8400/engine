@@ -46,6 +46,9 @@ namespace engine
                 if (lua_isstring(L, 1))
                     logger() << "[lua] " << lua_tostring(L, 1);
                 
+                if (lua_isnil(L, 1))
+                    logger() << "[lua] nil";
+                
                 CLEAR_TOP(L)
                 
                 return 0;

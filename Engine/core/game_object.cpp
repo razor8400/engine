@@ -141,6 +141,12 @@ namespace engine
         m_components.erase(component);
     }
     
+    math::vector3d game_object::transform_point(const math::vector3d& v3) const
+    {
+        math::vector4d v4 = math::vector4d(v3) * m_transform;
+        return math::vector3d(v4.x, v4.y, v4.z);
+    }
+    
     math::mat4 game_object::transfrom(const math::mat4& parent) const
     {
         auto anchor = m_size * m_anchor;

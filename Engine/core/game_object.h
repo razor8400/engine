@@ -29,6 +29,8 @@ namespace engine
         void remove_component(component* component);
 		
 		void mark_dirty() { m_update_transform = true; }
+        
+        math::vector3d transform_point(const math::vector3d& v3) const;
 
         math::mat4 transfrom(const math::mat4& parent) const;
 

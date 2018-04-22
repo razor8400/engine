@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mat4.h"
+#include "vector3d.h"
 
 namespace math
 {
@@ -10,6 +11,8 @@ namespace math
     
         vector4d();
         vector4d(float x1, float y1, float z1, float w1);
+        vector4d(const vector3d& v3);
+        
         vector4d operator*(const mat4& m4) const;
         
         static const vector4d one;
