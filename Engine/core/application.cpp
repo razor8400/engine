@@ -101,5 +101,12 @@ namespace engine
         
         gl::clear_buffers();
     }
+    
+    math::vector2d application::get_mouse_location() const
+    {
+        if (m_window)
+            return m_window->get_mouse_location();
+        return math::vector2d::zero;
+    }
 }
 

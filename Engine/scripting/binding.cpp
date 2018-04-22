@@ -137,6 +137,24 @@ namespace engine
                 return math::vector3d(r, g, b);
             }
 		}
+        
+        namespace game
+        {
+            int get_mouse_location(lua_State* L)
+            {
+                return 1;
+            }
+            
+            int add_touch_listener(lua_State* L)
+            {
+                return 0;
+            }
+            
+            int remove_touch_listener(lua_State* L)
+            {
+                return 0;
+            }
+        }
 
         namespace game_object
         {

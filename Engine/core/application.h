@@ -24,6 +24,7 @@ namespace engine
 		void run();
         void shutdown();
         const math::vector2d& get_win_size() const { return m_win_size; }
+        math::vector2d get_mouse_location() const;
 	private:
         application() {};
         

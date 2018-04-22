@@ -16,4 +16,3 @@
 #include "utils/logger.h"
 
 #include "interface/app_delegate.h"
-#include "interface/input_delegate.h"

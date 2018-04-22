@@ -19,6 +19,21 @@ namespace engine
             math::vector3d get(lua_State* L, int n);
         }
         
+        namespace game
+        {
+            int get_mouse_location(lua_State* L);
+            int add_touch_listener(lua_State* L);
+            int remove_touch_listener(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "get_mouse_location", get_mouse_location },
+                { "add_touch_listener", add_touch_listener },
+                { "remove_touch_listener", remove_touch_listener },
+                { NULL, NULL, }
+            };
+        }
+        
         namespace game_object
         {
             int create(lua_State* L);

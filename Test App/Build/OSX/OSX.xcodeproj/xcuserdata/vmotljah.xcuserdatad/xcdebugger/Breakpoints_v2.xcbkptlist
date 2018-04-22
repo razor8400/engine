@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/core/application.cpp"
-            timestampString = "546016490.974411"
+            timestampString = "546099318.414404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/core/application.cpp"
-            timestampString = "546016490.974787"
+            timestampString = "546099318.41449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
@@ -74,13 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/platform/window/glfw3/window.cpp"
-            timestampString = "546016490.974877"
+            timestampString = "546099318.414569"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "window::process()"
-            landmarkType = "7">
+            startingLineNumber = "98"
+            endingLineNumber = "98">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -208,6 +206,22 @@
             startingLineNumber = "64"
             endingLineNumber = "64"
             landmarkName = "read_file(const std::string&amp; file_name, unsigned char** data, size_t* size)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/platform/window/glfw3/window.cpp"
+            timestampString = "546099318.414989"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "window_iconify_callback(GLFWwindow* window, int iconified)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

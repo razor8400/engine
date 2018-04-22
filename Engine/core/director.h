@@ -1,10 +1,7 @@
 #pragma once
 
-#include "common.h"
-
 namespace engine
 {
-    class input_delegate;
 	class renderer;
     
     class director
@@ -27,13 +24,6 @@ namespace engine
         void run_scene(scene* scene);
         
 		void main_loop();
-		
-        void handle_mouse_down(const math::vector2d& location);
-		void handle_mouse_move(const math::vector2d& location);
-		void handle_mouse_up(const math::vector2d& location);
-        
-        void add_input_delegate(input_delegate* delegate);
-        void remove_input_delegate(input_delegate* delegate);
         
         scene* running_scene() const { return m_scene; }
 	private:
@@ -49,7 +39,6 @@ namespace engine
 
 		bool m_running = false;
 
-        std::vector<input_delegate*> m_input_handlers;
 		std::unique_ptr<renderer> m_renderer;
     };
 }

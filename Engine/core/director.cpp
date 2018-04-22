@@ -10,7 +10,6 @@
 
 #include "scene.h"
 #include "pool_manager.h"
-#include "interface/input_delegate.h"
 
 namespace engine
 {
@@ -121,36 +120,5 @@ namespace engine
         }
         
 		pool_manager::instance().update();
-    }
-    
-	void director::handle_mouse_down(const math::vector2d& location)
-	{
-        for (auto it : m_input_handlers)
-            it->on_mouse_up(location);
-	}
-
-	void director::handle_mouse_move(const math::vector2d& location)
-	{
-        for (auto it : m_input_handlers)
-            it->on_mouse_move(location);
-	}
-
-	void director::handle_mouse_up(const math::vector2d& location)
-	{
-		for (auto it : m_input_handlers)
-            it->on_mouse_up(location);
-	}
-    
-    void director::add_input_delegate(input_delegate* delegate)
-    {
-        m_input_handlers.push_back(delegate);
-    }
-    
-    void director::remove_input_delegate(input_delegate* delegate)
-    {
-        auto it = std::find(m_input_handlers.begin(), m_input_handlers.end(), delegate);
-        
-        if (it != m_input_handlers.end())
-            m_input_handlers.erase(it);
     }
 }
