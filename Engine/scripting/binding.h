@@ -18,6 +18,25 @@ namespace engine
             int create(lua_State* L, float x, float y, float z);
             math::vector3d get(lua_State* L, int n);
         }
+
+		namespace touch_listener
+		{
+			int create(lua_State* L);
+			int destroy(lua_State* L);
+			int on_touch_began(lua_State* L);
+			int on_touch_moved(lua_State* L);
+			int on_touch_ended(lua_State* L);
+
+			static const luaL_Reg functions[] =
+			{
+				{ "create", create },
+				{ "__gc", destroy },
+				{ "on_touch_began", on_touch_began },
+				{ "on_touch_moved", on_touch_moved },
+				{ "on_touch_ended", on_touch_ended },
+				{ NULL, NULL, }
+			};
+		}
         
         namespace game
         {

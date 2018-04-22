@@ -1,5 +1,5 @@
 #include "common.h"
-#include "platform.h"
+#include "platform/platform.h"
 
 namespace engine
 {

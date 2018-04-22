@@ -4,6 +4,8 @@
 
 namespace engine
 {
+	IMPLEMENT_TYPE_INFO(touch_listener)
+
     touch_listener::~touch_listener()
     {
         touch_dispatcher::instance().remove_touch_listener(this);

@@ -4,6 +4,10 @@
 #include "utils/file_utils.h"
 #include "components/component.h"
 
+#include "core/application.h"
+#include "core/input/touch_listener.h"
+#include "core/input/touch_dispatcher.h"
+#include "core/director.h"
 #include "core/game_object.h"
 #include "core/scene.h"
 
@@ -54,7 +58,7 @@ namespace engine
                 return 0;
             }
         }
-        
+
 		namespace vector
 		{
             void push(lua_State* L, float x, float y, float z)
@@ -137,21 +141,118 @@ namespace engine
                 return math::vector3d(r, g, b);
             }
 		}
+
+		namespace touch_listener
+		{
+			int create(lua_State* L)
+			{
+				return create_ref<engine::touch_listener>(L);
+			}
+
+			int destroy(lua_State* L)
+			{
+				return destroy_ref<engine::touch_listener>(L);
+			}
+
+			int on_touch_began(lua_State* L)
+			{
+				CHECK_TOP(L, 2);
+
+				auto listener = scripting::get<engine::touch_listener>(L, 1);
+				auto handler = lua_tocfunction(L, 2);
+
+				if (listener)
+				{
+					listener->touch_began = [handler, L]()
+					{
+						if (handler)
+						{
+							handler(L);
+							return true;
+						}
+
+						return false;
+					};
+				}
+				
+				return 0;
+			}
+
+			int on_touch_moved(lua_State* L)
+			{
+				CHECK_TOP(L, 2);
+
+				auto listener = scripting::get<engine::touch_listener>(L, 1);
+				auto handler = lua_tocfunction(L, 2);
+
+				if (listener)
+				{
+					listener->touch_moved = [handler, L]()
+					{
+						if (handler)
+							handler(L);
+					};
+				}
+
+				return 0;
+			}
+
+			int on_touch_ended(lua_State* L)
+			{
+				CHECK_TOP(L, 2);
+
+				auto listener = scripting::get<engine::touch_listener>(L, 1);
+				auto handler = lua_tocfunction(L, 2);
+
+				if (listener)
+				{
+					listener->touch_ended = [handler, L]()
+					{
+						if (handler)
+							handler(L);
+					};
+				}
+
+				return 0;
+			}
+		}
         
         namespace game
         {
             int get_mouse_location(lua_State* L)
             {
+				auto location = application::instance().get_mouse_location();
+
+				lua_newtable(L);
+				lua_pushnumber(L, location.x);
+				lua_setfield(L, -2, "x");
+				lua_pushnumber(L, location.y);
+				lua_setfield(L, -2, "y");
+
                 return 1;
             }
             
             int add_touch_listener(lua_State* L)
             {
+				CHECK_TOP(L, 2);
+
+				auto listener = scripting::get<engine::touch_listener>(L, 2);
+
+				if (listener)
+					touch_dispatcher::instance().add_touch_listener(listener);
+
                 return 0;
             }
             
             int remove_touch_listener(lua_State* L)
             {
+				CHECK_TOP(L, 2);
+
+				auto listener = scripting::get<engine::touch_listener>(L, 2);
+
+				if (listener)
+					touch_dispatcher::instance().remove_touch_listener(listener);
+
                 return 0;
             }
         }

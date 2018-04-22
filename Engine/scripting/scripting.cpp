@@ -4,6 +4,7 @@
 
 #include "components/component.h"
 
+#include "core/input/touch_listener.h"
 #include "core/game_object.h"
 #include "core/scene.h"
 
@@ -52,10 +53,17 @@ namespace engine
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
             register_class<engine::scene>(state, scripting::scene::functions);
+			register_class<engine::touch_listener>(state, scripting::touch_listener::functions);
         }
         
         void register_functions(lua_State* state)
         {
+			luaL_newmetatable(state, "game");
+			luaL_setfuncs(state, scripting::game::functions, NULL);
+			lua_setglobal(state, "game");
+
+			CLEAR_TOP(state);
+
             lua_pushcfunction(state, functions::load_script);
             lua_setglobal(state, "load_script");
             

@@ -1,12 +1,14 @@
 #pragma once
 
-#include "ref.h"
+#include "core/ref.h"
 
 namespace engine
 {
     class touch_listener : public ref
     {
     public:
+		DECLARE_CLASS;
+
         ~touch_listener();
         
         bool on_touch_began();

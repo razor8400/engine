@@ -60,8 +60,11 @@
     <Filter Include="engine\2d">
       <UniqueIdentifier>{c8673621-45e8-48f2-a676-5eda910e875f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\platform\windows">
+    <Filter Include="engine\platform\win32">
       <UniqueIdentifier>{c7cbc21f-6103-4115-b693-9f2ec4af9577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\core\input">
+      <UniqueIdentifier>{52b55a80-30c3-4217-977a-e97ef2439244}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +155,14 @@
     <ClCompile Include="..\..\..\..\Engine\utils\logger.cpp">
       <Filter>engine\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\platform\platform.cpp">
-      <Filter>engine\platform\windows</Filter>
+    <ClCompile Include="..\..\..\..\Engine\platform\win32\platform.cpp">
+      <Filter>engine\platform\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\core\input\touch_dispatcher.cpp">
+      <Filter>engine\core\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\core\input\touch_listener.cpp">
+      <Filter>engine\core\input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +179,6 @@
       <Filter>engine\core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\interface\app_delegate.h">
-      <Filter>engine\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\interface\input_delegate.h">
       <Filter>engine\interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\math\mat4.h">
@@ -273,6 +279,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\platform\platform.h">
       <Filter>engine\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\core\input\touch_dispatcher.h">
+      <Filter>engine\core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\core\input\touch_listener.h">
+      <Filter>engine\core\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

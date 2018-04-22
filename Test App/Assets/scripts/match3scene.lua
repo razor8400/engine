@@ -33,6 +33,14 @@ local function create_back_ground()
 	return obj
 end
 
+function on_touch_began()
+	debug_log('on_touch_began')
+end
+
+function on_touch_ended()
+	debug_log('on_touch_ended')
+end
+
 function match3scene:start()
 	local background = create_back_ground()
 
@@ -49,6 +57,13 @@ function match3scene:start()
 			end
 		end
 	end
+	
+	local listener = touch_listener.create()
+		
+	listener:on_touch_began(on_touch_began)
+	listener:on_touch_ended(on_touch_ended)
+	
+	game:add_touch_listener(listener)
 
 	self.obj:add_child(background)
 end
@@ -61,14 +76,3 @@ function match3scene:stop()
 
 end
 
-function match3scene:mouse_down()
-
-end
-
-function match3scene:mouse_move()
-
-end
-
-function match3scene:mouse_up()
-
-end
