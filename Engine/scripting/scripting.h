@@ -13,9 +13,9 @@ namespace engine
         static const char* update = "update";
         static const char* stop = "stop";
         
-        static const char* mouse_down = "mouse_down";
-        static const char* mouse_move = "mouse_move";
-        static const char* mouse_up = "mouse_up";
+        static const char* on_touch_began = "on_touch_began";
+        static const char* on_touch_moved = "on_touch_moved";
+        static const char* on_touch_ended = "on_touch_ended";
         
         lua_State* create_state();
         void close_state(lua_State* state);
@@ -24,7 +24,10 @@ namespace engine
         void register_functions(lua_State* state);
         
         bool load_script(lua_State* state, const char* buffer, size_t size, const std::string& name);
+        
         void call_method(lua_State* state, const std::string& class_name, const std::string& method);
+        bool call_boolean_method(lua_State* state, const std::string& class_name, const std::string& method);
+        
         void create_class(lua_State* state, const std::string& class_name);
         
         template<class T>

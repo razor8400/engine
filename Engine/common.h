@@ -31,6 +31,8 @@ namespace engine
     class texture2d;
     class script;
     
+    class touch_listener;
+    
     typedef std::shared_ptr<resource> resource_ptr;
     typedef std::shared_ptr<texture2d> texture2d_ptr;
     typedef std::shared_ptr<script> script_ptr;

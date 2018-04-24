@@ -164,6 +164,9 @@
     <ClCompile Include="..\..\..\..\Engine\core\input\touch_listener.cpp">
       <Filter>engine\core\input</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\math\rect.cpp">
+      <Filter>engine\math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h">
@@ -285,6 +288,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\core\input\touch_listener.h">
       <Filter>engine\core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\math\rect.h">
+      <Filter>engine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\math\libmath.h">
+      <Filter>engine\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

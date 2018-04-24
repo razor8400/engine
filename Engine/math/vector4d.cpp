@@ -2,7 +2,8 @@
 
 namespace math
 {
-    const vector4d vector4d::one = vector4d(1, 1, 1, 1);
+	const vector4d vector4d::zero = vector4d();
+	const vector4d vector4d::one = vector4d(1, 1, 1, 1);
     
     vector4d::vector4d() : x(0), y(0), z(0), w(0)
     {
@@ -13,22 +14,42 @@ namespace math
     {
 
     }
-    
-    vector4d::vector4d(const vector3d& v3) : x(v3.x), y(v3.y), z(v3.z)
-    {
         
-    }
+	vector4d vector4d::operator+(const vector4d& v4) const
+	{
+		return vector4d(x + v4.x, y + v4.y, z + v4.z, w + v4.w);
+	}
 
-    vector4d vector4d::operator*(const mat4& mat) const
+	vector4d vector4d::operator-(const vector4d& v4) const
+	{
+		return vector4d(x - v4.x, y - v4.y, z - v4.z, w - v4.w);
+	}
+	
+	vector4d vector4d::operator*(const vector4d& v4) const
+	{
+		return vector4d(x * v4.x, y * v4.y, z * v4.z, w * v4.w);
+	}
+	
+	vector4d vector4d::operator*(float number) const
+	{
+		return vector4d(x * number, y * number, z * number, w * number);
+	}
+
+	vector4d vector4d::operator/(float number) const
+	{
+		return vector4d(x / number, y / number, z / number, w / number);
+	}
+
+    vector4d vector4d::operator*(const mat4& m4) const
     {
-        vector4d v4;
+        vector4d result;
         
-        v4.x = mat[0] * x + mat[1] * y + mat[2] * z + mat[3] * w;
-        v4.y = mat[4] * x + mat[5] * y + mat[6] * z + mat[7] * w;
-        v4.z = mat[8] * x + mat[9] * y + mat[10] * z + mat[11] * w;
-        v4.w = mat[12] * x + mat[13] * y + mat[14] * z + mat[15] * w;
+		result.x = x * m4[0] + y * m4[4] + z * m4[8] + w * m4[12];
+		result.y = x * m4[1] + y * m4[5] + z * m4[9] + w * m4[13];
+		result.z = x * m4[2] + y * m4[6] + z * m4[10] + w * m4[14];
+		result.w = x * m4[3] + y * m4[7] + z * m4[11] + w * m4[15];
         
-        return v4;
+        return result;
     }
 }
 

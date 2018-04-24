@@ -1,6 +1,7 @@
 #include "common.h"
 
 #include "components/component.h"
+#include "director.h"
 #include "game_object.h"
 
 namespace engine
@@ -39,22 +40,24 @@ namespace engine
         });
 	}
 
-	void game_object::draw(const math::mat4& world)
+	void game_object::draw(const math::mat4& parent)
 	{
-		render(world);
+        auto model_view_transform = transform(parent);
     
         for (auto obj : m_children)
-            obj->draw(world);
+            obj->draw(model_view_transform);
+        
+        render(model_view_transform);
     }
     
-    void game_object::render(const math::mat4& world)
+    void game_object::render(const math::mat4& transform)
     {
 #if DEBUG_DRAW
         auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
         
         if (program)
-            program->use(transfrom(world), math::vector4d::one);
-
+            program->use(transform, math::vector4d::one);
+        
 		gl::draw_rect(0, 0, m_size.x, m_size.y);
 #endif
     }
@@ -81,6 +84,16 @@ namespace engine
             obj->on_exit();
         
         m_active = false;
+    }
+    
+    bool game_object::allow_touch(const math::vector3d& location) const
+    {
+        auto world = director::instance().convert_screen_to_world(location);
+		auto bbox = bounding_box();
+		auto bl = bbox.bottom_left();
+		auto tr = bbox.top_right();
+        
+        return bbox.contains(math::vector2d(world.x, world.y));
     }
     
 	void game_object::add_child(game_object* obj)
@@ -140,29 +153,29 @@ namespace engine
         
         m_components.erase(component);
     }
-    
-    math::vector3d game_object::transform_point(const math::vector3d& v3) const
+        
+	math::rect game_object::bounding_box() const
+	{
+		math::rect bbox(0, 0, m_size.x, m_size.y);
+		return bbox * m_transform;
+	}
+
+	math::mat4 game_object::transform(const math::mat4& parent) const
     {
-        math::vector4d v4 = math::vector4d(v3) * m_transform;
-        return math::vector3d(v4.x, v4.y, v4.z);
-    }
-    
-    math::mat4 game_object::transfrom(const math::mat4& parent) const
-    {
-        auto anchor = m_size * m_anchor;
-        return parent * world_transform() * math::mat4::translate(-anchor.x, -anchor.y, -anchor.z);
+        return parent * m_transform;
     }
 
 	math::mat4 game_object::parent_transform() const
 	{
-		auto position = math::mat4::translate(m_position.x, m_position.y, m_position.z);
+        auto anchor = m_size * m_anchor;
+		auto position = math::mat4::translate(m_position.x + anchor.x, m_position.y + anchor.y, m_position.z + anchor.z);
 		auto rotation = math::mat4::rotate(math::vector3d::right, m_rotation.x)
 			* math::mat4::rotate(math::vector3d::up, m_rotation.y)
 			* math::mat4::rotate(math::vector3d(0, 0, 1), m_rotation.z);
 
 		auto scale = math::mat4::scale(m_scale.x, m_scale.y, m_scale.z);
         
-        return position * rotation * scale;
+        return position * rotation * scale * math::mat4::translate(-anchor.x, -anchor.y, -anchor.z);
     }
 
 	math::mat4 game_object::world_transform() const
