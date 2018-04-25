@@ -36,7 +36,7 @@ end
 function match3scene:on_touch_began()
 	local mouse = game:get_mouse_location()
 	debug_log(mouse.x .. ',' .. mouse.y)
-	return self.obj:handle_click(mouse)
+	return self.collider:on_click(mouse)
 end
 
 function match3scene:on_touch_ended()
@@ -64,13 +64,16 @@ function match3scene:start()
 		end
 	end
 
-	local win_size = game:get_win_size()
 	local size = background:get_size()
+	local collider = box_collider2d.create(size.x, size.y)
+
+	self.collider = collider
 
 	self.obj:set_size(size)
 	self.obj:set_position(-size.x / 2, -size.y / 2)
 	self.obj:add_child(background)
-	self.obj:set_scale(0.5, 0.5)
+	self.obj:add_component(collider)
+	--self.obj:set_scale(0.5, 0.5)
 	self.obj:set_rotation(0, 0, 45)
 end
 

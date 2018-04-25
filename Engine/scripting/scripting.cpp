@@ -3,6 +3,7 @@
 #include "binding.h"
 
 #include "components/component.h"
+#include "components/box_collider2d.h"
 
 #include "core/game_object.h"
 #include "core/scene.h"
@@ -52,6 +53,7 @@ namespace engine
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
             register_class<engine::scene>(state, scripting::scene::functions);
+            register_class<engine::box_collider2d>(state, scripting::box_collider2d::functions);
         }
         
         void register_functions(lua_State* state)

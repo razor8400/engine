@@ -3,6 +3,7 @@
 
 #include "utils/file_utils.h"
 #include "components/component.h"
+#include "components/box_collider2d.h"
 
 #include "core/application.h"
 #include "core/director.h"
@@ -243,7 +244,7 @@ namespace engine
                 CHECK_TOP(L, 2);
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
-                auto component = scripting::get<engine::component>(L, 1);
+                auto component = scripting::get<engine::component>(L, 2);
                 
                 if (obj && component)
                     obj->add_component(component);
@@ -290,6 +291,8 @@ namespace engine
 				CHECK_TOP(L, 1);
 
 				auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                CLEAR_TOP(L);
 
 				if (obj)
 				{
@@ -324,6 +327,8 @@ namespace engine
 
 				if (!obj)
 					return 0;
+                
+                CLEAR_TOP(L);
 
 				auto position = obj->get_position();
 
@@ -348,10 +353,14 @@ namespace engine
 
 			int get_rotation(lua_State* L)
 			{
+                CHECK_TOP(L, 1);
+                
 				auto obj = scripting::get<engine::game_object>(L, 1);
 
 				if (!obj)
 					return 0;
+                
+                CLEAR_TOP(L);
 
 				auto rotation = obj->get_rotation();
 
@@ -376,10 +385,14 @@ namespace engine
 
 			int get_scale(lua_State* L)
 			{
+                CHECK_TOP(L, 1);
+                
 				auto obj = scripting::get<engine::game_object>(L, 1);
 
 				if (!obj)
 					return 0;
+                
+                CLEAR_TOP(L);
 
 				auto scale = obj->get_scale();
 
@@ -404,7 +417,11 @@ namespace engine
 
 			int get_size(lua_State* L)
 			{
+                CHECK_TOP(L, 1);
+                
 				auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                CLEAR_TOP(L);
 
 				if (!obj)
 					return 0;
@@ -435,6 +452,8 @@ namespace engine
                 CHECK_TOP(L, 1);
                 
 				auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                CLEAR_TOP(L);
 
 				if (!obj)
 					return 0;
@@ -468,6 +487,8 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
+                CLEAR_TOP(L);
+                
                 if (!obj)
                     return 0;
                 
@@ -500,6 +521,8 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
+                CLEAR_TOP(L);
+                
                 if (!obj)
                     return 0;
                 
@@ -513,6 +536,8 @@ namespace engine
                 CHECK_TOP(L, 1);
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                CLEAR_TOP(L);
                 
                 if (!obj)
                     return 0;
@@ -528,29 +553,12 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
+                CLEAR_TOP(L);
+                
                 if (!obj)
                     return 0;
                 
                 push_ref<engine::game_object>(L, obj->get_parent());
-                
-                return 1;
-            }
-            
-            int handle_click(lua_State* L)
-            {
-                CHECK_TOP(L, 2);
-                
-                auto obj = scripting::get<engine::game_object>(L, 1);
-                
-                if (!obj)
-                    return 0;
-                
-                auto location = vector::get(L, 1);
-                auto result = obj->allow_touch(location);
-                
-                CLEAR_TOP(L);
-                
-                lua_pushboolean(L, result);
                 
                 return 1;
             }
@@ -563,6 +571,9 @@ namespace engine
                 if (lua_isstring(L, 1))
                 {
                     auto texture = lua_tostring(L, 1);
+                    
+                    CLEAR_TOP(L);
+                    
                     return game_object::create<engine::sprite>(L, texture);
                 } 
                 
@@ -590,6 +601,8 @@ namespace engine
                 CHECK_TOP(L, 1);
 
                 auto obj = scripting::get<engine::sprite>(L, 1);
+                
+                CLEAR_TOP(L);
                 
                 if (!obj)
                     return 0;
@@ -639,6 +652,8 @@ namespace engine
                 
                 auto obj = scripting::get<engine::sprite>(L, 1);
                 
+                CLEAR_TOP(L);
+                
                 if (!obj)
                     return 0;
                 
@@ -655,6 +670,47 @@ namespace engine
             int create(lua_State* L)
             {
                 return game_object::create<engine::game_object>(L);
+            }
+        }
+        
+        namespace box_collider2d
+        {
+            int create(lua_State* L)
+            {
+                auto w = lua_tonumber(L, 1);
+                auto h = lua_tonumber(L, 2);
+                
+                CLEAR_TOP(L);
+                
+                auto collider = ref::create<engine::box_collider2d>();
+                
+                collider->set_size(math::vector2d(w, h));
+                push_ref(L, collider);
+                
+                return 1;
+            }
+            
+            int destroy(lua_State* L)
+            {
+                return destroy_ref<engine::box_collider2d>(L);
+            }
+            
+            int on_click(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto collider = get<engine::box_collider2d>(L, 1);
+                auto mouse = vector::get(L, 1);
+                
+                CLEAR_TOP(L);
+                
+                if (collider)
+                {
+                    auto result = collider->on_click(math::vector2d(mouse.x, mouse.y));
+                    lua_pushboolean(L, result);
+                }
+                
+                return 1;
             }
         }
     }

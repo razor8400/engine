@@ -14,7 +14,6 @@
 		BF0D23A82084030600542952 /* scriptable_component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23A72084030600542952 /* scriptable_component.cpp */; };
 		BF0D23AA20840B8300542952 /* scripting.inl in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23A920840B8300542952 /* scripting.inl */; };
 		BF1910EA2086648C00BCE74B /* binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23AB2084924600542952 /* binding.cpp */; };
-		BF1910EC2086685F00BCE74B /* component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1910EB2086685F00BCE74B /* component.cpp */; };
 		BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC80206B981C005A6240 /* my_app_delegate.cpp */; };
 		BF3D14D8206BF8E700293C36 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */; };
 		BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14DA206CF33500293C36 /* mat4.cpp */; };
@@ -37,6 +36,8 @@
 		BF51ECAF206BAC28005A6240 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC84206B993A005A6240 /* OpenGL.framework */; };
 		BF51ECB0206BAC3D005A6240 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */; };
 		BF868748208341FA00523939 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF868746208341FA00523939 /* script.cpp */; };
+		BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D520906CF000C39C31 /* rect.cpp */; };
+		BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */; };
 		BFCB321D20754006001B5995 /* file_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB321C20754006001B5995 /* file_utils.cpp */; };
 		BFCB321E20754100001B5995 /* Assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFCB321220753755001B5995 /* Assets */; };
 		BFCB32292076100B001B5995 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB32232076100A001B5995 /* window.cpp */; };
@@ -74,7 +75,6 @@
 		BF0D23A920840B8300542952 /* scripting.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = scripting.inl; sourceTree = "<group>"; };
 		BF0D23AB2084924600542952 /* binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = binding.cpp; sourceTree = "<group>"; };
 		BF1910E9208662BB00BCE74B /* binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = binding.h; sourceTree = "<group>"; };
-		BF1910EB2086685F00BCE74B /* component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = component.cpp; sourceTree = "<group>"; };
 		BF2D94F3208208C1004F98C0 /* resources_manager.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources_manager.inl; sourceTree = "<group>"; };
 		BF2DD50E208614E800BB2734 /* type_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = type_info.h; sourceTree = "<group>"; };
 		BF3D14CF206BD2B600293C36 /* app_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_delegate.h; sourceTree = "<group>"; };
@@ -128,6 +128,10 @@
 		BF868745208337D200523939 /* vector.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector.inl; sourceTree = "<group>"; };
 		BF868746208341FA00523939 /* script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = script.cpp; sourceTree = "<group>"; };
 		BF868747208341FA00523939 /* script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
+		BFB6D1D520906CF000C39C31 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
+		BFB6D1D620906CF000C39C31 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
+		BFB6D1D82090909900C39C31 /* box_collider2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider2d.h; sourceTree = "<group>"; };
+		BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = box_collider2d.cpp; sourceTree = "<group>"; };
 		BFCB321220753755001B5995 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = ../../Assets; sourceTree = "<group>"; };
 		BFCB321B20754006001B5995 /* file_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_utils.h; sourceTree = "<group>"; };
 		BFCB321C20754006001B5995 /* file_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_utils.cpp; sourceTree = "<group>"; };
@@ -178,9 +182,10 @@
 			isa = PBXGroup;
 			children = (
 				BF0D23A42083FEB700542952 /* component.h */,
-				BF1910EB2086685F00BCE74B /* component.cpp */,
 				BF0D23A62084030600542952 /* scriptable_component.h */,
 				BF0D23A72084030600542952 /* scriptable_component.cpp */,
+				BFB6D1D82090909900C39C31 /* box_collider2d.h */,
+				BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -322,6 +327,8 @@
 		BF51EC72206B96FA005A6240 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				BFB6D1D520906CF000C39C31 /* rect.cpp */,
+				BFB6D1D620906CF000C39C31 /* rect.h */,
 				BF51EC73206B96FA005A6240 /* vector2d.cpp */,
 				BF51EC74206B96FA005A6240 /* vector2d.h */,
 				BF3D14D9206CF32100293C36 /* mat4.h */,
@@ -494,8 +501,10 @@
 				BF439CC120888616000B8A15 /* platform.cpp in Sources */,
 				BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */,
 				BFCB32292076100B001B5995 /* window.cpp in Sources */,
+				BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */,
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
 				BF1910EA2086648C00BCE74B /* binding.cpp in Sources */,
+				BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
 				BF0D23972083734100542952 /* scripting.cpp in Sources */,
 				BF0D23AA20840B8300542952 /* scripting.inl in Sources */,
@@ -511,7 +520,6 @@
 				BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */,
 				BF3FF3DE208C92AF0070955D /* touch_listener.cpp in Sources */,
 				BF439CC420888653000B8A15 /* logger.cpp in Sources */,
-				BF1910EC2086685F00BCE74B /* component.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
 				BFCB323620766319001B5995 /* image_utils.cpp in Sources */,
 				BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */,

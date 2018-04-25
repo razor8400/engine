@@ -48,15 +48,5 @@ namespace math
     {
         return vector2d(x / s, y / s);
     }
-    
-    vector2d vector2d::operator*(float s) const
-    {
-        return vector2d(x * s, y * s);
-    }
-    
-    vector2d vector2d::operator/(float s) const
-    {
-        return vector2d(x / s, y / s);
-    }
 }
 

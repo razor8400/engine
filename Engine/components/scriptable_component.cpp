@@ -9,7 +9,7 @@
 
 namespace engine
 {
-    IMPLEMENT_INHERITANCE_INFO(scriptable_component, component);
+    IMPLEMENT_TYPE_INFO(component)
     
     scriptable_component* scriptable_component::create(const std::string& file_name)
     {

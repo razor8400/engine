@@ -20,9 +20,6 @@ namespace math
         vector2d operator*(float s) const;
         vector2d operator/(float s) const;
         
-        vector2d operator*(float s) const;
-        vector2d operator/(float s) const;
-        
         static const vector2d zero;
     };
 }

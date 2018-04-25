@@ -71,8 +71,6 @@ namespace engine
             int get_children_count(lua_State* L);
             int get_parent(lua_State* L);
             
-            int handle_click(lua_State* L);
-            
             static const luaL_Reg functions[] =
             {
                 { "create", create },
@@ -99,7 +97,6 @@ namespace engine
                 { "get_opacity", get_opacity },
                 { "get_children_count", get_children_count },
                 { "get_parent", get_parent },
-                { "handle_click", handle_click },
                 { "__gc", destroy },
                 { NULL, NULL }
             };
@@ -134,6 +131,21 @@ namespace engine
             static const luaL_Reg functions[] =
             {
                 { "create", create },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace box_collider2d
+        {
+            int create(lua_State* L);
+            int destroy(lua_State* L);
+            int on_click(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
+                { "on_click", on_click },
+                { "__gc", destroy },
                 { NULL, NULL }
             };
         }

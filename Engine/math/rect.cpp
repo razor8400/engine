@@ -1,6 +1,8 @@
 #include "rect.h"
 #include "vector4d.h"
 
+#include <algorithm>
+
 namespace math
 {
 	rect::rect(float x, float y, float w, float h) : m_origin(x, y), m_size(w, h)
@@ -59,7 +61,12 @@ namespace math
 		auto p3 = vector4d(tl.x, tl.y, 0, 1) * m4;
 		auto p4 = vector4d(tr.x, tr.y, 0, 1) * m4;
 
-		return rect(0, 0, 0, 0);
+        auto min_x = std::min(std::min(p1.x, p2.x), std::min(p3.x, p4.x));
+        auto max_x = std::max(std::max(p1.x, p2.x), std::max(p3.x, p4.x));
+        auto min_y = std::min(std::min(p1.y, p2.y), std::min(p3.y, p4.y));
+        auto max_y = std::max(std::max(p1.y, p2.y), std::max(p3.y, p4.y));
+        
+		return rect(min_x, min_y, max_x - min_x, max_y - min_y);
 	}
 
 	rect rect::operator*(const float s) const

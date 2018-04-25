@@ -20,8 +20,6 @@ namespace engine
         
         virtual void on_enter();
         virtual void on_exit();
-        
-        virtual bool allow_touch(const math::vector3d& location) const;
     public:
         void add_child(game_object* obj);
         void remove_child(game_object* obj);
@@ -30,13 +28,14 @@ namespace engine
         void add_component(component* component);
         void remove_component(component* component);
 		
-		void mark_dirty() { m_update_transform = true; }
+        const math::mat4& get_transform() const { return m_transform; }
+    private:
+        void mark_dirty() { m_update_transform = true; }
         
-		math::rect bounding_box() const;
         math::mat4 transform(const math::mat4& parent) const;
-
-		math::mat4 parent_transform() const;
-		math::mat4 world_transform() const;
+        
+        math::mat4 parent_transform() const;
+        math::mat4 world_transform() const;
     public:
         void set_enabled(bool enabled) { m_enabled = enabled; }
         bool get_enabled() const { return m_enabled; }
