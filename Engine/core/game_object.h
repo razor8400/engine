@@ -20,6 +20,8 @@ namespace engine
         
         virtual void on_enter();
         virtual void on_exit();
+        
+        virtual bool allow_touch(const math::vector3d& location) const;
     public:
         void add_child(game_object* obj);
         void remove_child(game_object* obj);
@@ -32,7 +34,7 @@ namespace engine
         
         math::vector3d transform_point(const math::vector3d& v3) const;
 
-        math::mat4 transfrom(const math::mat4& parent) const;
+        math::mat4 transform(const math::mat4& parent) const;
 
 		math::mat4 parent_transform() const;
 		math::mat4 world_transform() const;

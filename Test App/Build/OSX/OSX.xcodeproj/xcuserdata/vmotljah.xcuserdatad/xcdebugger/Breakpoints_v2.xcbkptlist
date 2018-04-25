@@ -9,45 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546044403.8617361"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "546281076.278681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "debug_log(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546044403.861858"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "load_script(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/core/application.cpp"
-            timestampString = "546099318.414404"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "application::shutdown()"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "game_object::render(const math::mat4&amp; transform)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,90 +25,44 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/core/application.cpp"
-            timestampString = "546099318.41449"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "546281076.279134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "application::shutdown()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/platform/window/glfw3/window.cpp"
-            timestampString = "546099318.414569"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/resources/script.cpp"
-            timestampString = "545996407.587844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "script::stop()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/resources/resources_manager.inl"
-            timestampString = "545996488.035149"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "resources_manager::load_resource_from_file(const std::string&amp; file_name)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "game_object::draw(const math::mat4&amp; parent)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "std::__1::shared_ptr&lt;engine::script&gt; engine::resources_manager::load_resource_from_file&lt;engine::script&gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const"
+                  symbolName = "engine::game_object::draw(math::mat4 const&amp;)"
                   moduleName = "OSX"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/resources/resources_manager.inl"
-                  timestampString = "545996488.321902"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/core/game_object.cpp"
+                  timestampString = "546280740.885832"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "542">
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "72">
                </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "std::__1::shared_ptr&lt;engine::texture2d&gt; engine::resources_manager::load_resource_from_file&lt;engine::texture2d&gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const"
+                  symbolName = "engine::game_object::draw(math::mat4 const&amp;)"
                   moduleName = "OSX"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/resources/resources_manager.inl"
-                  timestampString = "545996488.325803"
+                  urlString = "file:///Users/vladimir/Work/engine/Engine/core/game_object.cpp"
+                  timestampString = "546280740.888763"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "542">
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "426">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -151,61 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/resources/resources_manager.inl"
-            timestampString = "545996506.322525"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546281076.279225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "resources_manager::load_resource_from_file(const std::string&amp; file_name)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "std::__1::shared_ptr&lt;engine::script&gt; engine::resources_manager::load_resource_from_file&lt;engine::script&gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const"
-                  moduleName = "OSX"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/resources/resources_manager.inl"
-                  timestampString = "545996506.329636"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "792">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "std::__1::shared_ptr&lt;engine::texture2d&gt; engine::resources_manager::load_resource_from_file&lt;engine::texture2d&gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const"
-                  moduleName = "OSX"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/resources/resources_manager.inl"
-                  timestampString = "545996506.332391"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "792">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/utils/file_utils.cpp"
-            timestampString = "546016490.97536"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "read_file(const std::string&amp; file_name, unsigned char** data, size_t* size)"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "set_position(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -215,13 +89,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/platform/window/glfw3/window.cpp"
-            timestampString = "546099318.414989"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546281076.27956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "window_iconify_callback(GLFWwindow* window, int iconified)"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
+            landmarkName = "set_position(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546281076.279646"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "get_win_size(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

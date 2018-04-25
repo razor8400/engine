@@ -20,6 +20,7 @@ namespace engine
 		void stop();
 
         void call_function(const std::string& function);
+        bool call_boolean_function(const std::string& function) const;
         
         template<class T>
         void push_user_data(const std::string& field, T* data);

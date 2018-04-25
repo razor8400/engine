@@ -20,6 +20,6 @@ namespace engine
         ~touch_dispatcher();
     private:
         vector<touch_listener*> m_listeners;
-        touch_listener* m_current_listener = nullptr;
+        vector<touch_listener*> m_active_listeners;
     };
 }

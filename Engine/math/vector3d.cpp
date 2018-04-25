@@ -46,6 +46,11 @@ namespace math
         return vector3d(x * number, y * number, z * number);
     }
     
+    vector3d vector3d::operator/(float number) const
+    {
+        return vector3d(x / number, y / number, z / number);
+    }
+    
     float vector3d::lenght() const
     {
         return (float)sqrt(x * x + y * y + z * z);

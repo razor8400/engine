@@ -85,6 +85,11 @@ namespace engine
         scripting::call_method(m_state, m_name, function);
     }
     
+    bool script::call_boolean_function(const std::string& function) const
+    {
+        return scripting::call_boolean_method(m_state, m_name, function);
+    }
+    
     void script::push_vector(const std::string& field, const math::vector3d& v3)
     {
         scripting::push_to_table(m_state, m_name, field, v3);

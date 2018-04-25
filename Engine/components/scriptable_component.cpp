@@ -4,7 +4,8 @@
 #include "resources/script.h"
 #include "resources/resources_manager.h"
 
-#include "core/director.h"
+#include "core/input/touch_listener.h"
+#include "core/input/touch_dispatcher.h"
 
 namespace engine
 {
@@ -38,9 +39,27 @@ namespace engine
 				m_script.reset();
 				return;
 			}
+            
+            m_listener = ref::create<touch_listener>();
+            m_listener->touch_began = [=]()
+            {
+                return m_script->call_boolean_function(scripting::on_touch_began);
+            };
+            
+            m_listener->touch_moved = [=]()
+            {
+                m_script->call_function(scripting::on_touch_moved);
+            };
+            
+            m_listener->touch_ended = [=]()
+            {
+                m_script->call_function(scripting::on_touch_ended);
+            };
 
             m_script->push_user_data("obj", m_parent);
             m_script->call_function(scripting::start);
+            
+            touch_dispatcher::instance().add_touch_listener(m_listener);
         }
     }
     
@@ -56,6 +75,12 @@ namespace engine
         {
             m_script->call_function(scripting::stop);
             m_script->stop();
+            
+            if (m_listener)
+            {
+                touch_dispatcher::instance().remove_touch_listener(m_listener);
+                m_listener = nullptr;
+            }
         }
     }
 }

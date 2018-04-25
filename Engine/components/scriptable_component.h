@@ -17,5 +17,6 @@ namespace engine
         void stop() override;
     private:
         script_ptr m_script;
+        touch_listener* m_listener = nullptr;
     };
 }

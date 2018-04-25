@@ -4,7 +4,6 @@
 
 #include "components/component.h"
 
-#include "core/input/touch_listener.h"
 #include "core/game_object.h"
 #include "core/scene.h"
 
@@ -53,7 +52,6 @@ namespace engine
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
             register_class<engine::scene>(state, scripting::scene::functions);
-			register_class<engine::touch_listener>(state, scripting::touch_listener::functions);
         }
         
         void register_functions(lua_State* state)
@@ -98,6 +96,26 @@ namespace engine
 				logger() << "[scripting] call_method error:" << lua_tostring(state, -1);
              
             CLEAR_TOP(state);
+        }
+        
+        bool call_boolean_method(lua_State* state, const std::string& class_name, const std::string& method)
+        {
+            lua_getglobal(state, class_name.c_str());
+            lua_getfield(state, -1, method.c_str());
+            lua_pushvalue(state, -2);
+            
+            if (lua_pcall(state, 1, 1, 0))
+            {
+                logger() << "[scripting] call_method error:" << lua_tostring(state, -1);
+                CLEAR_TOP(state);
+                return false;
+            }
+            
+            auto result = lua_toboolean(state, 2);
+            
+            CLEAR_TOP(state);
+            
+            return result;
         }
         
         void create_class(lua_State* state, const std::string& class_name)

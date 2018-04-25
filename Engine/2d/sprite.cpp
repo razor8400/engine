@@ -34,15 +34,15 @@ namespace engine
         return true;
     }
     
-    void sprite::render(const math::mat4& world)
+    void sprite::render(const math::mat4& transform)
     {
         if (m_texture)
         {
             m_texture->set_color(math::vector4d(m_color.x, m_color.y, m_color.z, get_alpha()));
-            m_texture->draw(transfrom(world), m_shader_program);
+            m_texture->draw(transform, m_shader_program);
         }
         
-        game_object::render(world);
+        game_object::render(transform);
     }
 
     void sprite::set_texture(const std::string& file_name)

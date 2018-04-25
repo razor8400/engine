@@ -18,37 +18,16 @@ namespace engine
             int create(lua_State* L, float x, float y, float z);
             math::vector3d get(lua_State* L, int n);
         }
-
-		namespace touch_listener
-		{
-			int create(lua_State* L);
-			int destroy(lua_State* L);
-			int on_touch_began(lua_State* L);
-			int on_touch_moved(lua_State* L);
-			int on_touch_ended(lua_State* L);
-
-			static const luaL_Reg functions[] =
-			{
-				{ "create", create },
-				{ "__gc", destroy },
-				{ "on_touch_began", on_touch_began },
-				{ "on_touch_moved", on_touch_moved },
-				{ "on_touch_ended", on_touch_ended },
-				{ NULL, NULL, }
-			};
-		}
         
         namespace game
         {
             int get_mouse_location(lua_State* L);
-            int add_touch_listener(lua_State* L);
-            int remove_touch_listener(lua_State* L);
+            int get_win_size(lua_State* L);
             
             static const luaL_Reg functions[] =
             {
                 { "get_mouse_location", get_mouse_location },
-                { "add_touch_listener", add_touch_listener },
-                { "remove_touch_listener", remove_touch_listener },
+                { "get_win_size", get_win_size },
                 { NULL, NULL, }
             };
         }
@@ -92,6 +71,8 @@ namespace engine
             int get_children_count(lua_State* L);
             int get_parent(lua_State* L);
             
+            int handle_click(lua_State* L);
+            
             static const luaL_Reg functions[] =
             {
                 { "create", create },
@@ -118,6 +99,7 @@ namespace engine
                 { "get_opacity", get_opacity },
                 { "get_children_count", get_children_count },
                 { "get_parent", get_parent },
+                { "handle_click", handle_click },
                 { "__gc", destroy },
                 { NULL, NULL }
             };
