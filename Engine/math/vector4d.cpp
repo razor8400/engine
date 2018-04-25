@@ -2,8 +2,8 @@
 
 namespace math
 {
-    const vector4d vector4d::zero = vector4d();
-    const vector4d vector4d::one = vector4d(1, 1, 1, 1);
+	const vector4d vector4d::zero = vector4d();
+	const vector4d vector4d::one = vector4d(1, 1, 1, 1);
     
     vector4d::vector4d() : x(0), y(0), z(0), w(0)
     {
@@ -14,32 +14,40 @@ namespace math
     {
 
     }
-    
-    vector4d::vector4d(const vector3d& v3) : x(v3.x), y(v3.y), z(v3.z)
-    {
         
-    }
-    
-    vector4d operator*(const mat4& m4, const vector4d& v4)
-    {
-        vector4d result;
-        
-        result.x = m4[0] * v4.x + m4[1] * v4.y + m4[2] * v4.z + m4[3] * v4.w;
-        result.y = m4[4] * v4.x + m4[5] * v4.y + m4[6] * v4.z + m4[7] * v4.w;
-        result.z = m4[8] * v4.x + m4[9] * v4.y + m4[10] * v4.z + m4[11] * v4.w;
-        result.w = m4[12] * v4.x + m4[13] * v4.y + m4[14] * v4.z + m4[15] * v4.w;
-        
-        return result;
-    }
+	vector4d vector4d::operator+(const vector4d& v4) const
+	{
+		return vector4d(x + v4.x, y + v4.y, z + v4.z, w + v4.w);
+	}
+
+	vector4d vector4d::operator-(const vector4d& v4) const
+	{
+		return vector4d(x - v4.x, y - v4.y, z - v4.z, w - v4.w);
+	}
+	
+	vector4d vector4d::operator*(const vector4d& v4) const
+	{
+		return vector4d(x * v4.x, y * v4.y, z * v4.z, w * v4.w);
+	}
+	
+	vector4d vector4d::operator*(float number) const
+	{
+		return vector4d(x * number, y * number, z * number, w * number);
+	}
+
+	vector4d vector4d::operator/(float number) const
+	{
+		return vector4d(x / number, y / number, z / number, w / number);
+	}
 
     vector4d vector4d::operator*(const mat4& m4) const
     {
         vector4d result;
         
-        result.x = m4[0] * x + m4[1] * y + m4[2] * z + m4[3] * w;
-        result.y = m4[4] * x + m4[5] * y + m4[6] * z + m4[7] * w;
-        result.z = m4[8] * x + m4[9] * y + m4[10] * z + m4[11] * w;
-        result.w = m4[12] * x + m4[13] * y + m4[14] * z + m4[15] * w;
+		result.x = x * m4[0] + y * m4[4] + z * m4[8] + w * m4[12];
+		result.y = x * m4[1] + y * m4[5] + z * m4[9] + w * m4[13];
+		result.z = x * m4[2] + y * m4[6] + z * m4[10] + w * m4[14];
+		result.w = x * m4[3] + y * m4[7] + z * m4[11] + w * m4[15];
         
         return result;
     }

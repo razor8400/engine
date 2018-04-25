@@ -70,6 +70,7 @@ function match3scene:start()
 	self.obj:set_size(size)
 	self.obj:set_position(-size.x / 2, -size.y / 2)
 	self.obj:add_child(background)
+	self.obj:set_scale(0.5, 0.5)
 	self.obj:set_rotation(0, 0, 45)
 end
 

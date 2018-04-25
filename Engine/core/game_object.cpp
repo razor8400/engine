@@ -89,9 +89,11 @@ namespace engine
     bool game_object::allow_touch(const math::vector3d& location) const
     {
         auto world = director::instance().convert_screen_to_world(location);
-        auto transform = math::mat4::translate(world.x, world.y, world.z) * m_transform;
+		auto bbox = bounding_box();
+		auto bl = bbox.bottom_left();
+		auto tr = bbox.top_right();
         
-        return false;
+        return bbox.contains(math::vector2d(world.x, world.y));
     }
     
 	void game_object::add_child(game_object* obj)
@@ -151,14 +153,14 @@ namespace engine
         
         m_components.erase(component);
     }
-    
-    math::vector3d game_object::transform_point(const math::vector3d& v3) const
-    {
-        math::vector4d v4 = math::vector4d(v3) * m_transform;
-        return math::vector3d(v4.x, v4.y, v4.z);
-    }
-    
-    math::mat4 game_object::transform(const math::mat4& parent) const
+        
+	math::rect game_object::bounding_box() const
+	{
+		math::rect bbox(0, 0, m_size.x, m_size.y);
+		return bbox * m_transform;
+	}
+
+	math::mat4 game_object::transform(const math::mat4& parent) const
     {
         return parent * m_transform;
     }

@@ -22,8 +22,7 @@ function match3field:size()
 end
 
 function match3field:convert_cell_to_world(x, y)
-	local size = self:size()
-	return (x - 1) * self.cell - size.x / 2 + self.cell / 2, (y - 1) * self.cell - size.y / 2 + self.cell / 2
+	return (x - 1) * self.cell, (y - 1) * self.cell
 end
 
 function match3field:generate_field()

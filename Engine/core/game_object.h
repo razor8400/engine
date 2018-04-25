@@ -32,8 +32,7 @@ namespace engine
 		
 		void mark_dirty() { m_update_transform = true; }
         
-        math::vector3d transform_point(const math::vector3d& v3) const;
-
+		math::rect bounding_box() const;
         math::mat4 transform(const math::mat4& parent) const;
 
 		math::mat4 parent_transform() const;
