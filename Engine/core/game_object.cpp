@@ -27,13 +27,13 @@ namespace engine
 			m_transform = parent_transform();
 		}
         
-        m_components.lock([this, dt]()
+        m_components.lock([=]()
         {
             for (auto component : m_components)
                 component->update(dt);
         });
         
-        m_children.lock([this, dt]()
+        m_children.lock([=]()
         {
             for (auto obj : m_children)
                 obj->update(dt);
@@ -64,11 +64,17 @@ namespace engine
     
     void game_object::on_enter()
     {
-        for (auto component : m_components)
-            component->start();
-        
-        for (auto obj : m_children)
-            obj->on_enter();
+		m_components.lock([=]()
+		{
+			for (auto component : m_components)
+				component->start();
+		});
+
+		m_children.lock([=]()
+		{
+			for (auto obj : m_children)
+				obj->on_enter();
+		});
         
         m_active = true;
 
@@ -77,11 +83,17 @@ namespace engine
     
     void game_object::on_exit()
     {
-        for (auto component : m_components)
-            component->stop();
-        
-        for (auto obj : m_children)
-            obj->on_exit();
+		m_components.lock([=]()
+		{
+			for (auto component : m_components)
+				component->stop();
+		});
+
+		m_children.lock([=]()
+		{
+			for (auto obj : m_children)
+				obj->on_exit();
+		});
         
         m_active = false;
     }

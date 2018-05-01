@@ -44,20 +44,6 @@ namespace engine
     
     static const std::string empty_string;
     
-    static void log(const char* msg, ...)
-    {
-        static const int MAX = 1000;
-        static char buffer[MAX];
-        
-        va_list args;
-        
-        va_start(args, msg);
-        vsnprintf(buffer, MAX, msg, args);
-        va_end(args);
-        
-        printf("%s\n", buffer);
-    }
-
 	static std::string vector3d_to_string(const math::vector3d& v3)
 	{
 		std::stringstream ss;

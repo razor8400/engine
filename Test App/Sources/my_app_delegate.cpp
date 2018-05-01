@@ -9,7 +9,6 @@ void my_app_delegate::application_launched(engine::application* application)
     {
         engine::director& director = engine::director::instance();
         
-        director.set_frame_rate(60);
         director.set_projection_mode(engine::ortographic);
 		director.set_near_plane(-1000.0f);
         director.set_far_plane(1000.0f);

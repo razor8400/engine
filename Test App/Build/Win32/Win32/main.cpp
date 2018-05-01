@@ -1,6 +1,11 @@
+#include <windows.h>
+
 #include "my_app_delegate.h"
 
-int main()
+int APIENTRY WinMain(HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPTSTR    lpCmdLine,
+	int       nCmdShow)
 {
 	auto& application = engine::application::instance();
 	auto app_delegate = my_app_delegate();
@@ -8,5 +13,5 @@ int main()
 	application.set_delegate(&app_delegate);
 	application.on_launched();
 
-	return 1;
+	return 0;
 }

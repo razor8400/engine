@@ -121,8 +121,6 @@ function match3match_handler:match(field, match, x, y)
 			local x2 = x + (j - 1)
 			local y2 = y + (i - 1)
 
-			debug_log(x2 .. ',' .. y2)
-
 			local cell = field:get_cell(x2, y2)
 			if cell then
 				local element = nil
@@ -138,7 +136,7 @@ function match3match_handler:match(field, match, x, y)
 			end
 		end
 	end)
-
+		
 	if #result == match:size() then
 		return result
 	end
@@ -148,10 +146,10 @@ end
 
 function match3match_handler:check_match(field, x, y)
 	for k, v in pairs(self.matches) do
-		for i = 0, v.width - 1 do
-			for j = 0, v.height - 1 do
-				local x1 = x - i
-				local y1 = y - j
+		for i = 0, v.height - 1 do
+			for j = 0, v.width - 1 do
+				local x1 = x - j
+				local y1 = y - i
 
 				local match = self:match(field, v, x1, y1)
 

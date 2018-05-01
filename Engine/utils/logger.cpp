@@ -4,6 +4,15 @@
 #include <iomanip>
 #include <ctime>
 
+#ifdef _MSC_VER
+#include <windows.h>
+#define LOG(text)\
+OutputDebugStringA(text);
+#else
+#define LOG(text)\
+	std::cout << text;
+#endif
+
 namespace engine
 {
 	logger::logger()
@@ -15,7 +24,8 @@ namespace engine
 
 	logger::~logger()
 	{
-		std::cout << m_buffer.str() << std::endl;
+		m_buffer << std::endl;
+		LOG(m_buffer.str().c_str())
 	}
 
 	logger& logger::operator<<(bool val)

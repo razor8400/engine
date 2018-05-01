@@ -200,6 +200,7 @@ namespace engine
     void action_move::step(float s)
     {
         auto delta = m_to - m_from;
+
         m_parent->set_position(m_from + (delta * s));
     }
     

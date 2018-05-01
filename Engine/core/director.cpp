@@ -103,17 +103,17 @@ namespace engine
         
         if (m_running)
         {
-            static auto last_update = std::chrono::high_resolution_clock::now();
+            static auto last_update = std::chrono::steady_clock::now();
             
-            auto now = std::chrono::high_resolution_clock::now();
+            auto now = std::chrono::steady_clock::now();
             auto delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - last_update);
             auto count = delta.count();
             
-            if (count >= m_time_interval)
-            {
+			if (count >= m_time_interval)
+			{
                 last_update = now;
                 update(count);
-            }
+			}
         }
     }
     
