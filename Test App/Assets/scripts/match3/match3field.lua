@@ -9,6 +9,10 @@ local match3field = {
 	cells = {}
 }
 
+local function round(x)
+	return math.ceil(x)
+end
+
 function match3field:get_cell(x, y)
 	if x >= 1 and x <= self.colls and y >= 1 and y <= self.rows then
 		return self.cells[(y - 1) * self.colls + x]
@@ -22,7 +26,19 @@ function match3field:size()
 end
 
 function match3field:convert_cell_to_world(x, y)
-	return (x - 1) * self.cell, (y - 1) * self.cell
+	return { x = (x - 1) * self.cell, y = (y - 1) * self.cell }
+end
+
+function match3field:convert_world_to_cell(x, y)
+	return { x = round(x / self.cell), y = round(y / self.cell) }
+end
+
+function match3field:get_element(x, y, layer)
+	local cell = self:get_cell(x, y)
+	if cell then
+		return cell:get_element_at(layer)
+	end
+	return nil
 end
 
 function match3field:generate_field()
@@ -42,6 +58,27 @@ function match3field:generate_field()
 			until match3match:check_match(self, x, y) == nil
 		end
 	end
+end
+
+function match3field:swipe(a, b)
+	local cell1 = assert(self:get_cell(a.x, a.y))
+	local cell2 = assert(self:get_cell(b.x, b.y))
+
+	local el1 = cell1:get_element_at(element_layer.gameplay)
+	local el2 = cell2:get_element_at(element_layer.gameplay)
+
+	if el1 and el2 then
+		cell1:add_element(el2)
+		cell2:add_element(el1)
+
+		if match3match:check_match(self, a.x, a.y) ~= nil or match3match:check_match(self, b.x, b.y) ~= nil then
+			return true
+		end
+
+		cell1:add_element(el1)
+		cell2:add_element(el2)
+	end
+	return false
 end
 
 function match3field.new(colls, rows, cell)

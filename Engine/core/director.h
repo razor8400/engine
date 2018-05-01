@@ -11,7 +11,7 @@ namespace engine
     public:
         static director& instance();
         
-        math::vector3d convert_screen_to_world(const math::vector3d& screen) const;
+        math::vector3d convert_screen_to_world(const math::vector2d& screen) const;
         
 		void set_frame_rate(int frame_rate);
 		void set_projection_mode(projection_mode mode);

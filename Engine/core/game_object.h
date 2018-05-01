@@ -27,6 +27,10 @@ namespace engine
         
         void add_component(component* component);
         void remove_component(component* component);
+        
+        math::vector3d anchor_point() const { return m_anchor * m_size; }
+        math::vector3d global_to_local(const math::vector3d& v3) const;
+        math::vector3d local_to_global(const math::vector3d& v3) const;
 		
         const math::mat4& get_transform() const { return m_transform; }
     private:

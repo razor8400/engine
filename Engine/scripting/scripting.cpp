@@ -4,6 +4,7 @@
 
 #include "components/component.h"
 #include "components/box_collider2d.h"
+#include "components/action.h"
 
 #include "core/game_object.h"
 #include "core/scene.h"
@@ -36,8 +37,6 @@ namespace engine
             }
             
             lua_setglobal(state, type_name);
-            
-            CLEAR_TOP(state);
         }
         
         lua_State* create_state()
@@ -53,7 +52,15 @@ namespace engine
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
             register_class<engine::scene>(state, scripting::scene::functions);
+            
             register_class<engine::box_collider2d>(state, scripting::box_collider2d::functions);
+            
+            register_class<engine::action>(state, scripting::action::functions);
+            register_class<engine::targeted_action>(state, scripting::targeted_action::functions);
+            register_class<engine::action_lua_callback>(state, scripting::action_lua_callback::functions);
+            register_class<engine::action_sequence>(state, scripting::action_sequence::functions);
+            register_class<engine::action_list>(state, scripting::action_list::functions);
+            register_class<engine::action_move>(state, scripting::action_move::functions);
         }
         
         void register_functions(lua_State* state)
@@ -62,15 +69,11 @@ namespace engine
 			luaL_setfuncs(state, scripting::game::functions, NULL);
 			lua_setglobal(state, "game");
 
-			CLEAR_TOP(state);
-
             lua_pushcfunction(state, functions::load_script);
             lua_setglobal(state, "load_script");
             
             lua_pushcfunction(state, functions::debug_log);
             lua_setglobal(state, "debug_log");
-            
-            CLEAR_TOP(state);
         }
         
         void close_state(lua_State* state)
@@ -86,6 +89,13 @@ namespace engine
 				return false;
 			}
 			return true;
+        }
+        
+        void call_method(lua_State* state, int handler)
+        {
+            lua_rawgeti(state, LUA_REGISTRYINDEX, handler);
+            if (lua_pcall(state, 0, 0, 0))
+                logger() << "[scripting] call_method error:" << lua_tostring(state, -1);
         }
         
         void call_method(lua_State* state, const std::string& class_name, const std::string& method)
@@ -128,15 +138,13 @@ namespace engine
             lua_setfield(state, -1, "__index");
             
             lua_setglobal(state, class_name.c_str());
-            
-            CLEAR_TOP(state);
         }
         
         void push_to_table(lua_State* state, const std::string& table, const std::string& field, const math::vector3d& v3)
         {
             lua_getglobal(state, table.c_str());
             
-            vector::push(state, v3.x, v3.y, v3.z);
+            vector3d::push(state, v3.x, v3.y, v3.z);
             
             lua_setfield(state, -2, field.c_str());
             
@@ -145,7 +153,9 @@ namespace engine
 
 		float get_number(lua_State* state, int n)
 		{
-			return (float)lua_tonumber(state, n);
+            if (lua_isnumber(state, n))
+                return (float)lua_tonumber(state, n);
+            return 0;
 		}
 
 		int get_integer(lua_State* state, int n)

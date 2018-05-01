@@ -21,17 +21,21 @@ namespace engine
     {
         if (m_vertices.size() > 0)
         {
-            auto world = director::instance().convert_screen_to_world(location);
-            auto a = m_vertices[1];
-            auto b = m_vertices[2];
-            auto c = m_vertices[3];
-            auto d = m_vertices[4];
+            std::vector<std::pair<int, int>> indices = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 0 } };
             
-            auto r = math::line_equation(a, b, math::vector2d(world.x, world.y));
+            for (auto it : indices)
+            {
+                auto p1 = m_vertices[it.first];
+                auto p2 = m_vertices[it.second];
+                
+                auto f = math::line_equation(p1, p2, location);
             
-            return false;
+                if (f > 0)
+                    return false;
+            }
+            
+            return true;
         }
-
         
         return false;
     }
@@ -48,15 +52,15 @@ namespace engine
         
         auto transform = m_parent->get_transform();
         
-        auto p1 = math::vector4d(0, 0, 0, 1) * transform;
-        auto p2 = math::vector4d(m_size.x, 0, 0, 1) * transform;
-        auto p3 = math::vector4d(m_size.x, m_size.y, 0, 1) * transform;
-        auto p4 = math::vector4d(0, m_size.y, 0, 1) * transform;
+        auto p1 = math::transform_point(math::vector2d::zero, transform);
+        auto p2 = math::transform_point(math::vector2d(m_size.x, 0), transform);
+        auto p3 = math::transform_point(m_size, transform);
+        auto p4 = math::transform_point(math::vector2d(0, m_size.y), transform);
         
         m_vertices.clear();
-        m_vertices.push_back(math::vector2d(p1.x, p1.y));
-        m_vertices.push_back(math::vector2d(p2.x, p2.y));
-        m_vertices.push_back(math::vector2d(p3.x, p3.y));
-        m_vertices.push_back(math::vector2d(p4.x, p4.y));
+        m_vertices.push_back(p1);
+        m_vertices.push_back(p2);
+        m_vertices.push_back(p3);
+        m_vertices.push_back(p4);
     }
 }

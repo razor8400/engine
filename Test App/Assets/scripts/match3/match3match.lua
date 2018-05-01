@@ -113,32 +113,52 @@ function match3match_handler:load_config()
 	end
 end
 
-function match3match_handler:check_match(field, x, y)
-	for k, v in pairs(self.matches) do
-		local match = {}
-		v:iterate(function(i, j, k)
-			if v.match[k] > 0 then
-				local x2 = x + (j - 1)
-				local y2 = y + (i - 1)
+function match3match_handler:match(field, match, x, y)
+	local result = {}
 
-				local cell = field:get_cell(x2, y2)
-				if cell then
-					local element = nil
-					if #match > 0 then
-						element = compare_elements(cell, match)
-					else
-						element = cell:get_element_at(element_layer.gameplay)
-					end
+	match:iterate(function(i, j, k)
+		if match.match[k] > 0 then
+			local x2 = x + (j - 1)
+			local y2 = y + (i - 1)
 
-					if element then
-						table.insert(match, element)
-					end
+			debug_log(x2 .. ',' .. y2)
+
+			local cell = field:get_cell(x2, y2)
+			if cell then
+				local element = nil
+				if #result > 0 then
+					element = compare_elements(cell, result)
+				else
+					element = cell:get_element_at(element_layer.gameplay)
+				end
+
+				if element then
+					table.insert(result, element)
 				end
 			end
-		end)
+		end
+	end)
 
-		if #match == v:size() then
-			return match
+	if #result == match:size() then
+		return result
+	end
+
+	return nil
+end
+
+function match3match_handler:check_match(field, x, y)
+	for k, v in pairs(self.matches) do
+		for i = 0, v.width - 1 do
+			for j = 0, v.height - 1 do
+				local x1 = x - i
+				local y1 = y - j
+
+				local match = self:match(field, v, x1, y1)
+
+				if match then
+					return match
+				end
+			end
 		end
 	end
 

@@ -25,6 +25,7 @@ namespace engine
         
         bool load_script(lua_State* state, const char* buffer, size_t size, const std::string& name);
         
+        void call_method(lua_State* state, int handler);
         void call_method(lua_State* state, const std::string& class_name, const std::string& method);
         bool call_boolean_method(lua_State* state, const std::string& class_name, const std::string& method);
         

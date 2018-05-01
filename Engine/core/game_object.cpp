@@ -143,6 +143,17 @@ namespace engine
         
         m_components.erase(component);
     }
+    
+    math::vector3d game_object::global_to_local(const math::vector3d& v3) const
+    {
+        auto transform = math::mat4::inverse(world_transform());
+        return math::transform_point(v3, transform);
+    }
+    
+    math::vector3d game_object::local_to_global(const math::vector3d& v3) const
+    {
+        return math::transform_point(v3, world_transform());
+    }
 
 	math::mat4 game_object::transform(const math::mat4& parent) const
     {
@@ -151,7 +162,7 @@ namespace engine
 
 	math::mat4 game_object::parent_transform() const
 	{
-        auto anchor = m_size * m_anchor;
+        auto anchor = anchor_point();
 		auto position = math::mat4::translate(m_position.x + anchor.x, m_position.y + anchor.y, m_position.z + anchor.z);
 		auto rotation = math::mat4::rotate(math::vector3d::right, m_rotation.x)
 			* math::mat4::rotate(math::vector3d::up, m_rotation.y)

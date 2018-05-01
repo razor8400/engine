@@ -12,7 +12,7 @@ namespace engine
             int debug_log(lua_State* L);
         }
         
-        namespace vector
+        namespace vector3d
         {
             void push(lua_State* L, float x, float y, float z);
             int create(lua_State* L, float x, float y, float z);
@@ -22,12 +22,16 @@ namespace engine
         namespace game
         {
             int get_mouse_location(lua_State* L);
+            int get_world_mouse_location(lua_State* L);
+            int convert_to_world_space(lua_State* L);
             int get_win_size(lua_State* L);
             
             static const luaL_Reg functions[] =
             {
                 { "get_mouse_location", get_mouse_location },
+                { "get_world_mouse_location", get_world_mouse_location },
                 { "get_win_size", get_win_size },
+                { "convert_to_world_space", convert_to_world_space },
                 { NULL, NULL, }
             };
         }
@@ -71,6 +75,9 @@ namespace engine
             int get_children_count(lua_State* L);
             int get_parent(lua_State* L);
             
+            int local_to_global(lua_State* L);
+            int global_to_local(lua_State* L);
+            
             static const luaL_Reg functions[] =
             {
                 { "create", create },
@@ -97,6 +104,8 @@ namespace engine
                 { "get_opacity", get_opacity },
                 { "get_children_count", get_children_count },
                 { "get_parent", get_parent },
+                { "local_to_global", local_to_global },
+                { "global_to_local", global_to_local },
                 { "__gc", destroy },
                 { NULL, NULL }
             };
@@ -146,6 +155,83 @@ namespace engine
                 { "create", create },
                 { "on_click", on_click },
                 { "__gc", destroy },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace action
+        {
+            int destroy(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "__gc", destroy },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace targeted_action
+        {
+            int create(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace action_lua_callback
+        {
+            int create(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace action_sequence
+        {
+            int create(lua_State* L);
+            int append(lua_State* L);
+            int destroy(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
+                { "append", append },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace action_list
+        {
+            int create(lua_State* L);
+            int append(lua_State* L);
+            int destroy(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
+                { "append", append },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace action_move
+        {
+            int create(lua_State* L);
+            int move_to(lua_State* L);
+            int move_by(lua_State* L);
+            int destroy(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
+                { "move_to", move_to },
+                { "move_by", move_by },
                 { NULL, NULL }
             };
         }

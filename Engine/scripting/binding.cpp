@@ -4,6 +4,7 @@
 #include "utils/file_utils.h"
 #include "components/component.h"
 #include "components/box_collider2d.h"
+#include "components/action.h"
 
 #include "core/application.h"
 #include "core/director.h"
@@ -58,17 +59,8 @@ namespace engine
             }
         }
 
-		namespace vector
+		namespace vector3d
 		{
-            void push(lua_State* L, float x, float y)
-            {
-                lua_newtable(L);
-                lua_pushnumber(L, x);
-                lua_setfield(L, -2, "x");
-                lua_pushnumber(L, y);
-                lua_setfield(L, -2, "y");
-            }
-            
             void push(lua_State* L, float x, float y, float z)
             {
                 lua_newtable(L);
@@ -89,25 +81,33 @@ namespace engine
 
 			math::vector3d get(lua_State* L, int n)
 			{
-				if (lua_istable(L, n + 1))
+                float numbers[] = { 0, 0, 0 };
+                
+				if (lua_istable(L, n))
 				{
-					lua_getfield(L, n + 1, "x");
-					auto x = get_number(L, n + 2);
-
-					lua_getfield(L, n + 1, "y");
-					auto y = get_number(L, n + 3);
-					
-					lua_getfield(L, n + 1, "z");
-					auto z = get_number(L, n + 4);
-					
-					return math::vector3d(x, y, z);
+                    lua_getfield(L, n, "x");
+                    numbers[0] = get_number(L, -1);
+                    
+                    lua_pop(L, 1);
+                    
+                    lua_getfield(L, n, "y");
+                    numbers[1] = get_number(L, -1);
+                    
+                    lua_pop(L, 1);
+                    
+                    lua_getfield(L, n, "z");
+                    numbers[2] = get_number(L, -1);
+                    
+                    lua_pop(L, 1);
 				}
-				
-				auto x = get_number(L, n + 1);
-				auto y = get_number(L, n + 2);
-				auto z = get_number(L, n + 3);
+                else
+                {
+                    numbers[0] = get_number(L, n);
+                    numbers[1] = get_number(L, n + 1);
+                    numbers[2] = get_number(L, n + 2);
+                }
 
-				return math::vector3d(x, y, z);
+				return math::vector3d(numbers[0], numbers[1], numbers[2]);
 			}
 		}
 
@@ -128,25 +128,33 @@ namespace engine
             
             math::vector3d get(lua_State* L, int n)
             {
-                if (lua_istable(L, n + 1))
+                float numbers[] = { 0, 0, 0 };
+                
+                if (lua_istable(L, n))
                 {
-                    lua_getfield(L, n + 1, "r");
-                    auto r = get_number(L, n + 2);
+                    lua_getfield(L, n, "r");
+                    numbers[0] = get_number(L, -1);
                     
-                    lua_getfield(L, n + 1, "g");
-                    auto g = get_number(L, n + 2);
+                    lua_pop(L, 1);
                     
-                    lua_getfield(L, n + 1, "b");
-                    auto b = get_number(L, n + 2);
+                    lua_getfield(L, n, "g");
+                    numbers[1] = get_number(L, -1);
                     
-                    return math::vector3d(r, g, b);
+                    lua_pop(L, 1);
+                    
+                    lua_getfield(L, n, "b");
+                    numbers[2] = get_number(L, -1);
+                    
+                    lua_pop(L, 1);
+                }
+                else
+                {
+                    numbers[0] = get_number(L, n);
+                    numbers[1] = get_number(L, n + 1);
+                    numbers[2] = get_number(L, n + 2);
                 }
                 
-                auto r = get_number(L, n + 1);
-                auto g = get_number(L, n + 2);
-                auto b = get_number(L, n + 3);
-                
-                return math::vector3d(r, g, b);
+                return math::vector3d(numbers[0], numbers[1], numbers[2]);
             }
 		}
         
@@ -156,8 +164,32 @@ namespace engine
             {
 				auto location = application::instance().get_mouse_location();
                 
-                vector::push(L, location.x, location.y);
+                vector3d::push(L, location.x, location.y, 0);
 
+                return 1;
+            }
+            
+            int get_world_mouse_location(lua_State* L)
+            {
+                auto location = application::instance().get_mouse_location();
+                auto world = director::instance().convert_screen_to_world(location);
+                
+                vector3d::push(L, world.x, world.y, world.z);
+                
+                return 1;
+            }
+            
+            int convert_to_world_space(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto location = vector3d::get(L, 2);
+                auto world = director::instance().convert_screen_to_world(math::vector2d(location.x, location.y));
+                
+                CLEAR_TOP(L);
+                
+                vector3d::push(L, world.x, world.y, world.z);
+                
                 return 1;
             }
             
@@ -165,7 +197,7 @@ namespace engine
             {
                 auto location = application::instance().get_win_size();
                 
-                vector::push(L, location.x, location.y);
+                vector3d::push(L, location.x, location.y, 0);
                 
                 return 1;
             }
@@ -291,11 +323,11 @@ namespace engine
 				CHECK_TOP(L, 1);
 
 				auto obj = scripting::get<engine::game_object>(L, 1);
-                
-                CLEAR_TOP(L);
 
 				if (obj)
 				{
+                    CLEAR_TOP(L);
+                    
 					lua_pushboolean(L, obj->get_enabled());
 					return 1;
 				}
@@ -312,7 +344,7 @@ namespace engine
 				if (!obj)
 					return 0;
                 
-				obj->set_position(vector::get(L, 1));
+				obj->set_position(vector3d::get(L, 2));
                 
                 CLEAR_TOP(L);
 
@@ -327,12 +359,12 @@ namespace engine
 
 				if (!obj)
 					return 0;
+
+				auto position = obj->get_position();
                 
                 CLEAR_TOP(L);
 
-				auto position = obj->get_position();
-
-				return vector::create(L, position.x, position.y, position.z);
+				return vector3d::create(L, position.x, position.y, position.z);
 			}
 
 			int set_rotation(lua_State* L)
@@ -344,7 +376,7 @@ namespace engine
 				if (!obj)
 					return 0;
 
-				obj->set_rotation(vector::get(L, 1));
+				obj->set_rotation(vector3d::get(L, 2));
                 
                 CLEAR_TOP(L);
 
@@ -359,12 +391,12 @@ namespace engine
 
 				if (!obj)
 					return 0;
+
+				auto rotation = obj->get_rotation();
                 
                 CLEAR_TOP(L);
 
-				auto rotation = obj->get_rotation();
-
-				return vector::create(L, rotation.x, rotation.y, rotation.z);
+				return vector3d::create(L, rotation.x, rotation.y, rotation.z);
 			}
 
 			int set_scale(lua_State* L)
@@ -376,7 +408,7 @@ namespace engine
 				if (!obj)
 					return 0;
 
-				obj->set_scale(vector::get(L, 1));
+				obj->set_scale(vector3d::get(L, 2));
                 
                 CLEAR_TOP(L);
 
@@ -391,12 +423,12 @@ namespace engine
 
 				if (!obj)
 					return 0;
+
+				auto scale = obj->get_scale();
                 
                 CLEAR_TOP(L);
 
-				auto scale = obj->get_scale();
-
-				return vector::create(L, scale.x, scale.y, scale.z);
+				return vector3d::create(L, scale.x, scale.y, scale.z);
 			}
 
 			int set_size(lua_State* L)
@@ -408,7 +440,7 @@ namespace engine
 				if (!obj)
 					return 0;
 
-				obj->set_size(vector::get(L, 1));
+				obj->set_size(vector3d::get(L, 2));
                 
                 CLEAR_TOP(L);
 
@@ -420,15 +452,15 @@ namespace engine
                 CHECK_TOP(L, 1);
                 
 				auto obj = scripting::get<engine::game_object>(L, 1);
-                
-                CLEAR_TOP(L);
 
 				if (!obj)
 					return 0;
 
 				auto size = obj->get_size();
+                
+                CLEAR_TOP(L);
 
-				return vector::create(L, size.x, size.y, size.z);
+				return vector3d::create(L, size.x, size.y, size.z);
 			}
 
 			int set_anchor(lua_State* L)
@@ -440,7 +472,7 @@ namespace engine
 				if (!obj)
 					return 0;
 
-				obj->set_anchor(vector::get(L, 1));
+				obj->set_anchor(vector3d::get(L, 2));
                 
                 CLEAR_TOP(L);
 
@@ -452,15 +484,15 @@ namespace engine
                 CHECK_TOP(L, 1);
                 
 				auto obj = scripting::get<engine::game_object>(L, 1);
-                
-                CLEAR_TOP(L);
 
 				if (!obj)
 					return 0;
 
 				auto anchor = obj->get_anchor();
+                
+                CLEAR_TOP(L);
 
-				return vector::create(L, anchor.x, anchor.y, anchor.z);
+				return vector3d::create(L, anchor.x, anchor.y, anchor.z);
 			}
             
             int set_tag(lua_State* L)
@@ -487,10 +519,10 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
-                CLEAR_TOP(L);
-                
                 if (!obj)
                     return 0;
+                
+                CLEAR_TOP(L);
                 
                 lua_pushnumber(L, obj->get_tag());
                 
@@ -521,10 +553,10 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
-                CLEAR_TOP(L);
-                
                 if (!obj)
                     return 0;
+                
+                CLEAR_TOP(L);
                 
                 lua_pushinteger(L, obj->get_opacity());
                 
@@ -537,10 +569,10 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
-                CLEAR_TOP(L);
-                
                 if (!obj)
                     return 0;
+                
+                CLEAR_TOP(L);
                 
                 lua_pushnumber(L, obj->get_children_count());
                 
@@ -553,12 +585,48 @@ namespace engine
                 
                 auto obj = scripting::get<engine::game_object>(L, 1);
                 
+                if (!obj)
+                    return 0;
+                
                 CLEAR_TOP(L);
+                
+                push_ref<engine::game_object>(L, obj->get_parent());
+                
+                return 1;
+            }
+            
+            int local_to_global(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
                 
                 if (!obj)
                     return 0;
                 
-                push_ref<engine::game_object>(L, obj->get_parent());
+                auto location = obj->local_to_global(vector3d::get(L, 2));
+                
+                CLEAR_TOP(L);
+
+                vector3d::push(L, location.x, location.y, location.z);
+                
+                return 1;
+            }
+            
+            int global_to_local(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto obj = scripting::get<engine::game_object>(L, 1);
+                
+                if (!obj)
+                    return 0;
+                
+                auto location = obj->global_to_local(vector3d::get(L, 2));
+                
+                CLEAR_TOP(L);
+                
+                vector3d::push(L, location.x, location.y, location.z);
                 
                 return 1;
             }
@@ -589,7 +657,7 @@ namespace engine
                 if (!obj)
                     return 0;
                 
-                obj->set_color(vector::get(L, 1));
+                obj->set_color(vector3d::get(L, 2));
                 
                 CLEAR_TOP(L);
                 
@@ -602,12 +670,12 @@ namespace engine
 
                 auto obj = scripting::get<engine::sprite>(L, 1);
                 
-                CLEAR_TOP(L);
-                
                 if (!obj)
                     return 0;
                 
                 auto color = obj->get_color();
+                
+                CLEAR_TOP(L);
                 
                 return color::create(L, color.x, color.y, color.z);
             }
@@ -652,10 +720,10 @@ namespace engine
                 
                 auto obj = scripting::get<engine::sprite>(L, 1);
                 
-                CLEAR_TOP(L);
-                
                 if (!obj)
                     return 0;
+                
+                CLEAR_TOP(L);
                 
                 auto alpha = obj->get_alpha();
                 
@@ -677,8 +745,8 @@ namespace engine
         {
             int create(lua_State* L)
             {
-                auto w = lua_tonumber(L, 1);
-                auto h = lua_tonumber(L, 2);
+                auto w = get_number(L, 1);
+                auto h = get_number(L, 2);
                 
                 CLEAR_TOP(L);
                 
@@ -700,7 +768,7 @@ namespace engine
                 CHECK_TOP(L, 2);
                 
                 auto collider = get<engine::box_collider2d>(L, 1);
-                auto mouse = vector::get(L, 1);
+                auto mouse = vector3d::get(L, 2);
                 
                 CLEAR_TOP(L);
                 
@@ -709,6 +777,177 @@ namespace engine
                     auto result = collider->on_click(math::vector2d(mouse.x, mouse.y));
                     lua_pushboolean(L, result);
                 }
+                
+                return 1;
+            }
+        }
+        
+        namespace action
+        {
+            int destroy(lua_State* L)
+            {
+                return destroy_ref<engine::action>(L);
+            }
+        }
+        
+        namespace targeted_action
+        {
+            int create(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto target = get<engine::game_object>(L, 1);
+                auto action = get<engine::action>(L, 2);
+                
+                if (target && action)
+                {
+                    auto targeted = engine::targeted_action::create(action, target);
+                    
+                    CLEAR_TOP(L);
+                    
+                    push_ref(L, targeted);
+                }
+                
+                return 1;
+            }
+        }
+        
+        namespace action_lua_callback
+        {
+            int create(lua_State* L)
+            {
+                if (!lua_isfunction(L,1))
+                    luaL_argerror(L, 1, "expected function");
+                
+                lua_pushvalue(L, -1);
+                auto handler = luaL_ref(L, LUA_REGISTRYINDEX);
+                auto action = engine::action_lua_callback::create(L, handler);
+
+                push_ref(L, action);
+                
+                return 1;
+            }
+        }
+        
+        namespace action_sequence
+        {
+            int create(lua_State* L)
+            {
+                vector<engine::action*> actions;
+                
+                while (lua_gettop(L))
+                {
+                    auto action = get<engine::action>(L, -1);
+                    
+                    lua_pop(L, 1);
+                    
+                    actions.push_back(action);
+                }
+                
+                auto sequence = engine::action_sequence::sequence(actions);
+                
+                push_ref(L, sequence);
+                
+                return 1;
+            }
+            
+            int append(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto sequence = get<engine::action_sequence>(L, 1);
+                auto action = get<engine::action>(L, 2);
+                
+                CLEAR_TOP(L);
+                
+                if (sequence && action)
+                    sequence->append(action);
+                
+                return 0;
+            }
+        }
+        
+        namespace action_list
+        {
+            int create(lua_State* L)
+            {
+                vector<engine::action*> actions;
+                
+                while (lua_gettop(L))
+                {
+                    auto action = get<engine::action>(L, -1);
+                    
+                    lua_pop(L, 1);
+                    
+                    actions.push_back(action);
+                }
+                
+                auto list = engine::action_list::list(actions);
+                
+                push_ref(L, list);
+                
+                return 1;
+            }
+            
+            int append(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto list = get<engine::action_list>(L, 1);
+                auto action = get<engine::action>(L, 2);
+                
+                CLEAR_TOP(L);
+                
+                if (list && action)
+                    list->append(action);
+                
+                return 0;
+            }
+        }
+        
+        namespace action_move
+        {
+            int create(lua_State* L)
+            {
+                CHECK_TOP(L, 2);
+                
+                auto from = vector3d::get(L, 1);
+                auto to = vector3d::get(L, 2);
+                auto duration = get_number(L, 3);
+                
+                CLEAR_TOP(L);
+                
+                auto action = engine::action_move::move(from, to, duration);
+                
+                push_ref(L, action);
+                
+                return 1;
+            }
+            
+            int move_to(lua_State* L)
+            {
+                auto to = vector3d::get(L, 1);
+                auto duration = get_number(L, 2);
+                
+                CLEAR_TOP(L);
+                
+                auto action = engine::action_move::move_to(to, duration);
+                
+                push_ref(L, action);
+                
+                return 1;
+            }
+            
+            int move_by(lua_State* L)
+            {
+                auto by = vector3d::get(L, 1);
+                auto duration = lua_tonumber(L, 2);
+                
+                CLEAR_TOP(L);
+                
+                auto action = engine::action_move::move_by(by, duration);
+                
+                push_ref(L, action);
                 
                 return 1;
             }

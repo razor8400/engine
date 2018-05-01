@@ -6,6 +6,10 @@ local match3cell =  {
 	elements = nil
 }
 
+function match3cell:tile()
+	return { x = self.x, y = self.y }
+end
+
 function match3cell:element_index(element)
 	for k, v in pairs(self.elements) do
 		if v == element then
@@ -34,6 +38,7 @@ function match3cell:find_element(family, layer)
 end
 
 function match3cell:add_element(element)
+	element:remove_from_cell()
 	element.cell = self
 	table.insert(self.elements, element)
 end

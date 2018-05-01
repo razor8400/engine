@@ -38,6 +38,7 @@
 		BF868748208341FA00523939 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF868746208341FA00523939 /* script.cpp */; };
 		BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D520906CF000C39C31 /* rect.cpp */; };
 		BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */; };
+		BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1DC209359FD00C39C31 /* action.cpp */; };
 		BFCB321D20754006001B5995 /* file_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB321C20754006001B5995 /* file_utils.cpp */; };
 		BFCB321E20754100001B5995 /* Assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFCB321220753755001B5995 /* Assets */; };
 		BFCB32292076100B001B5995 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB32232076100A001B5995 /* window.cpp */; };
@@ -132,6 +133,8 @@
 		BFB6D1D620906CF000C39C31 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
 		BFB6D1D82090909900C39C31 /* box_collider2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider2d.h; sourceTree = "<group>"; };
 		BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = box_collider2d.cpp; sourceTree = "<group>"; };
+		BFB6D1DB2093531800C39C31 /* action.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = action.h; sourceTree = "<group>"; };
+		BFB6D1DC209359FD00C39C31 /* action.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = action.cpp; sourceTree = "<group>"; };
 		BFCB321220753755001B5995 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = ../../Assets; sourceTree = "<group>"; };
 		BFCB321B20754006001B5995 /* file_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_utils.h; sourceTree = "<group>"; };
 		BFCB321C20754006001B5995 /* file_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_utils.cpp; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 				BF0D23A72084030600542952 /* scriptable_component.cpp */,
 				BFB6D1D82090909900C39C31 /* box_collider2d.h */,
 				BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */,
+				BFB6D1DB2093531800C39C31 /* action.h */,
+				BFB6D1DC209359FD00C39C31 /* action.cpp */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */,
 				BF3FF3DE208C92AF0070955D /* touch_listener.cpp in Sources */,
 				BF439CC420888653000B8A15 /* logger.cpp in Sources */,
+				BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
 				BFCB323620766319001B5995 /* image_utils.cpp in Sources */,
 				BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */,

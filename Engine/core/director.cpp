@@ -29,7 +29,7 @@ namespace engine
 
     }
     
-    math::vector3d director::convert_screen_to_world(const math::vector3d& screen) const
+    math::vector3d director::convert_screen_to_world(const math::vector2d& screen) const
     {
         auto win_size = application::instance().get_win_size();
         return screen - win_size / 2.0f;

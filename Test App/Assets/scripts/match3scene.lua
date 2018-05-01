@@ -34,17 +34,61 @@ local function create_back_ground()
 end
 
 function match3scene:on_touch_began()
-	local mouse = game:get_mouse_location()
-	debug_log(mouse.x .. ',' .. mouse.y)
-	return self.collider:on_click(mouse)
+	local mouse = game:get_world_mouse_location()
+	if self.collider:on_click(mouse) then
+		local location = self.obj:global_to_local(mouse)
+		local cell = field:convert_world_to_cell(location.x, location.y)
+
+		self.selected = field:get_element(cell.x, cell.y, element_layer.gameplay)
+		return true
+	end
+	return false
 end
 
 function match3scene:on_touch_ended()
-	debug_log("hui")
+	self.selected = nil
 end
 
 function match3scene:on_touch_moved()
+	if self.selected then
+		local mouse = game:get_world_mouse_location()
+		local location = self.obj:global_to_local(mouse)
+		local to = field:convert_world_to_cell(location.x, location.y)
+		local selected = self.selected
+		
+		local dx = to.x - selected.cell.x
+		local dy = to.y - selected.cell.y
 
+		if math.abs(dx + dy) == 1 then
+			local target = field:get_element(to.x, to.y, element_layer.gameplay)
+			if target then
+				local from = selected.cell:tile()
+				local list = action_list.create()
+
+				list:append(targeted_action.create(selected.view, action_move.move_to(field:convert_cell_to_world(to.x, to.y), 0.3)))
+				list:append(targeted_action.create(target.view, action_move.move_to(field:convert_cell_to_world(from.x, from.y), 0.3)))
+				
+				local sequence = action_sequence.create()
+
+				sequence:append(list)
+				sequence:append(action_lua_callback.create(function()
+					if field:swipe(from, to) then
+						
+					else
+						local list = action_list.create()
+
+						list:append(targeted_action.create(selected.view, action_move.move_to(field:convert_cell_to_world(from.x, from.y), 0.3)))		
+						list:append(targeted_action.create(target.view, action_move.move_to(field:convert_cell_to_world(to.x, to.y), 0.3)))
+						
+						selected.view:add_component(list)
+					end
+				end))
+
+				selected.view:add_component(sequence)
+				self.selected = nil
+			end
+		end
+	end
 end
 
 function match3scene:start()
@@ -58,7 +102,7 @@ function match3scene:start()
 
 			for k, v in pairs(cell.elements) do
 				local view = assert(loader:load_element(v))
-				view:set_position(field:convert_cell_to_world(i, j))
+				view:set_position(field:convert_cell_to_world(cell.x, cell.y))
 				background:add_child(view)
 			end
 		end
@@ -73,8 +117,6 @@ function match3scene:start()
 	self.obj:set_position(-size.x / 2, -size.y / 2)
 	self.obj:add_child(background)
 	self.obj:add_component(collider)
-	--self.obj:set_scale(0.5, 0.5)
-	self.obj:set_rotation(0, 0, 45)
 end
 
 function match3scene:update()
