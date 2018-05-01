@@ -4,6 +4,10 @@
 #define M_PI       3.14159265358979323846f
 #endif
 
+#include "vector2d.h"
+#include "vector3d.h"
+#include "vector4d.h"
+
 namespace math
 {
     static float deg_to_rad(float rotation)

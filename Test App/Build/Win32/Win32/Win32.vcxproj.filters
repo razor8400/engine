@@ -122,9 +122,6 @@
     <ClCompile Include="..\..\..\..\Engine\utils\file_utils.cpp">
       <Filter>engine\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\components\component.cpp">
-      <Filter>engine\components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\components\scriptable_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
@@ -166,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\math\rect.cpp">
       <Filter>engine\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\components\action.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\components\box_collider2d.cpp">
+      <Filter>engine\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +297,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\math\libmath.h">
       <Filter>engine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\components\action.h">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\components\box_collider2d.h">
+      <Filter>engine\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

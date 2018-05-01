@@ -136,7 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp" />
-    <ClCompile Include="..\..\..\..\Engine\components\component.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\components\action.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\components\box_collider2d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\components\scriptable_component.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\application.cpp" />
     <ClCompile Include="..\..\..\..\Engine\core\director.cpp" />
@@ -202,6 +203,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Engine\2d\sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\common.h" />
+    <ClInclude Include="..\..\..\..\Engine\components\action.h" />
+    <ClInclude Include="..\..\..\..\Engine\components\box_collider2d.h" />
     <ClInclude Include="..\..\..\..\Engine\components\component.h" />
     <ClInclude Include="..\..\..\..\Engine\components\scriptable_component.h" />
     <ClInclude Include="..\..\..\..\Engine\config.h" />

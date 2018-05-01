@@ -941,7 +941,7 @@ namespace engine
             int move_by(lua_State* L)
             {
                 auto by = vector3d::get(L, 1);
-                auto duration = lua_tonumber(L, 2);
+                auto duration = get_number(L, 2);
                 
                 CLEAR_TOP(L);
                 

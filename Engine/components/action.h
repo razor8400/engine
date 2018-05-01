@@ -87,7 +87,7 @@ namespace engine
         void start_next_action();
     private:
         vector<action*> m_actions;
-        int m_current_action = 0;
+        size_t m_current_action = 0;
     };
     
     class action_list : public action
@@ -104,7 +104,7 @@ namespace engine
         void start() override;
     private:
         vector<action*> m_actions;
-        int m_counter = 0;
+        size_t m_counter = 0;
     };
     
     class action_move : public action_inverval
