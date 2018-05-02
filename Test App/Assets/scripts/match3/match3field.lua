@@ -137,7 +137,7 @@ function match3field:swipe(a, b)
 end
 
 function match3field:process()
-	match3match:find_matches(self, function(matches)
+	find_callback = function(matches)
 		for k, v in pairs(matches) do
 			for k1, v1 in pairs(v) do
 				v1:remove_from_cell()
@@ -147,12 +147,21 @@ function match3field:process()
 				end
 			end
 		end
-	end)
+	end
+	
+	finish_callback = function()
+
+	end
+
+	match3match:find_matches(self, find_callback, finish_callback)
 end
 
 function match3field:update()
 	match3match:update()
 
+	if self.thread then
+		coroutine.resume(self.thread)
+	end
 
 
 	if self.update_field then

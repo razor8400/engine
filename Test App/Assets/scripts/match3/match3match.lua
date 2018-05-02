@@ -163,7 +163,7 @@ function match3match_handler:check_match(field, x, y)
 	return nil
 end
 
-function match3match_handler:find_matches(field, callback)
+function match3match_handler:find_matches(field, find_callback, finish_callback)
 	self.thread = coroutine.create(function()
 		for y = 1, field.rows do
 			local matches = {}
@@ -173,16 +173,21 @@ function match3match_handler:find_matches(field, callback)
 					table.insert(matches, match)
 				end
 			end
-			if callback then
-				callback(matches)
+			if find_callback then
+				find_callback(matches)
 			end
 			coroutine.yield()
 		end
+		if finish_callback then
+			finish_callback()
+		end
+		self.thread = nil
 	end)
+	self.finish_callback = finish_callback
 end
 
 function match3match_handler:update()
-	if self.thread and coroutine.status(self.thread) ~= "dead" then
+	if self.thread then
 		coroutine.resume(self.thread)
 	end
 end
