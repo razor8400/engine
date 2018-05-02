@@ -38,6 +38,7 @@ function match3cell:find_element(family, layer)
 end
 
 function match3cell:add_element(element)
+	assert(self:get_element_at(element.element_layer) == nil)
 	element:remove_from_cell()
 	element.cell = self
 	table.insert(self.elements, element)
@@ -53,7 +54,8 @@ end
 function match3cell.new(x, y)
 	local cell = {
 		x = x, y = y,
-		elements = {}
+		elements = {},
+		generate_elements = false
 	}
 
 	debug_log('[match3cell] new x:' .. x .. ',' .. 'y:' .. y)

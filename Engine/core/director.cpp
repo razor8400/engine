@@ -34,11 +34,6 @@ namespace engine
         auto win_size = application::instance().get_win_size();
         return screen - win_size / 2.0f;
     }
-        
-	void director::set_frame_rate(int frame_rate)
-    {
-        m_time_interval = 1.0f / frame_rate;
-    }
     
 	void director::set_projection_mode(projection_mode mode)
 	{
@@ -103,17 +98,9 @@ namespace engine
         
         if (m_running)
         {
-            static auto last_update = std::chrono::steady_clock::now();
+            auto delta = get_delta_time();
             
-            auto now = std::chrono::steady_clock::now();
-            auto delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - last_update);
-            auto count = delta.count();
-            
-			if (count >= m_time_interval)
-			{
-                last_update = now;
-                update(count);
-			}
+            update(delta);
         }
     }
     
@@ -126,5 +113,17 @@ namespace engine
         }
         
 		pool_manager::instance().update();
+    }
+    
+    float director::get_delta_time() const
+    {
+        static auto last_update = std::chrono::steady_clock::now();
+        
+        auto now = std::chrono::steady_clock::now();
+        auto delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - last_update);
+        
+        last_update = now;
+        
+        return delta.count();
     }
 }

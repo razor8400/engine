@@ -24,9 +24,9 @@ end
 
 function match:iterate(handler)
 	for y = 0, self.height - 1 do
-		for x = 1, self.width do
-			local i = y * self.width + x
-			handler(x, y + 1, i)
+		for x = 0, self.width - 1 do
+			local i = y * self.width + x + 1
+			handler(x + 1, y + 1, i)
 		end
 	end
 end
@@ -118,8 +118,8 @@ function match3match_handler:match(field, match, x, y)
 
 	match:iterate(function(i, j, k)
 		if match.match[k] > 0 then
-			local x2 = x + (j - 1)
-			local y2 = y + (i - 1)
+			local x2 = x + (i - 1)
+			local y2 = y + (j - 1)
 
 			local cell = field:get_cell(x2, y2)
 			if cell then
@@ -163,18 +163,28 @@ function match3match_handler:check_match(field, x, y)
 	return nil
 end
 
-function match3match_handler:find_matches(field)
-	local matches = {}
-
-	for x = 1, field.colls do
+function match3match_handler:find_matches(field, callback)
+	self.thread = coroutine.create(function()
 		for y = 1, field.rows do
-			if self:check_match(field, x, y) then
-				table.insert(match, matches)
+			local matches = {}
+			for x = 1, field.colls do
+				local match = self:check_match(field, x, y)
+				if match then
+					table.insert(matches, match)
+				end
 			end
+			if callback then
+				callback(matches)
+			end
+			coroutine.yield()
 		end
-	end
+	end)
+end
 
-	return matches
+function match3match_handler:update()
+	if self.thread and coroutine.status(self.thread) ~= "dead" then
+		coroutine.resume(self.thread)
+	end
 end
 
 return match3match_handler

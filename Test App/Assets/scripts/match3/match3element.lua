@@ -15,35 +15,37 @@ local elements =
 	[element_type.blue] = {
 		element_type = element_type.blue,
 		element_layer = element_layer.gameplay,
-		handle_input = true
+		handle_input = true,
+		droppable = true
 	},
 	[element_type.red] = {
 		element_type = element_type.red,
 		element_layer = element_layer.gameplay,
-		handle_input = true
+		handle_input = true,
+		droppable = true
 	},
 	[element_type.green] = {
 		element_type = element_type.green,
 		element_layer = element_layer.gameplay,
-		handle_input = true
+		handle_input = true,
+		droppable = true
 	},
 	[element_type.yellow] = {
 		element_type = element_type.yellow,
 		element_layer = element_layer.gameplay,
-		handle_input = true
+		handle_input = true,
+		droppable = true
 	},
 	[element_type.orange] = {
 		element_type = element_type.orange,
 		element_layer = element_layer.gameplay,
-		handle_input = true
+		handle_input = true,
+		droppable = true
 	},
 }
 
 local match3element = {
-	element_type = element_type.unknown,
-	element_layer = element_layer.underground,
-	cell = nil,
-	view = nil
+
 }
 
 match3element.new = function(family)
@@ -52,10 +54,12 @@ match3element.new = function(family)
 	local element = {
 		element_type = config.element_type,
 		element_layer = config.element_layer,
-		handle_input = config.handle_input
+		handle_input = config.handle_input,
+		droppable = config.droppable,
+		cell = nil,
+		view = nil,
+		path = {}
 	}
-
-	debug_log('[match3element] new type:' .. element.element_type .. ', ' .. 'layer:' .. element.element_layer)
 
 	setmetatable(element, { __index = match3element })
 

@@ -60,6 +60,7 @@ namespace engine
             register_class<engine::action_lua_callback>(state, scripting::action_lua_callback::functions);
             register_class<engine::action_sequence>(state, scripting::action_sequence::functions);
             register_class<engine::action_list>(state, scripting::action_list::functions);
+            register_class<engine::action_delay>(state, scripting::action_delay::functions);
             register_class<engine::action_move>(state, scripting::action_move::functions);
         }
         

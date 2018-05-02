@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/core/game_object.cpp"
-            timestampString = "546868011.6911941"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "game_object::local_to_global(const math::vector3d&amp; v3)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/core/game_object.cpp"
-            timestampString = "546868011.692529"
+            timestampString = "546974254.921936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "game_object::global_to_local(const math::vector3d&amp; v3)"
+            landmarkName = "game_object::remove_component(component* component)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.692861"
+            timestampString = "546974254.922066"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "627"
-            endingLineNumber = "627"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
             landmarkName = "global_to_local(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -58,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.694212"
+            timestampString = "546974254.9235801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "629"
-            endingLineNumber = "629"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
             landmarkName = "global_to_local(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -74,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/components/action.cpp"
-            timestampString = "546868011.694556"
+            timestampString = "546974254.924199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "action_move::step(float s)"
             landmarkType = "7">
          </BreakpointContent>
@@ -137,22 +121,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Engine/components/action.cpp"
-            timestampString = "546868011.695576"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "action_move::stop()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "../../../Engine/components/scriptable_component.cpp"
             timestampString = "546825019.317444"
             startingColumnNumber = "9223372036854775807"
@@ -202,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.69584"
+            timestampString = "546974254.924577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "get(lua_State* L, int n)"
             landmarkType = "9">
          </BreakpointContent>
@@ -218,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.696066"
+            timestampString = "546974254.925123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "625"
-            endingLineNumber = "625"
+            startingLineNumber = "643"
+            endingLineNumber = "643"
             landmarkName = "global_to_local(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -234,7 +202,167 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.696306"
+            timestampString = "546974254.925583"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "get(lua_State* L, int n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.926029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "get(lua_State* L, int n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.9264849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "646"
+            endingLineNumber = "646"
+            landmarkName = "global_to_local(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.926931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
+            landmarkName = "global_to_local(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.927371"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
+            landmarkName = "global_to_local(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.9278409"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
+            landmarkName = "global_to_local(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.928282"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "get(lua_State* L, int n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.928717"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "get(lua_State* L, int n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.929147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "962"
+            endingLineNumber = "962"
+            landmarkName = "move_to(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.92959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "961"
+            endingLineNumber = "961"
+            landmarkName = "move_to(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.930023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -250,103 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.69671"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "get(lua_State* L, int n)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.697098"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "628"
-            endingLineNumber = "628"
-            landmarkName = "global_to_local(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.6974961"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "626"
-            endingLineNumber = "626"
-            landmarkName = "global_to_local(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.697822"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "624"
-            endingLineNumber = "624"
-            landmarkName = "global_to_local(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.697968"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "623"
-            endingLineNumber = "623"
-            landmarkName = "global_to_local(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.698084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "get(lua_State* L, int n)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.698215"
+            timestampString = "546974254.930447"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -362,75 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.6983351"
+            timestampString = "546974254.930879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "930"
-            endingLineNumber = "930"
-            landmarkName = "move_to(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.698432"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "929"
-            endingLineNumber = "929"
-            landmarkName = "move_to(lua_State* L)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.698534"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "get(lua_State* L, int n)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.698634"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "get(lua_State* L, int n)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.698733"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "932"
-            endingLineNumber = "932"
+            startingLineNumber = "964"
+            endingLineNumber = "964"
             landmarkName = "move_to(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -442,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/scripting.cpp"
-            timestampString = "546868011.698842"
+            timestampString = "546974254.931327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "call_method(lua_State* state, const std::string&amp; class_name, const std::string&amp; method)"
             landmarkType = "9">
          </BreakpointContent>
@@ -458,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/scripting.cpp"
-            timestampString = "546868011.6992511"
+            timestampString = "546974254.931595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "push_to_table(lua_State* state, const std::string&amp; table, const std::string&amp; field, const math::vector3d&amp; v3)"
             landmarkType = "9">
          </BreakpointContent>
@@ -474,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/scripting.inl"
-            timestampString = "546868011.69937"
+            timestampString = "546974254.931655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -490,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.699632"
+            timestampString = "546974254.931808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "934"
-            endingLineNumber = "934"
+            startingLineNumber = "966"
+            endingLineNumber = "966"
             landmarkName = "move_to(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -506,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.699713"
+            timestampString = "546974254.932268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "849"
-            endingLineNumber = "849"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
             landmarkName = "create(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -522,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/scripting/binding.cpp"
-            timestampString = "546868011.699783"
+            timestampString = "546974254.932691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "861"
-            endingLineNumber = "861"
+            startingLineNumber = "879"
+            endingLineNumber = "879"
             landmarkName = "append(lua_State* L)"
             landmarkType = "9">
          </BreakpointContent>
@@ -538,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/components/action.cpp"
-            timestampString = "546868011.699842"
+            timestampString = "546974254.933113"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
@@ -554,12 +522,265 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Engine/components/action.cpp"
-            timestampString = "546868011.699917"
+            timestampString = "546974254.933175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
             endingLineNumber = "112"
             landmarkName = "action_sequence::update(float dt)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/ref.cpp"
+            timestampString = "546948569.623778"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "ref::release()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "546974254.933267"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "game_object::remove_from_parent()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "546974254.9333169"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "game_object::remove_child(game_object* obj)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/utils/vector.inl"
+            timestampString = "546948288.673735"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "update()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::vector&lt;engine::action*&gt;::update()"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/utils/vector.inl"
+                  timestampString = "546948288.755031"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "4426">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::vector&lt;engine::ref*&gt;::update()"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/utils/vector.inl"
+                  timestampString = "546948288.756853"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "4423">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::vector&lt;engine::touch_listener*&gt;::update()"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/utils/vector.inl"
+                  timestampString = "546948288.7586319"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "4426">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::vector&lt;engine::component*&gt;::update()"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/utils/vector.inl"
+                  timestampString = "546948288.760379"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "4426">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "engine::vector&lt;engine::game_object*&gt;::update()"
+                  moduleName = "OSX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Work/engine/Test%20App/Build/OSX/../../../Engine/utils/vector.inl"
+                  timestampString = "546948288.762115"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "4426">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/pool_manager.cpp"
+            timestampString = "546948353.603374"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "pool_manager::update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/components/action.cpp"
+            timestampString = "546974254.9336129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "action::done_action()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "546974254.933673"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "game_object::remove_component(component* component)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.933723"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "807"
+            endingLineNumber = "807"
+            landmarkName = "destroy(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/ref.cpp"
+            timestampString = "546948751.47987"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "ref::release()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/scripting/binding.cpp"
+            timestampString = "546974254.934182"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "destroy(lua_State* L)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Engine/core/game_object.cpp"
+            timestampString = "546974254.9345779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "game_object::update(float dt)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

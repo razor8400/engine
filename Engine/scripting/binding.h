@@ -25,6 +25,7 @@ namespace engine
             int get_world_mouse_location(lua_State* L);
             int convert_to_world_space(lua_State* L);
             int get_win_size(lua_State* L);
+            int get_delta_time(lua_State* L);
             
             static const luaL_Reg functions[] =
             {
@@ -32,6 +33,7 @@ namespace engine
                 { "get_world_mouse_location", get_world_mouse_location },
                 { "get_win_size", get_win_size },
                 { "convert_to_world_space", convert_to_world_space },
+                { "get_delta_time", get_delta_time },
                 { NULL, NULL, }
             };
         }
@@ -216,6 +218,17 @@ namespace engine
             {
                 { "create", create },
                 { "append", append },
+                { NULL, NULL }
+            };
+        }
+        
+        namespace action_delay
+        {
+            int create(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "create", create },
                 { NULL, NULL }
             };
         }

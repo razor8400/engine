@@ -107,6 +107,15 @@ namespace engine
         size_t m_counter = 0;
     };
     
+    class action_delay : public action_inverval
+    {
+        DECLARE_CLASS
+    public:
+        static action_delay* delay(float duration);
+    private:
+        void step(float s) {};
+    };
+    
     class action_move : public action_inverval
     {
         DECLARE_CLASS
@@ -117,7 +126,6 @@ namespace engine
     protected:
         void step(float s) override;
         void start() override;
-        void stop() override;
     protected:
         math::vector3d m_from;
         math::vector3d m_to;

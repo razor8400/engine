@@ -153,6 +153,7 @@ namespace engine
         if (m_active)
             component->stop();
         
+        component->m_parent = nullptr;
         m_components.erase(component);
     }
     

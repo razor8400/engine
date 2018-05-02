@@ -162,6 +162,17 @@ namespace engine
             m_parent->add_component(action);
     }
     
+    IMPLEMENT_TYPE_INFO(action_delay)
+    
+    action_delay* action_delay::delay(float duration)
+    {
+        auto action = ref::create<action_delay>();
+        
+        action->m_duration = duration;
+        
+        return action;
+    }
+    
     IMPLEMENT_TYPE_INFO(action_move)
     
     action_move* action_move::move(const math::vector3d& from, const math::vector3d& to, float duration)
@@ -219,10 +230,5 @@ namespace engine
             m_to = m_parent->get_position() + m_by;
         
         action_inverval::start();
-    }
-    
-    void action_move::stop()
-    {
-        m_parent->set_position(m_to);
     }
 }

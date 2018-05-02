@@ -47,13 +47,22 @@ namespace engine
             
             int debug_log(lua_State* L)
             {
-                if (lua_isstring(L, 1))
-                    logger() << "[lua] " << lua_tostring(L, 1);
+                int top = lua_gettop(L);
                 
-                if (lua_isnil(L, 1))
-                    logger() << "[lua] nil";
-                
-                CLEAR_TOP(L)
+                while (top)
+                {
+                    if (lua_isstring(L, -1))
+                        logger() << "[lua] " << lua_tostring(L, -1);
+                    
+                    if (lua_isnil(L, -1))
+                        logger() << "[lua] nil";
+                    
+                    if (lua_isboolean(L, -1))
+                        logger() << "[lua] " << lua_toboolean(L, -1);
+                    
+                    lua_pop(L, 1);
+                    top = lua_gettop(L);
+                }
                 
                 return 0;
             }
@@ -198,6 +207,15 @@ namespace engine
                 auto location = application::instance().get_win_size();
                 
                 vector3d::push(L, location.x, location.y, 0);
+                
+                return 1;
+            }
+            
+            int get_delta_time(lua_State* L)
+            {
+                auto time = director::instance().get_delta_time();
+                
+                lua_pushnumber(L, time);
                 
                 return 1;
             }
@@ -657,7 +675,7 @@ namespace engine
                 if (!obj)
                     return 0;
                 
-                obj->set_color(vector3d::get(L, 2));
+                obj->set_color(color::get(L, 2));
                 
                 CLEAR_TOP(L);
                 
@@ -902,6 +920,20 @@ namespace engine
                     list->append(action);
                 
                 return 0;
+            }
+        }
+        
+        namespace action_delay
+        {
+            int create(lua_State* L)
+            {
+                auto duration = get_number(L, 1);
+                
+                CLEAR_TOP(L);
+                
+                push_ref(L, engine::action_delay::delay(duration));
+                
+                return 1;
             }
         }
         

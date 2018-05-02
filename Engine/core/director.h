@@ -13,7 +13,6 @@ namespace engine
         
         math::vector3d convert_screen_to_world(const math::vector2d& screen) const;
         
-		void set_frame_rate(int frame_rate);
 		void set_projection_mode(projection_mode mode);
 		
 		void set_near_plane(float near_plane);
@@ -30,14 +29,13 @@ namespace engine
 		void main_loop();
         
         scene* running_scene() const { return m_scene; }
+        float get_delta_time() const;
 	private:
         void update(float delta_time);
         
         director();
         ~director();
     private:
-		float m_time_interval = 0;
-
         scene* m_scene = nullptr;
         scene* m_next_scene = nullptr;
 
