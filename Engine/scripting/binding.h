@@ -26,6 +26,7 @@ namespace engine
             int convert_to_world_space(lua_State* L);
             int get_win_size(lua_State* L);
             int get_delta_time(lua_State* L);
+            int get_local_time(lua_State* L);
             
             static const luaL_Reg functions[] =
             {
@@ -34,6 +35,7 @@ namespace engine
                 { "get_win_size", get_win_size },
                 { "convert_to_world_space", convert_to_world_space },
                 { "get_delta_time", get_delta_time },
+                { "get_local_time", get_local_time },
                 { NULL, NULL, }
             };
         }

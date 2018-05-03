@@ -42,6 +42,9 @@ namespace engine
 
 	void game_object::draw(const math::mat4& parent)
 	{
+        if (!m_enabled)
+            return;
+        
         auto model_view_transform = transform(parent);
     
         for (auto obj : m_children)

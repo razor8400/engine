@@ -102,11 +102,11 @@ function match3field:generate_field()
 	for x = self.colls, 1, -1 do
 		for y = self.rows, 1, -1 do
 			local element = self:generate_element(x, y)
-			if self.delegate then
-				self.delegate:on_generate_element(event_generate.new(element, x, y))
-			end
+			table.insert(self.generate_events, event_generate.new(element, x, y))
 		end
 	end
+
+	self.send_events = true
 end
 
 function match3field:swipe(a, b)
@@ -136,24 +136,97 @@ function match3field:swipe(a, b)
 	return false
 end
 
+function match3field:events_count()
+	return #self.generate_events + #self.destroy_events + #self.drop_events
+end
+
 function match3field:process()
-	find_callback = function(matches)
+	local find_matches = 0
+	local find_finished = false
+
+	local find_callback = function(matches)
 		for k, v in pairs(matches) do
 			for k1, v1 in pairs(v) do
 				v1:remove_from_cell()
 				
-				if self.delegate then
-					self.delegate:on_destroy_element(event_destroy.new(v1))
-				end
+				table.insert(self.destroy_events, event_destroy.new(v1))
 			end
 		end
+
+		find_matches = find_matches + #matches
 	end
+
+	local finish_callback = function()
+		local tick = 1
+
+		function drop_element(element, x, y)
+			if #element.path == 0 then
+				table.insert(self.drop_events, event_drop.new(tick, element))
+			end
 	
-	finish_callback = function()
+			table.insert(element.path, { x = x, y = y })
+		end
+	
+		repeat
+			local drop_elements = false
 
+			for x = 1, self.colls do
+				for y = 1, self.rows - 1 do
+					local cell = assert(self:get_cell(x, y))
+	
+					if cell:get_element_at(element_layer.gameplay) == nil then
+						local top = assert(self:get_cell(x, y + 1))
+						local element = top:get_element_at(element_layer.gameplay)
+	
+						if element and element.droppable then
+							cell:add_element(element)
+							drop_elements = true
+							drop_element(element, x, y)
+						end
+					end
+				end
+			end
+	
+			for x = 1, self.colls do
+				for y = 1, self.rows do
+					local cell = assert(self:get_cell(x, y))
+					if cell:get_element_at(element_layer.gameplay) == nil and cell.generate_elements then
+						local element = self:generate_element(x, y)
+	
+						table.insert(self.generate_events, event_generate.new(element, x, y + 1))
+						drop_element(element, x, y)
+					end
+				end
+			end
+	
+			tick = tick + 1
+		until not drop_elements
+
+		self.send_events = true
+
+		find_finished = true
 	end
 
-	match3match:find_matches(self, find_callback, finish_callback)
+	self.thread = coroutine.create(function()
+		local find_started = false
+
+		repeat
+			if not find_started then
+				find_started = true
+				find_matches = 0
+				match3match:find_matches(self, find_callback, finish_callback)
+			end
+
+			coroutine.yield()
+
+			if find_finished and find_matches > 0 then
+				find_started = false
+				find_finished = false
+			end
+		until find_finished and self:events_count() == 0
+
+		self.thread = nil
+	end)
 end
 
 function match3field:update()
@@ -163,73 +236,27 @@ function match3field:update()
 		coroutine.resume(self.thread)
 	end
 
-
-	if self.update_field then
-		local destroy = {}
-		local drop = {}
-		local generate = {}
-
-		local tick = 1
-
-		local function on_drop(element, x, y)
-			if #element.path == 0 then
-				table.insert(drop, event_drop.new(tick, element))
-			end
-	
-			table.insert(element.path, { x = x, y = y })
-		end
-	
-		repeat
-			local drop_elements = false
-	
-			for y = 1, self.rows - 1 do
-				local cell = assert(self:get_cell(self.coll, y))
-
-				if cell:get_element_at(element_layer.gameplay) == nil then
-					local top = assert(self:get_cell(self.coll, y + 1))
-					local element = top:get_element_at(element_layer.gameplay)
-
-					if element and element.droppable then
-						cell:add_element(element)
-						
-						on_drop(element, self.coll, y)
-						drop_elements = true
-					end
-				end
-			end
-	
-			for y = 1, self.rows do
-				local cell = assert(self:get_cell(self.coll, y))
-				if cell:get_element_at(element_layer.gameplay) == nil and cell.generate_elements then
-					local element = self:generate_element(self.coll, y)
-
-					table.insert(generate, event_generate.new(element, self.coll, y + 1))
-					on_drop(element, self.coll, y)
-				end
-			end
-	
-			tick = tick + 1
-		until not drop_elements
-
+	if self.send_events then
 		if self.delegate then
-			for k, v in pairs(destroy) do
-				self.delegate:on_destroy_element(event_destroy.new(v))
+			for k, v in pairs(self.destroy_events) do
+				self.delegate:on_destroy_element(v)
 			end
 
-			for k, v in pairs(generate) do
+			for k, v in pairs(self.generate_events) do
 				self.delegate:on_generate_element(v)
 			end
 	
-			for k, v in pairs(drop) do
+			for k, v in pairs(self.drop_events) do
 				self.delegate:on_drop_element(v)
 			end
+
+			self.delegate:handle_events()
 		end
 
-		self.coll = self.coll + 1
-
-		if self.coll > self.colls then
-			self.update_field = false
-		end
+		self.send_events = false
+		self.drop_events = {}
+		self.generate_events = {}
+		self.destroy_events = {}
 	end
 end
 
@@ -242,6 +269,10 @@ function match3field.new(colls, rows, cell)
 	field.rows = rows
 	field.cell = cell
 	field.cells = {}
+	field.destroy_events = {}
+	field.generate_events = {}
+	field.drop_events = {}
+	field.send_events = false
 	
 	setmetatable(field, { __index = match3field })
 

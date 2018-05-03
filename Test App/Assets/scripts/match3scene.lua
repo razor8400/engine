@@ -5,10 +5,14 @@ local colls = 10
 local rows = 10
 local cell = 64
 local swipe = 0.2
-local drop = 0.1
+local drop = 0.2
 
 local field = match3field.new(colls, rows, cell)
 local bounds = { -field:size().x / 2, - field:size().y / 2, field:size().x / 2, field:size().y / 2 }
+ 
+local events_generate = {}
+local events_destroy = {}
+local events_drop = {}
 
 local function get_cell_texture(x, y)
 	if math.fmod(x + y, 2) == 0 then
@@ -36,7 +40,7 @@ local function create_back_ground()
 end
 
 function match3scene:on_touch_began()
-	if self.dispatch_events > 0 then
+	if self.dispatch_events then
 		return false
 	end
 
@@ -110,7 +114,10 @@ function match3scene:start()
 	self.obj:set_position(-size.x / 2, -size.y / 2)
 	self.obj:add_child(background)
 	self.obj:add_component(collider)
-	self.dispatch_events = 0
+
+	self.dispatch_events = false
+	self.actions = {}
+	self.current_action = 1
 
 	field.delegate = self
 	field:generate_field()
@@ -125,45 +132,90 @@ function match3scene:stop()
 end
 
 function match3scene:on_generate_element(e)
-	local view = assert(loader:load_element(e.element))
-	view:set_position(field:convert_cell_to_world(e.x, e.y))
-	self.obj:add_child(view)
+	table.insert(events_generate, e)
 end
 
 function match3scene:on_destroy_element(e)
-	local view = assert(e.element.view)
-	view:remove_from_parent()
+	table.insert(events_destroy, e)
 end
 
 function match3scene:on_drop_element(e)
-	local actions = action_sequence.create()
-	local view = assert(e.element.view)
+	table.insert(events_drop, e)
+end
 
-	actions:append(action_delay.create(e.tick * drop))
+function match3scene:handle_events()
+	local action_destroy = action_list.create()
+	local action_generate = action_list.create()
+	local action_drop = action_list.create()
 
-	for k, v in pairs(e.element.path) do
-		actions:append(action_move.move_to(field:convert_cell_to_world(v.x, v.y), drop))
+	for k, v in pairs(events_destroy) do
+		action_destroy:append(action_lua_callback.create(function()
+			local view = assert(v.element.view)
+			view:remove_from_parent()
+		end))
 	end
 
-	self:on_event_start()
+	for k, v in pairs(events_generate) do
+		local view = assert(loader:load_element(v.element))
+		
+		view:set_position(field:convert_cell_to_world(v.x, v.y))
+		view:set_enabled(false)
 
-	actions:append(action_lua_callback.create(function()
-		--self:on_event_done()
-	end))
+		self.obj:add_child(view)
 
-	e.element.path = {}
-	view:add_component(actions)
+		action_generate:append(action_lua_callback.create(function()
+			view:set_enabled(true)
+		end))
+	end
+
+	for k, v in pairs(events_drop) do
+		local sequence = action_sequence.create()
+		local view = assert(v.element.view)
+	
+		sequence:append(action_delay.create(v.tick * drop))
+
+		for k1, v1 in pairs(v.element.path) do
+			sequence:append(targeted_action.create(view, action_move.move_to(field:convert_cell_to_world(v1.x, v1.y), drop)))
+		end
+	
+		v.element.path = {}
+
+		action_drop:append(sequence)
+	end
+
+	events_generate = {}
+	events_destroy = {}
+	events_drop = {}
+
+	table.insert(self.actions, action_sequence.create(action_destroy, 
+													action_generate, 
+													action_drop, 
+													action_lua_callback.create(function()
+														self:on_events_finished()
+													end)))
+	self:run_events()
 end
 
-function match3scene:on_event_start()
-	--self.dispatch_events = self.dispatch_events + 1
+function match3scene:run_events()
+	if not self.dispatch_events then
+		self.current_action = 1
+		self.dispatch_events = true
+		self:run_next_events()
+	end
 end
 
-function match3scene:on_event_done()
-	--self.dispatch_events = self.dispatch_events - 1
-	debug_log(self.dispatch_events)
-	if self.dispatch_events == 0 then
-		field:process()
+function match3scene:run_next_events()
+	local action = self.actions[self.current_action]
+	self.obj:add_component(action)
+end
+
+function match3scene:on_events_finished()
+	self.current_action = self.current_action + 1
+	if self.current_action > #self.actions then
+		self.actions = {}
+		self.dispatch_events = false
+	else
+		self:run_next_events()
 	end
 end
 

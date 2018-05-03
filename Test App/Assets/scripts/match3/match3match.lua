@@ -178,12 +178,12 @@ function match3match_handler:find_matches(field, find_callback, finish_callback)
 			end
 			coroutine.yield()
 		end
+
 		if finish_callback then
 			finish_callback()
 		end
 		self.thread = nil
 	end)
-	self.finish_callback = finish_callback
 end
 
 function match3match_handler:update()

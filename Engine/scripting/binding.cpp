@@ -47,22 +47,24 @@ namespace engine
             
             int debug_log(lua_State* L)
             {
-                int top = lua_gettop(L);
+                std::vector<std::string> strings;
                 
-                while (top)
+                while (lua_gettop(L))
                 {
                     if (lua_isstring(L, -1))
-                        logger() << "[lua] " << lua_tostring(L, -1);
+                        strings.push_back(lua_tostring(L, -1));
                     
                     if (lua_isnil(L, -1))
-                        logger() << "[lua] nil";
+                        strings.push_back("nill");
                     
                     if (lua_isboolean(L, -1))
-                        logger() << "[lua] " << lua_toboolean(L, -1);
+                        strings.push_back(lua_toboolean(L, -1) > 0 ? "true" : "false");
                     
                     lua_pop(L, 1);
-                    top = lua_gettop(L);
                 }
+                
+                for (auto it = strings.rbegin(); it != strings.rend(); ++it)
+                    logger() << "[lua] " << *it;
                 
                 return 0;
             }
@@ -216,6 +218,15 @@ namespace engine
                 auto time = director::instance().get_delta_time();
                 
                 lua_pushnumber(L, time);
+                
+                return 1;
+            }
+            
+            int get_local_time(lua_State* L)
+            {
+                auto time = director::instance().get_local_time();
+                
+                lua_pushinteger(L, time);
                 
                 return 1;
             }
@@ -862,7 +873,10 @@ namespace engine
                     actions.push_back(action);
                 }
                 
-                auto sequence = engine::action_sequence::sequence(actions);
+                auto sequence = ref::create<engine::action_sequence>();
+                
+                for (auto it = actions.rbegin(); it != actions.rend(); ++it)
+                    sequence->append(*it);
                 
                 push_ref(L, sequence);
                 
