@@ -141,8 +141,7 @@ function match3field:events_count()
 end
 
 function match3field:process()
-	local find_matches = 0
-	local find_finished = false
+	local field_changed = false
 
 	local find_callback = function(matches)
 		for k, v in pairs(matches) do
@@ -152,8 +151,8 @@ function match3field:process()
 				table.insert(self.destroy_events, event_destroy.new(v1))
 			end
 		end
-
-		find_matches = find_matches + #matches
+		
+		field_changed = #matches > 0	
 	end
 
 	local finish_callback = function()
@@ -163,8 +162,9 @@ function match3field:process()
 			if #element.path == 0 then
 				table.insert(self.drop_events, event_drop.new(tick, element))
 			end
-	
+			
 			table.insert(element.path, { x = x, y = y })
+			field_changed = true
 		end
 	
 		repeat
@@ -202,39 +202,25 @@ function match3field:process()
 			tick = tick + 1
 		until not drop_elements
 
-		self.send_events = true
-
-		find_finished = true
+		self.send_events = true	
 	end
 
 	self.thread = coroutine.create(function()
-		local find_started = false
-
 		repeat
-			if not find_started then
-				find_started = true
-				find_matches = 0
-				match3match:find_matches(self, find_callback, finish_callback)
-			end
+			field_changed = false
+			match3match:find_matches(self, find_callback, finish_callback)
 
 			coroutine.yield()
-
-			if find_finished and find_matches > 0 then
-				find_started = false
-				find_finished = false
-			end
-		until find_finished and self:events_count() == 0
-
+		until not field_changed
+		
 		self.thread = nil
 	end)
+	
+	coroutine.resume(self.thread)
 end
 
 function match3field:update()
 	match3match:update()
-
-	if self.thread then
-		coroutine.resume(self.thread)
-	end
 
 	if self.send_events then
 		if self.delegate then
@@ -257,6 +243,10 @@ function match3field:update()
 		self.drop_events = {}
 		self.generate_events = {}
 		self.destroy_events = {}
+		
+		if self.thread then
+			coroutine.resume(self.thread)
+		end
 	end
 end
 

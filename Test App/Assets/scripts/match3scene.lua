@@ -4,8 +4,10 @@ local loader = load_script('scripts/view/match3element_loader.lua')
 local colls = 10
 local rows = 10
 local cell = 64
+
 local swipe = 0.2
 local drop = 0.2
+local destroy = 0.1
 
 local field = match3field.new(colls, rows, cell)
 local bounds = { -field:size().x / 2, - field:size().y / 2, field:size().x / 2, field:size().y / 2 }
@@ -149,10 +151,11 @@ function match3scene:handle_events()
 	local action_drop = action_list.create()
 
 	for k, v in pairs(events_destroy) do
-		action_destroy:append(action_lua_callback.create(function()
-			local view = assert(v.element.view)
-			view:remove_from_parent()
-		end))
+		action_destroy:append(action_sequence.create(action_delay.create(destroy),
+														action_lua_callback.create(function()
+															local view = assert(v.element.view)
+															view:remove_from_parent()
+														end)))
 	end
 
 	for k, v in pairs(events_generate) do
