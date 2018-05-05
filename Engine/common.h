@@ -8,6 +8,7 @@
 #include <functional>
 #include <queue>
 #include <cstdarg>
+#include <assert.h>
 
 #include "gl/libgl.h"
 #include "math/libmath.h"
@@ -16,6 +17,8 @@
 
 #include "utils/logger.h"
 #include "utils/vector.h"
+#include "utils/pointer.h"
+
 #include "config.h"
 
 namespace engine
@@ -67,4 +70,8 @@ namespace engine
 		return empty_string;
 	}
 }
+
+#include "utils/pointer.inl"
+#include "utils/vector.inl"
+#include "scripting/scripting.inl"
 

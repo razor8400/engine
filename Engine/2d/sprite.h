@@ -21,6 +21,7 @@ namespace engine
         
         void set_alpha(float alpha);
         float get_alpha() const;
+        const texture2d_ptr& get_texture() const { return m_texture; }
     private:
         texture2d_ptr m_texture;
         math::vector3d m_color = math::vector3d::one;

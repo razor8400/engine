@@ -20,6 +20,8 @@ namespace engine
         
         void set_color(const math::vector4d& color) { m_color = color; }
         const math::vector4d& get_color() const { return m_color; }
+        
+        int get_texture_id() { return m_texture_id; }
     private:
 		int m_width = 0;
 		int m_height = 0;

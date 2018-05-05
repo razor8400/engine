@@ -37,8 +37,8 @@ namespace engine
         director();
         ~director();
     private:
-        scene* m_scene = nullptr;
-        scene* m_next_scene = nullptr;
+        pointer<scene> m_scene;
+        pointer<scene> m_next_scene;
 
 		bool m_running = false;
 

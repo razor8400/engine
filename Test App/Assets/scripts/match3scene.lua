@@ -7,14 +7,9 @@ local cell = 64
 
 local swipe = 0.2
 local drop = 0.2
-local destroy = 0.1
+local destroy = 0.2
 
 local field = match3field.new(colls, rows, cell)
-local bounds = { -field:size().x / 2, - field:size().y / 2, field:size().x / 2, field:size().y / 2 }
- 
-local events_generate = {}
-local events_destroy = {}
-local events_drop = {}
 
 local function get_cell_texture(x, y)
 	if math.fmod(x + y, 2) == 0 then
@@ -123,6 +118,7 @@ function match3scene:start()
 
 	field.delegate = self
 	field:generate_field()
+	field:update_field()
 end
 
 function match3scene:update()
@@ -133,69 +129,59 @@ function match3scene:stop()
 
 end
 
-function match3scene:on_generate_element(e)
-	table.insert(events_generate, e)
-end
-
-function match3scene:on_destroy_element(e)
-	table.insert(events_destroy, e)
-end
-
-function match3scene:on_drop_element(e)
-	table.insert(events_drop, e)
-end
-
-function match3scene:handle_events()
+function match3scene:handle_events(events)
 	local action_destroy = action_list.create()
 	local action_generate = action_list.create()
 	local action_drop = action_list.create()
 
-	for k, v in pairs(events_destroy) do
-		action_destroy:append(action_sequence.create(action_delay.create(destroy),
-														action_lua_callback.create(function()
-															local view = assert(v.element.view)
-															view:remove_from_parent()
-														end)))
-	end
-
-	for k, v in pairs(events_generate) do
-		local view = assert(loader:load_element(v.element))
-		
-		view:set_position(field:convert_cell_to_world(v.x, v.y))
-		view:set_enabled(false)
-
-		self.obj:add_child(view)
-
-		action_generate:append(action_lua_callback.create(function()
-			view:set_enabled(true)
-		end))
-	end
-
-	for k, v in pairs(events_drop) do
-		local sequence = action_sequence.create()
-		local view = assert(v.element.view)
-	
-		sequence:append(action_delay.create(v.tick * drop))
-
-		for k1, v1 in pairs(v.element.path) do
-			sequence:append(targeted_action.create(view, action_move.move_to(field:convert_cell_to_world(v1.x, v1.y), drop)))
+	for k, v in pairs(events) do
+		if v.event == event_destroy.event then
+			action_destroy:append(action_sequence.create(action_delay.create(destroy),
+															action_lua_callback.create(function()
+																local view = assert(v.element.view)
+																view:remove_from_parent()
+															end)))
 		end
-	
-		v.element.path = {}
-
-		action_drop:append(sequence)
 	end
 
-	events_generate = {}
-	events_destroy = {}
-	events_drop = {}
+	for k, v in pairs(events) do
+		if v.event == event_generate.event then
+			local view = assert(loader:load_element(v.element))
+			
+			view:set_position(field:convert_cell_to_world(v.x, v.y))
+			view:set_enabled(false)
+
+			self.obj:add_child(view)
+
+			action_generate:append(action_lua_callback.create(function()
+				view:set_enabled(true)
+			end))
+		end
+	end
+
+	for k, v in pairs(events) do
+		if v.event == event_drop.event then
+			local sequence = action_sequence.create()
+			local view = assert(v.element.view)
+		
+			sequence:append(action_delay.create(v.tick * drop))
+
+			for k1, v1 in pairs(v.element.path) do
+				sequence:append(targeted_action.create(view, action_move.move_to(field:convert_cell_to_world(v1.x, v1.y), drop)))
+			end
+		
+			v.element.path = {}
+
+			action_drop:append(sequence)
+		end
+	end
 
 	table.insert(self.actions, action_sequence.create(action_destroy, 
-													action_generate, 
-													action_drop, 
-													action_lua_callback.create(function()
-														self:on_events_finished()
-													end)))
+														action_generate, 
+														action_drop, 
+														action_lua_callback.create(function()
+															self:on_events_finished()
+														end)))
 	self:run_events()
 end
 
@@ -221,4 +207,3 @@ function match3scene:on_events_finished()
 		self:run_next_events()
 	end
 end
-

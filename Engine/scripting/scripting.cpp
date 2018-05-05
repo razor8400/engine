@@ -55,7 +55,6 @@ namespace engine
             
             register_class<engine::box_collider2d>(state, scripting::box_collider2d::functions);
             
-            register_class<engine::action>(state, scripting::action::functions);
             register_class<engine::targeted_action>(state, scripting::targeted_action::functions);
             register_class<engine::action_lua_callback>(state, scripting::action_lua_callback::functions);
             register_class<engine::action_sequence>(state, scripting::action_sequence::functions);
@@ -92,11 +91,17 @@ namespace engine
 			return true;
         }
         
+        void clear_ref(lua_State* state, int handler)
+        {
+            luaL_unref(state, LUA_REGISTRYINDEX, handler);
+        }
+        
         void call_method(lua_State* state, int handler)
         {
             lua_rawgeti(state, LUA_REGISTRYINDEX, handler);
             if (lua_pcall(state, 0, 0, 0))
                 logger() << "[scripting] call_method error:" << lua_tostring(state, -1);
+            
         }
         
         void call_method(lua_State* state, const std::string& class_name, const std::string& method)

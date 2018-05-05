@@ -84,13 +84,9 @@ namespace engine
         if (m_next_scene)
         {
             if (m_scene)
-            {
                 m_scene->on_exit();
-                m_scene->release();
-            }
             
             m_scene = m_next_scene;
-            m_scene->retain();
             m_scene->on_enter();
             
             m_next_scene = nullptr;

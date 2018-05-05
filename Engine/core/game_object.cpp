@@ -8,6 +8,11 @@ namespace engine
 {
     IMPLEMENT_TYPE_INFO(game_object)
     
+    game_object::~game_object()
+    {
+
+    }
+    
 	bool game_object::init()
 	{
 		m_scale = math::vector3d(1.0f, 1.0f, 1.0f);
@@ -29,13 +34,13 @@ namespace engine
         
         m_components.lock([=]()
         {
-            for (auto component : m_components)
+            for (auto& component : m_components)
                 component->update(dt);
         });
         
         m_children.lock([=]()
         {
-            for (auto obj : m_children)
+            for (auto& obj : m_children)
                 obj->update(dt);
         });
 	}
@@ -47,7 +52,7 @@ namespace engine
         
         auto model_view_transform = transform(parent);
     
-        for (auto obj : m_children)
+        for (auto& obj : m_children)
             obj->draw(model_view_transform);
         
         render(model_view_transform);
@@ -69,13 +74,13 @@ namespace engine
     {
 		m_components.lock([=]()
 		{
-			for (auto component : m_components)
+			for (auto& component : m_components)
 				component->start();
 		});
 
 		m_children.lock([=]()
 		{
-			for (auto obj : m_children)
+			for (auto& obj : m_children)
 				obj->on_enter();
 		});
         
@@ -88,13 +93,13 @@ namespace engine
     {
 		m_components.lock([=]()
 		{
-			for (auto component : m_components)
+			for (auto& component : m_components)
 				component->stop();
 		});
 
 		m_children.lock([=]()
 		{
-			for (auto obj : m_children)
+			for (auto& obj : m_children)
 				obj->on_exit();
 		});
         
@@ -103,8 +108,7 @@ namespace engine
     
 	void game_object::add_child(game_object* obj)
 	{
-		if (!obj)
-			return;
+        assert(obj && obj != this);
 
         if (obj->m_parent)
             obj->remove_from_parent();
@@ -113,13 +117,13 @@ namespace engine
             obj->on_enter();
         
 		obj->m_parent = this;
+        
 		m_children.push_back(obj);
 	}
 
 	void game_object::remove_child(game_object* obj)
 	{
-		if (!obj)
-			return;
+        assert(obj && obj != this);
 
         m_children.erase(obj);
 
@@ -137,8 +141,7 @@ namespace engine
     
     void game_object::add_component(component* component)
     {
-		if (!component)
-			return;
+        assert(component);
 
         component->m_parent = this;
         
@@ -150,8 +153,7 @@ namespace engine
     
     void game_object::remove_component(component* component)
     {
-		if (!component)
-			return;
+        assert(component);
 
         if (m_active)
             component->stop();

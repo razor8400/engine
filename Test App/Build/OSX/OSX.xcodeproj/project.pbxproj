@@ -47,6 +47,7 @@
 		BFCB323220762B58001B5995 /* resources_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323020762B58001B5995 /* resources_manager.cpp */; };
 		BFCB323620766319001B5995 /* image_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323520766319001B5995 /* image_utils.cpp */; };
 		BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323B2077A52B001B5995 /* sprite.cpp */; };
+		BFD2F43D209E035B005A4CEA /* batch_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -152,6 +153,10 @@
 		BFCB323720776815001B5995 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		BFCB323A2077A47D001B5995 /* sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
 		BFCB323B2077A52B001B5995 /* sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
+		BFD2F436209DB767005A4CEA /* pointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer.h; sourceTree = "<group>"; };
+		BFD2F437209DBA01005A4CEA /* pointer.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pointer.inl; sourceTree = "<group>"; };
+		BFD2F43B209E0348005A4CEA /* batch_sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = batch_sprite.h; sourceTree = "<group>"; };
+		BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = batch_sprite.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +213,8 @@
 			children = (
 				BFCB323A2077A47D001B5995 /* sprite.h */,
 				BFCB323B2077A52B001B5995 /* sprite.cpp */,
+				BFD2F43B209E0348005A4CEA /* batch_sprite.h */,
+				BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */,
 			);
 			path = 2d;
 			sourceTree = "<group>";
@@ -389,6 +396,8 @@
 				BFCB323520766319001B5995 /* image_utils.cpp */,
 				BF8687442082BBAB00523939 /* vector.h */,
 				BF868745208337D200523939 /* vector.inl */,
+				BFD2F436209DB767005A4CEA /* pointer.h */,
+				BFD2F437209DBA01005A4CEA /* pointer.inl */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -512,6 +521,7 @@
 				BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
 				BF0D23972083734100542952 /* scripting.cpp in Sources */,
+				BFD2F43D209E035B005A4CEA /* batch_sprite.cpp in Sources */,
 				BF0D23AA20840B8300542952 /* scripting.inl in Sources */,
 				BFCB322A2076100B001B5995 /* file_system.cpp in Sources */,
 				BF0D239F2083D7DF00542952 /* pool_manager.cpp in Sources */,

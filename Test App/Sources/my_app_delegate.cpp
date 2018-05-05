@@ -1,3 +1,4 @@
+#include "engine.h"
 #include "my_app_delegate.h"
 
 void my_app_delegate::application_launched(engine::application* application)

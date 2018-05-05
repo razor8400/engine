@@ -3,8 +3,6 @@
 #include "scripting.h"
 #include "binding.h"
 
-#include "core/game_object.h"
-
 namespace engine
 {
     namespace scripting
