@@ -2,6 +2,7 @@
 
 #include "scripting.h"
 #include "binding.h"
+#include "engine.h"
 
 namespace engine
 {

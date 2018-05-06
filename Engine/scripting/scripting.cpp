@@ -2,15 +2,6 @@
 #include "scripting.h"
 #include "binding.h"
 
-#include "components/component.h"
-#include "components/box_collider2d.h"
-#include "components/action.h"
-
-#include "core/game_object.h"
-#include "core/scene.h"
-
-#include "2d/sprite.h"
-
 namespace engine
 {
     namespace scripting
@@ -51,6 +42,7 @@ namespace engine
         {
             register_class<engine::game_object>(state, scripting::game_object::functions);
             register_class<engine::sprite>(state, scripting::sprite::functions);
+			register_class<engine::batch_sprite>(state, scripting::batch_sprite::functions);
             register_class<engine::scene>(state, scripting::scene::functions);
             
             register_class<engine::box_collider2d>(state, scripting::box_collider2d::functions);

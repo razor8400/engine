@@ -42,15 +42,4 @@ namespace engine
         
         return m_texture_id != texture_default_id;
     }
-    
-    void texture2d::draw(const math::mat4& transform, const gl::shader_program_ptr& shader_program)
-    {
-        gl::bind_texture(m_texture_id);
-        gl::set_blend_func(m_blend_func.source, m_blend_func.destination);
-        
-        if (shader_program)
-            shader_program->use(transform, m_color);
-        
-        gl::draw_texture2d(0, 0, (float)m_width, (float)m_height);
-    }
 }

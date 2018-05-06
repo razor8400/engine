@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/ref.h"
 #include "core/application.h"
 #include "core/director.h"
 #include "core/game_object.h"
@@ -14,6 +15,7 @@
 #include "2d/batch_sprite.h"
 
 #include "resources/resources_manager.h"
+#include "resources/texture_atlas.h"
 #include "resources/texture2d.h"
 #include "resources/script.h"
 

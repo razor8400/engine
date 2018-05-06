@@ -138,6 +138,19 @@ namespace engine
                 { NULL, NULL }
             };
         }
+
+		namespace batch_sprite
+		{
+			int create(lua_State* L);
+			int destroy(lua_State* L);
+
+			static const luaL_Reg functions[] =
+			{
+				{ "create", create },
+				{ "__gc", destroy },
+				{ NULL, NULL }
+			};
+		}
         
         namespace scene
         {

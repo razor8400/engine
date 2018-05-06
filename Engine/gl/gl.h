@@ -22,7 +22,7 @@ namespace gl
     
     void bind_texture(GLuint texture);
     void set_blend_func(GLenum source, GLenum destination);
-    void draw_texture2d(float x, float y, float width, float height);
+	void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv, const std::vector<math::vector4d>& colors);
     void delete_texture(GLuint texture);
     
     void draw_line(float x1, float y1, float x2, float y2);
@@ -33,4 +33,10 @@ namespace gl
         GLenum source;
         GLenum destination;
     };
+
+	struct quad
+	{
+		std::vector<math::vector2d> vertices;
+		math::vector4d color;
+	};
 }

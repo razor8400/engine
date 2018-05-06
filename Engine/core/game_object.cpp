@@ -64,7 +64,7 @@ namespace engine
         auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
         
         if (program)
-            program->use(transform, math::vector4d::one);
+            program->use(transform);
         
 		gl::draw_rect(0, 0, m_size.x, m_size.y);
 #endif

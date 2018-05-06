@@ -5,6 +5,11 @@
 
 namespace math
 {
+	rect::rect()
+	{
+
+	}
+
 	rect::rect(float x, float y, float w, float h) : m_origin(x, y), m_size(w, h)
 	{
 

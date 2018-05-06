@@ -36,13 +36,13 @@ namespace engine
         math::vector3d local_to_global(const math::vector3d& v3) const;
 		
         const math::mat4& get_transform() const { return m_transform; }
-        
+	protected:
         math::mat4 transform(const math::mat4& parent) const;
         
         math::mat4 parent_transform() const;
         math::mat4 world_transform() const;
-    protected:
-        void mark_dirty() { m_update_transform = true; }
+
+		void mark_dirty() { m_update_transform = true; }
     public:
         void set_enabled(bool enabled) { m_enabled = enabled; }
         bool get_enabled() const { return m_enabled; }

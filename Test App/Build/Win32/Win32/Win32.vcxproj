@@ -93,6 +93,10 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -137,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Engine\2d\batch_sprite.cpp" />
     <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp" />
     <ClCompile Include="..\..\..\..\Engine\components\action.cpp" />
     <ClCompile Include="..\..\..\..\Engine\components\box_collider2d.cpp" />
@@ -188,6 +193,7 @@
     <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\script.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\resources\texture_atlas.cpp" />
     <ClCompile Include="..\..\..\..\Engine\scripting\binding.cpp" />
     <ClCompile Include="..\..\..\..\Engine\scripting\scripting.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\file_utils.cpp" />
@@ -203,6 +209,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Engine\2d\batch_sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\2d\sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\common.h" />
     <ClInclude Include="..\..\..\..\Engine\components\action.h" />
@@ -240,17 +247,20 @@
     <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\script.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\texture2d.h" />
+    <ClInclude Include="..\..\..\..\Engine\resources\texture_atlas.h" />
     <ClInclude Include="..\..\..\..\Engine\scripting\binding.h" />
     <ClInclude Include="..\..\..\..\Engine\scripting\scripting.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\file_utils.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\image_utils.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\logger.h" />
+    <ClInclude Include="..\..\..\..\Engine\utils\pointer.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\vector.h" />
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Engine\resources\resources_manager.inl" />
     <None Include="..\..\..\..\Engine\scripting\scripting.inl" />
+    <None Include="..\..\..\..\Engine\utils\pointer.inl" />
     <None Include="..\..\..\..\Engine\utils\vector.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

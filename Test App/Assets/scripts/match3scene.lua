@@ -10,30 +10,32 @@ local drop = 0.2
 local destroy = 0.2
 
 local field = match3field.new(colls, rows, cell)
+local atlas = "textures.json"
 
-local function get_cell_texture(x, y)
+local function get_background_texture(x, y)
 	if math.fmod(x + y, 2) == 0 then
 		return "cell-1.png"
 	end
-	return "cell-0.png"  
+	return "cell-0.png"
 end
 
-local function create_back_ground()
-	local obj = game_object.create()
-
-	obj:set_size(field:size())
+local function create_background()
+	local batch = batch_sprite.create("textures.png")
+	local size = field:size()
+	
+	batch:set_size(size)
 
 	for i = 1, colls do
 		for j = 1, rows do
-			local texture = get_cell_texture(i, j)
-			local sprite = sprite.create(texture)
-						
+			local texture = get_background_texture(i, j)
+			local sprite = sprite.create(atlas, texture)
+				
 			sprite:set_position(field:convert_cell_to_world(i, j))
-			obj:add_child(sprite)
+			batch:add_child(sprite)
 		end
 	end
-
-	return obj
+	
+	return batch
 end
 
 function match3scene:on_touch_began()
@@ -101,12 +103,13 @@ function match3scene:on_touch_moved()
 end
 
 function match3scene:start()
-	local background = create_back_ground()
+	local background = create_background()
 	local size = background:get_size()
 	local collider = box_collider2d.create(size.x, size.y)
 
 	self.collider = collider
-
+	self.batch = background
+	
 	self.obj:set_size(size)
 	self.obj:set_position(-size.x / 2, -size.y / 2)
 	self.obj:add_child(background)
@@ -118,7 +121,6 @@ function match3scene:start()
 
 	field.delegate = self
 	field:generate_field()
-	field:update_field()
 end
 
 function match3scene:update()
@@ -146,12 +148,12 @@ function match3scene:handle_events(events)
 
 	for k, v in pairs(events) do
 		if v.event == event_generate.event then
-			local view = assert(loader:load_element(v.element))
+			local view = assert(loader:load_element(atlas, v.element))
 			
 			view:set_position(field:convert_cell_to_world(v.x, v.y))
 			view:set_enabled(false)
 
-			self.obj:add_child(view)
+			self.batch:add_child(view)
 
 			action_generate:append(action_lua_callback.create(function()
 				view:set_enabled(true)
