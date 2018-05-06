@@ -39,7 +39,7 @@ namespace engine
 		m_quad.colors.clear();
 		m_quad.uv.clear();
         
-        for (auto obj : m_sprites)
+        for (auto& obj : m_sprites)
         {
 			if (!obj->get_enabled())
 				continue;
