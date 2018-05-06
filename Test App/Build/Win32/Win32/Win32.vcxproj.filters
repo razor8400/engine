@@ -176,6 +176,9 @@
     <ClCompile Include="..\..\..\..\Engine\resources\texture_atlas.cpp">
       <Filter>engine\resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\font.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h">
@@ -317,6 +320,9 @@
       <Filter>engine\2d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\resources\texture_atlas.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\font.h">
       <Filter>engine\resources</Filter>
     </ClInclude>
   </ItemGroup>

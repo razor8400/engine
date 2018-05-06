@@ -17,6 +17,7 @@
 #include "resources/resources_manager.h"
 #include "resources/texture_atlas.h"
 #include "resources/texture2d.h"
+#include "resources/font.h"
 #include "resources/script.h"
 
 #include "utils/logger.h"

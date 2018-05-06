@@ -72,8 +72,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\..\Sources;..\..\..\..\Engine;..\..\..\..\ThirdParty;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\..\..\ThirdParty\GLEW\lib\Win32\;..\..\..\..\ThirdParty\GLFW3\Win32\;..\..\..\..\ThirdParty\lua\Win32\;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\Sources;..\..\..\..\Engine;..\..\..\..\ThirdParty;..\..\..\..\ThirdParty\freetype\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\..\ThirdParty\GLEW\lib\Win32\;..\..\..\..\ThirdParty\GLFW3\Win32\;..\..\..\..\ThirdParty\lua\Win32\;..\..\..\..\ThirdParty\freetype\Win32\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>..\..\..\Sources;..\..\..\..\Engine;..\..\..\..\ThirdParty;$(IncludePath)</IncludePath>
@@ -90,7 +90,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;lua53.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -190,6 +190,7 @@
     <ClCompile Include="..\..\..\..\Engine\platform\win32\platform.cpp" />
     <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\window.cpp" />
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\resources\font.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\script.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="..\..\..\..\Engine\platform\platform.h" />
     <ClInclude Include="..\..\..\..\Engine\platform\window\window.h" />
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h" />
+    <ClInclude Include="..\..\..\..\Engine\resources\font.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resource.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\script.h" />

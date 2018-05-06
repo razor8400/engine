@@ -15,6 +15,8 @@ void my_app_delegate::application_launched(engine::application* application)
         director.set_far_plane(1000.0f);
         
         director.start();
+
+		auto font = engine::resources_manager::instance().load_resource_from_file<engine::font>("fonts/arial.ttf");
         
         run_match3_scene();
         
