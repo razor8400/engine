@@ -15,8 +15,6 @@ void my_app_delegate::application_launched(engine::application* application)
         director.set_far_plane(1000.0f);
         
         director.start();
-
-		auto font = engine::resources_manager::instance().load_resource_from_file<engine::font>("fonts/arial.ttf");
         
         run_match3_scene();
         
@@ -47,7 +45,18 @@ void my_app_delegate::run_match3_scene()
     auto script = engine::scriptable_component::create("scripts/match3scene.lua");
     auto scene = engine::game_object::create<engine::scene>();
     
-    scene->add_component(script);
+    auto label = engine::game_object::create<engine::label>("fonts/arial.ttf", 48);
+    label->set_caption("hui2d");
+    
+    auto label2 = engine::game_object::create<engine::label>("fonts/arial.ttf", 48);
+    label2->set_caption("zalupka");
+    
+    label->set_size(math::vector3d(100, 100, 0));
+    label2->set_size(math::vector3d(100, 100, 0));
+    
+    scene->add_child(label);
+   // scene->add_child(label2);
+    //scene->add_component(script);
     
     director.run_scene(scene);
 }

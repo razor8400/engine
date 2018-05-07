@@ -32,6 +32,7 @@ namespace engine
 
     class resource;
     class texture2d;
+    class font_ttf;
     class script;
     
     class touch_listener;
@@ -39,6 +40,7 @@ namespace engine
     typedef std::shared_ptr<resource> resource_ptr;
     typedef std::shared_ptr<texture2d> texture2d_ptr;
     typedef std::shared_ptr<script> script_ptr;
+    typedef std::shared_ptr<font_ttf> font_ttf_ptr;
 
 	enum projection_mode
 	{

@@ -21,8 +21,8 @@ namespace engine
         bool init(const texture2d_ptr& texture, const math::rect& rect);
 		bool init(const std::string& atlas_name, const std::string& file_name);
 
-		void draw(const math::mat4& world) override;
-        void render(const math::mat4& world) override;
+		void draw(const math::mat4& t) override;
+        void render(const math::mat4& t) override;
 
         void set_texture(const std::string& file_name);
         void set_texture(const texture2d_ptr& texture, const math::rect& rect);

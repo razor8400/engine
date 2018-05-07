@@ -45,12 +45,12 @@ namespace engine
         });
 	}
 
-	void game_object::draw(const math::mat4& parent)
+	void game_object::draw(const math::mat4& t)
 	{
         if (!m_enabled)
             return;
         
-        auto model_view_transform = transform(parent);
+        auto model_view_transform = transform(t);
     
         for (auto& obj : m_children)
             obj->draw(model_view_transform);
@@ -58,13 +58,13 @@ namespace engine
         render(model_view_transform);
     }
     
-    void game_object::render(const math::mat4& transform)
+    void game_object::render(const math::mat4& t)
     {
 #if DEBUG_DRAW
         auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
         
         if (program)
-            program->use(transform);
+            program->use(t);
         
 		gl::draw_rect(0, 0, m_size.x, m_size.y);
 #endif

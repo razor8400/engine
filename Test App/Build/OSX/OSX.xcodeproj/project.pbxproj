@@ -13,6 +13,7 @@
 		BF0D23A12083DB5D00542952 /* ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23A02083DB5D00542952 /* ref.cpp */; };
 		BF0D23A82084030600542952 /* scriptable_component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23A72084030600542952 /* scriptable_component.cpp */; };
 		BF1910EA2086648C00BCE74B /* binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23AB2084924600542952 /* binding.cpp */; };
+		BF38FCB320A088D200AF7DF1 /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF38FCB120A088D200AF7DF1 /* label.cpp */; };
 		BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC80206B981C005A6240 /* my_app_delegate.cpp */; };
 		BF3D14D8206BF8E700293C36 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */; };
 		BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14DA206CF33500293C36 /* mat4.cpp */; };
@@ -48,11 +49,12 @@
 		BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323B2077A52B001B5995 /* sprite.cpp */; };
 		BFD2F43D209E035B005A4CEA /* batch_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */; };
 		BFD2F44220A04072005A4CEA /* texture_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F43E20A04071005A4CEA /* texture_atlas.cpp */; };
-		BFD2F44320A04072005A4CEA /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F44120A04072005A4CEA /* font.cpp */; };
+		BFD2F44320A04072005A4CEA /* font_ttf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F44120A04072005A4CEA /* font_ttf.cpp */; };
 		BFD2F44920A04843005A4CEA /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD2F44820A04843005A4CEA /* libfreetype.a */; };
 		BFD2F44E20A04F02005A4CEA /* libpng16.16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD2F44A20A04B11005A4CEA /* libpng16.16.dylib */; };
 		BFD2F44F20A04F1D005A4CEA /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD2F44C20A04E5F005A4CEA /* libz.1.dylib */; };
 		BFD2F45120A05404005A4CEA /* libbz2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD2F45020A05404005A4CEA /* libbz2.1.0.dylib */; };
+		BFD2F45420A063CF005A4CEA /* font_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F45320A063CF005A4CEA /* font_utils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +86,8 @@
 		BF1910E9208662BB00BCE74B /* binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = binding.h; sourceTree = "<group>"; };
 		BF2D94F3208208C1004F98C0 /* resources_manager.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources_manager.inl; sourceTree = "<group>"; };
 		BF2DD50E208614E800BB2734 /* type_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = type_info.h; sourceTree = "<group>"; };
+		BF38FCB120A088D200AF7DF1 /* label.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = label.cpp; sourceTree = "<group>"; };
+		BF38FCB220A088D200AF7DF1 /* label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = label.h; sourceTree = "<group>"; };
 		BF3D14CF206BD2B600293C36 /* app_delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_delegate.h; sourceTree = "<group>"; };
 		BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../ThirdParty/GLEW/lib/osx/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		BF3D14D9206CF32100293C36 /* mat4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mat4.h; sourceTree = "<group>"; };
@@ -163,15 +167,15 @@
 		BFD2F43B209E0348005A4CEA /* batch_sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = batch_sprite.h; sourceTree = "<group>"; };
 		BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = batch_sprite.cpp; sourceTree = "<group>"; };
 		BFD2F43E20A04071005A4CEA /* texture_atlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_atlas.cpp; sourceTree = "<group>"; };
-		BFD2F43F20A04071005A4CEA /* font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = font.h; sourceTree = "<group>"; };
+		BFD2F43F20A04071005A4CEA /* font_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = font_ttf.h; sourceTree = "<group>"; };
 		BFD2F44020A04071005A4CEA /* texture_atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_atlas.h; sourceTree = "<group>"; };
-		BFD2F44120A04072005A4CEA /* font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = font.cpp; sourceTree = "<group>"; };
-		BFD2F44420A045B1005A4CEA /* libfreetype.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libfreetype.la; path = ../../../ThirdParty/freetype/OSX/libfreetype.la; sourceTree = "<group>"; };
-		BFD2F44620A047EF005A4CEA /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../ThirdParty/freetype/OSX/libfreetype.6.dylib; sourceTree = "<group>"; };
+		BFD2F44120A04072005A4CEA /* font_ttf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = font_ttf.cpp; sourceTree = "<group>"; };
 		BFD2F44820A04843005A4CEA /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../../ThirdParty/freetype/OSX/libfreetype.a; sourceTree = "<group>"; };
 		BFD2F44A20A04B11005A4CEA /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = ../../../ThirdParty/png/osx/libpng16.16.dylib; sourceTree = "<group>"; };
 		BFD2F44C20A04E5F005A4CEA /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../ThirdParty/zlib/osx/libz.1.dylib; sourceTree = "<group>"; };
 		BFD2F45020A05404005A4CEA /* libbz2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.dylib; path = ../../../ThirdParty/bz2/osx/libbz2.1.0.dylib; sourceTree = "<group>"; };
+		BFD2F45220A063A3005A4CEA /* font_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = font_utils.h; sourceTree = "<group>"; };
+		BFD2F45320A063CF005A4CEA /* font_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font_utils.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +238,8 @@
 				BFCB323B2077A52B001B5995 /* sprite.cpp */,
 				BFD2F43B209E0348005A4CEA /* batch_sprite.h */,
 				BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */,
+				BF38FCB120A088D200AF7DF1 /* label.cpp */,
+				BF38FCB220A088D200AF7DF1 /* label.h */,
 			);
 			path = 2d;
 			sourceTree = "<group>";
@@ -391,8 +397,6 @@
 				BFD2F44C20A04E5F005A4CEA /* libz.1.dylib */,
 				BFD2F44A20A04B11005A4CEA /* libpng16.16.dylib */,
 				BFD2F44820A04843005A4CEA /* libfreetype.a */,
-				BFD2F44620A047EF005A4CEA /* libfreetype.6.dylib */,
-				BFD2F44420A045B1005A4CEA /* libfreetype.la */,
 				BF0D238E2083496900542952 /* liblua.a */,
 				BF3D14D7206BF8E600293C36 /* libGLEW.2.1.0.dylib */,
 				BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */,
@@ -423,6 +427,8 @@
 				BF868745208337D200523939 /* vector.inl */,
 				BFD2F436209DB767005A4CEA /* pointer.h */,
 				BFD2F437209DBA01005A4CEA /* pointer.inl */,
+				BFD2F45220A063A3005A4CEA /* font_utils.h */,
+				BFD2F45320A063CF005A4CEA /* font_utils.cpp */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -464,8 +470,8 @@
 		BFCB322E20762ABA001B5995 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				BFD2F44120A04072005A4CEA /* font.cpp */,
-				BFD2F43F20A04071005A4CEA /* font.h */,
+				BFD2F44120A04072005A4CEA /* font_ttf.cpp */,
+				BFD2F43F20A04071005A4CEA /* font_ttf.h */,
 				BFD2F43E20A04071005A4CEA /* texture_atlas.cpp */,
 				BFD2F44020A04071005A4CEA /* texture_atlas.h */,
 				BFCB322F20762AE0001B5995 /* resource.h */,
@@ -566,13 +572,15 @@
 				BF439CC420888653000B8A15 /* logger.cpp in Sources */,
 				BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
+				BF38FCB320A088D200AF7DF1 /* label.cpp in Sources */,
 				BFCB323620766319001B5995 /* image_utils.cpp in Sources */,
 				BF51ECAA206BABD1005A6240 /* scene.cpp in Sources */,
-				BFD2F44320A04072005A4CEA /* font.cpp in Sources */,
+				BFD2F44320A04072005A4CEA /* font_ttf.cpp in Sources */,
 				BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */,
 				BF0D23A12083DB5D00542952 /* ref.cpp in Sources */,
 				BF51ECA9206BABCF005A6240 /* director.cpp in Sources */,
 				BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */,
+				BFD2F45420A063CF005A4CEA /* font_utils.cpp in Sources */,
 				BFCB322D2076104A001B5995 /* texture2d.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

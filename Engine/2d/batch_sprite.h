@@ -11,7 +11,7 @@ namespace engine
         void add_child(game_object* obj) override;
         void remove_child(game_object* obj) override;
         
-        void draw(const math::mat4& world) override;
+        void draw(const math::mat4& parent) override;
     private:
         vector<sprite*> m_sprites;
     };

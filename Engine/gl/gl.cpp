@@ -27,6 +27,8 @@ namespace gl
         if (glewInit() != GLEW_OK)
             return false;
         
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        
         return true;
     }
     
@@ -35,7 +37,7 @@ namespace gl
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
     }
-
+    
 	void generate_buffers()
 	{
 		glGenVertexArrays(1, &vertex_array);
@@ -130,8 +132,8 @@ namespace gl
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		return texture;
 	}
@@ -190,7 +192,7 @@ namespace gl
 		glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector4d) * colors.size(), &colors[0], GL_STATIC_DRAW);
 		glVertexAttribPointer(vertex_attribute::color, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 
-		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, NULL);
+		glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
 
 		glDisableVertexAttribArray(vertex_attribute::position);
 		glDisableVertexAttribArray(vertex_attribute::texture_position);

@@ -65,14 +65,14 @@ namespace engine
 		return init(atlas->get_texture(), frame.frame);
 	}
     
-	void sprite::draw(const math::mat4& world)
+	void sprite::draw(const math::mat4& t)
 	{
 		m_quad = update_quad();
 
-		game_object::draw(world);
+		game_object::draw(t);
 	}
 
-	void sprite::render(const math::mat4& transform)
+	void sprite::render(const math::mat4& t)
     {
 		auto texture = get_texture();
 
@@ -82,12 +82,12 @@ namespace engine
 			gl::set_blend_func(m_blend_func.source, m_blend_func.destination);
 
 			if (m_shader_program)
-				m_shader_program->use(transform);
+				m_shader_program->use(t);
 
 			gl::draw_texture2d(m_quad.vertices, m_quad.uv, m_quad.colors);
         }
         
-        game_object::render(transform);
+        game_object::render(t);
     }
 
     void sprite::set_texture(const std::string& file_name)

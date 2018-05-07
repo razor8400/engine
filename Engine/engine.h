@@ -13,11 +13,12 @@
 
 #include "2d/sprite.h"
 #include "2d/batch_sprite.h"
+#include "2d/label.h"
 
 #include "resources/resources_manager.h"
 #include "resources/texture_atlas.h"
 #include "resources/texture2d.h"
-#include "resources/font.h"
+#include "resources/font_ttf.h"
 #include "resources/script.h"
 
 #include "utils/logger.h"

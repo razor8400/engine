@@ -28,12 +28,12 @@ namespace engine
         game_object::remove_child(obj);
     }   
     
-    void batch_sprite::draw(const math::mat4& parent)
+    void batch_sprite::draw(const math::mat4& t)
     {
         if (!m_enabled)
             return;
         
-        auto model_view_transform = transform(parent);
+        auto model_view_transform = transform(t);
 
 		m_quad.vertices.clear();
 		m_quad.colors.clear();

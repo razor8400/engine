@@ -18,8 +18,8 @@ namespace engine
 		virtual bool init();
 
 		virtual void update(float dt);
-		virtual void draw(const math::mat4& world);
-        virtual void render(const math::mat4& world);
+		virtual void draw(const math::mat4& t);
+        virtual void render(const math::mat4& t);
         
         virtual void on_enter();
         virtual void on_exit();

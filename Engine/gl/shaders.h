@@ -26,7 +26,7 @@ namespace gl
 												uniform sampler2D sampler2d;
 												void main()
 												{
-                                                    fragment_color = texture(sampler2d, uv).rgba * color;
+                                                    fragment_color = vec4(1.0, 1.0, 1.0, texture(sampler2d, uv).r) * color;
 												})";
 
 		static const char* shader_texture_position = R"(#version 330 core
