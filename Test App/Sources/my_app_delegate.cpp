@@ -50,10 +50,7 @@ void my_app_delegate::run_match3_scene()
     
     auto label2 = engine::game_object::create<engine::label>("fonts/arial.ttf", 48);
     label2->set_caption("zalupka");
-    
-    label->set_size(math::vector3d(100, 100, 0));
-    label2->set_size(math::vector3d(100, 100, 0));
-    
+        
     scene->add_child(label);
    // scene->add_child(label2);
     //scene->add_component(script);

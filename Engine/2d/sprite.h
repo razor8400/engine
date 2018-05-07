@@ -24,6 +24,7 @@ namespace engine
 		void draw(const math::mat4& t) override;
         void render(const math::mat4& t) override;
 
+		void clear_texture();
         void set_texture(const std::string& file_name);
         void set_texture(const texture2d_ptr& texture, const math::rect& rect);
 

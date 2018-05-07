@@ -137,6 +137,49 @@ namespace gl
 
 		return texture;
 	}
+
+	GLuint render_to_texture(int width, int height, const std::function<void()>& draw_func)
+	{
+		GLuint frame_buffer;
+
+		glGenFramebuffers(1, &frame_buffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, frame_buffer);
+		
+		GLuint texture;
+
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA8, GL_UNSIGNED_BYTE, NULL);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
+
+		GLuint render_buffer;
+		
+		glGenRenderbuffers(1, &render_buffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
+
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
+
+		if (glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE_EXT)
+			printf("ERROR::FRAMEBUFFER:: Framebuffer is not complete!\n");
+
+		clear();
+
+		if (draw_func)
+			draw_func();
+		
+		glDeleteRenderbuffers(1, &render_buffer);
+		glDeleteFramebuffers(1, &frame_buffer);
+		
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+		return texture;
+	}
     
     void bind_texture(GLuint texture)
     {

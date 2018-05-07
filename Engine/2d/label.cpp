@@ -4,17 +4,7 @@
 #include "label.h"
 
 namespace engine
-{
-    bool label::init()
-    {
-        if (!game_object::init())
-            return false;
-        
-        m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
-        
-        return true;
-    }
-    
+{   
     bool label::init(const std::string& font_name)
     {
         return init(font_name, 0);
@@ -27,7 +17,7 @@ namespace engine
     
     bool label::init(const std::string& font_name, int font_size, const std::string& caption)
     {
-        if (!init())
+        if (!game_object::init())
             return false;
         
         auto font = resources_manager::instance().load_resource_from_file<font_ttf>(font_name);
@@ -39,7 +29,8 @@ namespace engine
         m_caption = caption;
         
         set_font(font);
-        
+		update_texture();
+
         return true;
     }
     
@@ -51,11 +42,24 @@ namespace engine
             set_font(font);
     }
     
-    void label::render(const math::mat4& t)
-    {
-        if (m_font)
-            m_font->draw_string(m_caption, m_font_size, t, m_shader_program);
-        
-        game_object::render(t);
-    }
+	void label::update_texture()
+	{
+		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
+		auto transform = parent_transform();
+		
+		clear_texture();
+
+		if (m_font)
+		{
+			auto texture = m_font->create_label(m_caption, m_font_size, transform, program);
+			
+			if (texture)
+			{
+				auto size = math::vector2d(texture->get_width(), texture->get_height());
+				
+				set_texture(texture, math::rect(0, 0, size.x, size.y));
+				set_size(size);
+			}
+		}
+	}
 }

@@ -4,7 +4,7 @@
 
 namespace engine
 {
-	static const std::vector<math::vector2d> uv =
+	static const std::vector<math::vector2d> glyph_uv =
 	{
 		math::vector2d(0, 1),
 		math::vector2d(1, 1),
@@ -12,7 +12,7 @@ namespace engine
 		math::vector2d(0, 0)
 	};
 
-	static const std::vector<math::vector4d> colors =
+	static const std::vector<math::vector4d> glyph_default_color =
 	{
 		math::vector4d(1, 1, 1, 1),
 		math::vector4d(1, 1, 1, 1),
@@ -61,47 +61,80 @@ namespace engine
                 glyphs[ch] = glyph;
         }
     }
+
+	void font_ttf::render_text(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program)
+	{
+		auto& glyphs = m_loaded_glyphs[size];
+
+		int x = 0;
+
+		for (auto& ch : string)
+		{
+			auto it = glyphs.find(ch);
+
+			if (it == glyphs.end())
+				continue;
+
+			gl::bind_texture(it->second.texture_id);
+			gl::set_blend_func(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+			if (program)
+				program->use(transform);
+
+			auto px = x + it->second.bearing.x;
+			auto py = it->second.size.y - it->second.bearing.y;
+
+			auto w = it->second.size.x;
+			auto h = it->second.size.y;
+
+			std::vector<math::vector2d> vertices =
+			{
+				math::vector2d(px, py),
+				math::vector2d(px + w, py),
+				math::vector2d(px + w, py + h),
+				math::vector2d(px, py + h)
+			};
+
+			gl::draw_texture2d(vertices, glyph_uv, glyph_default_color);
+
+			x += it->second.advance >> 6;
+		}
+	}
     
-    void font_ttf::draw_string(const std::string& string, int size, const math::mat4& world, const gl::shader_program_ptr& program)
+    texture2d_ptr font_ttf::create_label(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program)
     {
-        if (string.empty())
-            return;
-        
+		if (string.empty())
+			return texture2d_ptr();
+
 		update_atlas(string, size);
-        
-        auto& glyphs = m_loaded_glyphs[size];
-        
-        int x = 0;
-        
-        for (auto& ch : string)
-        {
-            auto it = glyphs.find(ch);
-            
-            if (it == glyphs.end())
-                continue;
-            
-            gl::bind_texture(it->second.texture_id);
-            gl::set_blend_func(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            
-            program->use(world);
-            
-            auto px = x + it->second.bearing.x;
-            auto py = it->second.size.y - it->second.bearing.y;
-            
-            auto w = it->second.size.x;
-            auto h = it->second.size.y;
-            
-            std::vector<math::vector2d> vertices =
-            {
-                math::vector2d(px, py),
-                math::vector2d(px + w, py),
-                math::vector2d(px + w, py + h),
-                math::vector2d(px, py + h)
-            };
-                        
-            gl::draw_texture2d(vertices, uv, colors);
-            
-            x += it->second.advance >> 6;
-        }
+		
+		int widtht = 0;
+		int height = 0;
+
+		auto& glyphs = m_loaded_glyphs[size];
+
+		for (auto& ch : string)
+		{
+			auto it = glyphs.find(ch);
+
+			if (it == glyphs.end())
+				continue;
+
+			widtht += (int)it->second.size.x;
+
+			if (it->second.size.y > height)
+				height = (int)it->second.size.y;
+		}
+
+		auto texture_id = gl::render_to_texture(widtht, height, [=]()
+		{
+			render_text(string, size, transform, program);
+		});
+
+		auto texture = std::make_shared<texture2d>(widtht, height, GL_RGBA8);
+
+		texture->set_texture_id(texture_id);
+
+		return texture;
     }
 }

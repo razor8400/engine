@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <functional>
 #include <map>
 
 #include "GLEW/glew.h"
@@ -19,6 +20,7 @@ namespace gl
     
     GLint create_gl_program(const char* vert, const char* frag);
 	GLuint load_texture(const unsigned char* data, int width, int height, GLuint format);
+	GLuint render_to_texture(int width, int height, const std::function<void()>& draw_func);
     
     void bind_texture(GLuint texture);
     void set_blend_func(GLenum source, GLenum destination);

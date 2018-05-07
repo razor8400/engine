@@ -1,13 +1,12 @@
 #pragma once
 
-#include "core/game_object.h"
+#include "2d/sprite.h"
 
 namespace engine
 {
-    class label : public game_object
+    class label : public sprite
     {
     public:
-        bool init() override;
         bool init(const std::string& font_name);
         bool init(const std::string& font_name, int font_size);
         bool init(const std::string& font_name, int font_size, const std::string& caption);
@@ -18,15 +17,14 @@ namespace engine
         void set_font(const font_ttf_ptr& font) { m_font = font; }
         
         const std::string& get_caption() const { return m_caption; }
-        void set_caption(const std::string& caption) { m_caption = caption; }
-        
-        const math::vector4d& get_color() const { return m_color; }
-        void set_color(const math::vector4d& color) { m_color = color; }
-        
-        void render(const math::mat4& t) override;
+		void set_caption(const std::string& caption) { m_caption = caption; update_texture(); }
+
+		int get_font_size() const { return m_font_size; }
+		void set_font_size(int font_size) { m_font_size = font_size; update_texture(); }
+
+		void update_texture();
     private:
         std::string m_caption;
-        math::vector4d m_color;
         int m_font_size;
         font_ttf_ptr m_font;
     };

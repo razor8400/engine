@@ -32,6 +32,7 @@ namespace engine
 
 		auto size = math::vector2d(texture->get_width(), texture->get_height());
 
+		m_size = size;
 		set_texture(texture, math::rect(0, 0, size.x, size.y));
                     
         return true;
@@ -67,7 +68,8 @@ namespace engine
     
 	void sprite::draw(const math::mat4& t)
 	{
-		m_quad = update_quad();
+		if (m_texture)
+			m_quad = update_quad();
 
 		game_object::draw(t);
 	}
@@ -90,9 +92,17 @@ namespace engine
         game_object::render(t);
     }
 
-    void sprite::set_texture(const std::string& file_name)
+	void sprite::clear_texture()
+	{
+		if (m_texture)
+			m_texture.reset();
+	}
+
+	void sprite::set_texture(const std::string& file_name)
     {
         auto texture = resources_manager::instance().load_resource_from_file<texture2d>(file_name);
+
+		clear_texture();
 
 		if (texture)
 		{
