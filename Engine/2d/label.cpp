@@ -10,7 +10,7 @@ namespace engine
         if (!game_object::init())
             return false;
         
-        m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color);
+        m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
         
         return true;
     }

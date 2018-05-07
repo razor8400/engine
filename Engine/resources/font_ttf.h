@@ -16,7 +16,7 @@ namespace engine
         
         void draw_string(const std::string& string, int size, const math::mat4& world, const gl::shader_program_ptr& program);
     private:
-        void update_cache(const std::string& string, int size);
+        void update_atlas(const std::string& string, int size);
 	private:
         std::string m_font_name;
         std::map<int, font_utils::glyphs_map> m_loaded_glyphs;

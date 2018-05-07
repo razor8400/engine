@@ -27,7 +27,7 @@ namespace gl
         if (glewInit() != GLEW_OK)
             return false;
         
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         
         return true;
     }

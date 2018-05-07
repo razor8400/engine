@@ -176,8 +176,14 @@
     <ClCompile Include="..\..\..\..\Engine\resources\texture_atlas.cpp">
       <Filter>engine\resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\resources\font.cpp">
+    <ClCompile Include="..\..\..\..\Engine\resources\font_ttf.cpp">
       <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\2d\label.cpp">
+      <Filter>engine\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\utils\font_utils.cpp">
+      <Filter>engine\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,8 +328,14 @@
     <ClInclude Include="..\..\..\..\Engine\resources\texture_atlas.h">
       <Filter>engine\resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\resources\font.h">
+    <ClInclude Include="..\..\..\..\Engine\resources\font_ttf.h">
       <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\2d\label.h">
+      <Filter>engine\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\utils\font_utils.h">
+      <Filter>engine\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

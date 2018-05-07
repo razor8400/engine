@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Engine\2d\batch_sprite.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\2d\label.cpp" />
     <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp" />
     <ClCompile Include="..\..\..\..\Engine\components\action.cpp" />
     <ClCompile Include="..\..\..\..\Engine\components\box_collider2d.cpp" />
@@ -190,7 +191,7 @@
     <ClCompile Include="..\..\..\..\Engine\platform\win32\platform.cpp" />
     <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\window.cpp" />
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp" />
-    <ClCompile Include="..\..\..\..\Engine\resources\font.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\resources\font_ttf.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\script.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="..\..\..\..\Engine\scripting\binding.cpp" />
     <ClCompile Include="..\..\..\..\Engine\scripting\scripting.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\file_utils.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\utils\font_utils.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\image_utils.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\logger.cpp" />
     <ClCompile Include="..\..\..\Sources\my_app_delegate.cpp">
@@ -211,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Engine\2d\batch_sprite.h" />
+    <ClInclude Include="..\..\..\..\Engine\2d\label.h" />
     <ClInclude Include="..\..\..\..\Engine\2d\sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\common.h" />
     <ClInclude Include="..\..\..\..\Engine\components\action.h" />
@@ -244,7 +247,7 @@
     <ClInclude Include="..\..\..\..\Engine\platform\platform.h" />
     <ClInclude Include="..\..\..\..\Engine\platform\window\window.h" />
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h" />
-    <ClInclude Include="..\..\..\..\Engine\resources\font.h" />
+    <ClInclude Include="..\..\..\..\Engine\resources\font_ttf.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resource.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\script.h" />
@@ -253,6 +256,7 @@
     <ClInclude Include="..\..\..\..\Engine\scripting\binding.h" />
     <ClInclude Include="..\..\..\..\Engine\scripting\scripting.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\file_utils.h" />
+    <ClInclude Include="..\..\..\..\Engine\utils\font_utils.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\image_utils.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\logger.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\pointer.h" />

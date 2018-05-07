@@ -4,6 +4,22 @@
 
 namespace engine
 {
+	static const std::vector<math::vector2d> uv =
+	{
+		math::vector2d(0, 1),
+		math::vector2d(1, 1),
+		math::vector2d(1, 0),
+		math::vector2d(0, 0)
+	};
+
+	static const std::vector<math::vector4d> colors =
+	{
+		math::vector4d(1, 1, 1, 1),
+		math::vector4d(1, 1, 1, 1),
+		math::vector4d(1, 1, 1, 1),
+		math::vector4d(1, 1, 1, 1)
+	};
+
     font_ttf::font_ttf(const std::string& font_name) : m_font_name(font_name)
     {
         
@@ -26,7 +42,7 @@ namespace engine
 		return std::shared_ptr<font_ttf>();
 	}
     
-    void font_ttf::update_cache(const std::string& string, int size)
+    void font_ttf::update_atlas(const std::string& string, int size)
     {
         auto it = m_loaded_glyphs.find(size);
         
@@ -35,7 +51,7 @@ namespace engine
         
         auto& glyphs = m_loaded_glyphs[size];
         
-        for (auto ch : string)
+        for (auto& ch : string)
         {
             if (glyphs.find(ch) != glyphs.end())
                 continue;
@@ -51,13 +67,13 @@ namespace engine
         if (string.empty())
             return;
         
-        update_cache(string, size);
+		update_atlas(string, size);
         
         auto& glyphs = m_loaded_glyphs[size];
         
         int x = 0;
         
-        for (auto ch : string)
+        for (auto& ch : string)
         {
             auto it = glyphs.find(ch);
             
@@ -69,11 +85,11 @@ namespace engine
             
             program->use(world);
             
-            GLfloat px = x + it->second.bearing.x;
-            GLfloat py = it->second.size.y - it->second.bearing.y;
+            auto px = x + it->second.bearing.x;
+            auto py = it->second.size.y - it->second.bearing.y;
             
-            GLfloat w = it->second.size.x;
-            GLfloat h = it->second.size.y;
+            auto w = it->second.size.x;
+            auto h = it->second.size.y;
             
             std::vector<math::vector2d> vertices =
             {
@@ -82,23 +98,7 @@ namespace engine
                 math::vector2d(px + w, py + h),
                 math::vector2d(px, py + h)
             };
-            
-            std::vector<math::vector2d> uv =
-            {
-                math::vector2d(0, 1),
-                math::vector2d(1, 1),
-                math::vector2d(1, 0),
-                math::vector2d(0, 0)
-            };
-            
-            std::vector<math::vector4d> colors =
-            {
-                math::vector4d(0, 1, 0, 0),
-                math::vector4d(0, 1, 0, 1),
-                math::vector4d(0, 1, 0, 0),
-                math::vector4d(0, 1, 0, 1)
-            };
-            
+                        
             gl::draw_texture2d(vertices, uv, colors);
             
             x += it->second.advance >> 6;

@@ -12,6 +12,7 @@ namespace engine
         free_type_library();
         ~free_type_library();
         
+		bool library_loaded() const;
         bool load_font(const std::string& file_name, const std::string& font_name) const;
         bool load_glyph(const std::string& font_name, char ch, int size, font_utils::glyph* glyph) const;
         
@@ -45,14 +46,22 @@ namespace engine
             FT_Done_FreeType(m_libary);
         }
     }
+
+	bool free_type_library::library_loaded() const
+	{
+		if (!m_library_loaded)
+		{
+			logger() << "[free type] library not loaded";
+			return false;
+		}
+
+		return true;
+	}
     
     bool free_type_library::load_font(const std::string& file_name, const std::string& font_name) const
     {
-        if (!m_library_loaded)
-        {
-            logger() << "[free type] library not loaded";
-            return false;
-        }
+		if (!library_loaded())
+			return false;
         
         auto it = m_loaded_fonts.find(font_name);
         
@@ -73,11 +82,8 @@ namespace engine
     
     bool free_type_library::load_glyph(const std::string& font_name, char ch, int size, font_utils::glyph* glyph) const
     {
-        if (!m_library_loaded)
-        {
-            logger() << "[free type] library not loaded";
-            return false;
-        }
+		if (!library_loaded())
+			return false;
         
         auto it = m_loaded_fonts.find(font_name);
         
@@ -109,22 +115,16 @@ namespace engine
     {
         logger() << "[free type] unload font:" << font_name;
         
-        if (!m_library_loaded)
-        {
-            logger() << "[free type] library not loaded";
-            return;
-        }
+		if (!library_loaded())
+			return;
         
         auto it = m_loaded_fonts.find(font_name);
         
-        if (it == m_loaded_fonts.end())
+        if (it != m_loaded_fonts.end())
         {
-            logger() << "[free type] font not loaded:" << font_name;
-            return;
-        }
-        
-        FT_Done_Face(it->second);
-        m_loaded_fonts.erase(it);
+			FT_Done_Face(it->second);
+			m_loaded_fonts.erase(it);
+        }      
     }
     
     namespace font_utils
@@ -136,7 +136,6 @@ namespace engine
             if (!library.load_font(file_name, font_name))
             {
                 logger() << "[font utils] error loading font:" << font_name;
-                
                 return false;
             }
             

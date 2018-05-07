@@ -5,6 +5,7 @@ namespace gl
 {
     const char* shader_program::shader_position_color = "shader_position_color";
     const char* shader_program::shader_texture_position_color = "shader_texture_position_color";
+	const char* shader_program::shader_font_position_color = "shader_font_position_color";
     
     shader_program::shader_program(GLuint program_id) : m_program_id(program_id)
     {
