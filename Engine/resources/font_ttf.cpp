@@ -64,6 +64,8 @@ namespace engine
 
 	void font_ttf::render_text(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program)
 	{
+		update_atlas(string, size);
+
 		auto& glyphs = m_loaded_glyphs[size];
 
 		int x = 0;
@@ -108,8 +110,8 @@ namespace engine
 
 		update_atlas(string, size);
 		
-		int widtht = 0;
-		int height = 0;
+		int w = 0;
+		int h = 0;
 
 		auto& glyphs = m_loaded_glyphs[size];
 
@@ -120,18 +122,18 @@ namespace engine
 			if (it == glyphs.end())
 				continue;
 
-			widtht += (int)it->second.size.x;
+			w += it->second.advance >> 6;
 
-			if (it->second.size.y > height)
-				height = (int)it->second.size.y;
+			if (it->second.size.y > h)
+				h = (int)it->second.size.y;
 		}
 
-		auto texture_id = gl::render_to_texture(widtht, height, [=]()
+		auto texture_id = gl::render_to_texture(w, h, [=]()
 		{
 			render_text(string, size, transform, program);
 		});
 
-		auto texture = std::make_shared<texture2d>(widtht, height, GL_RGBA8);
+		auto texture = std::make_shared<texture2d>(w, h, GL_RGBA8);
 
 		texture->set_texture_id(texture_id);
 

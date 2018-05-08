@@ -15,7 +15,7 @@ namespace engine
         bool load(const unsigned char* data, size_t size) override { return true; }
         
         texture2d_ptr create_label(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program);
-    private:
+	public:
         void update_atlas(const std::string& string, int size);
 		void render_text(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program);
 	private:

@@ -17,7 +17,7 @@ namespace engine
     
     bool label::init(const std::string& font_name, int font_size, const std::string& caption)
     {
-        if (!game_object::init())
+        if (!sprite::init())
             return false;
         
         auto font = resources_manager::instance().load_resource_from_file<font_ttf>(font_name);
@@ -29,7 +29,6 @@ namespace engine
         m_caption = caption;
         
         set_font(font);
-		update_texture();
 
         return true;
     }
@@ -41,8 +40,25 @@ namespace engine
         if (font)
             set_font(font);
     }
+
+	void label::render(const math::mat4& tr)
+	{
+		if (m_update_texture)
+		{
+			m_update_texture = false;
+			update_texture(tr);
+		}
+		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
+
+		//m_font->render_text(m_caption, m_font_size, tr, program);
+
+		if (m_texture)
+			m_quad = update_quad();
+
+		sprite::render(tr);
+	}
     
-	void label::update_texture()
+	void label::update_texture(const math::mat4& tr)
 	{
 		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
 		auto transform = parent_transform();
@@ -51,7 +67,7 @@ namespace engine
 
 		if (m_font)
 		{
-			auto texture = m_font->create_label(m_caption, m_font_size, transform, program);
+			auto texture = m_font->create_label(m_caption, m_font_size, tr, program);
 			
 			if (texture)
 			{
