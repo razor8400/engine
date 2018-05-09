@@ -112,11 +112,14 @@ namespace engine
 			auto glyph = font_utils::glyph();
 			auto ft = face->glyph;
 
-			glyph.advance = face->glyph->advance.x;
-			glyph.size = math::vector2d((int)ft->bitmap.width, (int)ft->bitmap.rows);
-			glyph.bearing = math::vector2d(ft->bitmap_left, ft->bitmap_top);
+			glyph.ax = ft->advance.x >> 6;
+			glyph.ay = ft->advance.y >> 6;
+			glyph.bw = ft->bitmap.width; 
+			glyph.bh = ft->bitmap.rows;
+			glyph.bl = ft->bitmap_left;
+			glyph.bt = ft->bitmap_top;
 
-			gl::sub_image2d(texture, GL_TEXTURE_2D, 0, x, 0, ft->bitmap.width, ft->bitmap.rows, GL_RED, GL_UNSIGNED_BYTE, ft->bitmap.buffer);
+			gl::sub_image2d(texture, GL_TEXTURE_2D, 0, x, 0, glyph.bw, glyph.bh, GL_RED, GL_UNSIGNED_BYTE, ft->bitmap.buffer);
 
 			x += ft->bitmap.width;
 

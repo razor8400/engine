@@ -6,9 +6,14 @@ namespace engine
     {
         struct glyph
         {
-            long advance;                   // Offset to advance to next glyph
-            math::vector2d size;            // Size of glyph
-            math::vector2d bearing;         // Offset from baseline to left/top of glyph
+			unsigned int ax; // advance.x
+			unsigned int ay; // advance.y
+
+			unsigned int bw; // bitmap.width;
+			unsigned int bh; // bitmap.rows;
+
+			unsigned int bl; // bitmap_left;
+			unsigned int bt; // bitmap_top;
         };
 
 		typedef std::map<char, glyph> glyphs_map;

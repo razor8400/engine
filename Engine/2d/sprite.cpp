@@ -86,7 +86,7 @@ namespace engine
             gl::draw_texture2d(m_quad.vertices, m_quad.uv, m_quad.colors);
         }
         
-      //  game_object::render(t);
+		game_object::render(t);
     }
 
 	void sprite::clear_texture()
