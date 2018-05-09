@@ -5,6 +5,7 @@ namespace gl
 {
     static GLuint vertex_array;
     static GLuint current_texture = -1;
+    static std::vector<std::string> error_messages;
     
     namespace vertex_attribute
     {
@@ -28,6 +29,8 @@ namespace gl
             return false;
         
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        
+        error_messages.push_back("init success");
         
         return true;
     }
@@ -75,6 +78,8 @@ namespace gl
         
         GLuint shader_id = glCreateShader(shader);
         
+        error_messages.push_back(std::string("compile shader:") + std::string(source));
+        
         glShaderSource(shader_id, 1, &source , NULL);
         glCompileShader(shader_id);
         
@@ -85,7 +90,8 @@ namespace gl
         {
             char* error_message = new char[info_log_length + 1];
             glGetShaderInfoLog(shader_id, info_log_length, NULL, error_message);
-            fprintf(stdout, "%s", error_message);
+            
+            error_messages.push_back(error_message);
             delete[] error_message;
         }
         
@@ -112,7 +118,8 @@ namespace gl
         {
             char* error_message = new char[info_log_length + 1];
             glGetProgramInfoLog(program, info_log_length, NULL, error_message);
-            fprintf(stdout, "%s", error_message);
+            
+            error_messages.push_back(error_message);
             delete[] error_message;
         }
         
@@ -138,46 +145,51 @@ namespace gl
 		return texture;
 	}
 
-	GLuint render_to_texture(int width, int height, const std::function<void()>& draw_func)
+	GLuint render_to_texture(int width, int height, GLuint format, const std::function<void()>& draw_func)
 	{
-		GLuint frame_buffer;
+        GLint viewport[4];
+        glGetIntegerv(GL_VIEWPORT, viewport);
+        
+        GLuint frame_buffer;
+        glGenFramebuffers(1, &frame_buffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, frame_buffer);
 
-		glGenFramebuffers(1, &frame_buffer);
-		glBindFramebuffer(GL_FRAMEBUFFER, frame_buffer);
-		
-		GLuint texture;
+        GLuint texture;
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+        
+        GLuint render_buffer;
+        glGenRenderbuffers(1, &render_buffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+        
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
 
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+            error_messages.push_back("ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-
-		GLuint render_buffer;
-		
-		glGenRenderbuffers(1, &render_buffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
-
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
-
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-			printf("ERROR::FRAMEBUFFER:: Framebuffer is not complete!\n");
-
-		clear();
-
-		if (draw_func)
-			draw_func();
-				
-		glDeleteRenderbuffers(1, &render_buffer);
-		glDeleteFramebuffers(1, &frame_buffer);
-		
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
+        clear();
+        
+        glViewport(0, 0, width, height);
+        
+        if (draw_func)
+            draw_func();
+        
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        
+        clear();
+        
+        glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+        
+        glDeleteFramebuffers(1, &frame_buffer);
+        glDeleteRenderbuffers(1, &render_buffer);
+        
 		return texture;
 	}
     
@@ -187,6 +199,8 @@ namespace gl
         {
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, texture);
+            
+            current_texture = texture;
         }
     }
     
@@ -213,9 +227,9 @@ namespace gl
 
 		glEnableVertexAttribArray(vertex_attribute::position);
 		glEnableVertexAttribArray(vertex_attribute::texture_position);
-		glEnableVertexAttribArray(vertex_attribute::color);
+        glEnableVertexAttribArray(vertex_attribute::color);
 
-		glEnable(GL_BLEND);
+        glEnable(GL_BLEND);
 
 		GLuint index_buffer;
 		glGenBuffers(1, &index_buffer);
@@ -231,20 +245,73 @@ namespace gl
 		glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector2d) * uv.size(), &uv[0], GL_STATIC_DRAW);
 		glVertexAttribPointer(vertex_attribute::texture_position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-		glBindBuffer(GL_ARRAY_BUFFER, buffers::color);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector4d) * colors.size(), &colors[0], GL_STATIC_DRAW);
-		glVertexAttribPointer(vertex_attribute::color, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::color);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector4d) * colors.size(), &colors[0], GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::color, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 
 		glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
 
 		glDisableVertexAttribArray(vertex_attribute::position);
 		glDisableVertexAttribArray(vertex_attribute::texture_position);
-		glDisableVertexAttribArray(vertex_attribute::color);
+        glDisableVertexAttribArray(vertex_attribute::color);
 
-		glDisable(GL_BLEND);
+        glDisable(GL_BLEND);
 
 		glDeleteBuffers(1, &index_buffer);
 	}
+    
+    void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color)
+    {
+        GLfloat vertices[] = {
+            x, y,
+            x + width, y,
+            x + width, y + height,
+            x, y + height
+        };
+        
+        GLushort indices[] = {
+            0, 1, 2, 2, 3, 0
+        };
+        
+        GLfloat colors[] = {
+            color.x, color.y, color.z,
+            color.x, color.y, color.z,
+            color.x, color.y, color.z,
+            color.x, color.y, color.z
+        };
+        
+        glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::color);
+        
+        GLuint index_buffer;
+        glGenBuffers(1, &index_buffer);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::color);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::color, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::color);
+    }
+    
+    const std::vector<std::string>& get_errors()
+    {
+        return error_messages;
+    }
+    
+    void clear_errors()
+    {
+        error_messages.clear();
+    }
     
     void delete_texture(GLuint texture)
     {
@@ -259,15 +326,26 @@ namespace gl
             x2, y2
         };
         
+        GLfloat colors[] = {
+            1, 1, 1,
+            1, 1, 1
+        };
+        
         glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::color);
         
         glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::color);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::color, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 		glDrawArrays(GL_LINES, 0, 2);
         
 		glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::color);
     }
     
     void draw_rect(float x, float y, float width, float height)

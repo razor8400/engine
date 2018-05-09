@@ -48,8 +48,8 @@ void my_app_delegate::run_match3_scene()
     auto label = engine::game_object::create<engine::label>("fonts/arial.ttf", 48);
     label->set_caption("hui2d");
     
-    auto label2 = engine::game_object::create<engine::label>("fonts/arial.ttf", 48);
-    label2->set_caption("zalupka");
+   // auto label2 = engine::game_object::create<engine::label>("fonts/arial.ttf", 48);
+   // label2->set_caption("zalupka");
         
     scene->add_child(label);
    // scene->add_child(label2);

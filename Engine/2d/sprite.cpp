@@ -30,10 +30,7 @@ namespace engine
         if (!texture || !init())
             return false;
 
-		auto size = math::vector2d(texture->get_width(), texture->get_height());
-
-		m_size = size;
-		set_texture(texture, math::rect(0, 0, size.x, size.y));
+		set_texture(texture);
                     
         return true;
     }
@@ -86,7 +83,7 @@ namespace engine
 			if (m_shader_program)
 				m_shader_program->use(t);
 
-			gl::draw_texture2d(m_quad.vertices, m_quad.uv, m_quad.colors);
+            gl::draw_texture2d(m_quad.vertices, m_quad.uv, m_quad.colors);
         }
         
         game_object::render(t);
@@ -94,22 +91,27 @@ namespace engine
 
 	void sprite::clear_texture()
 	{
-		if (m_texture)
-			m_texture.reset();
+        m_texture.reset();
 	}
 
 	void sprite::set_texture(const std::string& file_name)
     {
         auto texture = resources_manager::instance().load_resource_from_file<texture2d>(file_name);
 
-		clear_texture();
-
-		if (texture)
-		{
-			auto size = math::vector2d(texture->get_width(), texture->get_height());
-
-			set_texture(texture, math::rect(0, 0, size.x, size.y));
-		}
+        set_texture(texture);
+    }
+    
+    void sprite::set_texture(const texture2d_ptr& texture)
+    {
+        clear_texture();
+        
+        if (texture)
+        {
+            auto size = math::vector2d(texture->get_width(), texture->get_height());
+            
+            set_texture(texture, math::rect(0, 0, size.x, size.y));
+            set_size(size);
+        }
     }
     
     void sprite::set_texture(const texture2d_ptr& texture, const math::rect& rect)

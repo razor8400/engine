@@ -6,10 +6,10 @@ namespace engine
 {
 	static const std::vector<math::vector2d> glyph_uv =
 	{
-		math::vector2d(0, 1),
-		math::vector2d(1, 1),
-		math::vector2d(1, 0),
-		math::vector2d(0, 0)
+        math::vector2d(0, 0),
+        math::vector2d(1, 0),
+        math::vector2d(1, 1),
+		math::vector2d(0, 1)
 	};
 
 	static const std::vector<math::vector4d> glyph_default_color =
@@ -62,10 +62,8 @@ namespace engine
         }
     }
 
-	void font_ttf::render_text(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program)
+	void font_ttf::render_text(const std::string& string, int size)
 	{
-		update_atlas(string, size);
-
 		auto& glyphs = m_loaded_glyphs[size];
 
 		int x = 0;
@@ -80,9 +78,6 @@ namespace engine
 			gl::bind_texture(it->second.texture_id);
 			gl::set_blend_func(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-			if (program)
-				program->use(transform);
-
 			auto px = x + it->second.bearing.x;
 			auto py = it->second.size.y - it->second.bearing.y;
 
@@ -91,10 +86,10 @@ namespace engine
 
 			std::vector<math::vector2d> vertices =
 			{
-				math::vector2d(px, py),
+                math::vector2d(px, py + h),
+                math::vector2d(px + w, py + h),
 				math::vector2d(px + w, py),
-				math::vector2d(px + w, py + h),
-				math::vector2d(px, py + h)
+                math::vector2d(px, py),
 			};
 
 			gl::draw_texture2d(vertices, glyph_uv, glyph_default_color);
@@ -103,7 +98,7 @@ namespace engine
 		}
 	}
     
-    texture2d_ptr font_ttf::create_label(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program)
+    texture2d_ptr font_ttf::create_label(const std::string& string, int size, const gl::shader_program_ptr& program)
     {
 		if (string.empty())
 			return texture2d_ptr();
@@ -127,15 +122,20 @@ namespace engine
 			if (it->second.size.y > h)
 				h = (int)it->second.size.y;
 		}
+        
+        auto camera = math::mat4::look_at(math::vector3d(-w / 2,  0, -1), math::vector3d::zero, math::vector3d::up);
+        auto transform = math::mat4::ortographic(w, h, -100, 100) * camera;
 
-		auto texture_id = gl::render_to_texture(w, h, [=]()
-		{
-			render_text(string, size, transform, program);
-		});
+        auto texture_id = gl::render_to_texture(w, h, GL_RGBA, [=]()
+        {
+            program->use(transform);
+            
+            render_text(string, size);
+        });
 
-		auto texture = std::make_shared<texture2d>(w, h, GL_RGBA8);
+        auto texture = std::make_shared<texture2d>(w, h, GL_RGBA);
 
-		texture->set_texture_id(texture_id);
+        texture->set_texture_id(texture_id);
 
 		return texture;
     }

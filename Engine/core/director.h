@@ -31,6 +31,8 @@ namespace engine
         scene* running_scene() const { return m_scene; }
         float get_delta_time() const;
         time_t get_local_time() const;
+        
+        const math::mat4& get_world() const;
 	private:
         void update(float delta_time);
         

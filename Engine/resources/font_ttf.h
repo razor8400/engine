@@ -14,10 +14,10 @@ namespace engine
 		static std::shared_ptr<font_ttf> load_from_file(const std::string& file_name);
         bool load(const unsigned char* data, size_t size) override { return true; }
         
-        texture2d_ptr create_label(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program);
-	public:
+        texture2d_ptr create_label(const std::string& string, int size, const gl::shader_program_ptr& program);
+	private:
         void update_atlas(const std::string& string, int size);
-		void render_text(const std::string& string, int size, const math::mat4& transform, const gl::shader_program_ptr& program);
+        void render_text(const std::string& string, int size);
 	private:
         std::string m_font_name;
         std::map<int, font_utils::glyphs_map> m_loaded_glyphs;

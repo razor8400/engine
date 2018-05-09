@@ -26,6 +26,7 @@ namespace engine
 
 		void clear_texture();
         void set_texture(const std::string& file_name);
+        void set_texture(const texture2d_ptr& texture);
         void set_texture(const texture2d_ptr& texture, const math::rect& rect);
 
         void set_color(const math::vector3d& color) { m_color = color; }
