@@ -27,9 +27,10 @@ namespace engine
         
         m_font_size = font_size;
         m_caption = caption;
+		m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
 
         set_font(font);
-        update_texture();
+		update_texture();
 
         return true;
     }
@@ -41,12 +42,10 @@ namespace engine
     }
     
 	void label::update_texture()
-	{
-		auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
-        
+	{      
 		if (m_font)
 		{
-            auto texture = m_font->create_label(m_caption, m_font_size, program);
+            auto texture = m_font->create_label(m_font_size, m_caption);
 			
             if (texture)
             {

@@ -86,7 +86,7 @@ namespace engine
             gl::draw_texture2d(m_quad.vertices, m_quad.uv, m_quad.colors);
         }
         
-        game_object::render(t);
+      //  game_object::render(t);
     }
 
 	void sprite::clear_texture()
@@ -169,10 +169,10 @@ namespace engine
 		}
 		else
 		{
-			quad.uv.push_back(math::vector2d((origin.x + frame_size.x) / texture_size.x, (origin.y + frame_size.y) / texture_size.y));
 			quad.uv.push_back(math::vector2d(origin.x / texture_size.x, (origin.y + frame_size.y) / texture_size.y));
-			quad.uv.push_back(math::vector2d(origin.x / texture_size.x, origin.y / texture_size.y));
+			quad.uv.push_back(math::vector2d((origin.x + frame_size.x) / texture_size.x, (origin.y + frame_size.y) / texture_size.y));
 			quad.uv.push_back(math::vector2d((origin.x + frame_size.x) / texture_size.x, origin.y / texture_size.y));
+			quad.uv.push_back(math::vector2d(origin.x / texture_size.x, origin.y / texture_size.y));
 		}
 
 		quad.colors.push_back(color);

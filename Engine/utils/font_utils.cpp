@@ -14,8 +14,9 @@ namespace engine
         
 		bool library_loaded() const;
         bool load_font(const std::string& file_name, const std::string& font_name) const;
-        bool load_glyph(const std::string& font_name, char ch, int size, font_utils::glyph* glyph) const;
+		font_utils::glyphs_map load_glyphs(const std::string& font_name, int font_size, const std::string& text, int texture) const;
         
+		math::vector2d text_size(const std::string& font_name, int font_size, const std::string& text) const;
         void unload_font(const std::string& font_name);
     private:
         FT_Library m_libary;
@@ -79,39 +80,91 @@ namespace engine
         
         return true;
     }
-    
-    bool free_type_library::load_glyph(const std::string& font_name, char ch, int size, font_utils::glyph* glyph) const
-    {
+
+	font_utils::glyphs_map free_type_library::load_glyphs(const std::string& font_name, int font_size, const std::string& text, int texture) const
+	{
+		auto map = font_utils::glyphs_map();
+
 		if (!library_loaded())
-			return false;
+			return map;
+
+		auto it = m_loaded_fonts.find(font_name);
+
+		if (it == m_loaded_fonts.end())
+		{
+			logger() << "[free type] font not loaded:" << font_name;
+			return map;
+		}
+
+		auto face = it->second;
+		FT_Set_Pixel_Sizes(face, 0, font_size);
+
+		int x = 0;
+
+		for (auto& ch : text)
+		{
+			if (FT_Load_Char(face, ch, FT_LOAD_RENDER))
+			{
+				logger() << "[free type] failed to load glyph:" << ch;
+				continue;
+			}
+
+			auto glyph = font_utils::glyph();
+			auto ft = face->glyph;
+
+			glyph.advance = face->glyph->advance.x;
+			glyph.size = math::vector2d((int)ft->bitmap.width, (int)ft->bitmap.rows);
+			glyph.bearing = math::vector2d(ft->bitmap_left, ft->bitmap_top);
+
+			gl::sub_image2d(texture, GL_TEXTURE_2D, 0, x, 0, ft->bitmap.width, ft->bitmap.rows, GL_RED, GL_UNSIGNED_BYTE, ft->bitmap.buffer);
+
+			x += ft->bitmap.width;
+
+			map[ch] = glyph;
+		}
+
+		return map;
+	}
         
-        auto it = m_loaded_fonts.find(font_name);
-        
-        if (it == m_loaded_fonts.end())
-        {
-            logger() << "[free type] font not loaded:" << font_name;
-            return false;
-        }
-        
-        auto face = it->second;
-        
-        FT_Set_Pixel_Sizes(face, 0, size);
-        
-        if (FT_Load_Char(face, ch, FT_LOAD_RENDER))
-        {
-            logger() << "[free type] failed to load glyph:" << ch;
-            return false;
-        }
-        
-        glyph->texture_id = gl::load_texture(face->glyph->bitmap.buffer, face->glyph->bitmap.width, face->glyph->bitmap.rows, GL_RED);
-        glyph->advance = face->glyph->advance.x;
-        glyph->size = math::vector2d((int)face->glyph->bitmap.width, (int)face->glyph->bitmap.rows);
-        glyph->bearing = math::vector2d(face->glyph->bitmap_left, face->glyph->bitmap_top);
-        
-        return true;
-    }
-    
-    void free_type_library::unload_font(const std::string& font_name)
+	math::vector2d free_type_library::text_size(const std::string& font_name, int font_size, const std::string& text) const
+	{
+		if (!library_loaded())
+			return math::vector2d::zero;
+
+		auto it = m_loaded_fonts.find(font_name);
+
+		if (it == m_loaded_fonts.end())
+		{
+			logger() << "[free type] font not loaded:" << font_name;
+			return math::vector2d::zero;
+		}
+
+		auto face = it->second;
+		
+		int w = 0;
+		int h = 0;
+
+		for (auto& ch : text)
+		{
+			FT_Set_Pixel_Sizes(face, 0, font_size);
+
+			if (FT_Load_Char(face, ch, FT_LOAD_RENDER))
+			{
+				logger() << "[free type] failed to load glyph:" << ch;
+				continue;
+			}
+
+			auto glyph = face->glyph;
+
+			w += glyph->advance.x >> 6;
+			h = std::max(h, (int)face->glyph->bitmap.rows);
+		}
+		
+		return math::vector2d(w, h);
+
+	}
+
+	void free_type_library::unload_font(const std::string& font_name)
     {
         logger() << "[free type] unload font:" << font_name;
         
@@ -130,8 +183,8 @@ namespace engine
     namespace font_utils
     {
         static free_type_library library;
-        
-        bool load_font(const std::string& file_name, const std::string& font_name)
+
+		bool load_font(const std::string& file_name, const std::string& font_name)
         {
             if (!library.load_font(file_name, font_name))
             {
@@ -141,29 +194,27 @@ namespace engine
             
             return true;
         }
-        
-        bool load_glyph(const std::string& font_name, char ch, int size, glyph* glyph)
-        {
-            return library.load_glyph(font_name, ch, size, glyph);
-        }
-        
-        glyphs_map load_glyphs(const std::string& font_name, const std::string& text, int size)
-        {
-            glyphs_map map;
-        
-            for (auto ch : text)
-            {
-                glyph glyph;
-                if (load_glyph(font_name, ch, size, &glyph))
-                    map[ch] = glyph;
-            }
-            
-            return map;
-        }
-        
+                        
         void unload_font(const std::string& font_name)
         {
             library.unload_font(font_name);
         }
+		
+		glyphs_atlas create_atlas(const std::string& font_name, int font_size, const std::string& text)
+		{
+			auto atlas = glyphs_atlas();
+			auto size = text_size(font_name, font_size, text);
+
+			atlas.texture = gl::load_texture(0, (int)size.x, (int)size.y, GL_RED);
+			atlas.glyphs = library.load_glyphs(font_name, font_size, text, atlas.texture);
+			atlas.size = size;
+
+			return atlas;
+		}
+
+		math::vector2d text_size(const std::string& font_name, int font_size, const std::string& text)
+		{
+			return library.text_size(font_name, font_size, text);
+		}
     }
 }

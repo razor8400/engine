@@ -34,6 +34,8 @@ namespace gl
     const std::vector<std::string>& get_errors();
     void clear_errors();
     
+	void sub_image2d(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
+
     struct blend_func
     {
         GLenum source;
