@@ -48,6 +48,13 @@ namespace engine
         
         for (auto& ch : text)
         {
+			if (ch == '\n')
+			{
+				y -= size;
+				x = 0;
+				continue;
+			}
+
             auto it = atlas.glyphs.find(ch);
             
             if (it == atlas.glyphs.end())
