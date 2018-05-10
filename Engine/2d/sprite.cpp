@@ -160,7 +160,7 @@ namespace engine
             quad.uv.push_back({ origin.x / texture_size.x, origin.y / texture_size.y });
 		}
         
-        for (auto i = 0; i < quad.vertices.size(); ++i)
+        for (size_t i = 0; i < quad.vertices.size(); ++i)
             quad.colors.push_back(color);
 
 		return quad;

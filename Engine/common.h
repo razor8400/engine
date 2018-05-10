@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <numeric>
 #include <functional>
 #include <queue>
 #include <cstdarg>

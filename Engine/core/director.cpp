@@ -5,6 +5,8 @@
 #include "director.h"
 #include "application.h"
 
+#include "platform/platform.h"
+
 #include "renderer/renderer.h"
 #include "resources/resources_manager.h"
 
@@ -27,7 +29,8 @@ namespace engine
         
 #if DRAW_STATS
         m_stats_label = label::create<label>("fonts/arial.ttf", 18);
-        m_stats_label->set_anchor(math::vector2d::zero);
+		if (m_stats_label)
+			m_stats_label->set_anchor(math::vector2d::zero);
 #endif
     }
     
@@ -72,6 +75,7 @@ namespace engine
 		logger() << "[director] start";
 		m_renderer->dump_camera_settings();
         m_running = true;
+		m_reset_delta_time = true;
     }
     
     void director::stop()
@@ -143,14 +147,18 @@ namespace engine
         std::stringstream stats;
         
         stats.precision(3);
-        stats << "fps:" << calculate_fps()
-        << "draw calls:" << gl::get_draw_calls() / m_frames << " per frame";
+		stats << "fps:" << calculate_fps() << "\n"
+			<< "draw calls:" << gl::get_draw_calls() / m_frames << " per frame" << "\n"
+			<< "memory used:" << platform::instance().get_memory_used() << "KB";
     
-        m_stats_label->set_caption(stats.str());
-        
-        m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
-        m_stats_label->update(0);
-        m_stats_label->draw(m_renderer->get_world());
+		if (m_stats_label)
+		{
+			m_stats_label->set_caption(stats.str());
+			m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
+
+			m_stats_label->update(0);
+			m_stats_label->draw(m_renderer->get_world());
+		}
     }
 #endif
     
@@ -186,11 +194,8 @@ namespace engine
     }
     
     float director::calculate_fps() const
-    {
-        if (m_time > 0)
-            return m_frames / m_time;
-        
-        return 0;
+    {       
+        return m_frames / m_time;
     }
     
     void director::on_focus()
