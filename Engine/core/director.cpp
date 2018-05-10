@@ -8,6 +8,8 @@
 #include "renderer/renderer.h"
 #include "resources/resources_manager.h"
 
+#include "2d/label.h"
+
 #include "scene.h"
 #include "pool_manager.h"
 
@@ -22,6 +24,11 @@ namespace engine
     director::director()
     {
 		m_renderer = std::make_unique<renderer>();
+        
+#if DRAW_STATS
+        m_stats_label = label::create<label>("fonts/arial.ttf", 18);
+        m_stats_label->set_anchor(math::vector2d::zero);
+#endif
     }
     
     director::~director()
@@ -81,6 +88,9 @@ namespace engine
     
     void director::main_loop()
     {
+        if (m_paused)
+            return;
+        
         auto errors = gl::get_errors();
         
         for (auto error : errors)
@@ -115,8 +125,34 @@ namespace engine
 			m_renderer->draw_scene(m_scene);
         }
         
-		pool_manager::instance().update();
+        ++m_frames;
+        m_time += delta_time;
+        
+        pool_manager::instance().update();
+        
+#if DRAW_STATS
+        draw_stats();
+#endif
     }
+    
+#if DRAW_STATS
+    void director::draw_stats()
+    {
+        auto win_size = application::instance().get_win_size();
+     
+        std::stringstream stats;
+        
+        stats.precision(3);
+        stats << "fps:" << calculate_fps()
+        << "draw calls:" << gl::get_draw_calls() / m_frames << " per frame";
+    
+        m_stats_label->set_caption(stats.str());
+        
+        m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
+        m_stats_label->update(0);
+        m_stats_label->draw(m_renderer->get_world());
+    }
+#endif
     
     float director::get_delta_time() const
     {
@@ -126,6 +162,12 @@ namespace engine
         auto delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - last_update);
         
         last_update = now;
+        
+        if (m_reset_delta_time)
+        {
+            m_reset_delta_time = false;
+            return 0;
+        }
         
         return delta.count();
     }
@@ -141,5 +183,24 @@ namespace engine
     const math::mat4& director::get_world() const
     {
         return m_renderer->get_world();
+    }
+    
+    float director::calculate_fps() const
+    {
+        if (m_time > 0)
+            return m_frames / m_time;
+        
+        return 0;
+    }
+    
+    void director::on_focus()
+    {
+        m_paused = false;
+        m_reset_delta_time = true;
+    }
+    
+    void director::on_lost_focus()
+    {
+        m_paused = true;
     }
 }

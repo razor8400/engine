@@ -26,6 +26,10 @@ namespace engine
     class ref;
     class renderer;
     
+    class sprite;
+    class label;
+    class batch_sprite;
+    
 	class scene;
 	class game_object;
     class component;

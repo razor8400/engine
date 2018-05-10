@@ -3,8 +3,9 @@
 
 namespace gl
 {
-    static GLuint vertex_array;
+    static GLuint vbo;
     static GLuint current_texture = -1;
+    static GLuint draw_calls = 0;
     static std::vector<std::string> error_messages;
     
     namespace vertex_attribute
@@ -43,8 +44,8 @@ namespace gl
     
 	void generate_buffers()
 	{
-		glGenVertexArrays(1, &vertex_array);
-		glBindVertexArray(vertex_array);
+		glGenVertexArrays(1, &vbo);
+		glBindVertexArray(vbo);
         
         glGenBuffers(1, &buffers::position);
 		glGenBuffers(1, &buffers::color);
@@ -53,7 +54,7 @@ namespace gl
     
 	void clear_buffers()
 	{
-		glDeleteVertexArrays(1, &vertex_array);
+		glDeleteVertexArrays(1, &vbo);
         
         glDeleteBuffers(1, &buffers::position);
         glDeleteBuffers(1, &buffers::texture_position);
@@ -209,6 +210,49 @@ namespace gl
     {
         glBlendFunc(source, destination);
     }
+    
+    void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv)
+    {
+        static const GLsizei quad_size = 4;
+        
+        std::vector<GLushort> indices;
+        
+        for (GLushort i = 0; i < vertices.size(); i += quad_size)
+        {
+            indices.push_back(i);
+            indices.push_back(i + 1);
+            indices.push_back(i + 2);
+            indices.push_back(i + 2);
+            indices.push_back(i + 3);
+            indices.push_back(i);
+        }
+        
+        glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::texture_position);
+        
+        GLuint index_buffer;
+        glGenBuffers(1, &index_buffer);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices[0], GL_STATIC_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::position);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector2d) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, buffers::texture_position);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector2d) * uv.size(), &uv[0], GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::texture_position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::texture_position);
+        
+        glDeleteBuffers(1, &index_buffer);
+        
+        ++draw_calls;
+    }
 
 	void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv, const std::vector<math::vector4d>& colors)
 	{
@@ -259,6 +303,8 @@ namespace gl
         glDisable(GL_BLEND);
 
 		glDeleteBuffers(1, &index_buffer);
+        
+        ++draw_calls;
 	}
     
     void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color)
@@ -302,6 +348,8 @@ namespace gl
         
         glDisableVertexAttribArray(vertex_attribute::position);
         glDisableVertexAttribArray(vertex_attribute::color);
+        
+        ++draw_calls;
     }
     
     const std::vector<std::string>& get_errors()
@@ -312,6 +360,11 @@ namespace gl
     void clear_errors()
     {
         error_messages.clear();
+    }
+    
+    int get_draw_calls()
+    {
+        return draw_calls;
     }
 
 	void sub_image2d(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels)
@@ -327,8 +380,7 @@ namespace gl
     
     void draw_line(float x1, float y1, float x2, float y2)
     {
-        const GLfloat vertices[] =
-        {
+        const GLfloat vertices[] = {
             x1, y1,
             x2, y2
         };
@@ -353,6 +405,8 @@ namespace gl
         
 		glDisableVertexAttribArray(vertex_attribute::position);
         glDisableVertexAttribArray(vertex_attribute::color);
+        
+        ++draw_calls;
     }
     
     void draw_rect(float x, float y, float width, float height)

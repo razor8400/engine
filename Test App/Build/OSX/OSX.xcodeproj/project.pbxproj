@@ -35,6 +35,7 @@
 		BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC73206B96FA005A6240 /* vector2d.cpp */; };
 		BF51ECAF206BAC28005A6240 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC84206B993A005A6240 /* OpenGL.framework */; };
 		BF51ECB0206BAC3D005A6240 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */; };
+		BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF7A950420A4857100F12130 /* texture_protocol.cpp */; };
 		BF868748208341FA00523939 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF868746208341FA00523939 /* script.cpp */; };
 		BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D520906CF000C39C31 /* rect.cpp */; };
 		BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */; };
@@ -134,6 +135,8 @@
 		BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../ThirdParty/GLFW3/osx/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		BF51EC9F206BAAF0005A6240 /* OSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSX; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF51ECA7206BAB15005A6240 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		BF7A950420A4857100F12130 /* texture_protocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_protocol.cpp; sourceTree = "<group>"; };
+		BF7A950520A4857100F12130 /* texture_protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture_protocol.h; sourceTree = "<group>"; };
 		BF86873F20823E6300523939 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		BF8687442082BBAB00523939 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		BF868745208337D200523939 /* vector.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector.inl; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */,
 				BF38FCB120A088D200AF7DF1 /* label.cpp */,
 				BF38FCB220A088D200AF7DF1 /* label.h */,
+				BF7A950420A4857100F12130 /* texture_protocol.cpp */,
+				BF7A950520A4857100F12130 /* texture_protocol.h */,
 			);
 			path = 2d;
 			sourceTree = "<group>";
@@ -558,6 +563,7 @@
 				BF0D23972083734100542952 /* scripting.cpp in Sources */,
 				BFD2F43D209E035B005A4CEA /* batch_sprite.cpp in Sources */,
 				BFCB322A2076100B001B5995 /* file_system.cpp in Sources */,
+				BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */,
 				BF0D239F2083D7DF00542952 /* pool_manager.cpp in Sources */,
 				BF3FF3DB208C91660070955D /* touch_dispatcher.cpp in Sources */,
 				BF51ECAB206BABD4005A6240 /* game_object.cpp in Sources */,

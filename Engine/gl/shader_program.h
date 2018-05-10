@@ -8,8 +8,10 @@ namespace gl
     {
     public:
         static const char* shader_position_color;
+        static const char* shader_texture_position;
         static const char* shader_texture_position_color;
-		static const char* shader_font_position_color;
+        static const char* shader_texture_position_color_alpha;
+		static const char* shader_font_position_color_alpha;
 
         shader_program(GLuint program_id);
         virtual ~shader_program();

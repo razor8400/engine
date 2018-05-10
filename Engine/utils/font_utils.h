@@ -6,29 +6,37 @@ namespace engine
     {
         struct glyph
         {
-			unsigned int ax; // advance.x
-			unsigned int ay; // advance.y
+			long ax;   // advance.x
+			long ay;   // advance.y
 
-			unsigned int bw; // bitmap.width;
-			unsigned int bh; // bitmap.rows;
+			int bw;    // bitmap.width;
+            int bh;    // bitmap.rows;
 
-			unsigned int bl; // bitmap_left;
-			unsigned int bt; // bitmap_top;
+            int bl;    // bitmap_left;
+            int bt;    // bitmap_top;
+            
+            float tx, ty;
         };
 
 		typedef std::map<char, glyph> glyphs_map;
 
-		struct glyphs_atlas
+        struct size
+        {
+            int w, h;
+        };
+        
+		struct atlas
 		{
 			int texture;
-			math::vector2d size;
+            int width;
+            int height;
 			glyphs_map glyphs;
 		};
                 
 		bool load_font(const std::string& file_name, const std::string& font_name);
 		void unload_font(const std::string& font_name);
 
-		glyphs_atlas create_atlas(const std::string& font_name, int font_size, const std::string& text);
-		math::vector2d text_size(const std::string& font_name, int font_size, const std::string& text);
+		atlas create_atlas(const std::string& font_name, int font_size, const std::string& text);
+		size text_size(const std::string& font_name, int font_size, const std::string& text);
     }
 }

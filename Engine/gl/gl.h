@@ -24,6 +24,7 @@ namespace gl
     
     void bind_texture(GLuint texture);
     void set_blend_func(GLenum source, GLenum destination);
+    void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv);
 	void draw_texture2d(const std::vector<math::vector2d>& vertices, const std::vector<math::vector2d>& uv, const std::vector<math::vector4d>& colors);
     void delete_texture(GLuint texture);
     
@@ -33,6 +34,7 @@ namespace gl
     
     const std::vector<std::string>& get_errors();
     void clear_errors();
+    int get_draw_calls();
     
 	void sub_image2d(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
 
@@ -41,10 +43,4 @@ namespace gl
         GLenum source;
         GLenum destination;
     };
-
-	struct quad
-	{
-		std::vector<math::vector2d> vertices;
-		math::vector4d color;
-	};
 }

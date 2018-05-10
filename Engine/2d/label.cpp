@@ -17,7 +17,7 @@ namespace engine
     
     bool label::init(const std::string& font_name, int font_size, const std::string& caption)
     {
-        if (!sprite::init())
+        if (!game_object::init())
             return false;
         
         auto font = resources_manager::instance().load_resource_from_file<font_ttf>(font_name);
@@ -27,10 +27,9 @@ namespace engine
         
         m_font_size = font_size;
         m_caption = caption;
-		m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color);
+		m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color_alpha);
 
         set_font(font);
-		update_texture();
 
         return true;
     }
@@ -41,19 +40,24 @@ namespace engine
         set_font(font);
     }
     
-	void label::update_texture()
+	void label::render(const math::mat4& t)
 	{      
 		if (m_font)
 		{
-            auto texture = m_font->create_label(m_font_size, m_caption);
-			
-            if (texture)
-            {
-                auto size = math::vector2d(texture->get_width(), texture->get_height());
-				
-                set_texture(texture, math::rect(0, 0, size.x, size.y));
-                set_size(size);
-            }
+            if (m_shader_program)
+                m_shader_program->use(t);
+            
+            gl::set_blend_func(m_blend_func.source, m_blend_func.destination);
+            
+            m_font->render_text(m_caption, m_font_size, get_color_rgba());
 		}
+        
+        game_object::render(t);
 	}
+    
+    void label::update_size()
+    {
+        if (m_font)
+            m_size = m_font->text_size(m_caption, m_font_size);
+    }
 }

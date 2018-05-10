@@ -14,9 +14,9 @@ namespace engine
         
 		bool library_loaded() const;
         bool load_font(const std::string& file_name, const std::string& font_name) const;
-		font_utils::glyphs_map load_glyphs(const std::string& font_name, int font_size, const std::string& text, int texture) const;
+		bool load_glyphs(font_utils::atlas* atlas, const std::string& font_name, int font_size, const std::string& text) const;
         
-		math::vector2d text_size(const std::string& font_name, int font_size, const std::string& text) const;
+        font_utils::size text_size(const std::string& font_name, int font_size, const std::string& text) const;
         void unload_font(const std::string& font_name);
     private:
         FT_Library m_libary;
@@ -81,25 +81,28 @@ namespace engine
         return true;
     }
 
-	font_utils::glyphs_map free_type_library::load_glyphs(const std::string& font_name, int font_size, const std::string& text, int texture) const
+	bool free_type_library::load_glyphs(font_utils::atlas* atlas, const std::string& font_name, int font_size, const std::string& text) const
 	{
-		auto map = font_utils::glyphs_map();
+        assert(atlas);
 
 		if (!library_loaded())
-			return map;
+			return false;
 
 		auto it = m_loaded_fonts.find(font_name);
 
 		if (it == m_loaded_fonts.end())
 		{
 			logger() << "[free type] font not loaded:" << font_name;
-			return map;
+			return false;
 		}
 
 		auto face = it->second;
 		FT_Set_Pixel_Sizes(face, 0, font_size);
 
 		int x = 0;
+        int y = 0;
+        
+        auto& map = atlas->glyphs;
 
 		for (auto& ch : text)
 		{
@@ -118,28 +121,30 @@ namespace engine
 			glyph.bh = ft->bitmap.rows;
 			glyph.bl = ft->bitmap_left;
 			glyph.bt = ft->bitmap_top;
+            glyph.tx = (float)x / atlas->width;
+            glyph.ty = (float)y / atlas->height;
 
-			gl::sub_image2d(texture, GL_TEXTURE_2D, 0, x, 0, glyph.bw, glyph.bh, GL_RED, GL_UNSIGNED_BYTE, ft->bitmap.buffer);
+			gl::sub_image2d(atlas->texture, GL_TEXTURE_2D, 0, x, 0, glyph.bw, glyph.bh, GL_RED, GL_UNSIGNED_BYTE, ft->bitmap.buffer);
 
 			x += ft->bitmap.width;
 
 			map[ch] = glyph;
 		}
 
-		return map;
+		return true;
 	}
         
-	math::vector2d free_type_library::text_size(const std::string& font_name, int font_size, const std::string& text) const
+	font_utils::size free_type_library::text_size(const std::string& font_name, int font_size, const std::string& text) const
 	{
 		if (!library_loaded())
-			return math::vector2d::zero;
+			return font_utils::size();
 
 		auto it = m_loaded_fonts.find(font_name);
 
 		if (it == m_loaded_fonts.end())
 		{
 			logger() << "[free type] font not loaded:" << font_name;
-			return math::vector2d::zero;
+			return font_utils::size();
 		}
 
 		auto face = it->second;
@@ -163,8 +168,7 @@ namespace engine
 			h = std::max(h, (int)face->glyph->bitmap.rows);
 		}
 		
-		return math::vector2d(w, h);
-
+        return { w, h };
 	}
 
 	void free_type_library::unload_font(const std::string& font_name)
@@ -203,19 +207,22 @@ namespace engine
             library.unload_font(font_name);
         }
 		
-		glyphs_atlas create_atlas(const std::string& font_name, int font_size, const std::string& text)
+		atlas create_atlas(const std::string& font_name, int font_size, const std::string& text)
 		{
-			auto atlas = glyphs_atlas();
+			auto at = atlas();
 			auto size = text_size(font_name, font_size, text);
 
-			atlas.texture = gl::load_texture(0, (int)size.x, (int)size.y, GL_RED);
-			atlas.glyphs = library.load_glyphs(font_name, font_size, text, atlas.texture);
-			atlas.size = size;
+			at.texture = gl::load_texture(0, size.w, size.h, GL_RED);
+            at.width = size.w;
+            at.height = size.h;
+            
+            if (!library.load_glyphs(&at, font_name, font_size, text))
+                logger() << "[font utils] error loading atlas:" << text;
 
-			return atlas;
+			return at;
 		}
 
-		math::vector2d text_size(const std::string& font_name, int font_size, const std::string& text)
+		size text_size(const std::string& font_name, int font_size, const std::string& text)
 		{
 			return library.text_size(font_name, font_size, text);
 		}
