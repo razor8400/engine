@@ -2,6 +2,8 @@
 #include "resources/texture2d.h"
 #include "resources/texture_atlas.h"
 #include "resources/resources_manager.h"
+#include "renderer/render_command.h"
+#include "renderer/renderer.h"
 #include "sprite.h"
 
 namespace engine
@@ -63,29 +65,28 @@ namespace engine
 		return init(atlas->get_texture(), frame.frame);
 	}
     
-	void sprite::draw(const math::mat4& t)
-	{
-		if (m_texture)
-			m_quad = update_quad();
-
-		game_object::draw(t);
-	}
-
-	void sprite::render(const math::mat4& t)
+	void sprite::render(renderer* r, const math::mat4& t)
     {
 		auto texture = get_texture();
 
         if (texture)
         {
-			if (m_shader_program)
-				m_shader_program->use(t);
-
-            gl::bind_texture(texture->get_texture_id());
-            gl::set_blend_func(m_blend_func.source, m_blend_func.destination);
-            gl::draw_texture2d(m_quad.vertices, m_quad.uv, m_quad.colors);
+            auto command = quads_command::create(texture->get_texture_id(), m_blend_func, m_shader_program);
+            auto color = get_color_rgba();
+            
+            update_vertices();
+            
+            for (auto& v : m_vertices)
+            {
+                v.vertice = math::transform_point(v.vertice, t);
+                v.color = color;
+                command->add_vertice(v);
+            }
+            
+            r->add_command(command);
         }
         
-		game_object::render(t);
+		game_object::render(r, t);
     }
 
 	void sprite::clear_texture()
@@ -116,53 +117,45 @@ namespace engine
     void sprite::set_texture(const texture2d_ptr& texture, const math::rect& rect)
     {
         m_texture = texture;
-		m_texture_rect = rect;
+        set_texture_rect(rect);
     }
-
-    sprite::quad sprite::update_quad() const
-	{
-        assert(m_texture);
+    
+    void sprite::update_vertices()
+    {
+        if (!m_texture)
+            return;
         
-		auto origin = m_texture_rect.get_origin();
+        auto origin = m_texture_rect.get_origin();
         auto frame_size = m_texture_rect.get_size();
         
-		auto texture_size = math::vector2d(m_texture->get_width(), m_texture->get_height());
-		auto offset = (math::vector2d(m_size.x, m_size.y) - frame_size) / 2;
-
-		auto color = get_color_rgba();
-
-		quad quad;
-
-		quad.vertices.push_back(offset);
-        quad.vertices.push_back({ offset.x + frame_size.x, offset.y });
-        quad.vertices.push_back({ frame_size + offset });
-        quad.vertices.push_back({ offset.x, frame_size.y + offset.y });
-
-		if (m_rotated)
-		{
-            quad.uv.push_back({ origin.x / texture_size.x, origin.y / texture_size.y });
-            quad.uv.push_back({ (origin.x + frame_size.y) / texture_size.x, origin.y / texture_size.y });
-            quad.uv.push_back({ (origin.x + frame_size.y) / texture_size.x, (origin.y + frame_size.x) / texture_size.y });
-            quad.uv.push_back({ origin.x / texture_size.x, (origin.y + frame_size.x) / texture_size.y });
-
-			for (auto& vertice : quad.vertices)
-			{
-				auto t = vertice.x;
-				vertice.x = vertice.y;
-				vertice.y = t;
-			}
-		}
-		else
-		{
-            quad.uv.push_back({ origin.x / texture_size.x, (origin.y + frame_size.y) / texture_size.y });
-            quad.uv.push_back({ (origin.x + frame_size.x) / texture_size.x, (origin.y + frame_size.y) / texture_size.y });
-            quad.uv.push_back({ (origin.x + frame_size.x) / texture_size.x, origin.y / texture_size.y });
-            quad.uv.push_back({ origin.x / texture_size.x, origin.y / texture_size.y });
-		}
+        auto texture_size = math::vector2d(m_texture->get_width(), m_texture->get_height());
+        auto offset = (m_size - frame_size) / 2;
         
-        for (size_t i = 0; i < quad.vertices.size(); ++i)
-            quad.colors.push_back(color);
-
-		return quad;
-	}
+        m_vertices[gl::bottom_left].vertice = offset;
+        m_vertices[gl::bottom_right].vertice = { offset.x + frame_size.x, offset.y, 0.0f };
+        m_vertices[gl::top_right].vertice = { math::vector3d(frame_size.x, frame_size.y, 0.0f) + offset };
+        m_vertices[gl::top_left].vertice = { offset.x, frame_size.y + offset.y, 0.0f };
+        
+        if (m_rotated)
+        {
+            m_vertices[gl::bottom_left].tex_coord = { origin.x / texture_size.x, origin.y / texture_size.y };
+            m_vertices[gl::bottom_right].tex_coord = { (origin.x + frame_size.y) / texture_size.x, origin.y / texture_size.y };
+            m_vertices[gl::top_right].tex_coord = { (origin.x + frame_size.y) / texture_size.x, (origin.y + frame_size.x) / texture_size.y };
+            m_vertices[gl::top_left].tex_coord = { origin.x / texture_size.x, (origin.y + frame_size.x) / texture_size.y };
+            
+            for (auto& v : m_vertices)
+            {
+                auto t = v.vertice.x;
+                v.vertice.x = v.vertice.y;
+                v.vertice.y = t;
+            }
+        }
+        else
+        {
+            m_vertices[gl::bottom_left].tex_coord = { origin.x / texture_size.x, (origin.y + frame_size.y) / texture_size.y };
+            m_vertices[gl::bottom_right].tex_coord = { (origin.x + frame_size.x) / texture_size.x, (origin.y + frame_size.y) / texture_size.y };
+            m_vertices[gl::top_right].tex_coord = { (origin.x + frame_size.x) / texture_size.x, origin.y / texture_size.y };
+            m_vertices[gl::top_left].tex_coord = { origin.x / texture_size.x, origin.y / texture_size.y };
+        }
+    }
 }

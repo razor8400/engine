@@ -1,5 +1,9 @@
 #include "common.h"
 #include "utils/image_utils.h"
+
+#include "renderer/render_command.h"
+#include "renderer/renderer.h"
+
 #include "texture2d.h"
 
 namespace engine
@@ -41,31 +45,5 @@ namespace engine
         m_texture_id = gl::load_texture(data, m_width, m_height, m_format);
         
         return m_texture_id != texture_default_id;
-    }
-    
-    void texture2d::draw(const math::mat4& t)
-    {
-        gl::bind_texture(m_texture_id);
-        
-        auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position);
-        
-        if (program)
-            program->use(t);
-        
-        std::vector<math::vector2d> vertices = {
-            { 0, 0 },
-            { m_width, 0 },
-            { m_width, m_height },
-            { 0, m_height }
-        };
-        
-        std::vector<math::vector2d> text_coords = {
-            { 0, 1 },
-            { 1, 1 },
-            { 1, 0 },
-            { 0, 0 }
-        };
-        
-        gl::draw_texture2d(vertices, text_coords);
     }
 }

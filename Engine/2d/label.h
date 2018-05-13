@@ -13,7 +13,7 @@ namespace engine
         
         void set_font(const std::string& font_name);
         
-        void render(const math::mat4& t) override;
+        void render(renderer* r, const math::mat4& t) override;
         
         const font_ttf_ptr& get_font() const { return m_font; }
         void set_font(const font_ttf_ptr& font) { m_font = font; update_size(); }

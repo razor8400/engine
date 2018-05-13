@@ -20,10 +20,10 @@ local function get_background_texture(x, y)
 end
 
 local function create_background()
-	local batch = batch_sprite.create("textures.png")
+    local obj = game_object.create();
 	local size = field:size()
 	
-	batch:set_size(size)
+	obj:set_size(size)
 
 	for i = 1, colls do
 		for j = 1, rows do
@@ -31,11 +31,11 @@ local function create_background()
 			local sprite = sprite.create(atlas, texture)
 				
 			sprite:set_position(field:convert_cell_to_world(i, j))
-			batch:add_child(sprite)
+			obj:add_child(sprite)
 		end
 	end
 	
-	return batch
+	return obj
 end
 
 function match3scene:on_touch_began()
@@ -103,7 +103,7 @@ function match3scene:on_touch_moved()
 end
 
 function match3scene:start()
-	local background = create_background()
+    local background = create_background()
 	local size = background:get_size()
 	local collider = box_collider2d.create(size.x, size.y)
 

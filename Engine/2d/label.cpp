@@ -1,6 +1,10 @@
 #include "common.h"
 #include "resources/resources_manager.h"
 #include "resources/font_ttf.h"
+
+#include "renderer/render_command.h"
+#include "renderer/renderer.h"
+
 #include "label.h"
 
 namespace engine
@@ -40,19 +44,31 @@ namespace engine
         set_font(font);
     }
     
-	void label::render(const math::mat4& t)
+	void label::render(renderer* r, const math::mat4& t)
 	{      
 		if (m_font)
 		{
-            if (m_shader_program)
-                m_shader_program->use(t);
+            std::vector<gl::v3f_c4f_t2f> vertices;
+            int texture = 0;
             
-            gl::set_blend_func(m_blend_func.source, m_blend_func.destination);
-            
-            m_font->render_text(m_caption, m_font_size, get_color_rgba());
+            if (m_font->render_info(m_caption, m_font_size, &vertices, &texture))
+            {
+                auto command = quads_command::create(texture, m_blend_func, m_shader_program);
+                auto color = get_color_rgba();
+                
+                for (auto& v : vertices)
+                {
+                    v.vertice = math::transform_point(v.vertice, t);
+                    v.color = color;
+                    
+                    command->add_vertice(v);
+                }
+                
+                r->add_command(command);
+            }
 		}
         
-        game_object::render(t);
+        game_object::render(r, t);
 	}
     
     void label::update_size()

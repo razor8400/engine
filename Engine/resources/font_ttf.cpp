@@ -4,6 +4,8 @@
 
 namespace engine
 {
+    static const int max_atlas = 1024;
+    
     font_ttf::font_ttf(const std::string& font_name) : m_font_name(font_name)
     {
         
@@ -28,23 +30,17 @@ namespace engine
 		return std::shared_ptr<font_ttf>();
 	}
     
-    void font_ttf::render_text(const std::string& text, int size, const math::vector4d& color)
+    bool font_ttf::render_info(const std::string& text, int size, std::vector<gl::v3f_c4f_t2f>* vertices, int* texture)
     {
         if (text.empty())
-            return;
+            return false;
         
         auto& atlas = get_atlas(text, size);
         
-        gl::bind_texture(atlas.texture);
+        *texture = atlas.texture;
         
         int x = 0;
         int y = 0;
-        
-        std::vector<math::vector2d> vertices;
-        std::vector<math::vector2d> tex_coords;
-        std::vector<math::vector4d> colors;
-        
-        static const int quad = 4;
         
         for (auto& ch : text)
         {
@@ -62,26 +58,27 @@ namespace engine
             
             auto& glyph = it->second;
             
-            vertices.push_back({ x + glyph.bl, y + glyph.bt });
-            vertices.push_back({ x + glyph.bl + glyph.bw, y + glyph.bt });
-            vertices.push_back({ x + glyph.bl + glyph.bw, y + glyph.bt - glyph.bh });
-            vertices.push_back({ x + glyph.bl, y + glyph.bt - glyph.bh });
-            
             float tx = glyph.tx;
             float ty = glyph.ty;
             
-            tex_coords.push_back({ tx, ty });
-            tex_coords.push_back({ tx + (float)glyph.bw / atlas.width, ty });
-            tex_coords.push_back({ tx + (float)glyph.bw / atlas.width, ty + ((float)glyph.bh / atlas.height) });
-            tex_coords.push_back({ tx, ty + ((float)glyph.bh / atlas.height) });
+            auto quad = gl::v3f_c4f_t2f_quad();
             
-            for (int i = 0; i < quad; ++i)
-                colors.push_back(color);
+            quad[gl::bottom_left].vertice = { x + glyph.bl, y + glyph.bt, 0 };
+            quad[gl::bottom_right].vertice = { x + glyph.bl + glyph.bw, y + glyph.bt, 0 };
+            quad[gl::top_right].vertice = { x + glyph.bl + glyph.bw, y + glyph.bt - glyph.bh, 0 };
+            quad[gl::top_left].vertice = { x + glyph.bl, y + glyph.bt - glyph.bh, 0 };
+            
+            quad[gl::bottom_left].tex_coord = { tx, ty };
+            quad[gl::bottom_right].tex_coord = { tx + (float)glyph.bw / atlas.width, ty };
+            quad[gl::top_right].tex_coord = { tx + (float)glyph.bw / atlas.width, ty + ((float)glyph.bh / atlas.height) };
+            quad[gl::top_left].tex_coord = { tx, ty + ((float)glyph.bh / atlas.height) };
+            
+            vertices->insert(vertices->end(), quad.begin(), quad.end());
             
             x += glyph.ax;
         }
         
-        gl::draw_texture2d(vertices, tex_coords, colors);
+        return true;
     }
     
     const font_utils::atlas& font_ttf::get_atlas(const std::string& text, int size)
@@ -121,12 +118,12 @@ namespace engine
         
         buffer.insert(buffer.end(), text.begin(), text.end());
         
-        m_cache[size] = font_utils::create_atlas(m_font_name, size, buffer);
+        m_cache[size] = font_utils::create_atlas(m_font_name, size, buffer, max_atlas);
     }
     
     math::vector2d font_ttf::text_size(const std::string& text, int size) const
     {
-        auto sz = font_utils::text_size(m_font_name, size, text);
+        auto sz = font_utils::text_size(m_font_name, size, text, 0);
         return math::vector2d(sz.w, sz.h);
     }
 }

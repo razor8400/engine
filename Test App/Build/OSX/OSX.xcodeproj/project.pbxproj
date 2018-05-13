@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF0B2AFC20A6479E00C1305D /* render_command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2AFA20A6479E00C1305D /* render_command.cpp */; };
 		BF0D238F2083496900542952 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF0D238E2083496900542952 /* liblua.a */; };
 		BF0D23972083734100542952 /* scripting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D23962083734100542952 /* scripting.cpp */; };
 		BF0D239F2083D7DF00542952 /* pool_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0D239D2083D7DF00542952 /* pool_manager.cpp */; };
@@ -48,7 +49,6 @@
 		BFCB323220762B58001B5995 /* resources_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323020762B58001B5995 /* resources_manager.cpp */; };
 		BFCB323620766319001B5995 /* image_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323520766319001B5995 /* image_utils.cpp */; };
 		BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323B2077A52B001B5995 /* sprite.cpp */; };
-		BFD2F43D209E035B005A4CEA /* batch_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */; };
 		BFD2F44220A04072005A4CEA /* texture_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F43E20A04071005A4CEA /* texture_atlas.cpp */; };
 		BFD2F44320A04072005A4CEA /* font_ttf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F44120A04072005A4CEA /* font_ttf.cpp */; };
 		BFD2F44920A04843005A4CEA /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD2F44820A04843005A4CEA /* libfreetype.a */; };
@@ -72,6 +72,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF0B2AFA20A6479E00C1305D /* render_command.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = render_command.cpp; sourceTree = "<group>"; };
+		BF0B2AFB20A6479E00C1305D /* render_command.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_command.h; sourceTree = "<group>"; };
 		BF0D238E2083496900542952 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../../../ThirdParty/lua/osx/liblua.a; sourceTree = "<group>"; };
 		BF0D239120835D5000542952 /* scripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripting.h; sourceTree = "<group>"; };
 		BF0D23962083734100542952 /* scripting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scripting.cpp; sourceTree = "<group>"; };
@@ -167,8 +169,6 @@
 		BFCB323B2077A52B001B5995 /* sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		BFD2F436209DB767005A4CEA /* pointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer.h; sourceTree = "<group>"; };
 		BFD2F437209DBA01005A4CEA /* pointer.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pointer.inl; sourceTree = "<group>"; };
-		BFD2F43B209E0348005A4CEA /* batch_sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = batch_sprite.h; sourceTree = "<group>"; };
-		BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = batch_sprite.cpp; sourceTree = "<group>"; };
 		BFD2F43E20A04071005A4CEA /* texture_atlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_atlas.cpp; sourceTree = "<group>"; };
 		BFD2F43F20A04071005A4CEA /* font_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = font_ttf.h; sourceTree = "<group>"; };
 		BFD2F44020A04071005A4CEA /* texture_atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_atlas.h; sourceTree = "<group>"; };
@@ -239,8 +239,6 @@
 			children = (
 				BFCB323A2077A47D001B5995 /* sprite.h */,
 				BFCB323B2077A52B001B5995 /* sprite.cpp */,
-				BFD2F43B209E0348005A4CEA /* batch_sprite.h */,
-				BFD2F43C209E035B005A4CEA /* batch_sprite.cpp */,
 				BF38FCB120A088D200AF7DF1 /* label.cpp */,
 				BF38FCB220A088D200AF7DF1 /* label.h */,
 				BF7A950420A4857100F12130 /* texture_protocol.cpp */,
@@ -269,6 +267,8 @@
 			children = (
 				BF3D14EF207225C600293C36 /* renderer.cpp */,
 				BF3D14F0207225C600293C36 /* renderer.h */,
+				BF0B2AFA20A6479E00C1305D /* render_command.cpp */,
+				BF0B2AFB20A6479E00C1305D /* render_command.h */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -561,7 +561,6 @@
 				BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
 				BF0D23972083734100542952 /* scripting.cpp in Sources */,
-				BFD2F43D209E035B005A4CEA /* batch_sprite.cpp in Sources */,
 				BFCB322A2076100B001B5995 /* file_system.cpp in Sources */,
 				BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */,
 				BF0D239F2083D7DF00542952 /* pool_manager.cpp in Sources */,
@@ -577,6 +576,7 @@
 				BF3FF3DE208C92AF0070955D /* touch_listener.cpp in Sources */,
 				BF439CC420888653000B8A15 /* logger.cpp in Sources */,
 				BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */,
+				BF0B2AFC20A6479E00C1305D /* render_command.cpp in Sources */,
 				BF3D14CC206BD09500293C36 /* my_app_delegate.cpp in Sources */,
 				BF38FCB320A088D200AF7DF1 /* label.cpp in Sources */,
 				BFCB323620766319001B5995 /* image_utils.cpp in Sources */,

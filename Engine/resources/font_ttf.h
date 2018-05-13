@@ -14,7 +14,7 @@ namespace engine
 		static std::shared_ptr<font_ttf> load_from_file(const std::string& file_name);
         bool load(const unsigned char* data, size_t size) override { return true; }
         
-        void render_text(const std::string& text, int size, const math::vector4d& color);
+        bool render_info(const std::string& text, int size, std::vector<gl::v3f_c4f_t2f>* vertices, int* texture);
         math::vector2d text_size(const std::string& text, int size) const;
     private:
         void update_atlas(const std::string& text, int size);

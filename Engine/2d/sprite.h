@@ -21,8 +21,7 @@ namespace engine
         bool init(const texture2d_ptr& texture, const math::rect& rect);
 		bool init(const std::string& atlas_name, const std::string& file_name);
 
-		void draw(const math::mat4& t) override;
-        void render(const math::mat4& t) override;
+        void render(renderer* r, const math::mat4& t) override;
 
 		void clear_texture();
         void set_texture(const std::string& file_name);
@@ -32,15 +31,15 @@ namespace engine
         const texture2d_ptr& get_texture() const { return m_texture; }
 
 		const math::rect& get_texture_rect() const { return m_texture_rect; }
-		void set_texture_rect(const math::rect& texture_rect) { m_texture_rect = texture_rect; }
-
-		quad update_quad() const;
-    protected:
+        void set_texture_rect(const math::rect& texture_rect) { m_texture_rect = texture_rect; }
+    private:
+        void update_vertices();
+    private:
         texture2d_ptr m_texture;
 		math::rect m_texture_rect;
+        
+        gl::v3f_c4f_t2f_quad m_vertices;
 
 		bool m_rotated = false;
-
-		quad m_quad;
     };
 }
