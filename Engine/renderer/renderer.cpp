@@ -46,14 +46,14 @@ namespace engine
         
         for (auto& command : m_draw_commands)
         {
-            command->execute(m_world);
-            command->reset();
+			command->execute(m_world);
+			command->reset();
         }
         
         for (auto& command : m_post_draw_commands)
         {
-            command->execute(m_world);
-            command->reset();
+			command->execute(m_world);
+			command->reset();
         }
         
         m_draw_commands.clear();

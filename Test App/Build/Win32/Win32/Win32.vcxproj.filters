@@ -167,9 +167,6 @@
     <ClCompile Include="..\..\..\..\Engine\components\box_collider2d.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\2d\batch_sprite.cpp">
-      <Filter>engine\2d</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\resources\texture_atlas.cpp">
       <Filter>engine\resources</Filter>
     </ClCompile>
@@ -187,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\platform\win32\platform.cpp">
       <Filter>engine\platform\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\renderer\render_command.cpp">
+      <Filter>engine\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,9 +325,6 @@
     <ClInclude Include="..\..\..\..\Engine\utils\pointer.h">
       <Filter>engine\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\2d\batch_sprite.h">
-      <Filter>engine\2d</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\resources\texture_atlas.h">
       <Filter>engine\resources</Filter>
     </ClInclude>
@@ -342,6 +339,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\2d\texture_protocol.h">
       <Filter>engine\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\renderer\render_command.h">
+      <Filter>engine\renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

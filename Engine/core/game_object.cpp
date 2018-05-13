@@ -64,20 +64,30 @@ namespace engine
     
     void game_object::render(renderer* r, const math::mat4& t)
     {
-#if DEBUG_DRAW
-       // auto command = custom_command::create([t, this]()
-       // {
-            auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
-            
-            if (program)
-                program->use(t);
-            
-            gl::draw_rect(0, 0, m_size.x, m_size.y);
-       // });
-       // r->add_post_draw_command(command);
-#endif
+
     }
-    
+
+#if DEBUG_DRAW
+	void game_object::debug_draw(renderer* r, const math::mat4& t)
+	{
+		auto model_view_transform = transform(t);
+
+		for (auto& obj : m_children)
+			obj->debug_draw(r, model_view_transform);
+
+		auto command = custom_command::create([model_view_transform, this]()
+		{        
+			auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
+
+			if (program)
+				program->use(model_view_transform);
+
+			gl::draw_rect(0, 0, m_size.x, m_size.y);
+		});
+		r->add_post_draw_command(command);
+	}
+#endif
+
     void game_object::on_enter()
     {
 		m_components.lock([=]()

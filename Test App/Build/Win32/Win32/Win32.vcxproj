@@ -140,7 +140,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Engine\2d\batch_sprite.cpp" />
     <ClCompile Include="..\..\..\..\Engine\2d\label.cpp" />
     <ClCompile Include="..\..\..\..\Engine\2d\sprite.cpp" />
     <ClCompile Include="..\..\..\..\Engine\2d\texture_protocol.cpp" />
@@ -191,6 +190,7 @@
     <ClCompile Include="..\..\..\..\Engine\platform\win32\platform.cpp" />
     <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\window.cpp" />
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\renderer\render_command.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\font_ttf.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\script.cpp" />
@@ -212,7 +212,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Engine\2d\batch_sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\2d\label.h" />
     <ClInclude Include="..\..\..\..\Engine\2d\sprite.h" />
     <ClInclude Include="..\..\..\..\Engine\2d\texture_protocol.h" />
@@ -248,6 +247,7 @@
     <ClInclude Include="..\..\..\..\Engine\platform\platform.h" />
     <ClInclude Include="..\..\..\..\Engine\platform\window\window.h" />
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h" />
+    <ClInclude Include="..\..\..\..\Engine\renderer\render_command.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\font_ttf.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resource.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h" />

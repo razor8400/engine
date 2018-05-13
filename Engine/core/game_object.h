@@ -20,6 +20,10 @@ namespace engine
 		virtual void update(float dt);
 		virtual void draw(renderer* r, const math::mat4& t);
         virtual void render(renderer* r, const math::mat4& t);
+
+#if DEBUG_DRAW
+		virtual void debug_draw(renderer* r, const math::mat4& t);
+#endif
         
         virtual void on_enter();
         virtual void on_exit();

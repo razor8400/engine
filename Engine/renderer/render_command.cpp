@@ -53,7 +53,7 @@ namespace engine
         auto size = m_vertices.size() * 6 / 4;
         std::vector<unsigned short> indices(size);
         
-        for (size_t i = 0, index = 0; i < size; i += 6, index += gl::quad_size)
+        for (unsigned short i = 0, index = 0; i < size; i += 6, index += gl::quad_size)
         {
             indices[i] = index;
             indices[i + 1] = index + 1;
