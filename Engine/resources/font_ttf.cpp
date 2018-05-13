@@ -40,7 +40,7 @@ namespace engine
         *texture = atlas.texture;
         
         int x = 0;
-        int y = 0;
+        int y = atlas.height;
         
         for (auto& ch : text)
         {

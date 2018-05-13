@@ -12,12 +12,5 @@ namespace engine
     {
         for (auto& obj : m_children)
             obj->draw(r, m_transform);
-
-#if DEBUG_DRAW
-		auto world = transform(r->get_world());
-
-		for (auto& obj : m_children)
-			obj->debug_draw(r, world);
-#endif
     }
 }

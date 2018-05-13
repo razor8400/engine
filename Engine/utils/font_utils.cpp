@@ -148,14 +148,23 @@ namespace engine
 		}
 
 		auto face = it->second;
+
+		FT_Set_Pixel_Sizes(face, 0, font_size);
 		
 		int w = 0;
         
         font_utils::size size;
 
+		size.h = font_size;
+
 		for (auto& ch : text)
 		{
-			FT_Set_Pixel_Sizes(face, 0, font_size);
+			if (ch == '\n' || (max_width > 0 && w >= max_width))
+			{
+				size.w = w;
+				size.h += font_size;
+				w = 0;
+			}
 
 			if (FT_Load_Char(face, ch, FT_LOAD_RENDER))
 			{
@@ -166,17 +175,9 @@ namespace engine
 			auto glyph = face->glyph;
 
 			w += glyph->advance.x >> 6;
-            
-            if (max_width > 0 && w >= max_width)
-            {
-                size.w = w;
-                size.h += font_size;
-                w = 0;
-            }
 		}
         
         size.w = std::max(size.w, w);
-        size.h = std::max(size.h, font_size);
 		
         return size;
 	}
