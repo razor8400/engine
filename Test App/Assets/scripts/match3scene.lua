@@ -104,6 +104,11 @@ end
 
 function match3scene:start()
     local background = create_background()
+
+    if background then
+        return
+    end
+
 	local size = background:get_size()
 	local collider = box_collider2d.create(size.x, size.y)
 

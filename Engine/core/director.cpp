@@ -157,7 +157,7 @@ namespace engine
             m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
 
 			m_stats_label->update(0);
-            m_stats_label->draw(m_renderer.get(), math::mat4::identity);
+            m_stats_label->render(m_renderer.get(), math::mat4::identity);
 		}
     }
 #endif

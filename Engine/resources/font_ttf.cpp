@@ -1,5 +1,7 @@
 #include "common.h"
+
 #include "utils/file_utils.h"
+#include "texture2d.h"
 #include "font_ttf.h"
 
 namespace engine
@@ -30,23 +32,22 @@ namespace engine
 		return std::shared_ptr<font_ttf>();
 	}
     
-    bool font_ttf::render_info(const std::string& text, int size, 
-								vertical_text_alignment vertical_alignment, horisontal_text_alignment horisontal_alignmen,
-								std::vector<gl::v3f_c4f_t2f>* vertices, int* texture)
+    texture2d_ptr font_ttf::create_label(const std::string& text, int size, int max_line_width,
+                                         vertical_text_alignment vertical_alignment,
+                                         horisontal_text_alignment horisontal_alignment,
+                                         std::vector<gl::v3f_c4f_t2f>* vertices)
     {
         if (text.empty())
-            return false;
+            return texture2d_ptr();
         
         auto& atlas = get_atlas(text, size);
-        
-        *texture = atlas.texture;
         
         int x = 0;
         int y = atlas.height;
         
         for (auto& ch : text)
         {
-			if (ch == '\n')
+			if (ch == '\n' || (max_line_width > 0 && x >= max_line_width))
 			{
 				y -= size;
 				x = 0;
@@ -80,7 +81,7 @@ namespace engine
             x += glyph.ax;
         }
         
-        return true;
+        return std::make_shared<texture2d>(atlas.width, atlas.height, GL_RED, atlas.texture);
     }
     
     const font_utils::atlas& font_ttf::get_atlas(const std::string& text, int size)

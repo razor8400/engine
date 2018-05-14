@@ -43,37 +43,20 @@ namespace engine
         auto font = resources_manager::instance().load_resource_from_file<font_ttf>(font_name);
         set_font(font);
     }
-    
-	void label::render(renderer* r, const math::mat4& t)
-	{      
-		if (m_font)
-		{
-            std::vector<gl::v3f_c4f_t2f> vertices;
-            int texture = 0;
-            
-            if (m_font->render_info(m_caption, m_font_size, m_vertical_alignment, m_horisontal_alignment, &vertices, &texture))
-            {
-                auto command = quads_command::create(texture, m_blend_func, m_shader_program);
-                auto color = get_color_rgba();
-                
-                for (auto& v : vertices)
-                {
-                    v.vertice = math::transform_point(v.vertice, t);
-                    v.color = color;
-                    
-                    command->add_vertice(v);
-                }
-                
-                r->add_command(command);
-            }
-		}
-        
-        game_object::render(r, t);
-	}
-    
+
     void label::update_size()
     {
         if (m_font)
             m_size = m_font->text_size(m_caption, m_font_size, m_max_line_width);
+    }
+    
+    void label::update_texture()
+    {
+        clear_texture();
+        
+        m_vertices.clear();
+        
+        if (m_font)
+            m_texture = m_font->create_label(m_caption, m_font_size, m_max_line_width, m_vertical_alignment, m_horisontal_alignment, &m_vertices);
     }
 }

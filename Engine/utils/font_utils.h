@@ -32,7 +32,7 @@ namespace engine
             int height;
 			glyphs_map glyphs;
 		};
-                
+        
 		bool load_font(const std::string& file_name, const std::string& font_name);
 		void unload_font(const std::string& font_name);
 

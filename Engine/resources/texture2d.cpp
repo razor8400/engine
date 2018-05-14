@@ -34,6 +34,11 @@ namespace engine
         
     }
     
+    texture2d::texture2d(int width, int height, int format, int texture_id) : m_width(width), m_height(height), m_format(format), m_texture_id(texture_id)
+    {
+        
+    }
+    
     texture2d::~texture2d()
     {
         if (m_texture_id != texture_default_id)

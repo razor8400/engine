@@ -2,8 +2,6 @@
 #include "resources/texture2d.h"
 #include "resources/texture_atlas.h"
 #include "resources/resources_manager.h"
-#include "renderer/render_command.h"
-#include "renderer/renderer.h"
 #include "sprite.h"
 
 namespace engine
@@ -64,35 +62,6 @@ namespace engine
 
 		return init(atlas->get_texture(), frame.frame);
 	}
-    
-	void sprite::render(renderer* r, const math::mat4& t)
-    {
-		auto texture = get_texture();
-
-        if (texture)
-        {
-            auto command = quads_command::create(texture->get_texture_id(), m_blend_func, m_shader_program);
-            auto color = get_color_rgba();
-            
-            update_vertices();
-            
-            for (auto& v : m_vertices)
-            {
-                v.vertice = math::transform_point(v.vertice, t);
-                v.color = color;
-                command->add_vertice(v);
-            }
-            
-            r->add_command(command);
-        }
-        
-		game_object::render(r, t);
-    }
-
-	void sprite::clear_texture()
-	{
-        m_texture.reset();
-	}
 
 	void sprite::set_texture(const std::string& file_name)
     {
@@ -130,6 +99,8 @@ namespace engine
         
         auto texture_size = math::vector2d(m_texture->get_width(), m_texture->get_height());
         auto offset = (m_size - frame_size) / 2;
+        
+        m_vertices.resize(gl::quad_size);
         
         m_vertices[gl::bottom_left].vertice = offset;
         m_vertices[gl::bottom_right].vertice = { offset.x + frame_size.x, offset.y, 0.0f };
