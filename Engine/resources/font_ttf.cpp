@@ -30,7 +30,9 @@ namespace engine
 		return std::shared_ptr<font_ttf>();
 	}
     
-    bool font_ttf::render_info(const std::string& text, int size, std::vector<gl::v3f_c4f_t2f>* vertices, int* texture)
+    bool font_ttf::render_info(const std::string& text, int size, 
+								vertical_text_alignment vertical_alignment, horisontal_text_alignment horisontal_alignmen,
+								std::vector<gl::v3f_c4f_t2f>* vertices, int* texture)
     {
         if (text.empty())
             return false;
@@ -121,9 +123,9 @@ namespace engine
         m_cache[size] = font_utils::create_atlas(m_font_name, size, buffer, max_atlas);
     }
     
-    math::vector2d font_ttf::text_size(const std::string& text, int size) const
+    math::vector2d font_ttf::text_size(const std::string& text, int size, int max_line_width) const
     {
-        auto sz = font_utils::text_size(m_font_name, size, text, 0);
+        auto sz = font_utils::text_size(m_font_name, size, text, max_line_width);
         return math::vector2d(sz.w, sz.h);
     }
 }

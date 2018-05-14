@@ -51,7 +51,7 @@ namespace engine
             std::vector<gl::v3f_c4f_t2f> vertices;
             int texture = 0;
             
-            if (m_font->render_info(m_caption, m_font_size, &vertices, &texture))
+            if (m_font->render_info(m_caption, m_font_size, m_vertical_alignment, m_horisontal_alignment, &vertices, &texture))
             {
                 auto command = quads_command::create(texture, m_blend_func, m_shader_program);
                 auto color = get_color_rgba();
@@ -74,6 +74,6 @@ namespace engine
     void label::update_size()
     {
         if (m_font)
-            m_size = m_font->text_size(m_caption, m_font_size);
+            m_size = m_font->text_size(m_caption, m_font_size, m_max_line_width);
     }
 }

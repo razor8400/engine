@@ -14,8 +14,10 @@ namespace engine
 		static std::shared_ptr<font_ttf> load_from_file(const std::string& file_name);
         bool load(const unsigned char* data, size_t size) override { return true; }
         
-        bool render_info(const std::string& text, int size, std::vector<gl::v3f_c4f_t2f>* vertices, int* texture);
-        math::vector2d text_size(const std::string& text, int size) const;
+        bool render_info(const std::string& text, int size, 
+						vertical_text_alignment vertical_alignment, horisontal_text_alignment horisontal_alignment,
+						std::vector<gl::v3f_c4f_t2f>* vertices, int* texture);
+        math::vector2d text_size(const std::string& text, int size, int max_line_width) const;
     private:
         void update_atlas(const std::string& text, int size);
         const font_utils::atlas& get_atlas(const std::string& text, int size);

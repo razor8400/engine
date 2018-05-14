@@ -23,11 +23,26 @@ namespace engine
 
 		int get_font_size() const { return m_font_size; }
         void set_font_size(int font_size) { m_font_size = font_size; update_size(); }
+
+		int get_max_line_width() const { return m_max_line_width; }
+		void set_max_line_width(int max_line_width) { m_max_line_width = max_line_width; }
+
+		vertical_text_alignment get_vertical_alignment() const { return m_vertical_alignment; }
+		void set_vertical_alignment(vertical_text_alignment vertical_alignment) { m_vertical_alignment = vertical_alignment; }
+
+		horisontal_text_alignment get_horisonal_alignment() const { return m_horisontal_alignment; }
+		void get_horisonal_alignment(horisontal_text_alignment horisontal_alignment) { m_horisontal_alignment = horisontal_alignment; }
     private:
         void update_size();
     private:
         std::string m_caption;
+
         int m_font_size;
-        font_ttf_ptr m_font;
+		int m_max_line_width;
+        
+		vertical_text_alignment m_vertical_alignment = vertical_text_alignment::left;
+		horisontal_text_alignment m_horisontal_alignment = horisontal_text_alignment::bottom;
+
+		font_ttf_ptr m_font;
     };
 }

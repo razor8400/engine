@@ -55,7 +55,21 @@ namespace engine
 	{
 		ortographic, perspective
 	};
-    
+
+	enum class vertical_text_alignment
+	{
+		left,
+		center,
+		right
+	};
+
+	enum class horisontal_text_alignment
+	{
+		top,
+		center,
+		bottom
+	};
+	
     static const std::string empty_string;
     
 	static std::string vector3d_to_string(const math::vector3d& v3)
