@@ -2,7 +2,8 @@
 #include "font_utils.h"
 
 #include "ft2build.h"
-#include FT_FREETYPE_H 
+#include FT_FREETYPE_H
+#include FT_STROKER_H
 
 namespace engine
 {
@@ -14,7 +15,7 @@ namespace engine
         
 		bool library_loaded() const;
         bool load_font(const std::string& file_name, const std::string& font_name) const;
-		bool load_glyphs(font_utils::atlas* atlas, const std::string& font_name, int font_size, const std::string& text) const;
+		bool load_glyphs(font_utils::atlas_info* atlas, const std::string& font_name, int font_size, const std::string& text) const;
         
         font_utils::size text_size(const std::string& font_name, int font_size, const std::string& text, int max_width) const;
         void unload_font(const std::string& font_name);
@@ -81,7 +82,7 @@ namespace engine
         return true;
     }
 
-	bool free_type_library::load_glyphs(font_utils::atlas* atlas, const std::string& font_name, int font_size, const std::string& text) const
+	bool free_type_library::load_glyphs(font_utils::atlas_info* atlas, const std::string& font_name, int font_size, const std::string& text) const
 	{
         assert(atlas);
 
@@ -103,6 +104,11 @@ namespace engine
         int y = 0;
         
         auto& map = atlas->glyphs;
+        
+        FT_Stroker stroker;
+        
+        FT_Stroker_New(m_libary, &stroker);
+        FT_Stroker_Set(stroker, 4 * 64, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 
 		for (auto& ch : text)
 		{
@@ -159,7 +165,7 @@ namespace engine
 
 		for (auto& ch : text)
 		{
-			if (ch == '\n' || (max_width > 0 && w >= max_width))
+			if (END_LINE(ch, w, max_width))
 			{
 				size.w = w;
 				size.h += font_size;
@@ -218,9 +224,9 @@ namespace engine
             library.unload_font(font_name);
         }
 		
-		atlas create_atlas(const std::string& font_name, int font_size, const std::string& text, int max_width)
+		atlas_info create_atlas(const std::string& font_name, int font_size, const std::string& text, int max_width)
 		{
-			auto at = atlas();
+			auto at = atlas_info();
 			auto size = text_size(font_name, font_size, text, max_width);
 
 			at.texture = gl::load_texture(0, size.w, size.h, GL_RED);

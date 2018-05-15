@@ -43,22 +43,25 @@ namespace engine
         
 		if (scene)
 			scene->draw(this);
-        
+	}
+    
+    void renderer::execute_commands()
+    {
         for (auto& command : m_draw_commands)
         {
-			command->execute(m_world);
-			command->reset();
+            command->execute(m_world);
+            command->reset();
         }
         
         for (auto& command : m_post_draw_commands)
         {
-			command->execute(m_world);
-			command->reset();
+            command->execute(m_world);
+            command->reset();
         }
         
         m_draw_commands.clear();
         m_post_draw_commands.clear();
-	}
+    }
     
     void renderer::add_command(const render_command_ptr& command)
     {

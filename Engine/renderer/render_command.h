@@ -36,10 +36,10 @@ namespace engine
         static std::shared_ptr<quads_command> last_command;
     };
     
-    class custom_command : public render_command
+    class custom_render_command : public render_command
     {
     public:
-        static std::shared_ptr<custom_command> create(const std::function<void()>& handler);
+        static std::shared_ptr<custom_render_command> create(const std::function<void()>& handler);
         
         void execute(const math::mat4& world) override;
         void reset() override;

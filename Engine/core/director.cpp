@@ -8,6 +8,7 @@
 #include "platform/platform.h"
 
 #include "renderer/renderer.h"
+#include "renderer/render_command.h"
 #include "resources/resources_manager.h"
 
 #include "2d/label.h"
@@ -132,11 +133,12 @@ namespace engine
         ++m_frames;
         m_time += delta_time;
         
-        pool_manager::instance().update();
-        
 #if DRAW_STATS
         draw_stats();
 #endif
+        
+        m_renderer->execute_commands();
+        pool_manager::instance().update();
     }
     
 #if DRAW_STATS
@@ -147,17 +149,19 @@ namespace engine
         std::stringstream stats;
         
         stats.precision(3);
-		stats << "fps:" << calculate_fps() << "\n"
-			<< "draw calls:" << gl::get_draw_calls() / m_frames << " per frame" << "\n"
-			<< "memory used:" << platform::instance().get_memory_used() << "KB";
+        stats << "fps:" << calculate_fps() << std::endl
+                        << "draw calls:" << gl::get_draw_calls() / m_frames << " per frame" << std::endl
+                        << "memory used:" << platform::instance().get_memory_used() << "KB";
     
 		if (m_stats_label)
 		{
 			m_stats_label->set_caption(stats.str());
-            m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
+            m_stats_label->set_outline_color(math::vector3d::zero);
+            m_stats_label->set_outline_size(2);
+            //m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
 
 			m_stats_label->update(0);
-            m_stats_label->render(m_renderer.get(), math::mat4::identity);
+            m_stats_label->render(m_renderer.get(), m_stats_label->get_transform());
 		}
     }
 #endif

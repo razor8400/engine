@@ -15,6 +15,7 @@ namespace engine
 		void draw_scene(scene* scene);
         void add_command(const render_command_ptr& command);
         void add_post_draw_command(const render_command_ptr& command);
+        void execute_commands();
 		void dump_camera_settings();
         
         const math::mat4& get_world() const { return m_world; }

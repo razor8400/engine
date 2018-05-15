@@ -65,7 +65,7 @@ namespace engine
     void game_object::render(renderer* r, const math::mat4& t)
     {
 #if DEBUG_DRAW
-		auto command = custom_command::create([=]()
+		auto command = custom_render_command::create([=]()
 		{
 			auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
 
@@ -73,9 +73,15 @@ namespace engine
 				program->use(r->get_world());
 
 			auto p1 = math::transform_point({ 0, 0 }, t);
-			auto p2 = math::transform_point( m_size, t);
-			
-			gl::draw_rect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
+            auto p2 = math::transform_point({ m_size.x, 0.0f}, t);
+            
+			auto p3 = math::transform_point(m_size, t);
+            auto p4 = math::transform_point({0.0f, m_size.y }, t);
+            
+            gl::draw_line(p1.x, p1.y, p2.x, p2.y);
+            gl::draw_line(p2.x, p2.y, p3.x, p3.y);
+            gl::draw_line(p3.x, p3.y, p4.x, p4.y);
+            gl::draw_line(p4.x, p4.y, p1.x, p1.y);
 		});
 		r->add_post_draw_command(command);
 #endif

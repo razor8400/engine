@@ -1,5 +1,8 @@
 #pragma once
 
+#define END_LINE(ch, width, max_width) \
+    ch == '\n' || (max_width > 0 && width >= max_width)
+
 namespace engine
 {
     namespace font_utils
@@ -25,7 +28,7 @@ namespace engine
             int w = 0, h = 0;
         };
         
-		struct atlas
+		struct atlas_info
 		{
 			int texture;
             int width;
@@ -36,7 +39,7 @@ namespace engine
 		bool load_font(const std::string& file_name, const std::string& font_name);
 		void unload_font(const std::string& font_name);
 
-		atlas create_atlas(const std::string& font_name, int font_size, const std::string& text, int max_width);
+		atlas_info create_atlas(const std::string& font_name, int font_size, const std::string& text, int max_width);
 		size text_size(const std::string& font_name, int font_size, const std::string& text, int max_width);
     }
 }

@@ -36,6 +36,7 @@
 		BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF51EC73206B96FA005A6240 /* vector2d.cpp */; };
 		BF51ECAF206BAC28005A6240 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC84206B993A005A6240 /* OpenGL.framework */; };
 		BF51ECB0206BAC3D005A6240 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */; };
+		BF675D8320AB1666001046FE /* profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF675D8120AB1666001046FE /* profiler.cpp */; };
 		BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF7A950420A4857100F12130 /* texture_protocol.cpp */; };
 		BF868748208341FA00523939 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF868746208341FA00523939 /* script.cpp */; };
 		BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D520906CF000C39C31 /* rect.cpp */; };
@@ -137,6 +138,8 @@
 		BF51EC8E206BA9DD005A6240 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../ThirdParty/GLFW3/osx/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		BF51EC9F206BAAF0005A6240 /* OSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSX; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF51ECA7206BAB15005A6240 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		BF675D8120AB1666001046FE /* profiler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = profiler.cpp; sourceTree = "<group>"; };
+		BF675D8220AB1666001046FE /* profiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profiler.h; sourceTree = "<group>"; };
 		BF7A950420A4857100F12130 /* texture_protocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_protocol.cpp; sourceTree = "<group>"; };
 		BF7A950520A4857100F12130 /* texture_protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture_protocol.h; sourceTree = "<group>"; };
 		BF86873F20823E6300523939 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -434,6 +437,8 @@
 				BFD2F437209DBA01005A4CEA /* pointer.inl */,
 				BFD2F45220A063A3005A4CEA /* font_utils.h */,
 				BFD2F45320A063CF005A4CEA /* font_utils.cpp */,
+				BF675D8120AB1666001046FE /* profiler.cpp */,
+				BF675D8220AB1666001046FE /* profiler.h */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 				BFD2F44320A04072005A4CEA /* font_ttf.cpp in Sources */,
 				BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */,
 				BF0D23A12083DB5D00542952 /* ref.cpp in Sources */,
+				BF675D8320AB1666001046FE /* profiler.cpp in Sources */,
 				BF51ECA9206BABCF005A6240 /* director.cpp in Sources */,
 				BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */,
 				BFD2F45420A063CF005A4CEA /* font_utils.cpp in Sources */,

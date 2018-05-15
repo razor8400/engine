@@ -66,20 +66,20 @@ namespace engine
         return indices;
     }
     
-    std::shared_ptr<custom_command> custom_command::create(const std::function<void()>& handler)
+    std::shared_ptr<custom_render_command> custom_render_command::create(const std::function<void()>& handler)
     {
-        auto command = std::make_shared<custom_command>();
+        auto command = std::make_shared<custom_render_command>();
         command->m_handler = handler;
         return command;
     }
     
-    void custom_command::execute(const math::mat4& world)
+    void custom_render_command::execute(const math::mat4& world)
     {
         if (m_handler)
             m_handler();
     }
     
-    void custom_command::reset()
+    void custom_render_command::reset()
     {
         m_handler = nullptr;
     }

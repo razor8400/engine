@@ -43,12 +43,6 @@ namespace engine
         auto font = resources_manager::instance().load_resource_from_file<font_ttf>(font_name);
         set_font(font);
     }
-
-    void label::update_size()
-    {
-        if (m_font)
-            m_size = m_font->text_size(m_caption, m_font_size, m_max_line_width);
-    }
     
     void label::update_texture()
     {
@@ -57,6 +51,11 @@ namespace engine
         m_vertices.clear();
         
         if (m_font)
-            m_texture = m_font->create_label(m_caption, m_font_size, m_max_line_width, m_vertical_alignment, m_horisontal_alignment, &m_vertices);
+        {
+            auto size = m_font->text_size(m_caption, m_font_size + m_outline_size, m_max_line_width);
+            m_size.x = std::max(size.x, m_size.x);
+            m_size.y = std::max(size.y, m_size.y);
+            m_texture = m_font->create_label(m_caption, m_font_size, math::vector2d(m_size.x, m_size.y), m_vertical_alignment, m_horisontal_alignment, &m_vertices);
+        }
     }
 }

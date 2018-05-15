@@ -21,6 +21,7 @@
 #include "utils/logger.h"
 #include "utils/vector.h"
 #include "utils/pointer.h"
+#include "utils/profiler.h"
 
 #include "config.h"
 
