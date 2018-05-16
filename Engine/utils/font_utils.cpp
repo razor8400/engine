@@ -14,6 +14,7 @@ namespace engine
         ~free_type_library();
         
 		bool library_loaded() const;
+        bool load_font(const unsigned char* buffer, size_t size, const std::string& font_name) const;
         bool load_font(const std::string& file_name, const std::string& font_name) const;
 		bool load_glyphs(font_utils::atlas_info* atlas, const std::string& font_name, int font_size, const std::string& text) const;
         
@@ -82,6 +83,28 @@ namespace engine
         return true;
     }
 
+    bool free_type_library::load_font(const unsigned char* buffer, size_t size, const std::string& font_name) const
+    {
+        if (!library_loaded())
+            return false;
+        
+        auto it = m_loaded_fonts.find(font_name);
+        
+        if (it == m_loaded_fonts.end())
+        {
+            FT_Face face;
+            
+            logger() << "[free type] load font from memory:" << font_name;
+            
+            if (FT_New_Memory_Face(m_libary, buffer, size, 0, &face))
+                return false;
+            
+            m_loaded_fonts[font_name] = face;
+        }
+        
+        return true;
+    }
+    
 	bool free_type_library::load_glyphs(font_utils::atlas_info* atlas, const std::string& font_name, int font_size, const std::string& text) const
 	{
         assert(atlas);
@@ -207,6 +230,17 @@ namespace engine
     namespace font_utils
     {
         static free_type_library library;
+        
+        bool load_font(const unsigned char* buffer, size_t size, const std::string& font_name)
+        {
+            if (!library.load_font(buffer, size, font_name))
+            {
+                logger() << "[font utils] error loading font:" << font_name;
+                return false;
+            }
+            
+            return true;
+        }
 
 		bool load_font(const std::string& file_name, const std::string& font_name)
         {

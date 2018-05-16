@@ -48,10 +48,7 @@ namespace gl
         uniform sampler2D sampler2d;
         void main()
         {
-            vec4 effect_color = vec4(0, 0, 0, 1.0 - texture(sampler2d, uv).r);
-            //v_fragmentColor * vec4(u_effectColor.rgb, u_effectColor.a * outlineAlpha * (1.0 - fontAlpha));
-            
-            fragment_color = effect_color * color;
+            fragment_color = vec4(1, 1, 1, texture(sampler2d, uv).r) * color;
         })";
         
         static const char* shader_texture_position_color_alpha_vert =

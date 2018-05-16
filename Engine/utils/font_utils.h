@@ -36,6 +36,7 @@ namespace engine
 			glyphs_map glyphs;
 		};
         
+        bool load_font(const unsigned char* buffer, size_t data, const std::string& font_name);
 		bool load_font(const std::string& file_name, const std::string& font_name);
 		void unload_font(const std::string& font_name);
 

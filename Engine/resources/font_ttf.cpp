@@ -30,6 +30,11 @@ namespace engine
 		return std::shared_ptr<font_ttf>();
 	}
     
+    bool font_ttf::load(const unsigned char* data, size_t size)
+    {
+        return font_utils::load_font(data, size, m_font_name);
+    }
+    
     texture2d_ptr font_ttf::create_label(const std::string& text, int size, const math::vector2d& bounds,
                                          vertical_text_alignment vertical_alignment,
                                          horisontal_text_alignment horisontal_alignment,

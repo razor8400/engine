@@ -17,7 +17,7 @@ namespace engine
         ~font_ttf();
         
 		static std::shared_ptr<font_ttf> load_from_file(const std::string& file_name);
-        bool load(const unsigned char* data, size_t size) override { return true; }
+        bool load(const unsigned char* data, size_t size) override;
         
         texture2d_ptr create_label(const std::string& text, int size, const math::vector2d& bounds,
                                     vertical_text_alignment vertical_alignment,
