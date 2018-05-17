@@ -1,7 +1,10 @@
 #include "common.h"
 #include "application.h"
+
 #include "platform/platform.h"
 #include "interface/app_delegate.h"
+
+#include "platform/window/window.h"
 
 namespace engine
 {
@@ -66,7 +69,7 @@ namespace engine
     
     bool application::create_context_window()
     {
-        m_window = std::make_unique<window>();
+		m_window = window::create();
         
 		if (!m_window->create(m_display_name.c_str(), (int)m_win_size.x, (int)m_win_size.y))
 		{

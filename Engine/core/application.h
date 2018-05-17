@@ -5,6 +5,7 @@
 namespace engine
 {
 	class app_delegate;
+	class window;
 
 	class application
 	{

@@ -44,7 +44,7 @@ namespace engine
             return texture2d_ptr();
         
         auto& atlas = get_atlas(text, size);
-        auto strings = wrap_text(text, atlas.glyphs, bounds.x);
+        auto strings = wrap_text(text, atlas.glyphs, (int)bounds.x);
         
         auto width = atlas.texture->get_width();
         auto height = atlas.texture->get_height();
@@ -138,7 +138,7 @@ namespace engine
         if (alignment == vertical_text_alignment::left)
             return 0;
         
-        auto sz = text_size(text, size, bounds.x);
+        auto sz = text_size(text, size, (int)bounds.x);
         
         if (alignment == vertical_text_alignment::center)
             return bounds.x / 2 - sz.x / 2.0f;
@@ -154,7 +154,7 @@ namespace engine
         if (alignment == horisontal_text_alignment::center)
             return (bounds.y / 2) - ((size * total_lines) / 2) + (size * (line - 1));
         
-        return (size * total_lines) - (size * line);
+        return (float)(size * total_lines) - (size * line);
     }
     
     std::vector<std::string> font_ttf::wrap_text(const std::string& text, int size, int max_line_width) const
