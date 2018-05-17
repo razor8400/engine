@@ -17,7 +17,7 @@ namespace gl
         virtual ~shader_program();
         
         virtual void use(const math::mat4& transform) = 0;
-    protected:
+    public:
         GLint m_program_id = -1;
     };
     

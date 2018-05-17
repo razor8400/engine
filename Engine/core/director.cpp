@@ -27,12 +27,6 @@ namespace engine
     director::director()
     {
 		m_renderer = std::make_unique<renderer>();
-        
-#if DRAW_STATS
-        m_stats_label = label::create<label>("fonts/arial.ttf", 18);
-		if (m_stats_label)
-			m_stats_label->set_anchor(math::vector2d::zero);
-#endif
     }
     
     director::~director()
@@ -77,6 +71,12 @@ namespace engine
 		m_renderer->dump_camera_settings();
         m_running = true;
 		m_reset_delta_time = true;
+        
+#if DRAW_STATS
+        m_stats_label = label::create<label>("fonts/arial.ttf", 18);
+        if (m_stats_label)
+            m_stats_label->set_anchor(math::vector2d::zero);
+#endif
     }
     
     void director::stop()
@@ -93,7 +93,7 @@ namespace engine
     
     void director::main_loop()
     {
-        if (m_paused)
+        if (m_paused || !m_running)
             return;
         
         auto errors = gl::get_errors();

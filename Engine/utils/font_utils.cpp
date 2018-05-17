@@ -127,11 +127,6 @@ namespace engine
         int y = 0;
         
         auto& map = atlas->glyphs;
-        
-        FT_Stroker stroker;
-        
-        FT_Stroker_New(m_libary, &stroker);
-        FT_Stroker_Set(stroker, 4 * 64, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 
 		for (auto& ch : text)
 		{
