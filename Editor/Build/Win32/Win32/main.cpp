@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include "my_app_delegate.h"
+#include "editor_app_delegate.h"
 
 int APIENTRY WinMain(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -8,7 +8,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	int       nCmdShow)
 {
 	auto& application = engine::application::instance();
-	auto app_delegate = my_app_delegate();
+	auto app_delegate = editor_app_delegate();
 
 	application.set_delegate(&app_delegate);
 	application.on_launched();

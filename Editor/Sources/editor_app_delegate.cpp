@@ -1,3 +1,4 @@
+#include "common.h"
 #include "engine.h"
 #include "editor_app_delegate.h"
 

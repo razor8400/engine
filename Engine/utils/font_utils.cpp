@@ -96,7 +96,7 @@ namespace engine
             
             logger() << "[free type] load font from memory:" << font_name;
             
-            if (FT_New_Memory_Face(m_libary, buffer, size, 0, &face))
+            if (FT_New_Memory_Face(m_libary, buffer, (FT_Long)size, 0, &face))
                 return false;
             
             m_loaded_fonts[font_name] = face;
