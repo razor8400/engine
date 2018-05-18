@@ -49,7 +49,6 @@ namespace engine
         m_size.y = (float)height;
         
         resize(width, height);
-        
         show();
         
         return true;
@@ -57,11 +56,13 @@ namespace engine
     
     void qt_window::process()
     {
-        
+        m_showed = true;
+        requestUpdate();
     }
     
     void qt_window::terminate()
     {
+        m_showed = false;
         close();
     }
     
@@ -79,7 +80,8 @@ namespace engine
         
         m_context->swapBuffers(this);
         
-        requestUpdate();
+        if (m_showed)
+            process();
     }
     
     bool qt_window::event(QEvent *event)
@@ -87,8 +89,7 @@ namespace engine
         switch (event->type())
         {
             case QEvent::UpdateRequest: render(); return true;
-            default:
-                return QWindow::event(event);
+            default: return QWindow::event(event);
         }
     }
     

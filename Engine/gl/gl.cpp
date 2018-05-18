@@ -56,6 +56,9 @@ namespace gl
 	void compile_shaders()
     {
         auto& manager = shaders_manager::instance();
+        
+        error_messages.push_back("compile shaders");
+        
         manager.compile_default_shaders();
     }
 

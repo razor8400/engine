@@ -16,12 +16,13 @@ namespace engine
 		void set_display_name(const std::string& display_name);
 		void set_delegate(app_delegate* delegate);
 
-		void on_launched();
+		bool on_launched();
         void on_terminated();
         void on_enter_background();
         void on_enter_foreground();
         
         bool create_context_window();
+        
 		void run();
         void shutdown();
         const math::vector2d& get_win_size() const { return m_win_size; }

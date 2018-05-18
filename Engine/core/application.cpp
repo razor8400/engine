@@ -30,13 +30,15 @@ namespace engine
 		m_delegate = delegate;
 	}
 
-	void application::on_launched()
+	bool application::on_launched()
 	{
 		logger() << "[application] application launched";
 		logger() << "[application] platform:" << platform::instance().get_platform_code();
 
 		if (m_delegate)
-			m_delegate->application_launched(this);
+			return m_delegate->application_launched(this);
+        
+        return false;
 	}
     
     void application::on_terminated()
@@ -77,17 +79,17 @@ namespace engine
 			return false;
 		}
         
-		if (!gl::init_gl())
-		{
-			logger() << "[application] open gl init failed";
-			return false;
-		}
+        if (!gl::init_gl())
+        {
+            logger() << "[application] open gl init failed";
+            return false;
+        }
 
 		logger() << "[application] create context window";
 		logger() << "[application] title:" << m_display_name;
 		logger() << "[application] width:" << (int)m_win_size.x;
 		logger() << "[application] height:" << (int)m_win_size.y;
-		        
+        
         gl::compile_shaders();
         gl::generate_buffers();
         

@@ -29,6 +29,7 @@ namespace engine
         QOpenGLContext* m_context = nullptr;
         QOpenGLPaintDevice* m_device = nullptr;
         math::vector2d m_size;
+        bool m_showed = false;
     };
 }
 

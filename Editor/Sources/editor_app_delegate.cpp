@@ -2,7 +2,7 @@
 #include "engine.h"
 #include "editor_app_delegate.h"
 
-void editor_app_delegate::application_launched(engine::application* application)
+bool editor_app_delegate::application_launched(engine::application* application)
 {
 	application->set_win_size(1024, 768);
 	application->set_display_name("Editor");
@@ -21,7 +21,11 @@ void editor_app_delegate::application_launched(engine::application* application)
         director.run_scene(scene);
         
         application->run();
+        
+        return true;
     }
+    
+    return false;
 }
 
 void editor_app_delegate::application_terminated(engine::application* application)

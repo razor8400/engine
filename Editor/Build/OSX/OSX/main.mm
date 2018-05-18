@@ -15,7 +15,9 @@ int main(int argc, char* argv[])
         auto& application = engine::application::instance();
         
         application.set_delegate(&delegate);
-        application.on_launched();
+        
+        if (!application.on_launched())
+            return 0;
         
         return app.exec();
     }
