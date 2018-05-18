@@ -41,8 +41,7 @@
 		BF56687820AD866000B88887 /* QtGui.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF56687220AD859A00B88887 /* QtGui.framework */; };
 		BF56687920AD867000B88887 /* QtCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF56687420AD859B00B88887 /* QtCore.framework */; };
 		BF56687A20AD867800B88887 /* QtWidgets.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF56687320AD859A00B88887 /* QtWidgets.framework */; };
-		BF56687D20AD90B000B88887 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF56687C20AD90B000B88887 /* window.cpp */; };
-		BF56688020AD9C8E00B88887 /* qt_gl_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF56687E20AD9C8E00B88887 /* qt_gl_window.cpp */; };
+		BF56688020AD9C8E00B88887 /* qt_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF56687E20AD9C8E00B88887 /* qt_window.cpp */; };
 		BF56688720ADA2F600B88887 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF56688620ADA2F600B88887 /* OpenGL.framework */; };
 		BF675D8320AB1666001046FE /* profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF675D8120AB1666001046FE /* profiler.cpp */; };
 		BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF7A950420A4857100F12130 /* texture_protocol.cpp */; };
@@ -150,9 +149,8 @@
 		BF56687220AD859A00B88887 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = ../../../ThirdParty/QT/OSX/QtGui.framework; sourceTree = "<group>"; };
 		BF56687320AD859A00B88887 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = ../../../ThirdParty/QT/OSX/QtWidgets.framework; sourceTree = "<group>"; };
 		BF56687420AD859B00B88887 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = ../../../ThirdParty/QT/OSX/QtCore.framework; sourceTree = "<group>"; };
-		BF56687C20AD90B000B88887 /* window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
-		BF56687E20AD9C8E00B88887 /* qt_gl_window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = qt_gl_window.cpp; sourceTree = "<group>"; };
-		BF56687F20AD9C8E00B88887 /* qt_gl_window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = qt_gl_window.h; sourceTree = "<group>"; };
+		BF56687E20AD9C8E00B88887 /* qt_window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = qt_window.cpp; sourceTree = "<group>"; };
+		BF56687F20AD9C8E00B88887 /* qt_window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = qt_window.h; sourceTree = "<group>"; };
 		BF56688620ADA2F600B88887 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BF675D8120AB1666001046FE /* profiler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = profiler.cpp; sourceTree = "<group>"; };
 		BF675D8220AB1666001046FE /* profiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profiler.h; sourceTree = "<group>"; };
@@ -446,9 +444,8 @@
 		BF56687B20AD907A00B88887 /* qt */ = {
 			isa = PBXGroup;
 			children = (
-				BF56687C20AD90B000B88887 /* window.cpp */,
-				BF56687E20AD9C8E00B88887 /* qt_gl_window.cpp */,
-				BF56687F20AD9C8E00B88887 /* qt_gl_window.h */,
+				BF56687E20AD9C8E00B88887 /* qt_window.cpp */,
+				BF56687F20AD9C8E00B88887 /* qt_window.h */,
 			);
 			path = qt;
 			sourceTree = "<group>";
@@ -579,7 +576,6 @@
 				BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */,
 				BF868748208341FA00523939 /* script.cpp in Sources */,
 				BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */,
-				BF56687D20AD90B000B88887 /* window.cpp in Sources */,
 				BFCB323220762B58001B5995 /* resources_manager.cpp in Sources */,
 				BF439CC120888616000B8A15 /* platform.cpp in Sources */,
 				BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */,
@@ -612,7 +608,7 @@
 				BFD2F44320A04072005A4CEA /* font_ttf.cpp in Sources */,
 				BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */,
 				BF0D23A12083DB5D00542952 /* ref.cpp in Sources */,
-				BF56688020AD9C8E00B88887 /* qt_gl_window.cpp in Sources */,
+				BF56688020AD9C8E00B88887 /* qt_window.cpp in Sources */,
 				BF675D8320AB1666001046FE /* profiler.cpp in Sources */,
 				BF51ECA9206BABCF005A6240 /* director.cpp in Sources */,
 				BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */,
