@@ -41,16 +41,19 @@
 		BF56687820AD866000B88887 /* QtGui.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF56687220AD859A00B88887 /* QtGui.framework */; };
 		BF56687920AD867000B88887 /* QtCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF56687420AD859B00B88887 /* QtCore.framework */; };
 		BF56687A20AD867800B88887 /* QtWidgets.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF56687320AD859A00B88887 /* QtWidgets.framework */; };
-		BF56688020AD9C8E00B88887 /* qt_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF56687E20AD9C8E00B88887 /* qt_window.cpp */; };
 		BF56688720ADA2F600B88887 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF56688620ADA2F600B88887 /* OpenGL.framework */; };
+		BF56688A20AF151700B88887 /* editor_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF56688920AF151700B88887 /* editor_window.cpp */; };
 		BF675D8320AB1666001046FE /* profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF675D8120AB1666001046FE /* profiler.cpp */; };
 		BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF7A950420A4857100F12130 /* texture_protocol.cpp */; };
 		BF868748208341FA00523939 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF868746208341FA00523939 /* script.cpp */; };
+		BF873E6D20AF2EFD008F1E3E /* editor_window.h in Sources */ = {isa = PBXBuildFile; fileRef = BF56688820AF14FC00B88887 /* editor_window.h */; };
+		BF873E7120B0249B008F1E3E /* glfw_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF873E6F20B0249B008F1E3E /* glfw_window.cpp */; };
+		BF873E7420B03E2B008F1E3E /* editor_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF873E7220B03E2B008F1E3E /* editor_scene.cpp */; };
+		BF873E7620B0DA0B008F1E3E /* Assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF873E7520B0D9F3008F1E3E /* Assets */; };
 		BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D520906CF000C39C31 /* rect.cpp */; };
 		BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */; };
 		BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1DC209359FD00C39C31 /* action.cpp */; };
 		BFCB321D20754006001B5995 /* file_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB321C20754006001B5995 /* file_utils.cpp */; };
-		BFCB321E20754100001B5995 /* Assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFCB321220753755001B5995 /* Assets */; };
 		BFCB322A2076100B001B5995 /* file_system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB32272076100A001B5995 /* file_system.cpp */; };
 		BFCB322D2076104A001B5995 /* texture2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB322C2076104A001B5995 /* texture2d.cpp */; };
 		BFCB323220762B58001B5995 /* resources_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCB323020762B58001B5995 /* resources_manager.cpp */; };
@@ -65,6 +68,20 @@
 		BFD2F45420A063CF005A4CEA /* font_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD2F45320A063CF005A4CEA /* font_utils.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		BF873E6C20AF2E16008F1E3E /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.h";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}_moc.cpp",
+			);
+			script = "/Users/vladimir/Work/qt5.7.0/5.7/clang_64/bin/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		BF51EC9D206BAAF0005A6240 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -72,10 +89,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				BF873E7620B0DA0B008F1E3E /* Assets in CopyFiles */,
 				BF56687A20AD867800B88887 /* QtWidgets.framework in CopyFiles */,
 				BF56687920AD867000B88887 /* QtCore.framework in CopyFiles */,
 				BF56687820AD866000B88887 /* QtGui.framework in CopyFiles */,
-				BFCB321E20754100001B5995 /* Assets in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,9 +166,9 @@
 		BF56687220AD859A00B88887 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = ../../../ThirdParty/QT/OSX/QtGui.framework; sourceTree = "<group>"; };
 		BF56687320AD859A00B88887 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = ../../../ThirdParty/QT/OSX/QtWidgets.framework; sourceTree = "<group>"; };
 		BF56687420AD859B00B88887 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = ../../../ThirdParty/QT/OSX/QtCore.framework; sourceTree = "<group>"; };
-		BF56687E20AD9C8E00B88887 /* qt_window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = qt_window.cpp; sourceTree = "<group>"; };
-		BF56687F20AD9C8E00B88887 /* qt_window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = qt_window.h; sourceTree = "<group>"; };
 		BF56688620ADA2F600B88887 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		BF56688820AF14FC00B88887 /* editor_window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editor_window.h; sourceTree = "<group>"; };
+		BF56688920AF151700B88887 /* editor_window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = editor_window.cpp; sourceTree = "<group>"; };
 		BF675D8120AB1666001046FE /* profiler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = profiler.cpp; sourceTree = "<group>"; };
 		BF675D8220AB1666001046FE /* profiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profiler.h; sourceTree = "<group>"; };
 		BF7A950420A4857100F12130 /* texture_protocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_protocol.cpp; sourceTree = "<group>"; };
@@ -161,13 +178,17 @@
 		BF868745208337D200523939 /* vector.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector.inl; sourceTree = "<group>"; };
 		BF868746208341FA00523939 /* script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = script.cpp; sourceTree = "<group>"; };
 		BF868747208341FA00523939 /* script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
+		BF873E6F20B0249B008F1E3E /* glfw_window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glfw_window.cpp; sourceTree = "<group>"; };
+		BF873E7020B0249B008F1E3E /* glfw_window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw_window.h; sourceTree = "<group>"; };
+		BF873E7220B03E2B008F1E3E /* editor_scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = editor_scene.cpp; sourceTree = "<group>"; };
+		BF873E7320B03E2B008F1E3E /* editor_scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editor_scene.h; sourceTree = "<group>"; };
+		BF873E7520B0D9F3008F1E3E /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = ../../../Match3/Assets; sourceTree = "<group>"; };
 		BFB6D1D520906CF000C39C31 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 		BFB6D1D620906CF000C39C31 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
 		BFB6D1D82090909900C39C31 /* box_collider2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider2d.h; sourceTree = "<group>"; };
 		BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = box_collider2d.cpp; sourceTree = "<group>"; };
 		BFB6D1DB2093531800C39C31 /* action.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = action.h; sourceTree = "<group>"; };
 		BFB6D1DC209359FD00C39C31 /* action.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = action.cpp; sourceTree = "<group>"; };
-		BFCB321220753755001B5995 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = ../../Assets; sourceTree = "<group>"; };
 		BFCB321B20754006001B5995 /* file_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_utils.h; sourceTree = "<group>"; };
 		BFCB321C20754006001B5995 /* file_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_utils.cpp; sourceTree = "<group>"; };
 		BFCB32242076100A001B5995 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
@@ -319,7 +340,7 @@
 				BF51EC3A206B8B76005A6240 /* Products */,
 				BF51ECA6206BAB15005A6240 /* OSX */,
 				BF51EC83206B993A005A6240 /* Frameworks */,
-				BFCB321220753755001B5995 /* Assets */,
+				BF873E7520B0D9F3008F1E3E /* Assets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -409,6 +430,10 @@
 			children = (
 				BF51EC80206B981C005A6240 /* editor_app_delegate.cpp */,
 				BF51EC81206B981C005A6240 /* editor_app_delegate.h */,
+				BF56688820AF14FC00B88887 /* editor_window.h */,
+				BF56688920AF151700B88887 /* editor_window.cpp */,
+				BF873E7220B03E2B008F1E3E /* editor_scene.cpp */,
+				BF873E7320B03E2B008F1E3E /* editor_scene.h */,
 			);
 			name = Sources;
 			path = ../../Sources;
@@ -441,13 +466,13 @@
 			path = OSX;
 			sourceTree = "<group>";
 		};
-		BF56687B20AD907A00B88887 /* qt */ = {
+		BF873E6E20B0249B008F1E3E /* glfw3 */ = {
 			isa = PBXGroup;
 			children = (
-				BF56687E20AD9C8E00B88887 /* qt_window.cpp */,
-				BF56687F20AD9C8E00B88887 /* qt_window.h */,
+				BF873E6F20B0249B008F1E3E /* glfw_window.cpp */,
+				BF873E7020B0249B008F1E3E /* glfw_window.h */,
 			);
-			path = qt;
+			path = glfw3;
 			sourceTree = "<group>";
 		};
 		BFCB321A20754006001B5995 /* utils */ = {
@@ -474,7 +499,7 @@
 		BFCB32212076100A001B5995 /* window */ = {
 			isa = PBXGroup;
 			children = (
-				BF56687B20AD907A00B88887 /* qt */,
+				BF873E6E20B0249B008F1E3E /* glfw3 */,
 				BFCB32242076100A001B5995 /* window.h */,
 			);
 			path = window;
@@ -528,6 +553,7 @@
 				BF51EC9D206BAAF0005A6240 /* CopyFiles */,
 			);
 			buildRules = (
+				BF873E6C20AF2E16008F1E3E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -573,6 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF873E6D20AF2EFD008F1E3E /* editor_window.h in Sources */,
 				BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */,
 				BF868748208341FA00523939 /* script.cpp in Sources */,
 				BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */,
@@ -581,6 +608,8 @@
 				BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */,
 				BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */,
 				BF51ECAC206BABD6005A6240 /* application.cpp in Sources */,
+				BF873E7420B03E2B008F1E3E /* editor_scene.cpp in Sources */,
+				BF56688A20AF151700B88887 /* editor_window.cpp in Sources */,
 				BF1910EA2086648C00BCE74B /* binding.cpp in Sources */,
 				BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
@@ -593,6 +622,7 @@
 				BF0D23A82084030600542952 /* scriptable_component.cpp in Sources */,
 				BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */,
 				BF51ECA8206BAB15005A6240 /* main.mm in Sources */,
+				BF873E7120B0249B008F1E3E /* glfw_window.cpp in Sources */,
 				BF3D14F1207225C600293C36 /* renderer.cpp in Sources */,
 				BFD2F44220A04072005A4CEA /* texture_atlas.cpp in Sources */,
 				BFCB321D20754006001B5995 /* file_utils.cpp in Sources */,
@@ -608,7 +638,6 @@
 				BFD2F44320A04072005A4CEA /* font_ttf.cpp in Sources */,
 				BFCB323C2077A52B001B5995 /* sprite.cpp in Sources */,
 				BF0D23A12083DB5D00542952 /* ref.cpp in Sources */,
-				BF56688020AD9C8E00B88887 /* qt_window.cpp in Sources */,
 				BF675D8320AB1666001046FE /* profiler.cpp in Sources */,
 				BF51ECA9206BABCF005A6240 /* director.cpp in Sources */,
 				BF51ECAE206BABE0005A6240 /* vector2d.cpp in Sources */,

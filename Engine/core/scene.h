@@ -8,6 +8,6 @@ namespace engine
 	{
         DECLARE_CLASS
 	public:
-        void draw(renderer* r);
+        virtual void draw(renderer* r);
 	};
 }

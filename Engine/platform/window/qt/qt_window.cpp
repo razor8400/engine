@@ -49,6 +49,7 @@ namespace engine
         m_size.y = (float)height;
         
         resize(width, height);
+        setTitle(display_name);
         show();
         
         return true;

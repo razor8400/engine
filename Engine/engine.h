@@ -6,6 +6,9 @@
 #include "core/game_object.h"
 #include "core/scene.h"
 
+#include "renderer/render_command.h"
+#include "renderer/renderer.h"
+
 #include "components/scriptable_component.h"
 #include "components/component.h"
 #include "components/box_collider2d.h"

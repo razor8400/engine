@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
-
-#include <qapplication.h>
+#include <QApplication>
 
 #include "engine.h"
 #include "editor_app_delegate.h"
@@ -18,7 +17,7 @@ int main(int argc, char* argv[])
         
         if (!application.on_launched())
             return 0;
-        
+
         return app.exec();
     }
     return 0;
