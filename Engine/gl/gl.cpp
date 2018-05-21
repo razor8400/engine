@@ -281,9 +281,9 @@ namespace gl
             x2, y2
         };
         
-        GLfloat colors[] = {
-            1, 1, 1,
-            1, 1, 1
+        const GLfloat colors[] = {
+            1, 1, 1, 1,
+            1, 1, 1, 1
         };
         
         glEnableVertexAttribArray(vertex_attribute::position);
@@ -303,7 +303,7 @@ namespace gl
         glBindBuffer(GL_ARRAY_BUFFER, color_buffer);
         
         glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-        glVertexAttribPointer(vertex_attribute::color, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        glVertexAttribPointer(vertex_attribute::color, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 
 		glDrawArrays(GL_LINES, 0, 2);
         
@@ -323,5 +323,59 @@ namespace gl
         draw_line(x + width, y, x + width, y + height);
         draw_line(x + width, y + height, x, y + height);
         draw_line(x, y + height, x, y);
+    }
+    
+    void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color)
+    {
+        const GLfloat vertices[] = {
+            x, y,
+            x + width, y,
+            x + width, y + height,
+            x, y + height
+        };
+        
+        const GLfloat colors[] = {
+            color.x, color.y, color.z,
+            color.x, color.y, color.z,
+            color.x, color.y, color.z,
+            color.x, color.y, color.z
+        };
+        
+        const GLshort indices[] = {
+            0, 1, 2, 2, 3, 0
+        };
+        
+        glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::color);
+        
+        GLuint vertex_buffer;
+        
+        glGenBuffers(1, &vertex_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+        
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        GLuint color_buffer;
+        
+        glGenBuffers(1, &color_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, color_buffer);
+        
+        glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::color, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_object);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::color);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDeleteBuffers(1, &vertex_buffer);
+        glDeleteBuffers(1, &color_buffer);
+        
+        ++draw_calls;
     }
 }

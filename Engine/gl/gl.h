@@ -34,6 +34,7 @@ namespace gl
     
     void draw_line(float x1, float y1, float x2, float y2);
     void draw_rect(float x, float y, float width, float height);
+    void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color);
     
     const std::vector<std::string>& get_errors();
     void clear_errors();

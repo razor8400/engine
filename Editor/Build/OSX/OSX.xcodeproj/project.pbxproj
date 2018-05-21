@@ -45,6 +45,8 @@
 		BF56688A20AF151700B88887 /* editor_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF56688920AF151700B88887 /* editor_window.cpp */; };
 		BF675D8320AB1666001046FE /* profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF675D8120AB1666001046FE /* profiler.cpp */; };
 		BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF7A950420A4857100F12130 /* texture_protocol.cpp */; };
+		BF8564EA20B3068F0061E2D6 /* editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF8564E820B3068F0061E2D6 /* editor.cpp */; };
+		BF8564F020B3132B0061E2D6 /* EditorAssets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF8564EF20B3131B0061E2D6 /* EditorAssets */; };
 		BF868748208341FA00523939 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF868746208341FA00523939 /* script.cpp */; };
 		BF873E6D20AF2EFD008F1E3E /* editor_window.h in Sources */ = {isa = PBXBuildFile; fileRef = BF56688820AF14FC00B88887 /* editor_window.h */; };
 		BF873E7120B0249B008F1E3E /* glfw_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF873E6F20B0249B008F1E3E /* glfw_window.cpp */; };
@@ -89,6 +91,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				BF8564F020B3132B0061E2D6 /* EditorAssets in CopyFiles */,
 				BF873E7620B0DA0B008F1E3E /* Assets in CopyFiles */,
 				BF56687A20AD867800B88887 /* QtWidgets.framework in CopyFiles */,
 				BF56687920AD867000B88887 /* QtCore.framework in CopyFiles */,
@@ -173,6 +176,10 @@
 		BF675D8220AB1666001046FE /* profiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profiler.h; sourceTree = "<group>"; };
 		BF7A950420A4857100F12130 /* texture_protocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_protocol.cpp; sourceTree = "<group>"; };
 		BF7A950520A4857100F12130 /* texture_protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture_protocol.h; sourceTree = "<group>"; };
+		BF8564E820B3068F0061E2D6 /* editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = editor.cpp; sourceTree = "<group>"; };
+		BF8564E920B3068F0061E2D6 /* editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editor.h; sourceTree = "<group>"; };
+		BF8564EC20B307D70061E2D6 /* editor_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editor_data.h; sourceTree = "<group>"; };
+		BF8564EF20B3131B0061E2D6 /* EditorAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = EditorAssets; path = ../../EditorAssets; sourceTree = "<group>"; };
 		BF86873F20823E6300523939 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		BF8687442082BBAB00523939 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		BF868745208337D200523939 /* vector.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector.inl; sourceTree = "<group>"; };
@@ -340,6 +347,7 @@
 				BF51EC3A206B8B76005A6240 /* Products */,
 				BF51ECA6206BAB15005A6240 /* OSX */,
 				BF51EC83206B993A005A6240 /* Frameworks */,
+				BF8564EF20B3131B0061E2D6 /* EditorAssets */,
 				BF873E7520B0D9F3008F1E3E /* Assets */,
 			);
 			sourceTree = "<group>";
@@ -434,6 +442,9 @@
 				BF56688920AF151700B88887 /* editor_window.cpp */,
 				BF873E7220B03E2B008F1E3E /* editor_scene.cpp */,
 				BF873E7320B03E2B008F1E3E /* editor_scene.h */,
+				BF8564E820B3068F0061E2D6 /* editor.cpp */,
+				BF8564E920B3068F0061E2D6 /* editor.h */,
+				BF8564EC20B307D70061E2D6 /* editor_data.h */,
 			);
 			name = Sources;
 			path = ../../Sources;
@@ -613,6 +624,7 @@
 				BF1910EA2086648C00BCE74B /* binding.cpp in Sources */,
 				BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */,
 				BF3D14E3206D21D300293C36 /* gl.cpp in Sources */,
+				BF8564EA20B3068F0061E2D6 /* editor.cpp in Sources */,
 				BF0D23972083734100542952 /* scripting.cpp in Sources */,
 				BFCB322A2076100B001B5995 /* file_system.cpp in Sources */,
 				BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */,

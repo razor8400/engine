@@ -3,6 +3,7 @@
 #include "editor_app_delegate.h"
 #include "editor_scene.h"
 #include "editor_window.h"
+#include "editor.h"
 
 #include <QApplication>
 
@@ -17,21 +18,25 @@ bool editor_app_delegate::application_launched(engine::application* application)
     if (application->create_context_window())
     {
         engine::director& director = engine::director::instance();
+
+        auto& editor = editor::instance();
         
-        auto scene = editor_scene::create<editor_scene>();
+        editor.load_elements();
+        editor.new_scene();
         
         director.set_projection_mode(engine::ortographic);
 		director.set_near_plane(-1000.0f);
         director.set_far_plane(1000.0f);
         
         director.start();
-        director.run_scene(scene);
         
-        editor_window window(scene);
+        auto window = new editor_window;
         
-        window.resize(width / 2, height / 2);
-        window.setWindowTitle("Tools");
-        window.show();
+        window->resize(width / 2, height / 2);
+        window->setWindowTitle("Tools");
+        window->show();
+        
+        editor.m_main_window = window;
         
         application->run();
         

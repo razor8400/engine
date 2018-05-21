@@ -1,45 +1,89 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
+#include <QPushButton>
 #include <QGroupBox>
 #include <QComboBox>
 #include <QAction>
 #include <QGridLayout>
 #include <QLineEdit>
-#include <QFileDialog>
-#include <QFile>
-#include <QIODevice>
-#include <QMessageBox>
-#include <QTextStream>
+#include <QString>
+#include <QIcon>
 
 #include "editor_window.h"
 #include "editor_scene.h"
+#include "editor.h"
 
-editor_window::editor_window(editor_scene* scene) : m_scene(scene)
-{
-    assert(scene);
-    
+editor_window::editor_window()
+{    
     create_menu();
+    create_elements_buttons();
     create_level_layout();
     on_level_loaded();
 }
 
 void editor_window::create_menu()
 {
-    auto file_menu = menuBar()->addMenu("&Level");
+    auto file_menu = menuBar()->addMenu("&File");
+    auto edit_menu = menuBar()->addMenu("&Edit");
+    
     auto new_action = file_menu->addAction("&Create");
     auto save_action = file_menu->addAction("&Save");
     auto load_action = file_menu->addAction("&Load");
     
-    new_action->setStatusTip(tr("Create a new level"));
-    save_action->setStatusTip(tr("Save current level"));
-    load_action->setStatusTip(tr("Load level"));
+    auto elements_action = edit_menu->addAction("&Open elements editor");
+    auto matches_action = edit_menu->addAction("&Open matches editor");
+    
+    new_action->setStatusTip(tr("Create a new Level"));
+    save_action->setStatusTip(tr("Save current Level"));
+    load_action->setStatusTip(tr("Load Level"));
     
     connect(new_action, &QAction::triggered, this, &editor_window::on_new_level);
     connect(save_action, &QAction::triggered, this, &editor_window::on_save_level);
     connect(load_action, &QAction::triggered, this, &editor_window::on_load_level);
+    connect(elements_action, &QAction::triggered, this, &editor_window::on_open_elements_editor);
+    connect(matches_action, &QAction::triggered, this, &editor_window::on_open_matches_editor);
     
     menuBar()->setNativeMenuBar(false);
+}
+
+void editor_window::create_elements_buttons()
+{
+    auto elements = editor::instance().m_elements;
+    
+    auto group = new QGroupBox("Elements");
+    auto grid = new QGridLayout;
+    
+    int x = 0;
+    int y = 0;
+    
+    static int max_row = 5;
+    
+    for (auto el : elements)
+    {
+        if (x >= max_row)
+        {
+            x = 0;
+            ++y;
+        }
+        
+        auto button = new QPushButton;
+        auto icon = QIcon(QString("EditorAssets/") + QString(el->texture.c_str()));
+        
+        button->setIcon(icon);
+        button->setIconSize(QSize(40, 40));
+        button->resize(60, 60);
+        
+        grid->addWidget(button, y, x);
+        
+        ++x;
+    }
+    
+    group->setLayout(grid);
+    group->resize(240, 20 + 60 * (y + 1));
+    group->move(0, menuBar()->size().height());
+    
+    layout()->addWidget(group);
 }
 
 void editor_window::create_level_layout()
@@ -76,76 +120,53 @@ void editor_window::create_level_layout()
 
 void editor_window::on_set_colls(const QString& str)
 {
-    m_scene->m_colls = str.toInt();
+    m_edit_scene->m_colls = str.toInt();
 }
 
 void editor_window::on_set_rows(const QString& str)
 {
-    m_scene->m_rows = str.toInt();
+    m_edit_scene->m_rows = str.toInt();
 }
 
 void editor_window::on_set_cell(const QString& str)
 {
-    m_scene->m_cell_size = str.toInt();
+    m_edit_scene->m_cell_size = str.toInt();
 }
 
 void editor_window::on_new_level()
 {
-    m_scene = editor_scene::create<editor_scene>();
-    engine::director::instance().run_scene(m_scene);
+    editor::instance().new_scene();
     on_level_loaded();
 }
 
 void editor_window::on_load_level()
 {
-    auto file_name = QFileDialog::getOpenFileName(this,
-                                                     tr("Save Level"), "",
-                                                     tr("Level (*.json);;All Files (*)"));
-    
-    if (!file_name.isEmpty())
-    {
-        QFile file(file_name);
-        
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            QMessageBox::information(this, tr("Unable to open file"),
-                                     file.errorString());
-            return;
-        }
-        
-        QTextStream in(&file);
-        QString data;
-        
-        in >> data;
-        
-        if (m_scene->from_json(data.toStdString()))
-            on_level_loaded();
-    }
+    if (editor::instance().load_scene())
+        on_level_loaded();
 }
 
 void editor_window::on_save_level()
 {
-    auto file_name = QFileDialog::getSaveFileName(this,
-                                                    tr("Save Level"), "",
-                                                    tr("Level (*.json);;All Files (*)"));
-    
-    if (!file_name.isEmpty())
-    {
-        QFile file(file_name);
-        if (!file.open(QIODevice::WriteOnly))
-        {
-            QMessageBox::information(this, tr("Unable to open file"),
-                                     file.errorString());
-            return;
-        }
-        QTextStream out(&file);
-        out << QString(m_scene->to_json().c_str());
-    }
+    editor::instance().save_scene();
 }
 
 void editor_window::on_level_loaded()
 {
-    m_rows_edit->setText(QString::number(m_scene->m_rows));
-    m_colls_edit->setText(QString::number(m_scene->m_colls));
-    m_cell_edit->setText(QString::number(m_scene->m_cell_size));
+    m_edit_scene = editor::instance().m_current_scene;
+    
+    assert(m_edit_scene);
+    
+    m_rows_edit->setText(QString::number(m_edit_scene->m_rows));
+    m_colls_edit->setText(QString::number(m_edit_scene->m_colls));
+    m_cell_edit->setText(QString::number(m_edit_scene->m_cell_size));
+}
+
+void editor_window::on_open_elements_editor()
+{
+
+}
+
+void editor_window::on_open_matches_editor()
+{
+    
 }

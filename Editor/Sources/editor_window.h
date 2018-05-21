@@ -9,9 +9,10 @@ class editor_window : public QMainWindow
 {
     Q_OBJECT
 public:
-    editor_window(editor_scene* scene);
+    editor_window();
 private:
     void create_menu();
+    void create_elements_buttons();
     void create_level_layout();
     void on_level_loaded();
 private slots:
@@ -22,10 +23,14 @@ private slots:
     void on_new_level();
     void on_save_level();
     void on_load_level();
+    
+    void on_open_elements_editor();
+    void on_open_matches_editor();
 private:
-    editor_scene* m_scene = nullptr;
     QLineEdit* m_rows_edit = nullptr;
     QLineEdit* m_colls_edit = nullptr;
     QLineEdit* m_cell_edit = nullptr;
+    
+    editor_scene* m_edit_scene = nullptr;
 };
 
