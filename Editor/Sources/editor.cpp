@@ -12,6 +12,7 @@
 #include <QWidget>
 
 static const char* elements = "assets/configs/elements.json";
+const QString editor::assets = "EditorAssets/";
 
 editor& editor::instance()
 {

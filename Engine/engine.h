@@ -5,6 +5,8 @@
 #include "core/director.h"
 #include "core/game_object.h"
 #include "core/scene.h"
+#include "core/input/touch_listener.h"
+#include "core/input/touch_dispatcher.h"
 
 #include "renderer/render_command.h"
 #include "renderer/renderer.h"

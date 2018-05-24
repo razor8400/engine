@@ -2,13 +2,16 @@
 
 #include "editor_data.h"
 
+#include <QString>
+
 class editor_scene;
 class editor_element;
 class editor_window;
 
 class editor
 {
-public:    
+public:
+    static const QString assets;
     static editor& instance();
     
     void new_scene();

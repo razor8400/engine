@@ -1,14 +1,52 @@
 #include "editor_scene.h"
 #include "nlohmann/json.hpp"
 
+editor_scene::editor_scene()
+{
+    m_listener = ref::create<engine::touch_listener>();
+    m_listener->retain();
+    
+    m_listener->touch_began = std::bind(&editor_scene::on_touch_began, this);
+    m_listener->touch_moved = std::bind(&editor_scene::on_touch_moved, this);
+    m_listener->touch_ended = std::bind(&editor_scene::on_touch_ended, this);
+}
+
 editor_scene::~editor_scene()
 {
+    m_listener->release();
     clear_cells();
 }
 
 void editor_scene::clear_cells()
 {
     std::for_each(m_cells.begin(), m_cells.end(), std::default_delete<editor_cell>());
+}
+
+bool editor_scene::on_touch_began()
+{
+    return true;
+}
+
+void editor_scene::on_touch_moved()
+{
+    
+}
+
+void editor_scene::on_touch_ended()
+{
+    
+}
+
+void editor_scene::on_enter()
+{
+    scene::on_enter();
+    engine::touch_dispatcher::instance().add_touch_listener(m_listener);
+}
+
+void editor_scene::on_exit()
+{
+    scene::on_exit();
+    engine::touch_dispatcher::instance().remove_touch_listener(m_listener);
 }
 
 void editor_scene::update(float dt)

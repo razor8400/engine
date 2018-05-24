@@ -4,6 +4,8 @@
 
 class editor_scene;
 class QLineEdit;
+class QPushButton;
+class QButtonGroup;
 
 class editor_window : public QMainWindow
 {
@@ -26,6 +28,8 @@ private slots:
     
     void on_open_elements_editor();
     void on_open_matches_editor();
+    
+    void on_element_button(const QString& str);
 private:
     QLineEdit* m_rows_edit = nullptr;
     QLineEdit* m_colls_edit = nullptr;

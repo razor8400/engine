@@ -8,7 +8,10 @@
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QString>
+#include <QHBoxLayout>
 #include <QIcon>
+#include <QButtonGroup>
+#include <QSignalMapper>
 
 #include "editor_window.h"
 #include "editor_scene.h"
@@ -54,46 +57,79 @@ void editor_window::create_elements_buttons()
     auto group = new QGroupBox("Elements");
     auto grid = new QGridLayout;
     
-    int x = 0;
-    int y = 0;
-    
-    static int max_row = 5;
+    auto buttons_group = new QButtonGroup(this);
+    auto mapper = new QSignalMapper(this);
     
     for (auto el : elements)
     {
+        auto button = new QPushButton;
+        auto icon = QIcon(editor::assets + QString(el->texture.c_str()));
+        
+        mapper->setMapping(button, el->type_name.c_str());
+        button->setIcon(icon);
+        
+        buttons_group->addButton(button);
+    }
+    
+    static const char* field_buttons[] = { "clear", "disable", "spawn" };
+    
+    for (auto field_button : field_buttons)
+    {
+        auto button = new QPushButton;
+        auto icon = QIcon(editor::assets + field_button);
+        
+        button->setIcon(icon);
+        mapper->setMapping(button, field_button);
+        
+        buttons_group->addButton(button);
+    }
+    
+    int x = 0;
+    int y = 0;
+    
+    static const int max_row = 5;
+
+    auto buttons = buttons_group->buttons();
+    
+    for (auto button : buttons)
+    {
+        button->setIconSize(QSize(30, 30));
+        button->setCheckable(true);
+        
+        buttons_group->addButton(button);
+        
+        grid->addWidget(button, y, x++);
+        
         if (x >= max_row)
         {
             x = 0;
             ++y;
         }
         
-        auto button = new QPushButton;
-        auto icon = QIcon(QString("EditorAssets/") + QString(el->texture.c_str()));
-        
-        button->setIcon(icon);
-        button->setIconSize(QSize(40, 40));
-        button->resize(60, 60);
-        
-        grid->addWidget(button, y, x);
-        
-        ++x;
+        connect(button, SIGNAL(clicked(bool)), mapper, SLOT(map()));
     }
-    
+
     group->setLayout(grid);
-    group->resize(240, 20 + 60 * (y + 1));
+    group->resize(240, 105);
     group->move(0, menuBar()->size().height());
     
     layout()->addWidget(group);
+    connect(mapper, SIGNAL(mapped(QString)), this, SLOT(on_element_button(QString)));
+}
+
+void editor_window::on_element_button(const QString& str)
+{
+    m_edit_scene->m_selected_item = str.toStdString();
 }
 
 void editor_window::create_level_layout()
 {
-    auto group = new QGroupBox;
+    auto group = new QGroupBox("Field:");
     auto grid = new QGridLayout;
     
-    auto rows_label = new QLabel(tr("Rows:"));
-    auto colls_label = new QLabel(tr("Colls:"));
-    auto cell_label = new QLabel(tr("Cell:"));
+    auto rows_label = new QLabel("Rows:");
+    auto colls_label = new QLabel("Colls:");
+    auto cell_label = new QLabel("Cell:");
     
     m_rows_edit = new QLineEdit;
     m_colls_edit = new QLineEdit;
