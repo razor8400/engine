@@ -7,32 +7,6 @@ namespace engine
 {
     namespace file_utils
     {
-        static const char* assets_folder = "Assets/";
-        
-        bool read_resource_file(const std::string& file_name, unsigned char** data, size_t* size)
-        {
-            auto path = get_path_to_resource(file_name);
-            
-            if (read_file(path, data, size))
-                return true;
-            
-            logger() << "[file_utils] can't open resource file:" << file_name;
-            
-            return false;
-        }
-        
-        bool read_resource_file(const std::string& file_name, std::vector<char>* buffer)
-        {
-            auto path = get_path_to_resource(file_name);
-            
-            if (read_file(path, buffer))
-                return true;
-            
-            logger() << "[file_utils] can't open resource file:" << file_name;
-            
-            return false;
-        }
-        
         bool read_file(const std::string& file_name, std::vector<char>* buffer)
         {
             if (!buffer)
@@ -49,6 +23,19 @@ namespace engine
                 
                 delete [] data;
                 
+                return true;
+            }
+            
+            return false;
+        }
+        
+        bool file_exist(const std::string& file_name)
+        {
+            auto file = file_system::open_file(file_name.c_str(), "rb");
+            
+            if (file != NULL)
+            {
+                fclose(file);
                 return true;
             }
             
@@ -76,16 +63,6 @@ namespace engine
             }
             
             return false;
-        }
-        
-        std::string get_resources_folder()
-        {
-            return file_system::get_current_directory() + '/' + assets_folder;
-        }
-        
-        std::string get_path_to_resource(const std::string& path)
-        {
-            return get_resources_folder() + path;
         }
         
         std::string get_file_name(const std::string& path)

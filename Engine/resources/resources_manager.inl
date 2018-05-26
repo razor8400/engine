@@ -8,7 +8,7 @@ namespace engine
     template<class T>
     std::shared_ptr<T> resources_manager::load_resource_from_file(const std::string& file_name) const
     {
-        auto path = file_utils::get_path_to_resource(file_name);
+        auto path = get_path_to_resource(file_name);
         auto it = m_resources.find(path);
         
 		if (it != m_resources.end())

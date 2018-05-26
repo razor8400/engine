@@ -82,7 +82,7 @@ void editor::load_elements()
     {
         QTextStream in(&file);
         
-        engine::logger() << " [editor_window] read elements config:";
+        engine::logger() << " [editor] read elements config:";
         
         QString data = in.readAll();
         
@@ -97,7 +97,22 @@ void editor::load_elements()
             
             obj->texture = elem["texture"].get<std::string>();
             obj->type_name = elem["type"].get<std::string>();
+            obj->layer = (element_layer)elem["layer"].get<int>();
+            obj->dropable = elem["dropable"].get<bool>();
             m_elements.push_back(obj);
         }
     }
+}
+
+editor_element* editor::find_element(const std::string& type_name) const
+{
+    auto it = std::find_if(m_elements.begin(), m_elements.end(), [type_name](editor_element* e)
+    {
+        return type_name == e->type_name;
+    });
+    
+    if (it != m_elements.end())
+        return *it;
+    
+    return nullptr;
 }

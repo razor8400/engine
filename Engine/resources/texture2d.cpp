@@ -51,4 +51,33 @@ namespace engine
         
         return m_texture_id != texture_default_id;
     }
+    
+    void texture2d::draw(const math::rect& rect, const math::mat4& transform)
+    {
+        gl::v3f_c4f_t2f_quad quad;
+        gl::set_blend_func(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        gl::bind_texture(m_texture_id);
+        
+        quad[gl::bottom_left].vertice = rect.bottom_left();
+        quad[gl::bottom_right].vertice = rect.bottom_right();
+        quad[gl::top_right].vertice = rect.top_right();
+        quad[gl::top_left].vertice = rect.top_left();
+        
+        quad[gl::bottom_left].tex_coord = { 0, 1 };
+        quad[gl::bottom_right].tex_coord = { 1, 1 };
+        quad[gl::top_right].tex_coord = { 1, 0 };
+        quad[gl::top_left].tex_coord = { 0, 0 };
+        
+        auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color_alpha);
+        
+        if (program)
+            program->use(transform);
+        
+        gl::draw_quad(quad);
+    }
+    
+    void texture2d::draw(const math::vector2d& location, const math::mat4& transform)
+    {
+        draw(math::rect(location, math::vector2d(m_width, m_height)), transform);
+    }
 }

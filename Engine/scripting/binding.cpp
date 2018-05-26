@@ -23,11 +23,15 @@ namespace engine
                     
                     CLEAR_TOP(L)
                     
-                    if (file_utils::read_resource_file(script, &data))
+                    auto path = resources_manager::instance().get_path_to_resource(script);
+                    
+                    if (file_utils::read_file(path, &data))
                     {
                         if (scripting::load_script(L, data.data(), data.size(), script))
                             return 1;
                     }
+                    
+                    logger() << "[scripting] error loading file:" << script;
                 }
                 
                 return 0;

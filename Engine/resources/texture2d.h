@@ -19,6 +19,9 @@ namespace engine
         int get_height() const { return m_height; }
         
         int get_texture_id() const { return m_texture_id; }
+        
+        void draw(const math::rect& rect, const math::mat4& transform);
+        void draw(const math::vector2d& location, const math::mat4& transform);
     private:
 		int m_width = 0;
 		int m_height = 0;

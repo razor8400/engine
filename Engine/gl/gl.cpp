@@ -211,6 +211,55 @@ namespace gl
         glDisable(GL_BLEND);
     }
     
+    void draw_quad(const v3f_c3f_t2f_quad& quad)
+    {
+        std::vector<GLushort> indices = { 0, 1, 2, 2, 3, 0 };
+        std::vector<v3f_c3f_t2f> vertices = { quad[bottom_left], quad[bottom_right], quad[top_right], quad[top_left] };
+        
+        draw_vertices(vertices, indices);
+    }
+    
+    void draw_vertices(const std::vector<v3f_c3f_t2f>& vertices, const std::vector<GLushort>& indices)
+    {
+        if (vertices.empty())
+            return;
+        
+        static const GLsizei size = sizeof(v3f_c3f_t2f);
+        
+        glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::texture_position);
+        glEnableVertexAttribArray(vertex_attribute::color);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
+        glBufferData(GL_ARRAY_BUFFER, size * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+        
+        glVertexAttribPointer(vertex_attribute::position, 3, GL_FLOAT, GL_FALSE, size, (GLvoid*)offsetof(v3f_c3f_t2f, vertice));
+        glVertexAttribPointer(vertex_attribute::color, 4, GL_FLOAT, GL_FALSE, size, (GLvoid*)offsetof(v3f_c4f_t2f, color));
+        glVertexAttribPointer(vertex_attribute::texture_position, 2, GL_FLOAT, GL_FALSE, size, (GLvoid*)offsetof(v3f_c3f_t2f, tex_coord));
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_object);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices[0], GL_STATIC_DRAW);
+        
+        glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::texture_position);
+        glDisableVertexAttribArray(vertex_attribute::color);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        
+        ++draw_calls;
+    }
+    
+    void draw_quad(const v3f_c4f_t2f_quad& quad)
+    {
+        std::vector<GLushort> indices = { 0, 1, 2, 2, 3, 0 };
+        std::vector<v3f_c4f_t2f> vertices = { quad[bottom_left], quad[bottom_right], quad[top_right], quad[top_left] };
+        
+        draw_vertices(vertices, indices);
+    }
+    
     void draw_vertices(const std::vector<v3f_c4f_t2f>& vertices, const std::vector<GLushort>& indices)
     {
         if (vertices.empty())

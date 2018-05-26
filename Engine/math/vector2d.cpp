@@ -19,6 +19,10 @@ namespace math
 
 	}
 
+    vector2d vector2d::operator-() const
+    {
+        return vector2d(-x, -y);
+    }
 
 	bool vector2d::operator==(const vector2d& other) const
 	{

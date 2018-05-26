@@ -11,15 +11,18 @@ public:
     editor_scene();
     ~editor_scene();
     
-    void on_enter();
-    void on_exit();
+    void on_enter() override;
+    void on_exit() override;
     void update(float dt) override;
     void draw(engine::renderer* r) override;
     
     editor_cell* get_cell(int x, int y) const;
     
+    math::vector2d world_to_cell(int x, int y) const;
     math::vector2d cell_to_world(int x, int y) const;
     math::vector2d field_size() const;
+    
+    void on_cell_clicked(editor_cell* cell);
     
     void clear_cells();
     bool on_touch_began();

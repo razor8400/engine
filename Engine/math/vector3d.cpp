@@ -30,6 +30,11 @@ namespace math
     {
         
     }
+    
+    vector3d vector3d::operator-() const
+    {
+        return vector3d(-x, -y, -z);
+    }
 
     vector3d vector3d::operator+(const vector3d& v3) const
     {

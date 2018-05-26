@@ -18,6 +18,7 @@ bool editor_app_delegate::application_launched(engine::application* application)
     if (application->create_context_window())
     {
         engine::director& director = engine::director::instance();
+        engine::resources_manager::instance().add_resources_folder(editor::assets.toStdString());
 
         auto& editor = editor::instance();
         

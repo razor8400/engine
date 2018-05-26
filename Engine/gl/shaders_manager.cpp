@@ -27,13 +27,11 @@ namespace gl
     void shaders_manager::compile_default_shaders()
     {
         auto position_color = create_gl_program<shader_position_color>(shaders::shader_position_color_vert, shaders::shader_position_color_frag);
-        auto shader_position_texture = create_gl_program<shader_texture_position_color>(shaders::shader_texture_position_vert, shaders::shader_texture_position_frag);
         auto shader_position_texture_color = create_gl_program<shader_texture_position_color>(shaders::shader_texture_position_color_vert, shaders::shader_texture_position_color_frag);
         auto shader_position_texture_color_alpha = create_gl_program<shader_texture_position_color>(shaders::shader_texture_position_color_alpha_vert, shaders::shader_texture_position_color_alpha_frag);
 		auto shader_position_font_color_alpha = create_gl_program<shader_texture_position_color>(shaders::shader_texture_position_color_alpha_vert, shaders::shader_font_position_color_alpha_frag);
 
         add_to_cache(position_color, shader_program::shader_position_color);
-        add_to_cache(shader_position_texture, shader_program::shader_texture_position);
         add_to_cache(shader_position_texture_color, shader_program::shader_texture_position_color);
         add_to_cache(shader_position_texture_color_alpha, shader_program::shader_texture_position_color_alpha);
 		add_to_cache(shader_position_font_color_alpha, shader_program::shader_font_position_color_alpha);

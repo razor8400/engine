@@ -34,6 +34,12 @@ namespace engine
 
     }
     
+    math::vector3d director::get_mouse_location() const
+    {
+        auto mouse = application::instance().get_mouse_location();
+        return convert_screen_to_world(mouse);
+    }
+    
     math::vector3d director::convert_screen_to_world(const math::vector2d& screen) const
     {
         auto win_size = application::instance().get_win_size();

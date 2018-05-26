@@ -14,11 +14,15 @@ namespace engine
         
 		template<class T>
 		std::vector<std::shared_ptr<T>> get_resources() const;
+        
+        std::string get_path_to_resource(const std::string& resource) const;
         void clear_cache();
+        void add_resources_folder(const std::string& folder);
     private:
         resources_manager();
         
         mutable std::map<std::string, resource_ptr> m_resources;
+        std::vector<std::string> m_folders;
     };
 }
 

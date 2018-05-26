@@ -5,3 +5,6 @@
 
 #define OPEN_GL_MAJOR_VERSION 3
 #define OPEN_GL_MINOR_VERSION 3
+
+#define DEFAULT_ASSETS_FOLDER "Assets"
+

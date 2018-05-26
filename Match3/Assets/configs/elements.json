@@ -1,20 +1,30 @@
 {
 	"elements":
 	[
-		{ "type":"red",
-		  "texture":"red.png" 
+		{   "type":"red",
+            "texture":"red.png",
+            "layer":3,
+            "dropable":true
 		},
-		{ "type":"blue",
-		  "texture":"blue.png" 
+		{   "type":"blue",
+            "texture":"blue.png",
+            "layer":3,
+            "dropable":true
 		},
-		{ "type":"green",
-		  "texture":"green.png" 
+		{   "type":"green",
+            "texture":"green.png",
+            "layer":3,
+            "dropable":true
 		},
-		{ "type":"orange",
-		  "texture":"orange.png" 
+		{   "type":"orange",
+            "texture":"orange.png",
+            "layer":3,
+            "dropable":true
 		},
-		{ "type":"yellow",
-		  "texture":"yellow.png" 
+		{   "type":"yellow",
+            "texture":"yellow.png",
+            "layer":3,
+            "dropable":true
 		}
 	]
 }

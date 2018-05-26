@@ -37,9 +37,9 @@ void editor_window::create_menu()
     auto elements_action = edit_menu->addAction("&Open elements editor");
     auto matches_action = edit_menu->addAction("&Open matches editor");
     
-    new_action->setStatusTip(tr("Create a new Level"));
-    save_action->setStatusTip(tr("Save current Level"));
-    load_action->setStatusTip(tr("Load Level"));
+    new_action->setStatusTip("Create a new Level");
+    save_action->setStatusTip("Save current Level");
+    load_action->setStatusTip("Load Level");
     
     connect(new_action, &QAction::triggered, this, &editor_window::on_new_level);
     connect(save_action, &QAction::triggered, this, &editor_window::on_save_level);
@@ -54,15 +54,15 @@ void editor_window::create_elements_buttons()
 {
     auto elements = editor::instance().m_elements;
     
-    auto group = new QGroupBox("Elements");
-    auto grid = new QGridLayout;
+    auto group = new QGroupBox("Elements", this);
+    auto grid = new QGridLayout(this);
     
     auto buttons_group = new QButtonGroup(this);
     auto mapper = new QSignalMapper(this);
     
     for (auto el : elements)
     {
-        auto button = new QPushButton;
+        auto button = new QPushButton(this);
         auto icon = QIcon(editor::assets + QString(el->texture.c_str()));
         
         mapper->setMapping(button, el->type_name.c_str());
@@ -75,7 +75,7 @@ void editor_window::create_elements_buttons()
     
     for (auto field_button : field_buttons)
     {
-        auto button = new QPushButton;
+        auto button = new QPushButton(this);
         auto icon = QIcon(editor::assets + field_button);
         
         button->setIcon(icon);
@@ -124,16 +124,16 @@ void editor_window::on_element_button(const QString& str)
 
 void editor_window::create_level_layout()
 {
-    auto group = new QGroupBox("Field:");
-    auto grid = new QGridLayout;
+    auto group = new QGroupBox("Field:", this);
+    auto grid = new QGridLayout(this);
     
-    auto rows_label = new QLabel("Rows:");
-    auto colls_label = new QLabel("Colls:");
-    auto cell_label = new QLabel("Cell:");
+    auto rows_label = new QLabel("Rows:", this);
+    auto colls_label = new QLabel("Colls:", this);
+    auto cell_label = new QLabel("Cell:", this);
     
-    m_rows_edit = new QLineEdit;
-    m_colls_edit = new QLineEdit;
-    m_cell_edit = new QLineEdit;
+    m_rows_edit = new QLineEdit(this);
+    m_colls_edit = new QLineEdit(this);
+    m_cell_edit = new QLineEdit(this);
     
     grid->addWidget(rows_label, 0, 0);
     grid->addWidget(m_rows_edit, 0, 1);
@@ -195,6 +195,7 @@ void editor_window::on_level_loaded()
     m_rows_edit->setText(QString::number(m_edit_scene->m_rows));
     m_colls_edit->setText(QString::number(m_edit_scene->m_colls));
     m_cell_edit->setText(QString::number(m_edit_scene->m_cell_size));
+    m_edit_scene->m_selected_item = m_
 }
 
 void editor_window::on_open_elements_editor()

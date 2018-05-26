@@ -11,7 +11,35 @@
 
 namespace gl
 {
-    struct v3f_c4f_t2f;
+    struct blend_func
+    {
+        GLenum source;
+        GLenum destination;
+    };
+    
+    struct v3f_c4f_t2f
+    {
+        math::vector3d vertice;
+        math::vector4d color = math::vector4d::one;
+        math::vector2d tex_coord;
+    };
+    
+    struct v3f_c3f_t2f
+    {
+        math::vector3d vertice;
+        math::vector3d color = math::vector3d::one;
+        math::vector2d tex_coord;
+    };
+    
+    static const int quad_size = 4;
+    
+    static const int bottom_left = 0;
+    static const int bottom_right = 1;
+    static const int top_right = 2;
+    static const int top_left = 3;
+    
+    typedef std::array<v3f_c4f_t2f, quad_size> v3f_c4f_t2f_quad;
+    typedef std::array<v3f_c3f_t2f, quad_size> v3f_c3f_t2f_quad;
     
     bool init_gl();
 
@@ -28,6 +56,10 @@ namespace gl
     void bind_texture(GLuint texture);
     void set_blend_func(GLenum source, GLenum destination);
     
+    void draw_quad(const v3f_c3f_t2f_quad& quad);
+    void draw_vertices(const std::vector<v3f_c3f_t2f>& vertices, const std::vector<GLushort>& indices);
+    
+    void draw_quad(const v3f_c4f_t2f_quad& quad);
     void draw_vertices(const std::vector<v3f_c4f_t2f>& vertices, const std::vector<GLushort>& indices);
 
     void delete_texture(GLuint texture);
@@ -41,26 +73,4 @@ namespace gl
     int get_draw_calls();
     
 	void sub_image2d(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
-
-    struct blend_func
-    {
-        GLenum source;
-        GLenum destination;
-    };
-    
-    struct v3f_c4f_t2f
-    {
-        math::vector3d vertice;
-        math::vector4d color = math::vector4d::one;
-        math::vector2d tex_coord;
-    };
-    
-    static const int quad_size = 4;
-    
-    static const int bottom_left = 0;
-    static const int bottom_right = 1;
-    static const int top_right = 2;
-    static const int top_left = 3;
-    
-    typedef std::array<v3f_c4f_t2f, quad_size> v3f_c4f_t2f_quad;
 }

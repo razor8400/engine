@@ -13,6 +13,8 @@ namespace math
         vector3d(float x1, float y1, float z1);
         vector3d(const vector2d& v2);
 
+        vector3d operator-() const;
+        
         vector3d operator+(const vector3d& v3) const;
         vector3d operator-(const vector3d& v3) const;
         vector3d operator*(const vector3d& v3) const;

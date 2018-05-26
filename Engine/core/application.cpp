@@ -35,6 +35,8 @@ namespace engine
 		logger() << "[application] application launched";
 		logger() << "[application] platform:" << platform::instance().get_platform_code();
 
+        resources_manager::instance().add_resources_folder(DEFAULT_ASSETS_FOLDER);
+        
 		if (m_delegate)
 			return m_delegate->application_launched(this);
         

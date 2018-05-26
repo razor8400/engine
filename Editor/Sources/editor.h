@@ -18,6 +18,8 @@ public:
     void save_scene();
     bool load_scene();
     void load_elements();
+    
+    editor_element* find_element(const std::string& type_name) const;
 public:
     editor_scene* m_current_scene = nullptr;
     editor_window* m_main_window = nullptr;
