@@ -26,6 +26,9 @@ private slots:
     void on_save_level();
     void on_load_level();
     
+    void on_play_level();
+    void on_stop_level();
+    
     void on_open_elements_editor();
     void on_open_matches_editor();
     
@@ -34,6 +37,7 @@ private:
     QLineEdit* m_rows_edit = nullptr;
     QLineEdit* m_colls_edit = nullptr;
     QLineEdit* m_cell_edit = nullptr;
+    QString m_selected_item;
     
     editor_scene* m_edit_scene = nullptr;
 };

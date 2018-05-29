@@ -12,6 +12,9 @@ namespace engine
         
         ~scriptable_component();
         
+        void push_string(const std::string& key, const std::string& value);
+        bool run_script();
+        
         void start() override;
         void update(float dt) override;
         void stop() override;

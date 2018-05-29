@@ -1,5 +1,6 @@
 #include "common.h"
-#include "scripting.h"
+#include "binding.h"
+#include "nlohmann/json.hpp"
 
 #define CHECK_TOP(L, TOP)\
 auto n = lua_gettop(L);\
@@ -10,6 +11,91 @@ namespace engine
 {
     namespace scripting
     {
+        namespace json
+        {
+            void parse(lua_State*L, const nlohmann::json& json)
+            {
+                std::function<void(const nlohmann::json&)> parse_array = [=](const nlohmann::json& json)
+                {
+                    lua_newtable(L);
+                    
+                    int i = 1;
+                    
+                    for (auto it = json.begin(); it != json.end(); ++it, ++i)
+                    {
+                        lua_pushnumber(L, i);
+                        
+                        parse(L, it.value());
+                    }
+                };
+                
+                std::function<void(const nlohmann::json&)> parse_object = [=](const nlohmann::json& json)
+                {
+                    lua_newtable(L);
+                    
+                    for (auto it = json.begin(); it != json.end(); ++it)
+                    {
+                        auto key = it.key();
+                        
+                        parse(L, it.value());
+                    
+                        lua_setfield(L, -2, key.c_str());
+                    }
+
+                    if (lua_gettop(L) > 2)
+                        lua_settable(L, -3);
+                };
+                
+                if (json.is_boolean())
+                    lua_pushboolean(L, json.get<bool>());
+                
+                if (json.is_number())
+                    lua_pushnumber(L, json.get<double>());
+                
+                if (json.is_string())
+                    lua_pushstring(L, json.get<std::string>().c_str());
+                
+                if (json.is_array())
+                    parse_array(json);
+                
+                if (json.is_object())
+                    parse_object(json);
+            }
+            
+            int parse(lua_State* L)
+            {
+                CHECK_TOP(L, 1);
+                
+                try
+                {
+                    if (lua_isstring(L, 1))
+                    {
+                        auto data = lua_tostring(L, 1);
+                        
+                        logger() << "[scripting] parse json:" << data;
+                        
+                        CLEAR_TOP(L);
+                        
+                        auto json = nlohmann::json::parse(data);
+                        
+                        parse(L, json);
+                        
+                        return 1;
+                    }
+                }
+                catch (const nlohmann::json::parse_error& e)
+                {
+                    logger() << "[scripting] " << e.what();
+                }
+                catch (const nlohmann::json::type_error& e)
+                {
+                    logger() << "[scripting] " << e.what();
+                }
+                
+                return 0;
+            }
+        }
+        
         namespace functions
         {
             int load_script(lua_State* L)
@@ -57,6 +143,31 @@ namespace engine
                 
                 for (auto it = strings.rbegin(); it != strings.rend(); ++it)
                     logger() << "[lua] " << *it;
+                
+                return 0;
+            }
+            
+            int read_file(lua_State* L)
+            {
+                if (lua_isstring(L, 1))
+                {
+                    auto file = lua_tostring(L, 1);
+                    std::vector<char> data;
+                    
+                    logger() << "[scripting] read file:" << file;
+                    
+                    CLEAR_TOP(L)
+                    
+                    auto path = resources_manager::instance().get_path_to_resource(file);
+                    
+                    if (file_utils::read_file(path, &data))
+                    {
+                        lua_pushstring(L, std::string(data.data(), data.data() + data.size()).c_str());
+                        return 1;
+                    }
+                    
+                    logger() << "[scripting] error loading file:" << file;
+                }
                 
                 return 0;
             }

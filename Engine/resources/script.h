@@ -23,9 +23,12 @@ namespace engine
         void call_function(const std::string& function);
         bool call_boolean_function(const std::string& function) const;
         
+        bool running() const { return m_running; }
+        
         template<class T>
         void push_user_data(const std::string& field, T* data);
         void push_vector(const std::string& field, const math::vector3d& v3);
+        void push_string(const std::string& field, const std::string& str);
 
 		void clear_ref(int handler);
 		
@@ -33,6 +36,8 @@ namespace engine
     private:
         std::string m_name;
         std::vector<char> m_buffer;
+        
+        bool m_running = false;
         
         lua_State* m_state = nullptr;
     };

@@ -29,6 +29,10 @@ function elements_generator:generate_element()
 	return nil
 end
 
+function elements_generator:load_elements(elements)
+	match3element.load_config(elements)
+end
+
 function elements_generator:load_config(config)
 	self.config = config
 end

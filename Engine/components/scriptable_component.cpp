@@ -30,15 +30,34 @@ namespace engine
 
     }
     
+    void scriptable_component::push_string(const std::string& key, const std::string& value)
+    {
+        if (m_script)
+            m_script->push_string(key, value);
+    }
+    
+    bool scriptable_component::run_script()
+    {
+        if (m_script)
+        {
+            if (m_script->running())
+                return true;
+            
+            return m_script->run();
+        }
+        
+        return false;
+    }
+    
     void scriptable_component::start()
     {
         if (m_script)
         {
-			if (!m_script->run())
-			{
-				m_script.reset();
-				return;
-			}
+            if (!run_script())
+            {
+                m_script.reset();
+                return;
+            }
             
             m_listener = ref::create<touch_listener>();
             m_listener->touch_began = [=]()

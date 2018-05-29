@@ -230,7 +230,6 @@ std::string editor_scene::to_json() const
             
             data["disabled"] = cell->disabled;
             data["spawn"] = cell->spawn_elements;
-
             json["cells"].push_back(data);
         }
     }

@@ -3,28 +3,33 @@
 	[
 		{   "type":"red",
             "texture":"red.png",
-            "layer":3,
-            "dropable":true
+            "layer":"gameplay",
+            "dropable":true,
+            "handle_input":true
 		},
 		{   "type":"blue",
             "texture":"blue.png",
-            "layer":3,
-            "dropable":true
+            "layer":"gameplay",
+            "dropable":true,
+            "handle_input":true
 		},
 		{   "type":"green",
             "texture":"green.png",
-            "layer":3,
-            "dropable":true
+            "layer":"gameplay",
+            "dropable":true,
+            "handle_input":true
 		},
 		{   "type":"orange",
             "texture":"orange.png",
-            "layer":3,
-            "dropable":true
+            "layer":"gameplay",
+            "dropable":true,
+            "handle_input":true
 		},
 		{   "type":"yellow",
             "texture":"yellow.png",
-            "layer":3,
-            "dropable":true
-		}
+            "layer":"gameplay",
+            "dropable":true,
+            "handle_input":true
+        }
 	]
 }

@@ -6,10 +6,24 @@ namespace engine
 {
     namespace scripting
     {
+        namespace json
+        {
+            static const char* table = "json";
+            
+            int parse(lua_State* L);
+            
+            static const luaL_Reg functions[] =
+            {
+                { "parse", parse },
+                { NULL, NULL }
+            };
+        }
+        
         namespace functions
         {
             int load_script(lua_State* L);
             int debug_log(lua_State* L);
+            int read_file(lua_State* L);
         }
         
         namespace vector3d
@@ -21,6 +35,8 @@ namespace engine
         
         namespace game
         {
+            static const char* table = "game";
+            
             int get_mouse_location(lua_State* L);
             int get_world_mouse_location(lua_State* L);
             int convert_to_world_space(lua_State* L);

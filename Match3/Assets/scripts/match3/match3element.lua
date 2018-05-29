@@ -4,44 +4,14 @@ element_type = {
 
 element_layer = {
 	underground = "underground",
-	background = "background",
+	ground = "background",
 	gameplay = "gameplay",
 	blockers = "blockers",
 	top = "top"
 }
 
-local elements = 
-{
-	[element_type.blue] = {
-		element_type = element_type.blue,
-		element_layer = element_layer.gameplay,
-		handle_input = true,
-		droppable = true
-	},
-	[element_type.red] = {
-		element_type = element_type.red,
-		element_layer = element_layer.gameplay,
-		handle_input = true,
-		droppable = true
-	},
-	[element_type.green] = {
-		element_type = element_type.green,
-		element_layer = element_layer.gameplay,
-		handle_input = true,
-		droppable = true
-	},
-	[element_type.yellow] = {
-		element_type = element_type.yellow,
-		element_layer = element_layer.gameplay,
-		handle_input = true,
-		droppable = true
-	},
-	[element_type.orange] = {
-		element_type = element_type.orange,
-		element_layer = element_layer.gameplay,
-		handle_input = true,
-		droppable = true
-	},
+local elements = {
+
 }
 
 local match3element = {
@@ -64,6 +34,22 @@ match3element.new = function(family)
 	setmetatable(element, { __index = match3element })
 
 	return element
+end
+
+match3element.load_config = function(config)
+	assert(config)
+
+	elements = {}
+
+	for k, v in pairs(config.elements) do
+		local element = {}
+		element.element_type = v.type
+		element.element_layer = v.layer
+		element.handle_input = v.handle_input
+		element.dropable = v.dropable
+		element.texture = v.texture
+		elements[v.type] = element
+	end
 end
 
 function match3element:remove_from_cell()

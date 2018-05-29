@@ -47,6 +47,8 @@ namespace engine
             scripting::register_objects(m_state);
             scripting::register_functions(m_state);
             
+            m_running = true;
+            
             return scripting::load_script(m_state, m_buffer.data(), m_buffer.size(), m_name);
         }
 
@@ -60,6 +62,7 @@ namespace engine
 			logger() << "[script] stop:" << m_name;
 
             scripting::close_state(m_state);
+            m_running = false;
             m_state = nullptr;
         }
     }
@@ -96,6 +99,12 @@ namespace engine
     {
 		if (m_state)
 			scripting::push_to_table(m_state, m_name, field, v3);
+    }
+    
+    void script::push_string(const std::string& field, const std::string& str)
+    {
+        if (m_state)
+            scripting::push_to_table(m_state, m_name, field, str);
     }
 
 	void script::clear_ref(int handler)

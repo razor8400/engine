@@ -87,8 +87,7 @@ function match3field:get_element(x, y, layer)
 	return nil
 end
 
-function match3field:generate_element(x, y)
-	local cell = assert(self:get_cell(x, y))
+function match3field:generate_element(cell)
 	local element = nil
 
 	repeat
@@ -102,13 +101,53 @@ function match3field:generate_element(x, y)
 	return element
 end
 
-function match3field:generate_field()
+function match3field:load_elements(elements)
+	debug_log('[match3field] load_elemnts')
+
+	match3generator:load_elements(elements)
+end
+
+function match3field:load_matches(matches)
+	debug_log('[match3field] load_matches')
+
+	match3match:load_matches(matches)
+end
+
+function match3field:load(data)
+	assert(data)
+
 	match3match:load_config()
 
+	debug_log('[match3field] load rows:' .. data.rows .. ',' .. 'colls:' .. data.colls .. ',' .. 'cell:' .. data.cell)
+
+	self.rows = data.rows
+	self.colls = data.colls
+	self.cell = data.cell
+
+	for i = 1, data.colls do
+		for j = 1, data.rows do
+			local cell = match3cell.new(j, i)
+			cell.field = self
+			table.insert(self.cells, cell)
+		end
+	end
+
+	for i = 1, #data.cells do
+		local cell = assert(self.cells[i])
+		cell.disabled = data.cells[i].disabled
+		cell.generate_elements = data.cells[i].spawn
+	end
+end
+
+function match3field:generate_field()
 	for x = self.colls, 1, -1 do
 		for y = self.rows, 1, -1 do
-			local element = self:generate_element(x, y)
-			self:add_event(event_generate.new(element, x, y))
+			local cell = assert(self:get_cell(x, y))
+
+			if not cell.disabled and cell:get_element_at(element_layer.gameplay) == nil then
+				local element = self:generate_element(cell)
+				self:add_event(event_generate.new(element, x, y))
+			end
 		end
 	end
 
@@ -176,7 +215,7 @@ function update_field(field)
 						local top = assert(field:get_cell(x, y + 1))
 						local element = top:get_element_at(element_layer.gameplay)
 	
-						if element and element.droppable then
+						if element and element.dropable then
 							cell:add_element(element)
 							drop_elements = true
 							drop_element(element, x, y)
@@ -190,7 +229,7 @@ function update_field(field)
 			for y = 1, field.rows do
 				local cell = assert(field:get_cell(x, y))
 				if cell:get_element_at(element_layer.gameplay) == nil and cell.generate_elements then
-					local element = field:generate_element(x, y)
+					local element = field:generate_element(cell)
 
 					generate_elements = true
 
@@ -262,33 +301,19 @@ function match3field:update()
 	end
 end
 
-function match3field.new(colls, rows, cell)
+function match3field.new()
 	local field = {}
 
-	debug_log('[match3field] new rows:' .. rows .. ',' .. 'colls:' .. colls)
+	debug_log('[match3field] new')
 
-	field.colls = colls
-	field.rows = rows
-	field.cell = cell
+	field.colls = 0
+	field.rows = 0
+	field.cell = 0
 	field.cells = {}
 	field.events = {}
 	field.send_events = false
 	
 	setmetatable(field, { __index = match3field })
-
-	for i = 1, colls do
-		for j = 1, rows do
-			local cell = match3cell.new(j, i)
-			cell.field = field
-			table.insert(field.cells, cell)
-			assert(field:get_cell(j, i))
-		end
-	end
-
-	for i = 1, colls do
-		local cell = assert(field:get_cell(i, field.rows))
-		cell.generate_elements = true
-	end
 
 	return field
 end

@@ -33,6 +33,8 @@ void editor_window::create_menu()
     auto new_action = file_menu->addAction("&Create");
     auto save_action = file_menu->addAction("&Save");
     auto load_action = file_menu->addAction("&Load");
+    auto play_action = file_menu->addAction("&Play");
+    auto stop_action = file_menu->addAction("&Stop");
     
     auto elements_action = edit_menu->addAction("&Open elements editor");
     auto matches_action = edit_menu->addAction("&Open matches editor");
@@ -44,6 +46,8 @@ void editor_window::create_menu()
     connect(new_action, &QAction::triggered, this, &editor_window::on_new_level);
     connect(save_action, &QAction::triggered, this, &editor_window::on_save_level);
     connect(load_action, &QAction::triggered, this, &editor_window::on_load_level);
+    connect(play_action, &QAction::triggered, this, &editor_window::on_play_level);
+    connect(stop_action, &QAction::triggered, this, &editor_window::on_stop_level);
     connect(elements_action, &QAction::triggered, this, &editor_window::on_open_elements_editor);
     connect(matches_action, &QAction::triggered, this, &editor_window::on_open_matches_editor);
     
@@ -120,6 +124,7 @@ void editor_window::create_elements_buttons()
 void editor_window::on_element_button(const QString& str)
 {
     m_edit_scene->m_selected_item = str.toStdString();
+    m_selected_item = str;
 }
 
 void editor_window::create_level_layout()
@@ -186,6 +191,25 @@ void editor_window::on_save_level()
     editor::instance().save_scene();
 }
 
+void editor_window::on_play_level()
+{
+    auto script = engine::scriptable_component::create("scripts/match3scene.lua");
+    
+    if (script->run_script())
+    {
+        auto scene = engine::game_object::create<engine::scene>();
+        
+        script->push_string("data", m_edit_scene->to_json());
+        scene->add_component(script);
+        engine::director::instance().run_scene(scene);
+    }
+}
+
+void editor_window::on_stop_level()
+{
+    engine::director::instance().run_scene(m_edit_scene);
+}
+
 void editor_window::on_level_loaded()
 {
     m_edit_scene = editor::instance().m_current_scene;
@@ -195,7 +219,7 @@ void editor_window::on_level_loaded()
     m_rows_edit->setText(QString::number(m_edit_scene->m_rows));
     m_colls_edit->setText(QString::number(m_edit_scene->m_colls));
     m_cell_edit->setText(QString::number(m_edit_scene->m_cell_size));
-    m_edit_scene->m_selected_item = m_
+    m_edit_scene->m_selected_item = m_selected_item.toStdString();
 }
 
 void editor_window::on_open_elements_editor()

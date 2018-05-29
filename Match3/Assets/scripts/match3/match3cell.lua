@@ -55,7 +55,8 @@ function match3cell.new(x, y)
 	local cell = {
 		x = x, y = y,
 		elements = {},
-		generate_elements = false
+		generate_elements = false,
+		disabled = false
 	}
 
 	debug_log('[match3cell] new x:' .. x .. ',' .. 'y:' .. y)

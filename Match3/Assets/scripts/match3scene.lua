@@ -1,16 +1,14 @@
 local match3field = load_script('scripts/match3/match3field.lua')
 local loader = load_script('scripts/view/match3element_loader.lua')
 
-local colls = 10
-local rows = 10
-local cell = 64
-
 local swipe = 0.2
 local drop = 0.2
 local destroy = 0.2
 
-local field = match3field.new(colls, rows, cell)
+local field = nil
 local atlas = "textures.json"
+local elements = "configs/elements.json"
+local matches = "configs/matches.json"
 
 local function get_background_texture(x, y)
 	if math.fmod(x + y, 2) == 0 then
@@ -25,13 +23,17 @@ local function create_background()
 	
 	obj:set_size(size)
 
-	for i = 1, colls do
-		for j = 1, rows do
-			local texture = get_background_texture(i, j)
-			local sprite = sprite.create(atlas, texture)
-				
-			sprite:set_position(field:convert_cell_to_world(i, j))
-			obj:add_child(sprite)
+	for i = 1, field.colls do
+		for j = 1, field.rows do
+			local cell = assert(field:get_cell(i, j))
+
+			if not cell.disabled then
+				local texture = get_background_texture(i, j)
+				local sprite = sprite.create(atlas, texture)
+					
+				sprite:set_position(field:convert_cell_to_world(i, j))
+				obj:add_child(sprite)
+			end
 		end
 	end
 	
@@ -103,6 +105,12 @@ function match3scene:on_touch_moved()
 end
 
 function match3scene:start()
+    debug_log('match3scene:start()')
+
+	field = assert(match3field.new())
+	field:load_elements(json.parse(read_file(elements)))
+	field:load(json.parse(self.data))
+
     local background = create_background()
 
 	local size = background:get_size()

@@ -22,7 +22,11 @@ editor& editor::instance()
 
 void editor::new_scene()
 {
+    if (m_current_scene)
+        m_current_scene->release();
+    
     m_current_scene = editor_scene::create<editor_scene>();
+    m_current_scene->retain();
     engine::director::instance().run_scene(m_current_scene);
 }
 
@@ -88,18 +92,31 @@ void editor::load_elements()
         
         engine::logger() << data.toStdString();
         
-        auto json = nlohmann::json::parse(data.toUtf8());
-        auto elements = json["elements"];
-        
-        for (auto elem : elements)
+        try
         {
-            auto obj = new editor_element();
+            auto json = nlohmann::json::parse(data.toUtf8());
+            auto elements = json["elements"];
             
-            obj->texture = elem["texture"].get<std::string>();
-            obj->type_name = elem["type"].get<std::string>();
-            obj->layer = (element_layer)elem["layer"].get<int>();
-            obj->dropable = elem["dropable"].get<bool>();
-            m_elements.push_back(obj);
+            for (auto elem : elements)
+            {
+                auto obj = new editor_element();
+                
+                obj->texture = elem["texture"].get<std::string>();
+                obj->type_name = elem["type"].get<std::string>();
+                obj->layer = string_to_layer(elem["layer"].get<std::string>());
+                obj->dropable = elem["dropable"].get<bool>();
+                obj->handle_input = elem["handle_input"].get<bool>();
+                
+                m_elements.push_back(obj);
+            }
+        }
+        catch (const nlohmann::json::parse_error& e)
+        {
+            engine::logger() << "[editor] " << e.what();
+        }
+        catch (const nlohmann::json::type_error& e)
+        {
+            engine::logger() << "[editor] " << e.what();
         }
     }
 }

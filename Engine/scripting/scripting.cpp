@@ -56,15 +56,22 @@ namespace engine
         
         void register_functions(lua_State* state)
         {
-			luaL_newmetatable(state, "game");
+            luaL_newmetatable(state, scripting::game::table);
 			luaL_setfuncs(state, scripting::game::functions, NULL);
-			lua_setglobal(state, "game");
+			lua_setglobal(state, scripting::game::table);
+            
+            luaL_newmetatable(state, scripting::json::table);
+            luaL_setfuncs(state, scripting::json::functions, NULL);
+            lua_setglobal(state, scripting::json::table);
 
             lua_pushcfunction(state, functions::load_script);
             lua_setglobal(state, "load_script");
             
             lua_pushcfunction(state, functions::debug_log);
             lua_setglobal(state, "debug_log");
+            
+            lua_pushcfunction(state, functions::read_file);
+            lua_setglobal(state, "read_file");
         }
         
         void close_state(lua_State* state)
@@ -142,6 +149,17 @@ namespace engine
             lua_getglobal(state, table.c_str());
             
             vector3d::push(state, v3.x, v3.y, v3.z);
+            
+            lua_setfield(state, -2, field.c_str());
+            
+            CLEAR_TOP(state);
+        }
+        
+        void push_to_table(lua_State* state, const std::string& table, const std::string& field, const std::string& str)
+        {
+            lua_getglobal(state, table.c_str());
+           
+            lua_pushstring(state, str.c_str());
             
             lua_setfield(state, -2, field.c_str());
             

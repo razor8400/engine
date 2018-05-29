@@ -17,8 +17,9 @@ struct editor_element
 {
     std::string texture;
     std::string type_name;
-    element_layer layer;
-    bool dropable;
+    element_layer layer = element_layer::underground;
+    bool dropable = false;
+    bool handle_input = false;
 };
 
 struct editor_cell

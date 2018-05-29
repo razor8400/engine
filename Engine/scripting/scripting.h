@@ -36,6 +36,7 @@ namespace engine
         template<class T>
         void push_to_table(lua_State* state, const std::string& table, const std::string& field, T* data);
         void push_to_table(lua_State* state, const std::string& table, const std::string& field, const math::vector3d& v3);
+        void push_to_table(lua_State* state, const std::string& table, const std::string& field, const std::string& str);
 
 		float get_number(lua_State* state, int n);
 		int get_integer(lua_State* state, int n);
