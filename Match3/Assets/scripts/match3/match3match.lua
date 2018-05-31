@@ -1,5 +1,3 @@
-local config = load_script('scripts/match3/match3config.lua')
-
 local match = {
 	match = {
 
@@ -90,7 +88,7 @@ end
 
 local function compare_elements(cell, match)
 	for k, v in pairs(match) do
-		local element = cell:find_element(v.element_type, v.element_layer)
+		local element = cell:find_element(v.element_type, v.layer)
 		if element then
 			return element
 		end
@@ -98,7 +96,9 @@ local function compare_elements(cell, match)
 	return nil
 end
 
-function match3match_handler:load_config()
+function match3match_handler:load_matches(config)
+	assert(config)
+
 	for i = #config, 1, -1 do
 		local m = match.new(config[i])
 

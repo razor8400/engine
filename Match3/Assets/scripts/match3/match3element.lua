@@ -23,9 +23,10 @@ match3element.new = function(family)
 
 	local element = {
 		element_type = config.element_type,
-		element_layer = config.element_layer,
+		layer = config.layer,
 		handle_input = config.handle_input,
-		droppable = config.droppable,
+		dropable = config.dropable,
+		texture = config.texture,
 		cell = nil,
 		view = nil,
 		path = {}
@@ -41,10 +42,11 @@ match3element.load_config = function(config)
 
 	elements = {}
 
+	debug_log(#config.elements)
 	for k, v in pairs(config.elements) do
 		local element = {}
 		element.element_type = v.type
-		element.element_layer = v.layer
+		element.layer = v.layer
 		element.handle_input = v.handle_input
 		element.dropable = v.dropable
 		element.texture = v.texture

@@ -21,11 +21,15 @@ namespace engine
                     
                     int i = 1;
                     
+                    int top = lua_gettop(L);
+                    
                     for (auto it = json.begin(); it != json.end(); ++it, ++i)
                     {
                         lua_pushnumber(L, i);
                         
                         parse(L, it.value());
+                        
+                        lua_settable(L, top);
                     }
                 };
                 
@@ -33,17 +37,18 @@ namespace engine
                 {
                     lua_newtable(L);
                     
+                    int top = lua_gettop(L);
+                    
                     for (auto it = json.begin(); it != json.end(); ++it)
                     {
                         auto key = it.key();
+                
+                        lua_pushstring(L, key.c_str());
                         
                         parse(L, it.value());
-                    
-                        lua_setfield(L, -2, key.c_str());
+                        
+                        lua_settable(L, top);
                     }
-
-                    if (lua_gettop(L) > 2)
-                        lua_settable(L, -3);
                 };
                 
                 if (json.is_boolean())

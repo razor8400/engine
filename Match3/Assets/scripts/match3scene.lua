@@ -1,5 +1,4 @@
 local match3field = load_script('scripts/match3/match3field.lua')
-local loader = load_script('scripts/view/match3element_loader.lua')
 
 local swipe = 0.2
 local drop = 0.2
@@ -7,8 +6,8 @@ local destroy = 0.2
 
 local field = nil
 local atlas = "textures.json"
-local elements = "configs/elements.json"
-local matches = "configs/matches.json"
+local elements_config = "configs/elements.json"
+local matches_config = "configs/matches.json"
 
 local function get_background_texture(x, y)
 	if math.fmod(x + y, 2) == 0 then
@@ -108,7 +107,8 @@ function match3scene:start()
     debug_log('match3scene:start()')
 
 	field = assert(match3field.new())
-	field:load_elements(json.parse(read_file(elements)))
+	field:load_matches(json.parse(read_file(matches_config)))
+	field:load_elements(json.parse(read_file(elements_config)))
 	field:load(json.parse(self.data))
 
     local background = create_background()
@@ -157,10 +157,12 @@ function match3scene:handle_events(events)
 
 	for k, v in pairs(events) do
 		if v.event == event_generate.event then
-			local view = assert(loader:load_element(atlas, v.element))
+			local view = assert(sprite.create(atlas, v.element.texture))
 			
 			view:set_position(field:convert_cell_to_world(v.x, v.y))
 			view:set_enabled(false)
+
+			v.element.view = view
 
 			self.batch:add_child(view)
 

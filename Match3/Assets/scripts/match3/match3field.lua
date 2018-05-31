@@ -102,7 +102,7 @@ function match3field:generate_element(cell)
 end
 
 function match3field:load_elements(elements)
-	debug_log('[match3field] load_elemnts')
+	debug_log('[match3field] load_elements')
 
 	match3generator:load_elements(elements)
 end
@@ -115,8 +115,6 @@ end
 
 function match3field:load(data)
 	assert(data)
-
-	match3match:load_config()
 
 	debug_log('[match3field] load rows:' .. data.rows .. ',' .. 'colls:' .. data.colls .. ',' .. 'cell:' .. data.cell)
 
@@ -304,7 +302,7 @@ end
 function match3field.new()
 	local field = {}
 
-	debug_log('[match3field] new')
+	debug_log('[match3field] create field')
 
 	field.colls = 0
 	field.rows = 0
