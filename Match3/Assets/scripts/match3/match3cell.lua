@@ -37,6 +37,34 @@ function match3cell:find_element(family, layer)
 	return nil
 end
 
+function match3cell:drop_elements()
+	if self:blocked() then
+		return false
+	end
+
+	for k, v in pairs(self.elements) do
+		if v.dropable then
+			return true
+		end
+	end
+	
+	return false
+end
+
+function match3cell:blocked()
+	if self.disabled then 
+		return true
+	end
+
+	for k, v in pairs(self.elements) do
+		if v.block_move then
+			return true
+		end
+	end
+
+	return false
+end
+
 function match3cell:add_element(element)
 	assert(self:get_element_at(element.layer) == nil)
 	element:remove_from_cell()

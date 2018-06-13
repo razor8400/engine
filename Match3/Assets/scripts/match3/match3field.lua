@@ -6,11 +6,12 @@ event_generate = {
 	event = "generate"
 }
 
-event_generate.new = function(element, x, y)
+event_generate.new = function(element, x, y, tick)
 	local e = {
 		element = element,
 		x = x,
-		y = y
+		y = y,
+		tick = tick
 	}
 
 	setmetatable(e, { __index = event_generate })
@@ -24,7 +25,7 @@ event_destroy = {
 
 event_destroy.new = function(element)
 	local e = {
-		element = element
+		element = element,
 	}
 
 	setmetatable(e, { __index = event_destroy })
@@ -36,10 +37,10 @@ event_drop = {
 	event = "drop"
 }
 
-event_drop.new = function(tick, element)
+event_drop.new = function(element)
 	local e = {
-		tick = tick,
-		element = element
+		element = element,
+		path = {}
 	}
 
 	setmetatable(e, { __index = event_drop })
@@ -132,9 +133,21 @@ function match3field:load(data)
 
 	for i = 1, #data.cells do
 		local cell = assert(self.cells[i])
+		local elements = data.cells[i].elements
+
 		cell.disabled = data.cells[i].disabled
 		cell.generate_elements = data.cells[i].spawn
+
+		if elements then
+			for k, v in pairs(elements) do
+				local element = assert(match3generator:create_element(v))
+				cell:add_element(element)
+				self:add_event(event_generate.new(element, cell.x, cell.y))
+			end
+		end
 	end
+
+	self.send_events = true
 end
 
 function match3field:generate_field()
@@ -188,58 +201,106 @@ function match3field:events_count()
 end
 
 function update_field(field)
-	local tick = 1
+	local drop_events = {}
+	local ticks = {}
 
-	function drop_element(element, x, y)
-		if #element.path == 0 then
-			field:add_event(event_drop.new(tick, element))
-		end
+	local function on_drop_element(element, x, y)
+		local e = drop_events[element]
 		
-		table.insert(element.path, { x = x, y = y })
+		if not e then
+			e = event_drop.new(element)
+			field:add_event(e)
+			events[element] = e
+		end
+
+		table.insert(e.path, { x = x, y = y })
 		field.field_changed = true
 	end
 
-	repeat
-		local generate_elements = false
+	local function drop_diagonal(x, y)
+		for i = y, field.rows - 1 do
+			local cell = assert(field:get_cell(x, i))
 
-		repeat
-			local drop_elements = false
-
-			for x = 1, field.colls do
-				for y = 1, field.rows - 1 do
-					local cell = assert(field:get_cell(x, y))
-	
-					if cell:get_element_at(element_layer.gameplay) == nil then
-						local top = assert(field:get_cell(x, y + 1))
-						local element = top:get_element_at(element_layer.gameplay)
-	
-						if element and element.dropable then
-							cell:add_element(element)
-							drop_elements = true
-							drop_element(element, x, y)
-						end
-					end
-				end
+			if cell:drop_elements() then
+				return false
 			end
-		until not drop_elements
 
-		for x = 1, field.colls do
-			for y = 1, field.rows do
-				local cell = assert(field:get_cell(x, y))
-				if cell:get_element_at(element_layer.gameplay) == nil and cell.generate_elements then
-					local element = field:generate_element(cell)
+			if cell:blocked() then
+				return true
+			end
+		end
 
-					generate_elements = true
+		return false
+	end
 
-					field:add_event(event_generate.new(element, x, y + 1))
-					drop_element(element, x, y)
+	local function find_target_cell(x, y)
+		local top = field:get_cell(x, y + 1)
+
+		if top and top:drop_elements() then
+			return top
+		end
+
+		if drop_diagonal(x, y) then
+			local cells = { { -1, 1 }, { 1, 1 } }
+
+			for k, v in pairs(cells) do
+				local target = field:get_cell(x + v[1], y + v[2])
+
+				if target and target:drop_elements() then
+					return target
 				end
 			end
 		end
 
-		tick = tick + 1
+		return nil
+	end
+
+	local function drop_element(cell)
+		if cell.disabled or cell:blocked() or cell:get_element_at(element_layer.gameplay) ~= nil then
+			return false
+		end
+
+		local target = find_target_cell(cell.x, cell.y)
+
+		if target then
+			local element = assert(target:get_element_at(element_layer.gameplay))
+
+			cell:add_element(element)
+			on_drop_element(element, cell.x, cell.y)
+
+			return true
+		end
+
+		return false
+	end
+
+	for x = 1, field.colls do
+		repeat
+			local drop_elements = false
+
+			for y = 1, field.rows do
+				local cell = assert(field:get_cell(x, y))
+
+				if drop_element(cell) then
+					drop_elements = true
+				end
+
+				if cell.generate_elements and cell:get_element_at(element_layer.gameplay) == nil then
+					local element = field:generate_element(cell)
+					local tick = ticks[target] or 0
+
+					ticks[target] = tick + 1
+
+					drop_elements = true
+
+					field:add_event(event_generate.new(element, x, y + 1, tick))
+					on_drop_element(element, x, y)
+				end
+			end
+		until drop_elements
+
 		coroutine.yield()
-	until not generate_elements
+	end
 
 	field.send_events = true
 end

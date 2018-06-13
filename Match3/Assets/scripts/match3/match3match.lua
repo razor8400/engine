@@ -70,7 +70,7 @@ function match.new(config)
 	m.height = config.height
 
 	m:iterate(function(x, y, i)
-		m.match[i] = config.match[i]
+		m.match[i] = math.floor(config.match[i])
 	end)
 
 	return m

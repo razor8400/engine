@@ -27,9 +27,9 @@ match3element.new = function(family)
 		handle_input = config.handle_input,
 		dropable = config.dropable,
 		texture = config.texture,
+		block_move = config.block_move,
 		cell = nil,
 		view = nil,
-		path = {}
 	}
 
 	setmetatable(element, { __index = match3element })
@@ -42,7 +42,6 @@ match3element.load_config = function(config)
 
 	elements = {}
 
-	debug_log(#config.elements)
 	for k, v in pairs(config.elements) do
 		local element = {}
 		element.element_type = v.type
@@ -50,6 +49,7 @@ match3element.load_config = function(config)
 		element.handle_input = v.handle_input
 		element.dropable = v.dropable
 		element.texture = v.texture
+		element.block_move = v.block_move
 		elements[v.type] = element
 	end
 end

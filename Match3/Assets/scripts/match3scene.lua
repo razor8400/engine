@@ -107,9 +107,14 @@ function match3scene:start()
     debug_log('match3scene:start()')
 
 	field = assert(match3field.new())
+	field.delegate = self
+
 	field:load_matches(json.parse(read_file(matches_config)))
 	field:load_elements(json.parse(read_file(elements_config)))
 	field:load(json.parse(self.data))
+	
+	field:generate_field()
+	field:process()
 
     local background = create_background()
 
@@ -127,9 +132,6 @@ function match3scene:start()
 	self.dispatch_events = false
 	self.actions = {}
 	self.current_action = 1
-
-	field.delegate = self
-	field:generate_field()
 end
 
 function match3scene:update()
@@ -158,17 +160,21 @@ function match3scene:handle_events(events)
 	for k, v in pairs(events) do
 		if v.event == event_generate.event then
 			local view = assert(sprite.create(atlas, v.element.texture))
-			
+			local sequence = action_sequence.create()
+
 			view:set_position(field:convert_cell_to_world(v.x, v.y))
 			view:set_enabled(false)
-
+			
 			v.element.view = view
 
-			self.batch:add_child(view)
-
-			action_generate:append(action_lua_callback.create(function()
+			sequence:append(action_delay.create(v.tick * drop))
+			sequence:append(action_lua_callback.create(function()
 				view:set_enabled(true)
 			end))
+
+			self.batch:add_child(view)
+			
+			action_generate:append(sequence)
 		end
 	end
 
@@ -176,14 +182,10 @@ function match3scene:handle_events(events)
 		if v.event == event_drop.event then
 			local sequence = action_sequence.create()
 			local view = assert(v.element.view)
-		
-			sequence:append(action_delay.create(v.tick * drop))
 
-			for k1, v1 in pairs(v.element.path) do
+			for k1, v1 in pairs(v.path) do
 				sequence:append(targeted_action.create(view, action_move.move_to(field:convert_cell_to_world(v1.x, v1.y), drop)))
 			end
-		
-			v.element.path = {}
 
 			action_drop:append(sequence)
 		end
