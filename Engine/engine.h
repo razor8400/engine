@@ -9,6 +9,7 @@
 #include "core/input/touch_dispatcher.h"
 
 #include "renderer/render_command.h"
+#include "renderer/camera.h"
 #include "renderer/renderer.h"
 
 #include "components/scriptable_component.h"

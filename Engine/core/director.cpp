@@ -26,7 +26,7 @@ namespace engine
     
     director::director()
     {
-		m_renderer = std::make_unique<renderer>();
+        m_renderer = ref::create<renderer>();
     }
     
     director::~director()
@@ -45,41 +45,20 @@ namespace engine
         auto win_size = application::instance().get_win_size();
         return screen - win_size / 2.0f;
     }
-    
-	void director::set_projection_mode(projection_mode mode)
-	{
-		m_renderer->set_projection_mode(mode);
-	}
-
-	void director::set_near_plane(float near_plane)
-	{
-		m_renderer->set_near_plane(near_plane);
-	}
-
-	void director::set_far_plane(float far_plane)
-	{
-		m_renderer->set_far_plane(far_plane);
-	}
-
-	void director::set_field_of_view(float field_of_view)
-	{
-		m_renderer->set_field_of_view(field_of_view);
-	}
-
-	void director::set_camera_position(const math::vector3d& position)
-	{
-		m_renderer->set_camera_position(position);
-	}
 
 	void director::start()
     {
 		logger() << "[director] start";
-		m_renderer->dump_camera_settings();
+
         m_running = true;
 		m_reset_delta_time = true;
         
 #if DRAW_STATS
+        m_default_camera = ref::create<camera>();
+        m_default_camera->update_projection();
+        
         m_stats_label = label::create<label>("fonts/arial.ttf", 18);
+        
         if (m_stats_label)
             m_stats_label->set_anchor(math::vector2d::zero);
 #endif
@@ -130,10 +109,12 @@ namespace engine
     
     void director::update(float delta_time)
     {
+        gl::clear();
+        
         if (m_scene)
         {
             m_scene->update(delta_time);
-			m_renderer->draw_scene(m_scene);
+            m_scene->draw(m_renderer);
         }
         
         ++m_frames;
@@ -143,7 +124,8 @@ namespace engine
         draw_stats();
 #endif
         
-        m_renderer->execute_commands();
+        gl::clear_draw_calls();
+        
         pool_manager::instance().update();
     }
     
@@ -156,7 +138,7 @@ namespace engine
         
         stats.precision(4);
         stats << "fps:" << calculate_fps() << std::endl
-                        << "draw calls:" << gl::get_draw_calls() / m_frames << " per frame" << std::endl
+                        << "draw calls:" << gl::get_draw_calls() << " per frame" << std::endl
                         << "memory used:" << platform::instance().get_memory_used() << "KB";
     
 		if (m_stats_label)
@@ -165,7 +147,8 @@ namespace engine
             m_stats_label->set_position(math::vector2d(-win_size.x / 2, win_size.y / 2 - m_stats_label->get_size().y));
 
 			m_stats_label->update(0);
-            m_stats_label->render(m_renderer.get(), m_stats_label->get_transform());
+            m_stats_label->draw(m_renderer, math::mat4::identity);
+            m_renderer->execute_commands(m_default_camera->get_projection());
 		}
     }
 #endif
@@ -194,11 +177,6 @@ namespace engine
         auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch());
 
         return ms.count();
-    }
-    
-    const math::mat4& director::get_world() const
-    {
-        return m_renderer->get_world();
     }
     
     float director::calculate_fps() const

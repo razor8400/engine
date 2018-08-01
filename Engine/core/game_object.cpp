@@ -3,9 +3,12 @@
 #include "components/component.h"
 
 #include "renderer/render_command.h"
+#include "renderer/camera.h"
 #include "renderer/renderer.h"
 
 #include "director.h"
+#include "scene.h"
+
 #include "game_object.h"
 
 namespace engine
@@ -67,21 +70,29 @@ namespace engine
 #if DEBUG_DRAW
 		auto command = custom_render_command::create([=]()
 		{
-			auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
+            auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
+            auto scene = director::instance().running_scene();
 
-			if (program)
-				program->use(r->get_world());
+            if (program)
+                program->use(scene->get_camera()->get_projection());
+            
+            std::vector<math::vector3d> vertices =  {
+                                                        { 0, 0, 0 }, { m_size.x, 0.0f, 0.0f }, { m_size.x, m_size.y, 0.0f }, { 0.0f, m_size.y, 0.0f },
+                                                        { 0.0f, 0.0f, m_size.z }, { 0.0f, m_size.y, m_size.z },
+                                                        { m_size.z, 0.0f, m_size.z }, { m_size.x, m_size.y, m_size.z },
+                                                    };
+            
+            std::vector<short> indices = {
+                0, 1, 2, 2, 3, 0,
+                0, 4, 5, 5, 3, 0,
+                4, 6, 7, 7, 5, 4,
+                1, 6, 7, 7, 2, 1
+            };
+            
+            for (auto& v : vertices)
+                v = math::transform_point(v, t);
 
-			auto p1 = math::transform_point({ 0, 0 }, t);
-            auto p2 = math::transform_point({ m_size.x, 0.0f}, t);
-            
-			auto p3 = math::transform_point(m_size, t);
-            auto p4 = math::transform_point({0.0f, m_size.y }, t);
-            
-            gl::draw_line(p1.x, p1.y, p2.x, p2.y);
-            gl::draw_line(p2.x, p2.y, p3.x, p3.y);
-            gl::draw_line(p3.x, p3.y, p4.x, p4.y);
-            gl::draw_line(p4.x, p4.y, p1.x, p1.y);
+            gl::draw_cube(vertices, indices);
 		});
 		r->add_post_draw_command(command);
 #endif

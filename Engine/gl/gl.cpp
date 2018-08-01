@@ -311,6 +311,11 @@ namespace gl
     {
         return draw_calls;
     }
+    
+    void clear_draw_calls()
+    {
+        draw_calls = 0;
+    }
 
 	void sub_image2d(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels)
 	{
@@ -357,6 +362,47 @@ namespace gl
 		glDrawArrays(GL_LINES, 0, 2);
         
 		glDisableVertexAttribArray(vertex_attribute::position);
+        glDisableVertexAttribArray(vertex_attribute::color);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDeleteBuffers(1, &vertex_buffer);
+        glDeleteBuffers(1, &color_buffer);
+        
+        ++draw_calls;
+    }
+    
+    void draw_cube(const std::vector<math::vector3d>& vertices, const std::vector<short>& indices)
+    {
+        std::vector<math::vector3d> colors;
+        
+        for (auto i = 0; i < vertices.size(); ++i)
+            colors.push_back(math::vector3d::one);
+        
+        glEnableVertexAttribArray(vertex_attribute::position);
+        glEnableVertexAttribArray(vertex_attribute::color);
+        
+        GLuint vertex_buffer;
+        
+        glGenBuffers(1, &vertex_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+        
+        glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector3d) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        GLuint color_buffer;
+        
+        glGenBuffers(1, &color_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, color_buffer);
+        
+        glBufferData(GL_ARRAY_BUFFER, sizeof(math::vector3d) * colors.size(), &colors[0], GL_STATIC_DRAW);
+        glVertexAttribPointer(vertex_attribute::color, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_object);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices[0], GL_STATIC_DRAW);
+        
+        glDrawElements(GL_LINE_STRIP, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
         glDisableVertexAttribArray(vertex_attribute::color);
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);

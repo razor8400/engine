@@ -68,9 +68,13 @@ namespace gl
     void draw_rect(float x, float y, float width, float height);
     void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color);
     
+    void draw_cube(const std::vector<math::vector3d>& vertices, const std::vector<short>& indices);
+    
     const std::vector<std::string>& get_errors();
     void clear_errors();
+    
     int get_draw_calls();
+    void clear_draw_calls();
     
 	void sub_image2d(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
 }

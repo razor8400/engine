@@ -35,6 +35,7 @@ namespace engine
     
 	class scene;
 	class game_object;
+    class camera;
     class component;
 
     class resource;

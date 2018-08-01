@@ -1,5 +1,4 @@
 #include "pointer.h"
-//#include "engine.h"
 
 #define REF() \
     if (m_obj) \
