@@ -64,11 +64,12 @@ namespace gl
 
     void delete_texture(GLuint texture);
     
-    void draw_line(float x1, float y1, float x2, float y2);
+    void draw_line(float x1, float y1, float z1, float x2, float y2, float z2, const math::vector3d& color);
+    void draw_line(float x1, float y1, float x2, float y2, const math::vector3d& color);
     void draw_rect(float x, float y, float width, float height);
     void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color);
     
-    void draw_cube(const std::vector<math::vector3d>& vertices, const std::vector<short>& indices);
+    void draw_cube(const std::vector<math::vector3d>& vertices, const std::vector<math::vector3d>& colors, const std::vector<short>& indices);
     
     const std::vector<std::string>& get_errors();
     void clear_errors();

@@ -328,16 +328,16 @@ namespace gl
         glDeleteTextures(1, &texture);
     }
     
-    void draw_line(float x1, float y1, float x2, float y2)
+    void draw_line(float x1, float y1, float z1, float x2, float y2, float z2, const math::vector3d& color)
     {
         const GLfloat vertices[] = {
-            x1, y1,
-            x2, y2
+            x1, y1, z1,
+            x2, y2, z2
         };
         
         const GLfloat colors[] = {
-            1, 1, 1, 1,
-            1, 1, 1, 1
+            color.x, color.y, color.z,
+            color.x, color.y, color.z
         };
         
         glEnableVertexAttribArray(vertex_attribute::position);
@@ -347,9 +347,9 @@ namespace gl
         
         glGenBuffers(1, &vertex_buffer);
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-		
+        
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
         
         GLuint color_buffer;
         
@@ -357,11 +357,11 @@ namespace gl
         glBindBuffer(GL_ARRAY_BUFFER, color_buffer);
         
         glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-        glVertexAttribPointer(vertex_attribute::color, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-
-		glDrawArrays(GL_LINES, 0, 2);
+        glVertexAttribPointer(vertex_attribute::color, 3, GL_FLOAT, GL_FALSE, 0, NULL);
         
-		glDisableVertexAttribArray(vertex_attribute::position);
+        glDrawArrays(GL_LINES, 0, 2);
+        
+        glDisableVertexAttribArray(vertex_attribute::position);
         glDisableVertexAttribArray(vertex_attribute::color);
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -371,13 +371,13 @@ namespace gl
         ++draw_calls;
     }
     
-    void draw_cube(const std::vector<math::vector3d>& vertices, const std::vector<short>& indices)
+    void draw_line(float x1, float y1, float x2, float y2, const math::vector3d& color)
     {
-        std::vector<math::vector3d> colors;
-        
-        for (auto i = 0; i < vertices.size(); ++i)
-            colors.push_back(math::vector3d::one);
-        
+        draw_line(x1, y1, 0, x2, y2, 0, color);
+    }
+    
+    void draw_cube(const std::vector<math::vector3d>& vertices, const std::vector<math::vector3d>& colors, const std::vector<short>& indices)
+    {        
         glEnableVertexAttribArray(vertex_attribute::position);
         glEnableVertexAttribArray(vertex_attribute::color);
         
@@ -400,7 +400,7 @@ namespace gl
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_object);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices[0], GL_STATIC_DRAW);
         
-        glDrawElements(GL_LINE_STRIP, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
+        glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_SHORT, NULL);
         
         glDisableVertexAttribArray(vertex_attribute::position);
         glDisableVertexAttribArray(vertex_attribute::color);
@@ -414,10 +414,10 @@ namespace gl
     
     void draw_rect(float x, float y, float width, float height)
     {
-        draw_line(x, y, x + width, y);
-        draw_line(x + width, y, x + width, y + height);
-        draw_line(x + width, y + height, x, y + height);
-        draw_line(x, y + height, x, y);
+        draw_line(x, y, x + width, y, math::vector3d::one);
+        draw_line(x + width, y, x + width, y + height, math::vector3d::one);
+        draw_line(x + width, y + height, x, y + height, math::vector3d::one);
+        draw_line(x, y + height, x, y, math::vector3d::one);
     }
     
     void draw_solid_rect(float x, float y, float width, float height, const math::vector3d& color)

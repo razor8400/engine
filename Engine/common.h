@@ -44,6 +44,7 @@ namespace engine
     class script;
     
     class touch_listener;
+    class touch_event;
     class render_command;
     
     typedef std::shared_ptr<resource> resource_ptr;

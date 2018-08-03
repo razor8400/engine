@@ -31,6 +31,20 @@ namespace math
         
     }
     
+    void vector3d::operator+=(const vector3d& v3)
+    {
+        x += v3.x;
+        y += v3.y;
+        z += v3.z;
+    }
+    
+    void vector3d::operator*=(float f)
+    {
+        x *= f;
+        y *= f;
+        z *= f;
+    }
+    
     vector3d vector3d::operator-() const
     {
         return vector3d(-x, -y, -z);

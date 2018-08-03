@@ -5,8 +5,8 @@ namespace engine
     class ref
     {
     public:
-        template<class T>
-        static T* create();
+        template<class T, class ...Args>
+        static T* create(Args... args);
         
         ref* retain();
         ref* autorelease();
@@ -20,10 +20,10 @@ namespace engine
         int m_counter = 0;
     };
     
-    template<class T>
-    T* ref::create()
+    template<class T, class ...Args>
+    T* ref::create(Args... args)
     {
-        auto obj = new T();
+        auto obj = new T(args...);
         
         return dynamic_cast<T*>(obj->autorelease());
     }

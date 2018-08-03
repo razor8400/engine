@@ -82,7 +82,7 @@ namespace engine
 		math::vector3d m_rotation;
 		math::vector3d m_scale;
 		math::vector3d m_size;
-        math::vector3d m_anchor;
+        math::vector3d m_anchor = { 0.5f, 0.5f, 0.5f };
 
 		math::mat4 m_transform;
 

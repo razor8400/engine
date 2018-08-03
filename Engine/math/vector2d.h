@@ -22,6 +22,8 @@ namespace math
         vector2d operator*(float s) const;
         vector2d operator/(float s) const;
         
+        float lenght() const;
+        
         static const vector2d zero;
     };
 }

@@ -60,17 +60,17 @@ namespace engine
             }
             
             m_listener = ref::create<touch_listener>();
-            m_listener->touch_began = [=]()
+            m_listener->touch_began = [=](const math::vector2d& location)
             {
                 return m_script->call_boolean_function(scripting::on_touch_began);
             };
             
-            m_listener->touch_moved = [=]()
+            m_listener->touch_moved = [=](const math::vector2d& location)
             {
                 m_script->call_function(scripting::on_touch_moved);
             };
             
-            m_listener->touch_ended = [=]()
+            m_listener->touch_ended = [=](const math::vector2d& location)
             {
                 m_script->call_function(scripting::on_touch_ended);
             };

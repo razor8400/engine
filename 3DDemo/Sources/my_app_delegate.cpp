@@ -17,12 +17,15 @@ bool my_app_delegate::application_launched(engine::application* application)
         auto scene = my_scene3d::create<my_scene3d>();
         auto camera = engine::ref::create<engine::camera>();
         
-        camera->set_field_of_view(45.0f);
+        camera->set_field_of_view(90.0f);
         camera->set_projection_mode(engine::perspective);
+        camera->set_direction(math::vector3d(0, 0, 0));
+        camera->set_position(math::vector3d(0, 0, -1));
         camera->set_far_plane(0.1f);
         camera->set_near_plane(100.0f);
         
         scene->set_camera(camera);
+        scene->set_size(math::vector3d(100, 100, 100));
         
         director.start();
         director.run_scene(scene);

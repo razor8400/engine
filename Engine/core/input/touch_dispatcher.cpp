@@ -36,9 +36,11 @@ namespace engine
     
     void touch_dispatcher::on_touch_began()
     {
+        auto location = application::instance().get_mouse_location();
+        
         for (auto& listener : m_listeners)
         {
-            if (listener->on_touch_began())
+            if (listener->on_touch_began(location))
             {
                 m_active_listeners.push_back(listener);
                 
@@ -50,14 +52,30 @@ namespace engine
     
     void touch_dispatcher::on_touch_moved()
     {
+        auto location = application::instance().get_mouse_location();
+        
         for (auto& listener : m_active_listeners)
-            listener->on_touch_moved();
+            listener->on_touch_moved(location);
+        
+        for (auto& listener : m_listeners)
+        {
+            if (listener->swallow_touches)
+                listener->on_touch_moved(location);
+        }
     }
     
     void touch_dispatcher::on_touch_ended()
     {
+        auto location = application::instance().get_mouse_location();
+        
         for (auto& listener : m_active_listeners)
-            listener->on_touch_ended();
+            listener->on_touch_ended(location);
+        
+        for (auto& listener : m_listeners)
+        {
+            if (listener->swallow_touches)
+                listener->on_touch_ended(location);
+        }
         
         m_active_listeners.clear();
     }

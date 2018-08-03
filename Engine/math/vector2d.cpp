@@ -1,3 +1,4 @@
+#include <math.h>
 #include "vector2d.h"
 
 namespace math
@@ -57,6 +58,11 @@ namespace math
 	vector2d vector2d::operator/(float s) const
     {
         return vector2d(x / s, y / s);
+    }
+    
+    float vector2d::lenght() const
+    {
+        return (float)sqrt(x * x + y * y);
     }
 }
 

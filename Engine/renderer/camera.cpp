@@ -33,9 +33,15 @@ namespace engine
         update_projection();
     }
     
-    void camera::set_target(const math::vector3d& target)
+    void camera::set_direction(const math::vector3d& direction)
     {
-        m_target = target;
+        m_direction = direction;
+        update_projection();
+    }
+    
+    void camera::set_up(const math::vector3d& up)
+    {
+        m_up = up;
         update_projection();
     }
     
@@ -43,7 +49,7 @@ namespace engine
     {
         auto win_size = application::instance().get_win_size();
         
-        auto camera = math::mat4::look_at(m_position, m_target, math::vector3d::up);
+        auto camera = math::mat4::look_at(m_position, m_direction, m_up);
         
         if (m_projection_mode == perspective)
         {
