@@ -38,6 +38,13 @@ namespace math
         z += v3.z;
     }
     
+    void vector3d::operator-=(const vector3d& v3)
+    {
+        x -= v3.x;
+        z -= v3.y;
+        z -= v3.z;
+    }
+    
     void vector3d::operator*=(float f)
     {
         x *= f;

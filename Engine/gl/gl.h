@@ -44,6 +44,8 @@ namespace gl
     bool init_gl();
 
     void enable_depth();
+    void enable_cull();
+    void disable_cull();
 	void generate_buffers();
     void clear_buffers();
     void compile_shaders();

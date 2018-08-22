@@ -6,6 +6,12 @@ void my_scene3d::on_enter()
 {
     scene::on_enter();
     
+    auto obj = game_object::create<game_object>();
+    
+    obj->set_size(math::vector3d(0.5f, 0.5f, 0.5f));
+    
+    add_child(obj);
+    
     m_listener = ref::create<touch_listener>();
     m_listener->swallow_touches = true;
     m_listener->touch_began = std::bind(&my_scene3d::on_touch_began, this, std::placeholders::_1);
@@ -29,13 +35,6 @@ bool my_scene3d::on_touch_began(const math::vector2d& location)
 
 void my_scene3d::on_touch_moved(const math::vector2d& location)
 {
-    if (m_mouse.lenght() > 0)
-    {
-        auto delta = location - m_mouse;
-        
-        m_camera_position += math::vector3d(delta.x, delta.y, 0.0f);
-    }
-    
     m_mouse = location;
 }
 
@@ -70,15 +69,4 @@ void my_scene3d::draw(engine::renderer* r)
 void my_scene3d::update(float dt)
 {
     scene::update(dt);
-    
-    if (m_camera_position.lenght() > 0)
-    {
-        auto camera = get_camera();
-        
-        auto position = camera->get_position() + m_camera_position * dt;
-
-        camera->set_position(position);
-        
-        m_camera_position *= 0.9f;
-    }
 }

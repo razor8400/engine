@@ -37,6 +37,16 @@ namespace gl
         glDepthFunc(GL_LESS);
     }
     
+    void enable_cull()
+    {
+        glEnable(GL_CULL_FACE);
+    }
+    
+    void disable_cull()
+    {
+        glDisable(GL_CULL_FACE);
+    }
+    
 	void generate_buffers()
 	{
 		glGenVertexArrays(1, &vertex_array_object);
@@ -64,7 +74,7 @@ namespace gl
 
     void clear()
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     GLint compile_shader(const char* source, unsigned int shader)

@@ -83,10 +83,10 @@ namespace engine
                                                     };
             
             std::vector<math::vector3d> colors =    {
-                                                        { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 },
                                                         { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
-                                                        { 1, 1, 0 }, { 1, 1, 0 }, { 1, 1, 0 }, { 1, 1, 0 },
-                                                        { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 },
+                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
+                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
+                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
                                                     };
             
             std::vector<short> indices = {
@@ -216,7 +216,7 @@ namespace engine
 	math::mat4 game_object::parent_transform() const
 	{
         auto anchor = anchor_point();
-		auto position = math::mat4::translate(m_position.x, m_position.y, m_position.z);
+		auto position = math::mat4::translate(m_position.x + anchor.x, m_position.y + anchor.y, m_position.z + anchor.z);
 		auto rotation = math::mat4::rotate(math::vector3d::right, m_rotation.x)
 			* math::mat4::rotate(math::vector3d::up, m_rotation.y)
 			* math::mat4::rotate(math::vector3d(0, 0, 1), m_rotation.z);

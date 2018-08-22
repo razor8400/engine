@@ -163,12 +163,10 @@ namespace math
     mat4 mat4::look_at(const vector3d& eye, const vector3d& target, const vector3d& up)
     {
         mat4 mat;
-
-        auto normalized_eye = vector3d::normalize(eye);
-
-        auto zaxis = vector3d::normalize(target - eye);
-        auto xaxis = vector3d::normalize(vector3d::cross(up, zaxis));
-        auto yaxis = vector3d::normalize(vector3d::cross(zaxis, xaxis));
+        
+        auto zaxis = math::vector3d::normalize(target - eye);
+        auto xaxis = vector3d::cross(up, zaxis);
+        auto yaxis = vector3d::cross(zaxis, xaxis);
         
         mat[0] = xaxis.x;
         mat[1] = yaxis.x;
@@ -182,11 +180,7 @@ namespace math
         mat[9] = yaxis.z;
         mat[10] = zaxis.z;
 
-        mat[12] = -vector3d::dot(xaxis, normalized_eye);
-        mat[13] = -vector3d::dot(yaxis, normalized_eye);
-        mat[14] = -vector3d::dot(zaxis, normalized_eye);
-
-        return mat;
+        return mat * translate(-eye.x, -eye.y, -eye.z);
     }
 
     mat4 mat4::perspective(float fow, float aspect_ratio, float near_plane, float far_plane)

@@ -33,31 +33,24 @@ namespace engine
         update_projection();
     }
     
-    void camera::set_direction(const math::vector3d& direction)
+    void camera::set_target(const math::vector3d& target)
     {
-        m_direction = direction;
-        update_projection();
-    }
-    
-    void camera::set_up(const math::vector3d& up)
-    {
-        m_up = up;
+        m_target = target;
         update_projection();
     }
     
     void camera::update_projection()
     {
-        auto win_size = application::instance().get_win_size();
-        
-        auto camera = math::mat4::look_at(m_position, m_direction, m_up);
+        auto win_size = application::instance().get_win_size();        
+        auto look_at = math::mat4::look_at(m_position, m_target, math::vector3d::up);
         
         if (m_projection_mode == perspective)
         {
-            m_projection = math::mat4::perspective(m_field_of_view, win_size.x / win_size.y, m_near_plane, m_far_plane) * camera;
+            m_projection = math::mat4::perspective(m_field_of_view, win_size.x / win_size.y, m_near_plane, m_far_plane) * look_at;
         }
         else if (m_projection_mode == ortographic)
         {
-            m_projection = math::mat4::ortographic(win_size.x, win_size.y, m_near_plane, m_far_plane) * camera;
+            m_projection = math::mat4::ortographic(win_size.x, win_size.y, m_near_plane, m_far_plane) * look_at;
         }
     }
 }

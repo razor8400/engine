@@ -16,5 +16,4 @@ private:
 private:
     engine::touch_listener* m_listener = nullptr;
     math::vector2d m_mouse;
-    math::vector3d m_camera_position;
 };
