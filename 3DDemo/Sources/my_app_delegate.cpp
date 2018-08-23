@@ -19,6 +19,8 @@ bool my_app_delegate::application_launched(engine::application* application)
         
         camera->set_field_of_view(45.0);
         camera->set_projection_mode(engine::perspective);
+        camera->set_position(math::vector3d(0, 3, -1));
+        camera->set_target(math::vector3d(0, 0, 1));
         camera->set_far_plane(0.1f);
         camera->set_near_plane(100.0f);
         

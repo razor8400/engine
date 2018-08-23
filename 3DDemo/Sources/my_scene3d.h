@@ -16,5 +16,5 @@ private:
 private:
     engine::touch_listener* m_listener = nullptr;
     math::vector2d m_mouse;
-    float time = 0;
+    math::vector2d m_scroll;
 };

@@ -78,10 +78,5 @@ namespace math
 	{
 		return rect(m_origin * s, m_size * s);
 	}
-
-	rect rect::operator*(const vector2d& s) const
-	{
-		return rect(m_origin * s, m_size * s);
-	}
 }
 

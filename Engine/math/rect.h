@@ -21,7 +21,6 @@ namespace math
 		vector2d center() const;
 
 		rect operator*(const float s) const;
-		rect operator*(const vector2d& s) const;
 		rect operator*(const mat4& m4) const;
 
 		const vector2d& get_origin() const { return m_origin; }

@@ -2,6 +2,8 @@
 
 using namespace engine;
 
+static const float speed = 10.0f;
+
 void my_scene3d::on_enter()
 {
     scene::on_enter();
@@ -35,6 +37,11 @@ bool my_scene3d::on_touch_began(const math::vector2d& location)
 
 void my_scene3d::on_touch_moved(const math::vector2d& location)
 {
+    if (m_mouse.lenght() > 0)
+    {
+        m_scroll += location - m_mouse;
+    }
+    
     m_mouse = location;
 }
 
@@ -68,11 +75,23 @@ void my_scene3d::update(float dt)
 {
     scene::update(dt);
     
-    time += dt;
-    
-    static const float r = 10.0f;
-    float x = sin(time) * r;
-    float y = cos(time) * r;
-    
-    get_camera()->set_position(math::vector3d(x, 3.0f, y));
+    if (m_scroll.lenght() > 0)
+    {
+        auto camera = get_camera();
+        auto position = camera->get_position();
+        auto target = camera->get_target();
+        
+        if (m_scroll.y > 0)
+        {
+            position += target * speed * dt;
+        }
+        else if (m_scroll.y < 0)
+        {
+            position -= target * speed * dt;
+        }
+        
+        camera->set_position(position);
+        
+        m_scroll *= 0.9f;
+    }
 }

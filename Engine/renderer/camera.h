@@ -17,6 +17,8 @@ namespace engine
         void set_target(const math::vector3d& target);
         
         const math::mat4& get_projection() const { return m_projection; }
+        const math::vector3d& get_position() const { return m_position; }
+        const math::vector3d& get_target() const { return m_target; }
         
         void update_projection();
     private:

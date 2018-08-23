@@ -41,8 +41,8 @@ namespace engine
     
     void camera::update_projection()
     {
-        auto win_size = application::instance().get_win_size();        
-        auto look_at = math::mat4::look_at(m_position, m_target, math::vector3d::up);
+        auto win_size = application::instance().get_win_size();
+        auto look_at = math::mat4::look_at(m_position, m_position + m_target, math::vector3d::up);
         
         if (m_projection_mode == perspective)
         {

@@ -19,6 +19,24 @@ namespace math
 	{
 
 	}
+    
+    void vector2d::operator +=(const math::vector2d& other)
+    {
+        x += other.x;
+        y += other.y;
+    }
+    
+    void vector2d::operator -=(const math::vector2d& other)
+    {
+        x -= other.x;
+        y -= other.y;
+    }
+    
+    void vector2d::operator *=(float s)
+    {
+        x *= s;
+        y *= s;
+    }
 
     vector2d vector2d::operator-() const
     {
@@ -50,11 +68,6 @@ namespace math
         return vector2d(x * s, y * s);
     }
     
-	vector2d vector2d::operator*(const vector2d& other) const
-	{
-		return vector2d(x * other.x, y * other.y);
-	}
-
 	vector2d vector2d::operator/(float s) const
     {
         return vector2d(x / s, y / s);
