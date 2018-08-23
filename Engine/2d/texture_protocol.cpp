@@ -42,7 +42,17 @@ namespace engine
             r->add_command(command);
         }
         
-        game_object::render(r, t);
+#if DEBUG_DRAW
+        auto command = custom_render_command::create([=](const math::mat4& world)
+        {
+            if (m_shader_program)
+                m_shader_program->use(world * t);
+            
+            gl::draw_rect(0, 0, m_size.x, m_size.y);
+        });
+        
+        r->add_post_draw_command(command);
+#endif
     }
     
     void texture_protocol::clear_texture()

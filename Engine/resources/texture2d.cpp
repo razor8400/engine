@@ -4,6 +4,8 @@
 #include "renderer/render_command.h"
 #include "renderer/renderer.h"
 
+#include "resources_manager.h"
+#include "shader.h"
 #include "texture2d.h"
 
 namespace engine
@@ -68,7 +70,7 @@ namespace engine
         quad[gl::top_right].tex_coord = { 1, 0 };
         quad[gl::top_left].tex_coord = { 0, 0 };
         
-        auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color_alpha);
+        auto program = resources_manager::instance().load_resource_from_file<shader>(shaders::shader_texture_position_color_alpha);
         
         if (program)
             program->use(transform);

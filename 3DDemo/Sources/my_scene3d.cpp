@@ -45,14 +45,12 @@ void my_scene3d::on_touch_ended(const math::vector2d& location)
 
 void my_scene3d::draw(engine::renderer* r)
 {
-    auto command = custom_render_command::create([=]()
+    auto command = custom_render_command::create([=](const math::mat4& world)
     {
-        auto model_view_position = transform(get_camera()->get_projection());
-        
-        auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
+        auto program = resources_manager::instance().load_resource_from_file<shader>(shaders::shader_position_color);
         
         if (program)
-            program->use(model_view_position);
+            program->use(world);
         
         for (auto x = 1; x < m_size.x; ++x)
             gl::draw_line(x, 0, 0, x, 0, m_size.z, math::vector3d(0.0f, 0.7f, 0.0f));
@@ -69,4 +67,12 @@ void my_scene3d::draw(engine::renderer* r)
 void my_scene3d::update(float dt)
 {
     scene::update(dt);
+    
+    time += dt;
+    
+    static const float r = 10.0f;
+    float x = sin(time) * r;
+    float y = cos(time) * r;
+    
+    get_camera()->set_position(math::vector3d(x, 3.0f, y));
 }

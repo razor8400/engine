@@ -24,6 +24,7 @@ namespace engine
 	{
 		m_scale = math::vector3d(1.0f, 1.0f, 1.0f);
 		m_anchor = math::vector3d(0.5f, 0.5f, 0.5f);
+        m_shader_program = resources_manager::instance().load_resource_from_file<shader>(shaders::shader_position_color);
         
 		return true;
 	}
@@ -68,40 +69,34 @@ namespace engine
     void game_object::render(renderer* r, const math::mat4& t)
     {
 #if DEBUG_DRAW
-		auto command = custom_render_command::create([=]()
+		auto command = custom_render_command::create([=](const math::mat4& world)
 		{
-            auto program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_position_color);
-            auto scene = director::instance().running_scene();
-
-            if (program)
-                program->use(scene->get_camera()->get_projection());
+            if (m_shader_program)
+                m_shader_program->use(world * t);
             
-            std::vector<math::vector3d> vertices =  {
-                                                        { 0, 0, 0 }, { m_size.x, 0.0f, 0.0f }, { m_size.x, m_size.y, 0.0f }, { 0.0f, m_size.y, 0.0f },
-                                                        { 0.0f, 0.0f, m_size.z }, { 0.0f, m_size.y, m_size.z },
-                                                        { m_size.z, 0.0f, m_size.z }, { m_size.x, m_size.y, m_size.z },
-                                                    };
+            std::vector<gl::v3f_c3f> vertices;
             
-            std::vector<math::vector3d> colors =    {
-                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
-                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
-                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
-                                                        { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 },
-                                                    };
+            vertices.push_back(gl::v3f_c3f{ { 0, 0, 0 }, { 1, 0, 0 } });
+            vertices.push_back(gl::v3f_c3f{ { m_size.x, 0.0f, 0.0f }, { 1, 0, 0 } });
+            vertices.push_back(gl::v3f_c3f{ { m_size.x, m_size.y, 0.0f }, { 1, 0, 0 } });
+            vertices.push_back(gl::v3f_c3f{ { 0.0f, m_size.y, 0.0f }, { 1, 0, 0 } });
             
-            std::vector<short> indices = {
+            vertices.push_back(gl::v3f_c3f{ { 0.0f, 0.0f, m_size.z }, { 1, 0, 0 } });
+            vertices.push_back(gl::v3f_c3f{ { 0.0f, m_size.y, m_size.z }, { 1, 0, 0 } });
+            
+            vertices.push_back(gl::v3f_c3f{ { m_size.x, 0.0f, m_size.z }, { 1, 0, 0 } });
+            vertices.push_back(gl::v3f_c3f{ { m_size.x, m_size.y, m_size.z }, { 1, 0, 0 } });
+            
+            std::vector<unsigned short> indices = {
                 0, 1, 2, 2, 3, 0,
                 0, 4, 5, 5, 3, 0,
                 4, 6, 7, 7, 5, 4,
                 1, 6, 7, 7, 2, 1
             };
-            
-            for (auto& v : vertices)
-                v = math::transform_point(v, t);
 
-            gl::draw_cube(vertices, colors, indices);
+            gl::draw_vertices(vertices, indices);
 		});
-		r->add_post_draw_command(command);
+        r->add_post_draw_command(command);
 #endif
     }
 	

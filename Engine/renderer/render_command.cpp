@@ -1,4 +1,5 @@
 #include "common.h"
+#include "resources/shader.h"
 #include "render_command.h"
 
 namespace engine
@@ -26,7 +27,7 @@ namespace engine
     
     std::shared_ptr<quads_command> quads_command::last_command;
     
-    std::shared_ptr<quads_command> quads_command::create(int texture, const gl::blend_func& blend_func, const gl::shader_program_ptr& program)
+    std::shared_ptr<quads_command> quads_command::create(int texture, const gl::blend_func& blend_func, const shader_ptr& program)
     {
         if (last_command != nullptr)
         {
@@ -66,7 +67,7 @@ namespace engine
         return indices;
     }
     
-    std::shared_ptr<custom_render_command> custom_render_command::create(const std::function<void()>& handler)
+    std::shared_ptr<custom_render_command> custom_render_command::create(const std::function<void(const math::mat4&)>& handler)
     {
         auto command = std::make_shared<custom_render_command>();
         command->m_handler = handler;
@@ -76,7 +77,7 @@ namespace engine
     void custom_render_command::execute(const math::mat4& world)
     {
         if (m_handler)
-            m_handler();
+            m_handler(world);
     }
     
     void custom_render_command::reset()

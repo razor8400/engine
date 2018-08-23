@@ -8,3 +8,10 @@
 
 #define DEFAULT_ASSETS_FOLDER "Assets"
 
+namespace shaders
+{
+    static const char* shader_position_color = "shaders/position_color.json";
+    static const char* shader_texture_position_color_alpha = "shaders/texture_position_color_alpha.json";
+    static const char* shader_font_position_color_alpha = "shaders/font_position_color_alpha.json";
+}
+

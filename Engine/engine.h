@@ -25,6 +25,7 @@
 #include "resources/texture2d.h"
 #include "resources/font_ttf.h"
 #include "resources/script.h"
+#include "resources/shader.h"
 
 #include "utils/logger.h"
 #include "utils/file_utils.h"

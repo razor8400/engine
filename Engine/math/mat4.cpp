@@ -213,11 +213,11 @@ namespace math
         
         mat[0] = 2 / (right - left);
         mat[5] = 2 / (top - bottom);
-        mat[10] = 2 / (near_plane - far_plane);
+        mat[10] = -2 / (far_plane - near_plane);
         
-        mat[3] = (left + right) / (left - right);
-        mat[7] = (top + bottom) / (bottom - top);
-        mat[11] = (near_plane + far_plane) / (near_plane - far_plane);
+        mat[3] = -(right + left) / (right - left);
+        mat[7] = -(top + bottom) / (top - bottom);
+        mat[11] = -(near_plane + far_plane) / (far_plane - near_plane);
         
         return mat;
     }

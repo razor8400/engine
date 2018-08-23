@@ -92,7 +92,7 @@ namespace engine
 		logger() << "[application] width:" << (int)m_win_size.x;
 		logger() << "[application] height:" << (int)m_win_size.y;
         
-        gl::compile_shaders();
+        //gl::compile_shaders();
         gl::generate_buffers();
         
         return true;

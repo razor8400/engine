@@ -1,5 +1,6 @@
 #include "common.h"
 #include "resources/texture2d.h"
+#include "resources/shader.h"
 #include "resources/texture_atlas.h"
 #include "resources/resources_manager.h"
 #include "sprite.h"
@@ -13,7 +14,7 @@ namespace engine
         if (!game_object::init())
             return false;
 
-        m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_texture_position_color_alpha);
+        m_shader_program = resources_manager::instance().load_resource_from_file<shader>(shaders::shader_texture_position_color_alpha);
         
         return true;
     }

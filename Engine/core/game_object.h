@@ -72,8 +72,8 @@ namespace engine
         
         game_object* get_parent() const { return m_parent; };
         
-        void set_shader_program(const gl::shader_program_ptr& shader_program) { m_shader_program = shader_program; }
-        const gl::shader_program_ptr& get_shader_program() const { return m_shader_program; }
+        void set_shader_program(const shader_ptr& shader_program) { m_shader_program = shader_program; }
+        const shader_ptr& get_shader_program() const { return m_shader_program; }
 	protected:
         engine::vector<pointer<game_object>> m_children;
         engine::vector<pointer<component>> m_components;
@@ -94,7 +94,7 @@ namespace engine
 		bool m_update_transform = false;
 
 		game_object* m_parent = nullptr;
-        gl::shader_program_ptr m_shader_program;
+        shader_ptr m_shader_program;
 	};
     
     template<class T, class ...Args>

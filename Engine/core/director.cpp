@@ -55,6 +55,9 @@ namespace engine
         
 #if DRAW_STATS
         m_default_camera = ref::create<camera>();
+        m_default_camera->set_far_plane(100);
+        m_default_camera->set_near_plane(-100);
+        m_default_camera->set_position(math::vector3d(0.0f, 0.0f, -1.0f));
         m_default_camera->update_projection();
         
         m_stats_label = label::create<label>("fonts/arial.ttf", 18);

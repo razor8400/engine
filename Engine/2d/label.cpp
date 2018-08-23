@@ -31,7 +31,7 @@ namespace engine
         
         m_font_size = font_size;
         m_caption = caption;
-        m_shader_program = gl::shaders_manager::instance().get_program(gl::shader_program::shader_font_position_color_alpha);
+        m_shader_program = resources_manager::instance().load_resource_from_file<shader>(shaders::shader_font_position_color_alpha);
 
         set_font(font);
 

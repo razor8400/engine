@@ -21,9 +21,7 @@
 		BF3D14DE206D030100293C36 /* vector4d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14DD206D030100293C36 /* vector4d.cpp */; };
 		BF3D14E3206D21D300293C36 /* gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E2206D21D300293C36 /* gl.cpp */; };
 		BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E4206D51C700293C36 /* vector3d.cpp */; };
-		BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14E92072254D00293C36 /* shaders_manager.cpp */; };
 		BF3D14F1207225C600293C36 /* renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14EF207225C600293C36 /* renderer.cpp */; };
-		BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3D14F320736F9200293C36 /* shader_program.cpp */; };
 		BF3FF3DB208C91660070955D /* touch_dispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3FF3DA208C91660070955D /* touch_dispatcher.cpp */; };
 		BF3FF3DE208C92AF0070955D /* touch_listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3FF3DD208C92AF0070955D /* touch_listener.cpp */; };
 		BF439CC120888616000B8A15 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF439CC020888616000B8A15 /* platform.cpp */; };
@@ -42,6 +40,8 @@
 		BF8A9F982111DD3E0082778E /* glfw_window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF8A9F962111DD3E0082778E /* glfw_window.cpp */; };
 		BF8A9F9B2111DF980082778E /* my_scene3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF8A9F9A2111DF980082778E /* my_scene3d.cpp */; };
 		BF8A9F9E2111EF9C0082778E /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF8A9F9C2111EF9C0082778E /* camera.cpp */; };
+		BF913C25212F02B800A4697D /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF913C23212F02B800A4697D /* shader.cpp */; };
+		BF913C28212F122200A4697D /* strings_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF913C26212F122200A4697D /* strings_buffer.cpp */; };
 		BFB6D1D720906CF000C39C31 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D520906CF000C39C31 /* rect.cpp */; };
 		BFB6D1DA209090AD00C39C31 /* box_collider2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1D9209090AD00C39C31 /* box_collider2d.cpp */; };
 		BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB6D1DC209359FD00C39C31 /* action.cpp */; };
@@ -105,14 +105,8 @@
 		BF3D14E4206D51C700293C36 /* vector3d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vector3d.cpp; sourceTree = "<group>"; };
 		BF3D14E5206D51C700293C36 /* vector3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector3d.h; sourceTree = "<group>"; };
 		BF3D14E7206E341800293C36 /* functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
-		BF3D14E92072254D00293C36 /* shaders_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaders_manager.cpp; sourceTree = "<group>"; };
-		BF3D14EA2072254D00293C36 /* shaders_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaders_manager.h; sourceTree = "<group>"; };
-		BF3D14EB2072254D00293C36 /* shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaders.h; sourceTree = "<group>"; };
 		BF3D14EF207225C600293C36 /* renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = renderer.cpp; sourceTree = "<group>"; };
 		BF3D14F0207225C600293C36 /* renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
-		BF3D14F220736F3200293C36 /* shader_program.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_program.h; sourceTree = "<group>"; };
-		BF3D14F320736F9200293C36 /* shader_program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader_program.cpp; sourceTree = "<group>"; };
-		BF3D14F5207376D400293C36 /* libgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgl.h; sourceTree = "<group>"; };
 		BF3D14F62073785C00293C36 /* libmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmath.h; sourceTree = "<group>"; };
 		BF3FF3D8208C91110070955D /* touch_dispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = touch_dispatcher.h; sourceTree = "<group>"; };
 		BF3FF3DA208C91660070955D /* touch_dispatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = touch_dispatcher.cpp; sourceTree = "<group>"; };
@@ -155,6 +149,10 @@
 		BF8A9F9A2111DF980082778E /* my_scene3d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = my_scene3d.cpp; sourceTree = "<group>"; };
 		BF8A9F9C2111EF9C0082778E /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		BF8A9F9D2111EF9C0082778E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		BF913C23212F02B800A4697D /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		BF913C24212F02B800A4697D /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
+		BF913C26212F122200A4697D /* strings_buffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = strings_buffer.cpp; sourceTree = "<group>"; };
+		BF913C27212F122200A4697D /* strings_buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = strings_buffer.h; sourceTree = "<group>"; };
 		BFB6D1D520906CF000C39C31 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 		BFB6D1D620906CF000C39C31 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
 		BFB6D1D82090909900C39C31 /* box_collider2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider2d.h; sourceTree = "<group>"; };
@@ -260,14 +258,8 @@
 		BF3D14E0206D1E2300293C36 /* gl */ = {
 			isa = PBXGroup;
 			children = (
-				BF3D14E92072254D00293C36 /* shaders_manager.cpp */,
-				BF3D14EA2072254D00293C36 /* shaders_manager.h */,
-				BF3D14EB2072254D00293C36 /* shaders.h */,
 				BF3D14E1206D1E3B00293C36 /* gl.h */,
 				BF3D14E2206D21D300293C36 /* gl.cpp */,
-				BF3D14F220736F3200293C36 /* shader_program.h */,
-				BF3D14F320736F9200293C36 /* shader_program.cpp */,
-				BF3D14F5207376D400293C36 /* libgl.h */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -504,6 +496,10 @@
 				BFCB323020762B58001B5995 /* resources_manager.cpp */,
 				BFCB323120762B58001B5995 /* resources_manager.h */,
 				BF2D94F3208208C1004F98C0 /* resources_manager.inl */,
+				BF913C23212F02B800A4697D /* shader.cpp */,
+				BF913C24212F02B800A4697D /* shader.h */,
+				BF913C26212F122200A4697D /* strings_buffer.cpp */,
+				BF913C27212F122200A4697D /* strings_buffer.h */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -567,7 +563,6 @@
 			files = (
 				BF3D14E6206D51C700293C36 /* vector3d.cpp in Sources */,
 				BF868748208341FA00523939 /* script.cpp in Sources */,
-				BF3D14F420736F9200293C36 /* shader_program.cpp in Sources */,
 				BFCB323220762B58001B5995 /* resources_manager.cpp in Sources */,
 				BF439CC120888616000B8A15 /* platform.cpp in Sources */,
 				BF8A9F9B2111DF980082778E /* my_scene3d.cpp in Sources */,
@@ -581,16 +576,17 @@
 				BFCB322A2076100B001B5995 /* file_system.cpp in Sources */,
 				BF7A950620A4857100F12130 /* texture_protocol.cpp in Sources */,
 				BF0D239F2083D7DF00542952 /* pool_manager.cpp in Sources */,
+				BF913C25212F02B800A4697D /* shader.cpp in Sources */,
 				BF3FF3DB208C91660070955D /* touch_dispatcher.cpp in Sources */,
 				BF51ECAB206BABD4005A6240 /* game_object.cpp in Sources */,
 				BF0D23A82084030600542952 /* scriptable_component.cpp in Sources */,
 				BF3D14DB206CF33500293C36 /* mat4.cpp in Sources */,
+				BF913C28212F122200A4697D /* strings_buffer.cpp in Sources */,
 				BF51ECA8206BAB15005A6240 /* main.mm in Sources */,
 				BF3D14F1207225C600293C36 /* renderer.cpp in Sources */,
 				BFD2F44220A04072005A4CEA /* texture_atlas.cpp in Sources */,
 				BF8A9F9E2111EF9C0082778E /* camera.cpp in Sources */,
 				BFCB321D20754006001B5995 /* file_utils.cpp in Sources */,
-				BF3D14ED2072254D00293C36 /* shaders_manager.cpp in Sources */,
 				BF3FF3DE208C92AF0070955D /* touch_listener.cpp in Sources */,
 				BF439CC420888653000B8A15 /* logger.cpp in Sources */,
 				BFB6D1DD209359FD00C39C31 /* action.cpp in Sources */,
