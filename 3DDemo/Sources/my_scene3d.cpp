@@ -3,7 +3,7 @@
 
 using namespace engine;
 
-static const float scroll_speed = 0.15f;
+static const float scroll_speed = 0.25f;
 
 void my_scene3d::on_enter()
 {
@@ -33,12 +33,15 @@ void my_scene3d::on_exit()
 
 bool my_scene3d::on_touch_began(const math::vector2d& location)
 {
+	m_touch_began = true;
+	m_mouse = location;
+
     return true;
 }
 
 void my_scene3d::on_touch_moved(const math::vector2d& location)
 {
-    if (m_mouse.lenght() > 0)
+    if (m_touch_began)
     {
         auto delta = location - m_mouse;
 		
@@ -51,7 +54,7 @@ void my_scene3d::on_touch_moved(const math::vector2d& location)
 
 void my_scene3d::on_touch_ended(const math::vector2d& location)
 {
-    
+	m_touch_began = false;
 }
 
 void my_scene3d::draw(engine::renderer* r)
