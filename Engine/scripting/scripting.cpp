@@ -127,7 +127,7 @@ namespace engine
                 return false;
             }
             
-            auto result = (bool)lua_toboolean(state, 2);
+			auto result = lua_toboolean(state, 2) > 0;
             
             CLEAR_TOP(state);
             

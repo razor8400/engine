@@ -98,9 +98,6 @@
     <ClCompile Include="..\..\..\..\Engine\math\vector4d.cpp">
       <Filter>engine\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp">
-      <Filter>engine\gl</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\core\game_object.cpp">
       <Filter>engine\core</Filter>
     </ClCompile>
@@ -109,9 +106,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp">
       <Filter>engine\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\gl\shader_program.cpp">
-      <Filter>engine\gl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\utils\image_utils.cpp">
       <Filter>engine\utils</Filter>
@@ -191,6 +185,18 @@
     <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\glfw_window.cpp">
       <Filter>engine\platform\window\glfw</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sources\my_scene3d.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\shader.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\resources\strings_buffer.cpp">
+      <Filter>engine\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Engine\renderer\camera.cpp">
+      <Filter>engine\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h">
@@ -220,12 +226,6 @@
     <ClInclude Include="..\..\..\..\Engine\math\vector4d.h">
       <Filter>engine\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\gl\shaders.h">
-      <Filter>engine\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\gl\shaders_manager.h">
-      <Filter>engine\gl</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\core\game_object.h">
       <Filter>engine\core</Filter>
     </ClInclude>
@@ -234,12 +234,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h">
       <Filter>engine\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\gl\libgl.h">
-      <Filter>engine\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Engine\gl\shader_program.h">
-      <Filter>engine\gl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\utils\file_utils.h">
       <Filter>engine\utils</Filter>
@@ -348,6 +342,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Engine\platform\window\glfw3\glfw_window.h">
       <Filter>engine\platform\window\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\my_scene3d.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\shader.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\resources\strings_buffer.h">
+      <Filter>engine\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Engine\renderer\camera.h">
+      <Filter>engine\renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

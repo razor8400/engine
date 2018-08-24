@@ -161,14 +161,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\gl\shaders_manager.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Engine\gl\shader_program.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Engine\math\mat4.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -192,11 +184,14 @@
     <ClCompile Include="..\..\..\..\Engine\platform\file_system\windows\file_system.cpp" />
     <ClCompile Include="..\..\..\..\Engine\platform\win32\platform.cpp" />
     <ClCompile Include="..\..\..\..\Engine\platform\window\glfw3\glfw_window.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\renderer\camera.cpp" />
     <ClCompile Include="..\..\..\..\Engine\renderer\renderer.cpp" />
     <ClCompile Include="..\..\..\..\Engine\renderer\render_command.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\font_ttf.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\resources_manager.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\script.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\resources\shader.cpp" />
+    <ClCompile Include="..\..\..\..\Engine\resources\strings_buffer.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\texture2d.cpp" />
     <ClCompile Include="..\..\..\..\Engine\resources\texture_atlas.cpp" />
     <ClCompile Include="..\..\..\..\Engine\scripting\binding.cpp" />
@@ -206,6 +201,10 @@
     <ClCompile Include="..\..\..\..\Engine\utils\image_utils.cpp" />
     <ClCompile Include="..\..\..\..\Engine\utils\logger.cpp" />
     <ClCompile Include="..\..\..\Sources\my_app_delegate.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\my_scene3d.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -235,10 +234,6 @@
     <ClInclude Include="..\..\..\..\Engine\core\type_info.h" />
     <ClInclude Include="..\..\..\..\Engine\engine.h" />
     <ClInclude Include="..\..\..\..\Engine\gl\gl.h" />
-    <ClInclude Include="..\..\..\..\Engine\gl\libgl.h" />
-    <ClInclude Include="..\..\..\..\Engine\gl\shaders.h" />
-    <ClInclude Include="..\..\..\..\Engine\gl\shaders_manager.h" />
-    <ClInclude Include="..\..\..\..\Engine\gl\shader_program.h" />
     <ClInclude Include="..\..\..\..\Engine\interface\app_delegate.h" />
     <ClInclude Include="..\..\..\..\Engine\math\libmath.h" />
     <ClInclude Include="..\..\..\..\Engine\math\mat4.h" />
@@ -250,12 +245,15 @@
     <ClInclude Include="..\..\..\..\Engine\platform\platform.h" />
     <ClInclude Include="..\..\..\..\Engine\platform\window\glfw3\glfw_window.h" />
     <ClInclude Include="..\..\..\..\Engine\platform\window\window.h" />
+    <ClInclude Include="..\..\..\..\Engine\renderer\camera.h" />
     <ClInclude Include="..\..\..\..\Engine\renderer\renderer.h" />
     <ClInclude Include="..\..\..\..\Engine\renderer\render_command.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\font_ttf.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resource.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\resources_manager.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\script.h" />
+    <ClInclude Include="..\..\..\..\Engine\resources\shader.h" />
+    <ClInclude Include="..\..\..\..\Engine\resources\strings_buffer.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\texture2d.h" />
     <ClInclude Include="..\..\..\..\Engine\resources\texture_atlas.h" />
     <ClInclude Include="..\..\..\..\Engine\scripting\binding.h" />
@@ -267,6 +265,7 @@
     <ClInclude Include="..\..\..\..\Engine\utils\pointer.h" />
     <ClInclude Include="..\..\..\..\Engine\utils\vector.h" />
     <ClInclude Include="..\..\..\Sources\my_app_delegate.h" />
+    <ClInclude Include="..\..\..\Sources\my_scene3d.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Engine\resources\resources_manager.inl" />

@@ -5,6 +5,7 @@
 #include <memory>
 #include <functional>
 #include <map>
+#include <assert.h>
 
 #include "GLEW/glew.h"
 #include "math/libmath.h"

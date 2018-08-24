@@ -1,5 +1,3 @@
-#include "engine.h"
-
 #include "my_scene3d.h"
 #include "my_app_delegate.h"
 
@@ -25,6 +23,7 @@ bool my_app_delegate::application_launched(engine::application* application)
         camera->set_near_plane(100.0f);
         
         scene->set_camera(camera);
+		scene->set_position(math::vector3d(-50, 0, -50));
         scene->set_size(math::vector3d(100, 100, 100));
         
         director.start();

@@ -1,8 +1,9 @@
+#include "engine.h"
 #include "my_scene3d.h"
 
 using namespace engine;
 
-static const float speed = 10.0f;
+static const float scroll_speed = 0.15f;
 
 void my_scene3d::on_enter()
 {
@@ -39,7 +40,10 @@ void my_scene3d::on_touch_moved(const math::vector2d& location)
 {
     if (m_mouse.lenght() > 0)
     {
-        m_scroll += location - m_mouse;
+        auto delta = location - m_mouse;
+		
+		m_vertical_scroll += delta.x * scroll_speed;
+		m_horisontal_scroll -= delta.y * scroll_speed;
     }
     
     m_mouse = location;
@@ -57,7 +61,7 @@ void my_scene3d::draw(engine::renderer* r)
         auto program = resources_manager::instance().load_resource_from_file<shader>(shaders::shader_position_color);
         
         if (program)
-            program->use(world);
+            program->use(world * get_transform());
         
         for (auto x = 1; x < m_size.x; ++x)
             gl::draw_line(x, 0, 0, x, 0, m_size.z, math::vector3d(0.0f, 0.7f, 0.0f));
@@ -75,23 +79,15 @@ void my_scene3d::update(float dt)
 {
     scene::update(dt);
     
-    if (m_scroll.lenght() > 0)
-    {
-        auto camera = get_camera();
-        auto position = camera->get_position();
-        auto target = camera->get_target();
+    auto camera = get_camera();
+    auto position = camera->get_position();
+    auto target = camera->get_target();
         
-        if (m_scroll.y > 0)
-        {
-            position += target * speed * dt;
-        }
-        else if (m_scroll.y < 0)
-        {
-            position -= target * speed * dt;
-        }
-        
-        camera->set_position(position);
-        
-        m_scroll *= 0.9f;
-    }
+	position += target * m_horisontal_scroll * dt;
+	position += math::vector3d::cross(target, math::vector3d::up) * m_vertical_scroll * dt;
+	
+	camera->set_position(position);
+
+	m_vertical_scroll *= 0.9f;
+	m_horisontal_scroll *= 0.9f;
 }
